@@ -1,0 +1,1159 @@
+@prefix : <https://ilmanifesto.it/mema/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix mema: <https://ilmanifesto.it/mema/ontology> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://ilmanifesto.it/mema/ontology> .
+
+<https://ilmanifesto.it/mema/ontology> rdf:type owl:Ontology ;
+                                        <http://purl.org/dc/elements/1.1/creator> "Guido Vetere, Isagog Srl, Italy" ;
+                                        <http://purl.org/dc/elements/1.1/license> <http://creativecommons.org/licenses/by/4.0/> ;
+                                        rdfs:comment """This work is licensed under a Creative Commons Attribution 4.0 International License.
+Credits: 
+Il Manifesto Soc. Coop. Via Angelo Bargoni 8, 00153 Roma, Italy
+Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
+                                        rdfs:label "The MeMa Ontology" ;
+                                        owl:versionInfo 1.2 .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/license
+<http://purl.org/dc/elements/1.1/license> rdf:type owl:AnnotationProperty .
+
+
+###  https://ilmanifesto.it/mema/ontology#count
+:count rdf:type owl:AnnotationProperty ;
+       rdfs:range xsd:integer .
+
+
+###  https://ilmanifesto.it/mema/ontology#dbpedia
+:dbpedia rdf:type owl:AnnotationProperty ;
+         rdfs:subPropertyOf :mapping .
+
+
+###  https://ilmanifesto.it/mema/ontology#mapping
+:mapping rdf:type owl:AnnotationProperty .
+
+
+###  https://ilmanifesto.it/mema/ontology#mema_db
+:mema_db rdf:type owl:AnnotationProperty ;
+         rdfs:comment "mapping with legacy db" ;
+         rdfs:subPropertyOf :mapping .
+
+
+###  https://ilmanifesto.it/mema/ontology#schema
+:schema rdf:type owl:AnnotationProperty ;
+        rdfs:comment "Corrispondenza con schema.org"@it ;
+        rdfs:subPropertyOf :mapping .
+
+
+###  https://ilmanifesto.it/mema/ontology#statements
+:statements rdf:type owl:AnnotationProperty ;
+            rdfs:range xsd:integer .
+
+
+###  https://ilmanifesto.it/mema/ontology#wikidata
+:wikidata rdf:type owl:AnnotationProperty ;
+          rdfs:subPropertyOf :mapping .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://ilmanifesto.it/mema/ontology#agent_of
+:agent_of rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :involved_in ;
+          owl:inverseOf :has_agent .
+
+
+###  https://ilmanifesto.it/mema/ontology#attack
+:attack rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :reply_to ;
+        rdfs:domain :Statement ;
+        rdfs:range :Statement .
+
+
+###  https://ilmanifesto.it/mema/ontology#author_of
+:author_of rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :related_to ;
+           owl:inverseOf :authored_by ;
+           rdfs:domain :Author ;
+           rdfs:range :Information .
+
+
+###  https://ilmanifesto.it/mema/ontology#authored_by
+:authored_by rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :related_to ;
+             rdfs:domain :Information ;
+             rdfs:range :Author .
+
+
+###  https://ilmanifesto.it/mema/ontology#category_link
+:category_link rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :related_to ;
+               rdfs:domain :Article ;
+               rdfs:range :Article .
+
+
+###  https://ilmanifesto.it/mema/ontology#category_of
+:category_of rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :classifies ;
+             owl:inverseOf :has_category .
+
+
+###  https://ilmanifesto.it/mema/ontology#classified_by
+:classified_by rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :signification ;
+               owl:inverseOf :classifies .
+
+
+###  https://ilmanifesto.it/mema/ontology#classifies
+:classifies rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :signification .
+
+
+###  https://ilmanifesto.it/mema/ontology#collocation
+:collocation rdf:type owl:ObjectProperty ;
+             rdfs:range :Region ;
+             rdfs:comment "Region collocation" .
+
+
+###  https://ilmanifesto.it/mema/ontology#component_of
+:component_of rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :part_of ;
+              owl:inverseOf :has_component ;
+              rdfs:comment "Material parthood"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#composition
+:composition rdf:type owl:ObjectProperty ;
+             rdfs:comment "General part-whole relationship" .
+
+
+###  https://ilmanifesto.it/mema/ontology#correspondent_sign
+:correspondent_sign rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :signification ;
+                    rdfs:domain :Sign ;
+                    rdfs:range :Sign .
+
+
+###  https://ilmanifesto.it/mema/ontology#dependency
+:dependency rdf:type owl:ObjectProperty ;
+            rdfs:comment "Existential dependency" .
+
+
+###  https://ilmanifesto.it/mema/ontology#depends_on
+:depends_on rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :dependency ;
+            owl:inverseOf :has_dependent .
+
+
+###  https://ilmanifesto.it/mema/ontology#generalization_of
+:generalization_of rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :signification ;
+                   owl:inverseOf :specialization_of ;
+                   rdfs:domain :Category ;
+                   rdfs:range :Category .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_agent
+:has_agent rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :involves ;
+           rdfs:domain :Event .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_category
+:has_category rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :classified_by ;
+              rdfs:range :Category .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_component
+:has_component rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :has_part .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_dependent
+:has_dependent rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :dependency .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_meaning
+:has_meaning rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :signified_by ;
+             rdfs:range :Sense .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_member
+:has_member rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :collocation ;
+            owl:inverseOf :member_of ;
+            rdfs:domain :Collection .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_part
+:has_part rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :composition ;
+          owl:inverseOf :part_of .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_phase
+:has_phase rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :composition ;
+           owl:inverseOf :phase_of ;
+           rdfs:domain :Occurrent ;
+           rdfs:range :Occurrent .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_picture
+:has_picture rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :has_component ;
+             owl:inverseOf :picture_of ;
+             rdfs:domain :Information ;
+             rdfs:range :Picture .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_reply
+:has_reply rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :composition ;
+           owl:inverseOf :reply_to ;
+           rdfs:domain :Statement ;
+           rdfs:range :Statement .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_sense
+:has_sense rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :composition ;
+           rdfs:range :Sense .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_sentiment
+:has_sentiment rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :signified_by ;
+               rdfs:range :Sentiment .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_synt_dependent
+:has_synt_dependent rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :has_dependent ;
+                    owl:inverseOf :synt_depends_on ;
+                    rdfs:domain :Token ;
+                    rdfs:range :Token .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_tag
+:has_tag rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :classified_by ;
+         owl:inverseOf :tag_of ;
+         rdfs:range :Tag .
+
+
+###  https://ilmanifesto.it/mema/ontology#has_topic
+:has_topic rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :classified_by ;
+           owl:inverseOf :topic_of .
+
+
+###  https://ilmanifesto.it/mema/ontology#in_period
+:in_period rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :collocation ;
+           rdfs:range :Period .
+
+
+###  https://ilmanifesto.it/mema/ontology#in_place
+:in_place rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :collocation ;
+          rdfs:range :Location .
+
+
+###  https://ilmanifesto.it/mema/ontology#interpreted_by
+:interpreted_by rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :depends_on ;
+                rdfs:domain :Sign ;
+                rdfs:comment "Source of interpretation, e.g. the agent that assigns the signified to the signifier"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#involved_in
+:involved_in rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :participation ;
+             owl:inverseOf :involves ;
+             rdfs:domain :Continuant ;
+             rdfs:range :Occurrent .
+
+
+###  https://ilmanifesto.it/mema/ontology#involves
+:involves rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :participation ;
+          rdfs:domain :Occurrent ;
+          rdfs:range :Entity .
+
+
+###  https://ilmanifesto.it/mema/ontology#member_of
+:member_of rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :collocation ;
+           rdfs:comment "Group membership"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#mentions
+:mentions rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :related_to ;
+          rdfs:domain :Information ;
+          rdfs:range :Entity ;
+          rdfs:comment "Ontological lift of a Reference"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#part_of
+:part_of rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :composition ;
+         rdfs:comment "Generic parthood"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#participation
+:participation rdf:type owl:ObjectProperty ;
+               rdfs:comment "Continuant participation in occurrents" .
+
+
+###  https://ilmanifesto.it/mema/ontology#patient_of
+:patient_of rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :involved_in .
+
+
+###  https://ilmanifesto.it/mema/ontology#phase_of
+:phase_of rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :composition ;
+          rdfs:comment "Temporal parthood"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#picture_of
+:picture_of rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :component_of .
+
+
+###  https://ilmanifesto.it/mema/ontology#realized_by
+:realized_by rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :signification ;
+             rdfs:domain :Information ;
+             rdfs:range :Continuant .
+
+
+###  https://ilmanifesto.it/mema/ontology#referred_by
+:referred_by rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :signified_by ;
+             owl:inverseOf :refers_to ;
+             rdfs:range :Reference .
+
+
+###  https://ilmanifesto.it/mema/ontology#refers_to
+:refers_to rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :signified ;
+           rdfs:domain :Reference .
+
+
+###  https://ilmanifesto.it/mema/ontology#related_to
+:related_to rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :signification ;
+            rdfs:comment "generic relatedness" .
+
+
+###  https://ilmanifesto.it/mema/ontology#remark
+:remark rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :reply_to ;
+        rdfs:domain :Statement ;
+        rdfs:range :Statement .
+
+
+###  https://ilmanifesto.it/mema/ontology#reply_to
+:reply_to rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :related_to ;
+          rdfs:domain :Statement ;
+          rdfs:range :Statement .
+
+
+###  https://ilmanifesto.it/mema/ontology#sense_of
+:sense_of rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :signified ;
+          rdfs:domain :Sense .
+
+
+###  https://ilmanifesto.it/mema/ontology#signification
+:signification rdf:type owl:ObjectProperty ;
+               rdfs:comment "Any relation involved in semiotic processes" .
+
+
+###  https://ilmanifesto.it/mema/ontology#signified
+:signified rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :signification ;
+           owl:inverseOf :signified_by ;
+           rdfs:domain :Sign ;
+           rdfs:comment "Sign's referent" .
+
+
+###  https://ilmanifesto.it/mema/ontology#signified_by
+:signified_by rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :signification ;
+              rdfs:range :Sign .
+
+
+###  https://ilmanifesto.it/mema/ontology#signifier
+:signifier rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :signification ;
+           rdfs:domain :Sign ;
+           rdfs:comment "Sign's signifier"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#specialization_of
+:specialization_of rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :signification ;
+                   rdfs:domain :Category ;
+                   rdfs:range :Category .
+
+
+###  https://ilmanifesto.it/mema/ontology#support
+:support rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :reply_to ;
+         rdfs:domain :Statement ;
+         rdfs:range :Statement .
+
+
+###  https://ilmanifesto.it/mema/ontology#synt_depends_on
+:synt_depends_on rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :depends_on ;
+                 rdfs:domain :Token ;
+                 rdfs:range :Token .
+
+
+###  https://ilmanifesto.it/mema/ontology#tag_of
+:tag_of rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :classifies .
+
+
+###  https://ilmanifesto.it/mema/ontology#topic_link
+:topic_link rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :related_to .
+
+
+###  https://ilmanifesto.it/mema/ontology#topic_of
+:topic_of rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :classifies .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://ilmanifesto.it/mema/ontology#article_place
+:article_place rdf:type owl:DatatypeProperty ;
+               owl:deprecated "" .
+
+
+###  https://ilmanifesto.it/mema/ontology#article_pubblication
+:article_pubblication rdf:type owl:DatatypeProperty ;
+                      owl:deprecated "" .
+
+
+###  https://ilmanifesto.it/mema/ontology#base_form
+:base_form rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :form ,
+                              :real_signifier .
+
+
+###  https://ilmanifesto.it/mema/ontology#caption
+:caption rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :text ;
+         :schema "https://schema.org/abstract" .
+
+
+###  https://ilmanifesto.it/mema/ontology#category
+:category rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf :tag ;
+          rdfs:range xsd:string .
+
+
+###  https://ilmanifesto.it/mema/ontology#category_tag
+:category_tag rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :tag .
+
+
+###  https://ilmanifesto.it/mema/ontology#copyright
+:copyright rdf:type owl:DatatypeProperty .
+
+
+###  https://ilmanifesto.it/mema/ontology#dbpedia_ref
+:dbpedia_ref rdf:type owl:DatatypeProperty .
+
+
+###  https://ilmanifesto.it/mema/ontology#edition_date
+:edition_date rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :time_coord .
+
+
+###  https://ilmanifesto.it/mema/ontology#excerpt
+:excerpt rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :text_annotation ;
+         rdfs:comment "maps to wp 'excerpt'" .
+
+
+###  https://ilmanifesto.it/mema/ontology#expression
+:expression rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf :text .
+
+
+###  https://ilmanifesto.it/mema/ontology#form
+:form rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf :text ;
+      rdfs:range xsd:string .
+
+
+###  https://ilmanifesto.it/mema/ontology#full_name
+:full_name rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :text .
+
+
+###  https://ilmanifesto.it/mema/ontology#geo_coord
+:geo_coord rdf:type owl:DatatypeProperty ;
+           rdfs:comment "any suitable <logitude, latitude> coordinate" .
+
+
+###  https://ilmanifesto.it/mema/ontology#histid
+:histid rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf :identifier ;
+        rdfs:range xsd:long .
+
+
+###  https://ilmanifesto.it/mema/ontology#identifier
+:identifier rdf:type owl:DatatypeProperty ;
+            rdfs:range xsd:string .
+
+
+###  https://ilmanifesto.it/mema/ontology#image_url
+:image_url rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :url .
+
+
+###  https://ilmanifesto.it/mema/ontology#imgcaption
+:imgcaption rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf :caption .
+
+
+###  https://ilmanifesto.it/mema/ontology#imgurl
+:imgurl rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf :identifier .
+
+
+###  https://ilmanifesto.it/mema/ontology#instant
+:instant rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :time_coord .
+
+
+###  https://ilmanifesto.it/mema/ontology#keyword
+:keyword rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :tag ;
+         rdfs:range xsd:string .
+
+
+###  https://ilmanifesto.it/mema/ontology#kicker
+:kicker rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf :text_annotation .
+
+
+###  https://ilmanifesto.it/mema/ontology#length
+:length rdf:type owl:DatatypeProperty .
+
+
+###  https://ilmanifesto.it/mema/ontology#location_name
+:location_name rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :identifier .
+
+
+###  https://ilmanifesto.it/mema/ontology#name
+:name rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf :text ;
+      rdfs:range xsd:string .
+
+
+###  https://ilmanifesto.it/mema/ontology#offset
+:offset rdf:type owl:DatatypeProperty .
+
+
+###  https://ilmanifesto.it/mema/ontology#pagenum
+:pagenum rdf:type owl:DatatypeProperty .
+
+
+###  https://ilmanifesto.it/mema/ontology#pos
+:pos rdf:type owl:DatatypeProperty ;
+     rdfs:domain :Lexeme ;
+     rdfs:range [ rdf:type rdfs:Datatype ;
+                  owl:oneOf [ rdf:type rdf:List ;
+                              rdf:first " VERB" ;
+                              rdf:rest [ rdf:type rdf:List ;
+                                         rdf:first "ADJ" ;
+                                         rdf:rest [ rdf:type rdf:List ;
+                                                    rdf:first "ADV" ;
+                                                    rdf:rest [ rdf:type rdf:List ;
+                                                               rdf:first "MWE" ;
+                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                          rdf:first "NOUN" ;
+                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                     rdf:first "PROPN" ;
+                                                                                     rdf:rest rdf:nil
+                                                                                   ]
+                                                                        ]
+                                                             ]
+                                                  ]
+                                       ]
+                            ]
+                ] ;
+     rdfs:comment "part of speech"@en ,
+                  "parte del discorso (standard universal dependencies)"@it .
+
+
+###  https://ilmanifesto.it/mema/ontology#published_day
+:published_day rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :time_coord .
+
+
+###  https://ilmanifesto.it/mema/ontology#real_signifier
+:real_signifier rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf :text .
+
+
+###  https://ilmanifesto.it/mema/ontology#reference
+:reference rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :text_annotation .
+
+
+###  https://ilmanifesto.it/mema/ontology#score
+:score rdf:type owl:DatatypeProperty .
+
+
+###  https://ilmanifesto.it/mema/ontology#signature
+:signature rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :identifier .
+
+
+###  https://ilmanifesto.it/mema/ontology#span
+:span rdf:type owl:DatatypeProperty ;
+      rdfs:range rdfs:Literal ;
+      rdfs:comment "A pair of non-negative integer <begin, end>, separator may be comma or colums" .
+
+
+###  https://ilmanifesto.it/mema/ontology#spotlight_score
+:spotlight_score rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf :score .
+
+
+###  https://ilmanifesto.it/mema/ontology#surname
+:surname rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :text ;
+         rdfs:range xsd:string .
+
+
+###  https://ilmanifesto.it/mema/ontology#tag
+:tag rdf:type owl:DatatypeProperty .
+
+
+###  https://ilmanifesto.it/mema/ontology#text
+:text rdf:type owl:DatatypeProperty ;
+      rdfs:range xsd:string .
+
+
+###  https://ilmanifesto.it/mema/ontology#text_annotation
+:text_annotation rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf :text .
+
+
+###  https://ilmanifesto.it/mema/ontology#time_coord
+:time_coord rdf:type owl:DatatypeProperty ;
+            rdfs:comment "any suitable time point or interval" .
+
+
+###  https://ilmanifesto.it/mema/ontology#title
+:title rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf :caption ;
+       rdfs:range xsd:string .
+
+
+###  https://ilmanifesto.it/mema/ontology#uid
+:uid rdf:type owl:DatatypeProperty ;
+     rdfs:subPropertyOf :identifier ;
+     rdfs:domain :Person .
+
+
+###  https://ilmanifesto.it/mema/ontology#url
+:url rdf:type owl:DatatypeProperty .
+
+
+###  https://ilmanifesto.it/mema/ontology#wp_slug
+:wp_slug rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :identifier .
+
+
+###  https://ilmanifesto.it/mema/ontology#year
+:year rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf :time_coord .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://ilmanifesto.it/mema/ontology#Agent
+:Agent rdf:type owl:Class ;
+       owl:equivalentClass [ rdf:type owl:Class ;
+                             owl:unionOf ( :Automata
+                                           :Organization
+                                           :Person
+                                         )
+                           ] ;
+       rdfs:subClassOf :Continuant ;
+       rdfs:comment "Agentive entity"@en ,
+                    "Qualsiasi entità che interagisce con il contenuto, sia contribuendovi, sia fruendone"@it ;
+       :schema "Property::agent"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Article
+:Article rdf:type owl:Class ;
+         rdfs:subClassOf :Text ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :authored_by ;
+                           owl:someValuesFrom :Author
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :has_part ;
+                           owl:someValuesFrom :Title
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :part_of ;
+                           owl:someValuesFrom :Issue
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :text ;
+                           owl:someValuesFrom xsd:string
+                         ] ;
+         rdfs:comment "Articolo del quotidiano"@it ;
+         :schema "https://schema.org/NewsArticle" .
+
+
+###  https://ilmanifesto.it/mema/ontology#Author
+:Author rdf:type owl:Class ;
+        owl:equivalentClass [ rdf:type owl:Restriction ;
+                              owl:onProperty :author_of ;
+                              owl:someValuesFrom :Text
+                            ] ;
+        rdfs:subClassOf :Information ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :realized_by ;
+                          owl:allValuesFrom :Agent
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :signature ;
+                          owl:someValuesFrom xsd:string
+                        ] ;
+        :mema_db "" .
+
+
+###  https://ilmanifesto.it/mema/ontology#Automata
+:Automata rdf:type owl:Class ;
+          rdfs:subClassOf :Object .
+
+
+###  https://ilmanifesto.it/mema/ontology#Category
+:Category rdf:type owl:Class ;
+          rdfs:subClassOf :Classifier ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :signified ;
+                            owl:allValuesFrom :Information
+                          ] ;
+          rdfs:comment "Categoria di classificazione di oggetti informativi"@it ;
+          rdfs:label "Categoria"@it ,
+                     "Category"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Classifier
+:Classifier rdf:type owl:Class ;
+            rdfs:subClassOf :Information ;
+            rdfs:comment "A single symbol for a class of entities"@en ;
+            rdfs:seeAlso "https://schema.org/Class"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Collection
+:Collection rdf:type owl:Class ;
+            owl:equivalentClass [ rdf:type owl:Restriction ;
+                                  owl:onProperty :has_member ;
+                                  owl:someValuesFrom owl:Thing
+                                ] ;
+            rdfs:subClassOf :Region .
+
+
+###  https://ilmanifesto.it/mema/ontology#Continuant
+:Continuant rdf:type owl:Class ;
+            rdfs:subClassOf :Entity ;
+            owl:disjointWith :Occurrent ;
+            :schema "Non-temporal entity"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Contributor
+:Contributor rdf:type owl:Class ;
+             rdfs:subClassOf :Person .
+
+
+###  https://ilmanifesto.it/mema/ontology#Entity
+:Entity rdf:type owl:Class ;
+        rdfs:comment "Entità localizzabile nello spazio e / o nel tempo"@it ,
+                     "Thing located in space and / or time"@en ;
+        rdfs:label "Entity"@en ,
+                   "Entità"@it .
+
+
+###  https://ilmanifesto.it/mema/ontology#Event
+:Event rdf:type owl:Class ;
+       rdfs:subClassOf :Occurrent ;
+       rdfs:comment "Specific occurrence or happening, often significant, marked by a change or impact in time and space"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Factoid
+:Factoid rdf:type owl:Class ;
+         rdfs:subClassOf :Sign ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :signified ;
+                           owl:allValuesFrom :Event
+                         ] ;
+         rdfs:comment "The interpretation of some information as a evidence that something happened"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Information
+:Information rdf:type owl:Class ;
+             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                               owl:onProperty :realized_by ;
+                               owl:someValuesFrom :Continuant
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :signified_by ;
+                               owl:someValuesFrom :Sign
+                             ] ;
+             rdfs:comment "Structure of non material symbols, realizable in many physical forms, e.g. a newspaper article (written or spoken); a thunder (if interpreted as the sign of a storm)"@en ;
+             rdfs:seeAlso "Representamen (Peirce)" ;
+             :schema "https://schema.org/CreativeWork" .
+
+
+###  https://ilmanifesto.it/mema/ontology#Issue
+:Issue rdf:type owl:Class ;
+       owl:equivalentClass [ rdf:type owl:Restriction ;
+                             owl:onProperty :has_member ;
+                             owl:someValuesFrom :Article
+                           ] ;
+       rdfs:subClassOf :Information ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :has_picture ;
+                         owl:someValuesFrom :Picture
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :title ;
+                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onDataRange xsd:string
+                       ] ;
+       rdfs:comment "Numero del quotidiano" ;
+       :schema "https://schema.org/PublicationIssue" .
+
+
+###  https://ilmanifesto.it/mema/ontology#Lexeme
+:Lexeme rdf:type owl:Class ;
+        rdfs:subClassOf :Information ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :has_sense ;
+                          owl:someValuesFrom :Sense
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :pos ;
+                          owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                               owl:oneOf [ rdf:type rdf:List ;
+                                                           rdf:first " VERB" ;
+                                                           rdf:rest [ rdf:type rdf:List ;
+                                                                      rdf:first "ADJ" ;
+                                                                      rdf:rest [ rdf:type rdf:List ;
+                                                                                 rdf:first "ADV" ;
+                                                                                 rdf:rest [ rdf:type rdf:List ;
+                                                                                            rdf:first "MWE" ;
+                                                                                            rdf:rest [ rdf:type rdf:List ;
+                                                                                                       rdf:first "NOUN" ;
+                                                                                                       rdf:rest rdf:nil
+                                                                                                     ]
+                                                                                          ]
+                                                                               ]
+                                                                    ]
+                                                         ]
+                                             ]
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :base_form ;
+                          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onDataRange xsd:string
+                        ] ;
+        rdfs:comment "Unità del lessico, anche polirematica (multiword expression)"@it .
+
+
+###  https://ilmanifesto.it/mema/ontology#LivingBeing
+:LivingBeing rdf:type owl:Class ;
+             rdfs:subClassOf :Continuant ;
+             owl:disjointWith :Object ;
+             rdfs:comment "Animate biological entity"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Location
+:Location rdf:type owl:Class ;
+          rdfs:subClassOf :Region ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :geo_coord ;
+                            owl:someValuesFrom xsd:string
+                          ] ;
+          owl:disjointWith :Period ;
+          rdfs:comment "Identified portion of space (place)"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#NamedEntity
+:NamedEntity rdf:type owl:Class ;
+             rdfs:subClassOf :Token ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :signified_by ;
+                               owl:someValuesFrom :Reference
+                             ] ;
+             rdfs:comment "Riferimento a individui nominati, come persone, luoghi, organizzazioni"@it .
+
+
+###  https://ilmanifesto.it/mema/ontology#Object
+:Object rdf:type owl:Class ;
+        rdfs:subClassOf :Continuant .
+
+
+###  https://ilmanifesto.it/mema/ontology#Occurrent
+:Occurrent rdf:type owl:Class ;
+           rdfs:subClassOf :Entity ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :involves ;
+                             owl:someValuesFrom :Continuant
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :in_period ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Period
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :in_place ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Location
+                           ] ;
+           rdfs:comment "Temporal entity"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Organization
+:Organization rdf:type owl:Class ;
+              owl:equivalentClass [ rdf:type owl:Restriction ;
+                                    owl:onProperty :has_member ;
+                                    owl:someValuesFrom :Person
+                                  ] ;
+              rdfs:subClassOf :Continuant ;
+              rdfs:comment "Structured group of people working together towards common goals, governed by defined rules and processes"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Period
+:Period rdf:type owl:Class ;
+        rdfs:subClassOf :Region ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :time_coord ;
+                          owl:someValuesFrom xsd:string
+                        ] ;
+        rdfs:comment "Identified portion of time" .
+
+
+###  https://ilmanifesto.it/mema/ontology#Person
+:Person rdf:type owl:Class ;
+        rdfs:subClassOf :LivingBeing ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :name ;
+                          owl:someValuesFrom xsd:string
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :surname ;
+                          owl:someValuesFrom xsd:string
+                        ] ;
+        :schema "https://schema.org/Person" .
+
+
+###  https://ilmanifesto.it/mema/ontology#Picture
+:Picture rdf:type owl:Class ;
+         rdfs:subClassOf :Information ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :caption ;
+                           owl:someValuesFrom xsd:string
+                         ] ;
+         rdfs:comment "Immagine fotografica o grafica a corredo di articolo o numero"@it ;
+         :schema "https://schema.org/Photograph"@it .
+
+
+###  https://ilmanifesto.it/mema/ontology#Reader
+:Reader rdf:type owl:Class ;
+        rdfs:subClassOf :Person ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :uid ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onDataRange xsd:string
+                        ] .
+
+
+###  https://ilmanifesto.it/mema/ontology#Reference
+:Reference rdf:type owl:Class ;
+           rdfs:subClassOf :Sign ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :refers_to ;
+                             owl:allValuesFrom :Entity
+                           ] ;
+           rdfs:comment "Riferimento a una entità identificata" .
+
+
+###  https://ilmanifesto.it/mema/ontology#Region
+:Region rdf:type owl:Class ;
+        rdfs:comment "Array of elements either abstract (as in mathematics) or physical (as in physics), which are distinguished by certain inner relationsships, such as space points in bounded areas, time instants in definite periods, or items in collections."@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Reply
+:Reply rdf:type owl:Class ;
+       owl:equivalentClass [ rdf:type owl:Restriction ;
+                             owl:onProperty :reply_to ;
+                             owl:someValuesFrom :Information
+                           ] ;
+       rdfs:subClassOf :Statement ;
+       :schema "https://schema.org/ReplyAction" .
+
+
+###  https://ilmanifesto.it/mema/ontology#Sense
+:Sense rdf:type owl:Class ;
+       rdfs:subClassOf :Sign ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :signified ;
+                         owl:allValuesFrom [ rdf:type owl:Class ;
+                                             owl:unionOf ( :Lexeme
+                                                           :WordToken
+                                                         )
+                                           ]
+                       ] ;
+       rdfs:comment "Significato comunemente inteso di un lessema, o occasionalmente attribuito all'occorrenza di una parola"@it .
+
+
+###  https://ilmanifesto.it/mema/ontology#Sentiment
+:Sentiment rdf:type owl:Class ;
+           rdfs:subClassOf :Classifier ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :signified ;
+                             owl:allValuesFrom :Statement
+                           ] ;
+           rdfs:comment "Caratterizzazione emotiva di una espressione"@it .
+
+
+###  https://ilmanifesto.it/mema/ontology#Sign
+:Sign rdf:type owl:Class ;
+      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                        owl:onProperty :interpreted_by ;
+                        owl:someValuesFrom :Agent
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :signified ;
+                        owl:someValuesFrom owl:Thing
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :signifier ;
+                        owl:someValuesFrom :Information
+                      ] ;
+      rdfs:comment "The reified interpretation of a symbol (signifier) as representing something else (signified) through mental or algorithmic processes. This interpretation occurs within specific situations (contexts) and communication flows (such as co-text), and is typically (but not necessarily) rooted in social realities, agreements, or stipulations."@en ;
+      rdfs:seeAlso "Interpretant (Peirce). Note however that Peirce's concept is broader and more dynamic, emphasizing the evolving nature of meaning creation in the mind of the interpreter." .
+
+
+###  https://ilmanifesto.it/mema/ontology#State
+:State rdf:type owl:Class ;
+       rdfs:subClassOf :Occurrent ;
+       rdfs:comment "Particular set of circumstances or conditions existing at a specific time and place"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Statement
+:Statement rdf:type owl:Class ;
+           rdfs:subClassOf :Text ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :text ;
+                             owl:someValuesFrom xsd:string
+                           ] ;
+           rdfs:comment "A statement of some agent, as instance of both occurrent (the utterance) and continuant (the content)"@en ;
+           :schema "https://schema.org/CommunicateAction" .
+
+
+###  https://ilmanifesto.it/mema/ontology#Subscriber
+:Subscriber rdf:type owl:Class ;
+            rdfs:subClassOf :Reader .
+
+
+###  https://ilmanifesto.it/mema/ontology#Symbolization
+:Symbolization rdf:type owl:Class ;
+               rdfs:subClassOf :Region .
+
+
+###  https://ilmanifesto.it/mema/ontology#Tag
+:Tag rdf:type owl:Class ;
+     rdfs:subClassOf :Classifier .
+
+
+###  https://ilmanifesto.it/mema/ontology#Text
+:Text rdf:type owl:Class ;
+      rdfs:subClassOf :Information ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :has_part ;
+                        owl:someValuesFrom :Token
+                      ] ;
+      rdfs:comment "Textual information object"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Title
+:Title rdf:type owl:Class ;
+       rdfs:subClassOf :Text .
+
+
+###  https://ilmanifesto.it/mema/ontology#Token
+:Token rdf:type owl:Class ;
+       rdfs:subClassOf :Information ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :part_of ;
+                         owl:someValuesFrom :Text
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :expression ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onDataRange xsd:string
+                       ] ;
+       rdfs:comment "Occorrenza di un simbolo linguistico in un testo"@it ,
+                    "Occurrence of a linguistic symbol in a text"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Topic
+:Topic rdf:type owl:Class ;
+       rdfs:subClassOf :Classifier ;
+       rdfs:comment "Argomento rilevante di articolo identificato dalle funzioni redazionali o dall'IA"@it .
+
+
+###  https://ilmanifesto.it/mema/ontology#WordToken
+:WordToken rdf:type owl:Class ;
+           rdfs:subClassOf :Token ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :signified_by ;
+                             owl:someValuesFrom :Sense
+                           ] ;
+           rdfs:comment "Occorrenza di una parola (lessema) in un contenuto"@it ,
+                        "Word token"@en .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
