@@ -15,7 +15,7 @@ Credits:
 Il Manifesto Soc. Coop. Via Angelo Bargoni 8, 00153 Roma, Italy
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                         rdfs:label "The MeMa Ontology" ;
-                                        owl:versionInfo 1.2 .
+                                        owl:versionInfo 1.21 .
 
 #################################################################
 #    Annotation properties
@@ -747,7 +747,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 :Author rdf:type owl:Class ;
         owl:equivalentClass [ rdf:type owl:Restriction ;
                               owl:onProperty :author_of ;
-                              owl:someValuesFrom :Text
+                              owl:someValuesFrom :Information
                             ] ;
         rdfs:subClassOf :Information ,
                         [ rdf:type owl:Restriction ;
@@ -759,6 +759,20 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                           owl:someValuesFrom xsd:string
                         ] ;
         :mema_db "" .
+
+
+###  https://ilmanifesto.it/mema/ontology#AuthoredInformation
+:AuthoredInformation rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                           owl:onProperty :authored_by ;
+                                           owl:someValuesFrom [ rdf:type owl:Class ;
+                                                                owl:unionOf ( :Agent
+                                                                              :Author
+                                                                            )
+                                                              ]
+                                         ] ;
+                     rdfs:subClassOf :Information ;
+                     :schema "https://schema.org/CreativeWork" .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Automata
@@ -840,9 +854,8 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                owl:onProperty :signified_by ;
                                owl:someValuesFrom :Sign
                              ] ;
-             rdfs:comment "Structure of non material symbols, realizable in many physical forms, e.g. a newspaper article (written or spoken); a thunder (if interpreted as the sign of a storm)"@en ;
-             rdfs:seeAlso "Representamen (Peirce)" ;
-             :schema "https://schema.org/CreativeWork" .
+             rdfs:comment "Non material thing realizable in many physical forms, e.g. a newspaper article (written or spoken), classifiers such as tags or topics, word types (lexemes)"@en ;
+             rdfs:seeAlso "Representamen (Peirce)" .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Issue
@@ -927,6 +940,11 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                owl:someValuesFrom :Reference
                              ] ;
              rdfs:comment "Riferimento a individui nominati, come persone, luoghi, organizzazioni"@it .
+
+
+###  https://ilmanifesto.it/mema/ontology#Number
+:Number rdf:type owl:Class ;
+        rdfs:subClassOf :Information .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Object
@@ -1098,9 +1116,10 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
             rdfs:subClassOf :Reader .
 
 
-###  https://ilmanifesto.it/mema/ontology#Symbolization
-:Symbolization rdf:type owl:Class ;
-               rdfs:subClassOf :Region .
+###  https://ilmanifesto.it/mema/ontology#SymbolicSpace
+:SymbolicSpace rdf:type owl:Class ;
+               rdfs:subClassOf :Region ;
+               rdfs:comment "Conceptual or theoretical framework where symbols and their relationships are defined"@en .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Tag
