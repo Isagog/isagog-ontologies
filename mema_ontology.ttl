@@ -15,7 +15,7 @@ Credits:
 Il Manifesto Soc. Coop. Via Angelo Bargoni 8, 00153 Roma, Italy
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                         rdfs:label "The MeMa Ontology" ;
-                                        owl:versionInfo 1.22 .
+                                        owl:versionInfo 1.23 .
 
 #################################################################
 #    Annotation properties
@@ -152,6 +152,14 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
          rdfs:domain :Sign ;
          rdfs:range :Entity ;
          rdfs:comment "Contextual elements of a signification"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#contributing_text
+:contributing_text rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :inheres_to ;
+                   rdfs:domain :Sign ;
+                   rdfs:range :Information ;
+                   rdfs:comment "Information elements that concur to the interpretation of a sign"@en .
 
 
 ###  https://ilmanifesto.it/mema/ontology#dependency
@@ -312,14 +320,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                 rdfs:subPropertyOf :depends_on ;
                 rdfs:domain :Sign ;
                 rdfs:comment "Source of interpretation, e.g. the agent that assigns the signified to the signifier"@en .
-
-
-###  https://ilmanifesto.it/mema/ontology#intertext
-:intertext rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :inheres_to ;
-           rdfs:domain :Sign ;
-           rdfs:range :Information ;
-           rdfs:comment "Information elements that concur to the interpretation of a sign"@en .
 
 
 ###  https://ilmanifesto.it/mema/ontology#member_of
@@ -766,8 +766,8 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 :Agent rdf:type owl:Class ;
        owl:equivalentClass [ rdf:type owl:Class ;
                              owl:unionOf ( :Automata
-                                           :Organization
                                            :Person
+                                           :SocialGroup
                                          )
                            ] ;
        rdfs:subClassOf :Continuant ;
@@ -904,10 +904,10 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
          rdfs:subClassOf :Denotation ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty :context ;
-                           owl:someValuesFrom :Entity
+                           owl:someValuesFrom :Sign
                          ] ,
                          [ rdf:type owl:Restriction ;
-                           owl:onProperty :intertext ;
+                           owl:onProperty :contributing_text ;
                            owl:someValuesFrom :Information
                          ] ,
                          [ rdf:type owl:Restriction ;
@@ -1023,6 +1023,11 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
              rdfs:comment "Riferimento a individui nominati, come persone, luoghi, organizzazioni"@it .
 
 
+###  https://ilmanifesto.it/mema/ontology#NaturalEvent
+:NaturalEvent rdf:type owl:Class ;
+              rdfs:subClassOf :Event .
+
+
 ###  https://ilmanifesto.it/mema/ontology#NewsArticle
 :NewsArticle rdf:type owl:Class ;
              rdfs:subClassOf :Article ,
@@ -1084,12 +1089,8 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#Organization
 :Organization rdf:type owl:Class ;
-              owl:equivalentClass [ rdf:type owl:Restriction ;
-                                    owl:onProperty :has_member ;
-                                    owl:someValuesFrom :Person
-                                  ] ;
-              rdfs:subClassOf :Continuant ;
-              rdfs:comment "Structured group of people working together towards common goals, governed by defined rules and processes"@en .
+              rdfs:subClassOf :SocialGroup ;
+              rdfs:comment "Social group of people working together towards common goals, governed by defined rules and processes"@en .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Period
@@ -1114,6 +1115,17 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                           owl:someValuesFrom xsd:string
                         ] ;
         :schema "https://schema.org/Person" .
+
+
+###  https://ilmanifesto.it/mema/ontology#PersonalEvent
+:PersonalEvent rdf:type owl:Class ;
+               rdfs:subClassOf :Event ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :has_participant ;
+                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass :Person
+                               ] ;
+               rdfs:comment "Event participated by one or more persons"@en .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Picture
@@ -1149,7 +1161,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#Region
 :Region rdf:type owl:Class ;
-        rdfs:comment "Array of elements either abstract (as in mathematics) or physical (as in physics), which are distinguished by certain inner relationsships, such as space points in bounded areas, time instants in definite periods, or items in collections."@en .
+        rdfs:comment "Set of elements either abstract (as in mathematics) or physical (as in physics), which are distinguished by certain inner relationsships, such as space points in bounded areas, time instants in definite periods, or items in collections."@en .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Sense
@@ -1195,13 +1207,27 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
       rdfs:seeAlso "Interpretant (Peirce). Note however that Peirce's concept is broader and more dynamic, emphasizing the evolving nature of meaning creation in the mind of the interpreter." .
 
 
-###  https://ilmanifesto.it/mema/ontology#SocialOccurrent
-:SocialOccurrent rdf:type owl:Class ;
-                 owl:equivalentClass [ rdf:type owl:Restriction ;
-                                       owl:onProperty :has_participant ;
-                                       owl:someValuesFrom :Person
-                                     ] ;
-                 rdfs:subClassOf :Occurrent .
+###  https://ilmanifesto.it/mema/ontology#SocialEvent
+:SocialEvent rdf:type owl:Class ;
+             rdfs:subClassOf :Event ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :has_participant ;
+                               owl:someValuesFrom :SocialGroup
+                             ] ;
+             rdfs:comment "Event participated by one or more social groups"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#SocialGroup
+:SocialGroup rdf:type owl:Class ;
+             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                   owl:onProperty :has_member ;
+                                   owl:someValuesFrom [ rdf:type owl:Class ;
+                                                        owl:unionOf ( :Person
+                                                                      :SocialGroup
+                                                                    )
+                                                      ]
+                                 ] ;
+             rdfs:subClassOf :Continuant .
 
 
 ###  https://ilmanifesto.it/mema/ontology#State
