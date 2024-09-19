@@ -301,7 +301,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://ilmanifesto.it/mema/ontology#in_place
 :in_place rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :collocation ;
-          rdfs:range :Location .
+          rdfs:range :Place .
 
 
 ###  https://ilmanifesto.it/mema/ontology#inherence
@@ -334,6 +334,13 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
           rdfs:domain :Information ;
           rdfs:range :Entity ;
           rdfs:comment "Ontological lift of a Reference"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#object
+:object rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :depends_on ;
+        rdfs:domain :Relationship ;
+        rdfs:range :Entity .
 
 
 ###  https://ilmanifesto.it/mema/ontology#part_of
@@ -437,11 +444,25 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
            rdfs:comment "Sign's signifier"@en .
 
 
+###  https://ilmanifesto.it/mema/ontology#source
+:source rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :depends_on ;
+        rdfs:domain :Relationship ;
+        rdfs:range :Information .
+
+
 ###  https://ilmanifesto.it/mema/ontology#specialization_of
 :specialization_of rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf :composition ;
                    rdfs:domain :Category ;
                    rdfs:range :Category .
+
+
+###  https://ilmanifesto.it/mema/ontology#subject
+:subject rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :depends_on ;
+         rdfs:domain :Relationship ;
+         rdfs:range :Entity .
 
 
 ###  https://ilmanifesto.it/mema/ontology#support
@@ -1002,17 +1023,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
              rdfs:comment "Animate biological entity"@en .
 
 
-###  https://ilmanifesto.it/mema/ontology#Location
-:Location rdf:type owl:Class ;
-          rdfs:subClassOf :Region ,
-                          [ rdf:type owl:Restriction ;
-                            owl:onProperty :geo_coord ;
-                            owl:someValuesFrom xsd:string
-                          ] ;
-          owl:disjointWith :Period ;
-          rdfs:comment "Identified portion of space (place)"@en .
-
-
 ###  https://ilmanifesto.it/mema/ontology#NamedEntity
 :NamedEntity rdf:type owl:Class ;
              rdfs:subClassOf :Token ,
@@ -1082,7 +1092,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                            [ rdf:type owl:Restriction ;
                              owl:onProperty :in_place ;
                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                             owl:onClass :Location
+                             owl:onClass :Place
                            ] ;
            rdfs:comment "Temporal entity"@en .
 
@@ -1100,6 +1110,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                           owl:onProperty :time_coord ;
                           owl:someValuesFrom xsd:string
                         ] ;
+        owl:disjointWith :Place ;
         rdfs:comment "Identified portion of time" .
 
 
@@ -1139,6 +1150,16 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
          :schema "https://schema.org/Photograph"@it .
 
 
+###  https://ilmanifesto.it/mema/ontology#Place
+:Place rdf:type owl:Class ;
+       rdfs:subClassOf :Continuant ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :geo_coord ;
+                         owl:someValuesFrom xsd:string
+                       ] ;
+       rdfs:comment "Identified portion of space (place)"@en .
+
+
 ###  https://ilmanifesto.it/mema/ontology#Reader
 :Reader rdf:type owl:Class ;
         rdfs:subClassOf :Person ,
@@ -1162,6 +1183,11 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://ilmanifesto.it/mema/ontology#Region
 :Region rdf:type owl:Class ;
         rdfs:comment "Set of elements either abstract (as in mathematics) or physical (as in physics), which are distinguished by certain inner relationsships, such as space points in bounded areas, time instants in definite periods, or items in collections."@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Relationship
+:Relationship rdf:type owl:Class ;
+              rdfs:subClassOf :Information .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Sense
