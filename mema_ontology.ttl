@@ -698,6 +698,10 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                  rdfs:subPropertyOf :score .
 
 
+###  https://ilmanifesto.it/mema/ontology#status
+:status rdf:type owl:DatatypeProperty .
+
+
 ###  https://ilmanifesto.it/mema/ontology#surname
 :surname rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf :text ;
@@ -1011,6 +1015,28 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                           ] ;
           owl:disjointWith :Period ;
           rdfs:comment "Identified portion of space (place)"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#Mention
+:Mention rdf:type owl:Class ;
+         rdfs:subClassOf :Reference ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :signifier ;
+                           owl:allValuesFrom :Text
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :status ;
+                           owl:allValuesFrom [ rdf:type rdfs:Datatype ;
+                                               owl:oneOf [ rdf:type rdf:List ;
+                                                           rdf:first "ACCEPTED" ;
+                                                           rdf:rest [ rdf:type rdf:List ;
+                                                                      rdf:first "PENDING" ;
+                                                                      rdf:rest rdf:nil
+                                                                    ]
+                                                         ]
+                                             ]
+                         ] ;
+         rdfs:comment "Reference to an Entity in a Text"@en .
 
 
 ###  https://ilmanifesto.it/mema/ontology#NamedEntity
