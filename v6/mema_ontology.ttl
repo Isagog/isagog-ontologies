@@ -15,7 +15,7 @@ Credits:
 Il Manifesto Soc. Coop. Via Angelo Bargoni 8, 00153 Roma, Italy
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                         rdfs:label "The MeMa Ontology" ;
-                                        owl:versionInfo 1.23 .
+                                        owl:versionInfo 6.0 .
 
 #################################################################
 #    Annotation properties
@@ -1025,7 +1025,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
              rdfs:subClassOf :Continuant ;
              owl:disjointWith :Object ;
              rdfs:comment "Animate biological entity"@en .
-
 
 
 ###  https://ilmanifesto.it/mema/ontology#Location
