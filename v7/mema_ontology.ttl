@@ -87,8 +87,8 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://ilmanifesto.it/mema/ontology#category_link
 :category_link rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :relatedness ;
-               rdfs:domain :Article ;
-               rdfs:range :Article .
+               rdfs:domain :MemaArticle ;
+               rdfs:range :MemaArticle .
 
 
 ###  https://ilmanifesto.it/mema/ontology#category_of
@@ -202,7 +202,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://ilmanifesto.it/mema/ontology#in_place
 :in_place rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :collocation ;
-          rdfs:range :Place .
+          rdfs:range :Location .
 
 
 ###  https://ilmanifesto.it/mema/ontology#inherence
@@ -345,6 +345,11 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                       owl:deprecated "" .
 
 
+###  https://ilmanifesto.it/mema/ontology#author_str
+:author_str rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf :identifier .
+
+
 ###  https://ilmanifesto.it/mema/ontology#body
 :body rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf :text ;
@@ -380,7 +385,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://ilmanifesto.it/mema/ontology#directus_id
 :directus_id rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf :identifier ;
-             rdfs:domain :Article .
+             rdfs:domain :MemaArticle .
 
 
 ###  https://ilmanifesto.it/mema/ontology#edition_date
@@ -455,7 +460,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://ilmanifesto.it/mema/ontology#histid
 :histid rdf:type owl:DatatypeProperty ;
         rdfs:subPropertyOf :identifier ;
-        rdfs:domain :Article .
+        rdfs:domain :MemaArticle .
 
 
 ###  https://ilmanifesto.it/mema/ontology#identifier
@@ -503,11 +508,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
         rdfs:subPropertyOf :text_annotation .
 
 
-###  https://ilmanifesto.it/mema/ontology#location_name
-:location_name rdf:type owl:DatatypeProperty ;
-               rdfs:subPropertyOf :identifier .
-
-
 ###  https://ilmanifesto.it/mema/ontology#name
 :name rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf :text ;
@@ -521,11 +521,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://ilmanifesto.it/mema/ontology#published_day
 :published_day rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf :time_coord .
-
-
-###  https://ilmanifesto.it/mema/ontology#signature
-:signature rdf:type owl:DatatypeProperty ;
-           rdfs:subPropertyOf :identifier .
 
 
 ###  https://ilmanifesto.it/mema/ontology#significant
@@ -572,12 +567,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
        rdfs:range xsd:string .
 
 
-###  https://ilmanifesto.it/mema/ontology#uid
-:uid rdf:type owl:DatatypeProperty ;
-     rdfs:subPropertyOf :identifier ;
-     rdfs:domain :Person .
-
-
 ###  https://ilmanifesto.it/mema/ontology#wiki_summary
 :wiki_summary rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf :text .
@@ -602,13 +591,13 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://ilmanifesto.it/mema/ontology#wp_slug
 :wp_slug rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf :identifier ;
-         rdfs:domain :Article .
+         rdfs:domain :MemaArticle .
 
 
 ###  https://ilmanifesto.it/mema/ontology#wpid
 :wpid rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf :identifier ;
-      rdfs:domain :Article .
+      rdfs:domain :MemaArticle .
 
 
 ###  https://ilmanifesto.it/mema/ontology#year
@@ -628,43 +617,11 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                            owl:someValuesFrom :Author
                          ] ,
                          [ rdf:type owl:Restriction ;
-                           owl:onProperty :category_link ;
-                           owl:someValuesFrom :Category
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :has_category ;
-                           owl:someValuesFrom :Category
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :has_picture ;
-                           owl:someValuesFrom :Picture
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :has_tag ;
-                           owl:someValuesFrom :Tag
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :has_topic ;
-                           owl:someValuesFrom :Topic
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :mentions ;
-                           owl:someValuesFrom [ rdf:type owl:Class ;
-                                                owl:unionOf ( :Entity
-                                                              :Mention
-                                                            )
-                                              ]
-                         ] ,
-                         [ rdf:type owl:Restriction ;
                            owl:onProperty :summary ;
                            owl:someValuesFrom :Summary
                          ] ,
                          [ rdf:type owl:Restriction ;
-                           owl:onProperty :topic_link ;
-                           owl:someValuesFrom :Article
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :excerpt ;
+                           owl:onProperty :body ;
                            owl:someValuesFrom xsd:string
                          ] ,
                          [ rdf:type owl:Restriction ;
@@ -681,35 +638,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                            owl:onProperty :published_day ;
                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                            owl:onDataRange xsd:string
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :directus_id ;
-                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                           owl:onDataRange xsd:string
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :kicker ;
-                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                           owl:onDataRange xsd:string
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :pagenum ;
-                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                           owl:onDataRange xsd:integer
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :wp_slug ;
-                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                           owl:onDataRange xsd:string
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :wpid ;
-                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                           owl:onDataRange xsd:integer
-                         ] ;
-         rdfs:comment "Authored text"@en ,
-                      "Testo auroriale"@it ;
-         :schema "https://schema.org/Article" .
+                         ] .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Author
@@ -720,7 +649,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                           owl:someValuesFrom :Article
                         ] ,
                         [ rdf:type owl:Restriction ;
-                          owl:onProperty :signature ;
+                          owl:onProperty :author_str ;
                           owl:someValuesFrom xsd:string
                         ] ;
         rdfs:comment "Autorship information, realized (but not necessarily) by some agent"@en .
@@ -739,11 +668,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#Document
 :Document rdf:type owl:Class ;
-          rdfs:subClassOf :Information ,
-                          [ rdf:type owl:Restriction ;
-                            owl:onProperty :body ;
-                            owl:someValuesFrom xsd:string
-                          ] .
+          rdfs:subClassOf :Information .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Entity
@@ -751,6 +676,21 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
         rdfs:subClassOf [ rdf:type owl:Restriction ;
                           owl:onProperty :mentioned_in ;
                           owl:someValuesFrom :Article
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :wiki_timestamp ;
+                          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onDataRange xsd:string
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :wiki_title ;
+                          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onDataRange xsd:string
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :wiki_url ;
+                          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onDataRange xsd:anyURI
                         ] ;
         rdfs:comment "Entità localizzabile nello spazio e / o nel tempo"@it ,
                      "Thing localizable in space and / or time, without temporal parts"@en ;
@@ -766,7 +706,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                        ] ,
                        [ rdf:type owl:Restriction ;
                          owl:onProperty :in_place ;
-                         owl:someValuesFrom :Place
+                         owl:someValuesFrom :Location
                        ] ;
        rdfs:comment "Temporal entity, either stative or dynamic" ;
        rdfs:seeAlso "Occurrent" .
@@ -781,6 +721,118 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 :Information rdf:type owl:Class ;
              rdfs:comment "Non material thing realizable in many physical forms, e.g. a newspaper article (written or spoken), classifiers such as tags or topics, word types (lexemes)"@en ;
              rdfs:seeAlso "Representamen (Peirce)" .
+
+
+###  https://ilmanifesto.it/mema/ontology#Location
+:Location rdf:type owl:Class ;
+          rdfs:subClassOf :Entity ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :geoinfo_bbox ;
+                            owl:someValuesFrom xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :geoinfo_country_name ;
+                            owl:someValuesFrom xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :geoinfo_name ;
+                            owl:someValuesFrom xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :geoinfo_feature_class ;
+                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :geoinfo_feature_code ;
+                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:string
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :geoinfo_id ;
+                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:integer
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :geoinfo_lat ;
+                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:double
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :geoinfo_lng ;
+                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:double
+                          ] ;
+          rdfs:comment "Identified portion of space (place)"@en .
+
+
+###  https://ilmanifesto.it/mema/ontology#MemaArticle
+:MemaArticle rdf:type owl:Class ;
+             rdfs:subClassOf :Article ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :category_link ;
+                               owl:someValuesFrom :MemaArticle
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :has_category ;
+                               owl:someValuesFrom :Category
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :has_picture ;
+                               owl:someValuesFrom :Picture
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :has_tag ;
+                               owl:someValuesFrom :Tag
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :has_topic ;
+                               owl:someValuesFrom :Topic
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :mentions ;
+                               owl:someValuesFrom [ rdf:type owl:Class ;
+                                                    owl:unionOf ( :Entity
+                                                                  :Mention
+                                                                )
+                                                  ]
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :topic_link ;
+                               owl:someValuesFrom :MemaArticle
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :excerpt ;
+                               owl:someValuesFrom xsd:string
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :directus_id ;
+                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onDataRange xsd:string
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :kicker ;
+                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onDataRange xsd:string
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :pagenum ;
+                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onDataRange xsd:integer
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :wp_slug ;
+                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onDataRange xsd:string
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :wpid ;
+                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onDataRange xsd:integer
+                             ] ;
+             rdfs:comment "Authored text"@en ,
+                          "Testo auroriale"@it ;
+             :schema "https://schema.org/Article" .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Mention
@@ -834,7 +886,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
          rdfs:subClassOf :Information ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty :picture_of ;
-                           owl:someValuesFrom :Article
+                           owl:someValuesFrom :MemaArticle
                          ] ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty :imgcaption ;
@@ -853,12 +905,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
          rdfs:comment "Immagine fotografica o grafica a corredo di articolo o numero"@it ,
                       "Information represented by image" ;
          :schema "https://schema.org/Photograph"@it .
-
-
-###  https://ilmanifesto.it/mema/ontology#Place
-:Place rdf:type owl:Class ;
-       rdfs:subClassOf :Entity ;
-       rdfs:comment "Identified portion of space (place)"@en .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Relationship
