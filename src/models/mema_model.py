@@ -7,7 +7,6 @@ from isagog_kg.models.logic_model import Thing
 
 class Information(Thing):
     """Non material thing that conveys semantic information, realizable in many physical forms, e.g. a newspaper article (written or spoken), signs such as tags or topics, word types (lexemes)."""
-    yields: List['Sign'] = Field(default_factory=list, description="yields property", json_schema_extra={'kg_property': 'yields', 'kg_type': 'relation', 'kg_related_class': 'Sign'})
 
 class Sign(Information):
     """Non-material entity underpinning the process of interpreting one thing as representing or standing for another"""
@@ -29,6 +28,7 @@ class AIDescriptior(EntityDescriptor):
 class Document(Information):
     """Textual document"""
     described_by: List['Metadata'] = Field(default_factory=list, description="described_by property", json_schema_extra={'kg_property': 'described_by', 'kg_type': 'relation', 'kg_related_class': 'Metadata'})
+    yields: List['Sign'] = Field(default_factory=list, description="yields property", json_schema_extra={'kg_property': 'yields', 'kg_type': 'relation', 'kg_related_class': 'Sign'})
     body: Optional[str] = Field(default=None, description="body property", json_schema_extra={'kg_property': 'body', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Article(Document):
@@ -41,11 +41,11 @@ class Article(Document):
 
 class Entity(Thing):
     """Entità localizzabile nello spazio e / o nel tempo"""
-    described_by: List['EntityDescriptor'] = Field(default_factory=list, description="described_by property", json_schema_extra={'kg_property': 'described_by', 'kg_type': 'relation', 'kg_related_class': 'EntityDescriptor'})
     mentioned_in: List['Document'] = Field(default_factory=list, description="mentioned_in property", json_schema_extra={'kg_property': 'mentioned_in', 'kg_type': 'relation', 'kg_related_class': 'Document'})
+    described_by: Optional['EntityDescriptor'] = Field(default=None, description="described_by property", json_schema_extra={'kg_property': 'described_by', 'kg_type': 'relation', 'kg_related_class': 'EntityDescriptor'})
 
 class Person(Entity):
-    name: List[str] = Field(default_factory=list, description="name property", json_schema_extra={'kg_property': 'name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    name: Optional[str] = Field(default=None, description="name property", json_schema_extra={'kg_property': 'name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     surname: str = Field(..., description="surname property", json_schema_extra={'kg_property': 'surname', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Author(Person):
@@ -81,6 +81,7 @@ class GeonamesDescriptor(EntityDescriptor):
     geoinfo_id: Optional[int] = Field(default=None, description="geoinfo_id property", json_schema_extra={'kg_property': 'geoinfo_id', 'kg_type': 'attribute', 'kg_data_type': 'int'})
     geoinfo_lat: Optional[float] = Field(default=None, description="geoinfo_lat property", json_schema_extra={'kg_property': 'geoinfo_lat', 'kg_type': 'attribute', 'kg_data_type': 'float'})
     geoinfo_lng: Optional[float] = Field(default=None, description="geoinfo_lng property", json_schema_extra={'kg_property': 'geoinfo_lng', 'kg_type': 'attribute', 'kg_data_type': 'float'})
+    geoinfo_population: Optional['long'] = Field(default=None, description="geoinfo_population property", json_schema_extra={'kg_property': 'geoinfo_population', 'kg_type': 'relation', 'kg_related_class': 'long'})
 
 class Highlight(Metadata):
     pass
@@ -90,6 +91,12 @@ class HumanDescriptor(EntityDescriptor):
 
 class Location(Entity):
     """Identified portion of space (place)"""
+
+class MeMaArticle(Article):
+    directus_id: str = Field(..., description="directus_id property", json_schema_extra={'kg_property': 'directus_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    athena_id: Optional[str] = Field(default=None, description="athena_id property", json_schema_extra={'kg_property': 'athena_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    wp_id: Optional[str] = Field(default=None, description="wp_id property", json_schema_extra={'kg_property': 'wp_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    wp_slug: Optional[str] = Field(default=None, description="wp_slug property", json_schema_extra={'kg_property': 'wp_slug', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Mention(Sign):
     """Reference to an Entity in a Document"""
@@ -148,6 +155,7 @@ GeonamesDescriptor.model_rebuild()
 Highlight.model_rebuild()
 HumanDescriptor.model_rebuild()
 Location.model_rebuild()
+MeMaArticle.model_rebuild()
 Mention.model_rebuild()
 Organization.model_rebuild()
 Picture.model_rebuild()

@@ -15,18 +15,16 @@ xsd_types = {
 }
 
 
-def _make_field_definition(prop_name:str,
-                           field_type:str,
-                           value_type:str,
-                           ) -> str:
-
+def _make_field_definition(prop_name: str,
+                           field_type: str,
+                           value_type: str,
+                           annotations: Optional[Dict[str, str]] = None) -> str:
     if "Optional" in field_type:
         default_value = "default=None"
     elif "List" in field_type:
         default_value = "default_factory=list"
     else:
         default_value = "..."
-
     extras = {
         'kg_property': prop_name,
     }
@@ -36,10 +34,12 @@ def _make_field_definition(prop_name:str,
     else:
         extras['kg_type'] = 'relation'
         extras['kg_related_class'] = value_type
-
+    if annotations:
+        extras.update(annotations)
     field_def = f"    {prop_name}: {field_type}"
     field_def += f' = Field({default_value}, description="{prop_name} property", json_schema_extra={extras})'
     return field_def
+
 
 class OntologyConverter:
     """Converts a Turtle ontology to Pydantic model classes."""
@@ -52,6 +52,8 @@ class OntologyConverter:
         self.class_hierarchy: Dict[str, List[str]] = {}
         self.class_restrictions: Dict[str, List[Tuple[str, str, str, int | None]]] = {}
         self.class_comments: Dict[str, str] = {}
+        # Memorizziamo le annotazioni degli axiomi, indicizzate per (classe, proprietà)
+        self.axiom_annotations: Dict[Tuple[str, str], Dict[str, str]] = {}
 
     def load_ontology(self, turtle_content: str) -> None:
         """Load ontology from Turtle content string."""
@@ -68,6 +70,7 @@ class OntologyConverter:
         self.class_hierarchy.clear()
         self.class_restrictions.clear()
         self.class_comments.clear()
+        self.axiom_annotations.clear()
 
         # Get all classes
         for class_uri in self.graph.subjects(RDF.type, OWL.Class):
@@ -94,8 +97,11 @@ class OntologyConverter:
 
             # Get class comment
             for comment in self.graph.objects(class_uri, RDFS.comment):
-               self.class_comments[class_name] = str(comment)
-               break
+                self.class_comments[class_name] = str(comment)
+                break
+
+        # Process axioms annotations after aver raccolto le restrizioni
+        self._extract_axiom_annotations()
 
     def _process_restriction(self, class_name: str, restriction_node: BNode) -> None:
         """Process an OWL restriction and store the property information."""
@@ -137,6 +143,33 @@ class OntologyConverter:
                 (property_name, restriction_type, value_type_name, cardinality),
             )
 
+    def _extract_axiom_annotations(self) -> None:
+        """
+        Process OWL axioms to extract annotations on restrictions.
+        Queste annotazioni verranno integrate nel parametro json_schema_extra.
+        """
+        for axiom in self.graph.subjects(RDF.type, OWL.Axiom):
+            source = self.graph.value(subject=axiom, predicate=OWL.annotatedSource)
+            target = self.graph.value(subject=axiom, predicate=OWL.annotatedTarget)
+            if source is None or target is None:
+                continue
+            class_name = self._get_class_name(URIRef(str(source)))
+            if not class_name:
+                continue
+            # Verifichiamo che il target sia una restrizione contenente owl:onProperty
+            property_uri = self.graph.value(subject=target, predicate=OWL.onProperty)
+            if property_uri is None:
+                continue
+            property_name = self._get_property_name(URIRef(str(property_uri)))
+            # Raccolta delle annotazioni (escludendo i predicati standard)
+            annotations = {}
+            for p, o in self.graph.predicate_objects(axiom):
+                if p in {RDF.type, OWL.annotatedSource, OWL.annotatedProperty, OWL.annotatedTarget}:
+                    continue
+                key = self._get_property_name(URIRef(str(p)))
+                annotations[key] = str(o)
+            self.axiom_annotations[(class_name, property_name)] = annotations
+
     def _sort_classes_by_inheritance(self) -> List[str]:
         """Sort classes so that superclasses come before their subclasses."""
         # Create dependency graph
@@ -168,15 +201,14 @@ class OntologyConverter:
 
         return sorted_classes
 
-    
     def generate_model(self, format: str = "pydantic") -> str:
         """Generate model classes from the extracted ontology information."""
         match format.lower():
             case "pydantic":
-                 return self._generate_pydantic_model()
+                return self._generate_pydantic_model()
             case _:
                 raise ValueError(f"Unsupported format: {format}")
-    
+
     def _generate_pydantic_model(self) -> str:
         """Generate Pydantic model classes from the extracted ontology information."""
         imports = [
@@ -221,8 +253,9 @@ class OntologyConverter:
                     if any(cls in field_type for cls in self.class_hierarchy):
                         forward_refs.add(class_name)
 
-
-                    field_def = _make_field_definition(prop_name, field_type, value_type)
+                    # Verifica se esistono annotazioni axiom per la coppia (classe, proprietà)
+                    annotations = self.axiom_annotations.get((class_name, prop_name))
+                    field_def = _make_field_definition(prop_name, field_type, value_type, annotations)
                     class_def.append(field_def)
             if len(class_def) == 1:  # Only class definition, no fields
                 class_def.append("    pass")
@@ -266,7 +299,7 @@ class OntologyConverter:
         cardinality: Optional[int],
     ) -> str:
         """Convert OWL restriction to Python type annotation."""
-        # If value_type is a custom class (not a built-in type), wrap it in quotes
+        # Se value_type è una classe custom (non built-in) la racchiudiamo tra virgolette
         if value_type not in {"str", "int", "float", "bool", "datetime", "Any"}:
             value_type = f"'{value_type}'"
 
@@ -288,7 +321,7 @@ def ontology_to_pydantic(turtle_content: str) -> str:
     return converter._generate_pydantic_model()
 
 
-def generate_module(ontology_file: str, output_file: str | None = None, format: str="pydantic") -> None:
+def generate_module(ontology_file: str, output_file: str | None = None, format: str = "pydantic") -> None:
     """
     Generate a Python module with Pydantic models from an ontology file.
 
@@ -296,17 +329,17 @@ def generate_module(ontology_file: str, output_file: str | None = None, format: 
         ontology_file (str): Path to the ontology file (e.g. "resources/ontology/mema_ontology.ttl").
         output_file (str): Path to the output Python module file (e.g. "src/isagog_kg/models/mema_model.py").
     """
-    
+
     if output_file is None:
         output_file = ontology_file.replace(".ttl", "_model.py")
-        
+
     with open(ontology_file, "r") as file:
         turtle_content = file.read()
 
     converter = OntologyConverter()
     converter.load_ontology(turtle_content)
     converter.extract_class_info()
-    pydantic_model = converter.generate_model(format)
+    ontology_model = converter.generate_model(format)
 
     out_path = Path(output_file)
     if out_path.exists():
@@ -316,8 +349,7 @@ def generate_module(ontology_file: str, output_file: str | None = None, format: 
             return
 
     with out_path.open("w") as file:
-        file.write(pydantic_model)
-
+        file.write(ontology_model)
 
 if __name__ == "__main__":   
     
