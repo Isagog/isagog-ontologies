@@ -45,7 +45,7 @@ class Entity(Thing):
     described_by: Optional['EntityDescriptor'] = Field(default=None, description="described_by property", json_schema_extra={'kg_property': 'described_by', 'kg_type': 'relation', 'kg_related_class': 'EntityDescriptor'})
 
 class Person(Entity):
-    name: Optional[str] = Field(default=None, description="name property", json_schema_extra={'kg_property': 'name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    name: str = Field(..., description="name property", json_schema_extra={'kg_property': 'name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     surname: str = Field(..., description="surname property", json_schema_extra={'kg_property': 'surname', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Author(Person):
