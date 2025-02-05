@@ -54,6 +54,23 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
             rdfs:range xsd:integer .
 
 
+###  https://ilmanifesto.it/mema/ontology#we_filter
+:we_filter rdf:type owl:AnnotationProperty ;
+           rdfs:subPropertyOf :isagog ;
+           rdfs:range xsd:boolean .
+
+
+###  https://ilmanifesto.it/mema/ontology#we_search
+:we_search rdf:type owl:AnnotationProperty ;
+           rdfs:subPropertyOf :isagog ;
+           rdfs:range xsd:boolean .
+
+
+###  https://ilmanifesto.it/mema/ontology#we_tok
+:we_tok rdf:type owl:AnnotationProperty ;
+        rdfs:subPropertyOf :isagog .
+
+
 #################################################################
 #    Object Properties
 #################################################################
@@ -648,6 +665,42 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                            owl:onDataRange xsd:string
                          ] ;
          rdfs:comment "Newspaper article" .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource :Article ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget [ rdf:type owl:Restriction ;
+                         owl:onProperty :authored_by ;
+                         owl:someValuesFrom :Author
+                       ] ;
+   :we_filter "true"^^xsd:boolean ;
+   :we_search "true"^^xsd:boolean ;
+   :we_tok "FIELD"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource :Article ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget [ rdf:type owl:Restriction ;
+                         owl:onProperty :title ;
+                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onDataRange xsd:string
+                       ] ;
+   :we_search "false"^^xsd:boolean ;
+   :we_tok "FIELD"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource :Article ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget [ rdf:type owl:Restriction ;
+                         owl:onProperty :kicker ;
+                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onDataRange xsd:string
+                       ] ;
+   :we_search "false"^^xsd:boolean ;
+   :we_tok "FIELD"
+ ] .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Author
