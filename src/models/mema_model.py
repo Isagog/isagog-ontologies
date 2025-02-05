@@ -33,11 +33,11 @@ class Document(Information):
 
 class Article(Document):
     """Newspaper article"""
-    authored_by: List['Author'] = Field(default_factory=list, description="authored_by property", json_schema_extra={'kg_property': 'authored_by', 'kg_type': 'relation', 'kg_related_class': 'Author'})
-    title: Optional[str] = Field(default=None, description="title property", json_schema_extra={'kg_property': 'title', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    authored_by: List['Author'] = Field(default_factory=list, description="authored_by property", json_schema_extra={'kg_property': 'authored_by', 'kg_type': 'relation', 'kg_related_class': 'Author', 'we_filter': 'true', 'we_search': 'true', 'we_tok': 'FIELD'})
+    title: Optional[str] = Field(default=None, description="title property", json_schema_extra={'kg_property': 'title', 'kg_type': 'attribute', 'kg_data_type': 'str', 'we_search': 'false', 'we_tok': 'FIELD'})
     published_day: str = Field(..., description="published_day property", json_schema_extra={'kg_property': 'published_day', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     edition_date: Optional[str] = Field(default=None, description="edition_date property", json_schema_extra={'kg_property': 'edition_date', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    kicker: Optional[str] = Field(default=None, description="kicker property", json_schema_extra={'kg_property': 'kicker', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    kicker: Optional[str] = Field(default=None, description="kicker property", json_schema_extra={'kg_property': 'kicker', 'kg_type': 'attribute', 'kg_data_type': 'str', 'we_search': 'false', 'we_tok': 'FIELD'})
 
 class Entity(Thing):
     """Entità localizzabile nello spazio e / o nel tempo"""
