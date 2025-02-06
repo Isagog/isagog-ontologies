@@ -1,4 +1,5 @@
 @prefix : <https://ilmanifesto.it/mema/ontology#> .
+@prefix ig: <https://isagog.com/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
@@ -7,6 +8,7 @@
 @base <https://ilmanifesto.it/mema/ontology> .
 
 <https://ilmanifesto.it/mema/ontology> rdf:type owl:Ontology ;
+                                        owl:imports <https://isagog.com/ontology> ;
                                         <http://purl.org/dc/elements/1.1/creator> "Guido Vetere, Isagog Srl, Italy" ;
                                         <http://purl.org/dc/elements/1.1/license> <http://creativecommons.org/licenses/by/4.0/> ;
                                         rdfs:comment """This work is licensed under a Creative Commons Attribution 4.0 International License.
@@ -32,22 +34,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
        rdfs:range xsd:integer .
 
 
-###  https://ilmanifesto.it/mema/ontology#isagog
-:isagog rdf:type owl:AnnotationProperty ;
-        rdfs:comment "Mapping to the isagog platform" ;
-        rdfs:subPropertyOf :mapping ;
-        rdfs:range xsd:string .
-
-
-###  https://ilmanifesto.it/mema/ontology#mapping
-:mapping rdf:type owl:AnnotationProperty .
-
-
-###  https://ilmanifesto.it/mema/ontology#schema
-:schema rdf:type owl:AnnotationProperty ;
-        rdfs:comment "Corrispondenza con schema.org"@it ;
-        rdfs:subPropertyOf :mapping .
-
 
 ###  https://ilmanifesto.it/mema/ontology#statements
 :statements rdf:type owl:AnnotationProperty ;
@@ -56,88 +42,26 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#we_filter
 :we_filter rdf:type owl:AnnotationProperty ;
-           rdfs:subPropertyOf :isagog ;
+           rdfs:subPropertyOf ig:isagog ;
            rdfs:range xsd:boolean .
 
 
 ###  https://ilmanifesto.it/mema/ontology#we_search
 :we_search rdf:type owl:AnnotationProperty ;
-           rdfs:subPropertyOf :isagog ;
+           rdfs:subPropertyOf ig:isagog ;
            rdfs:range xsd:boolean .
 
 
 ###  https://ilmanifesto.it/mema/ontology#we_tok
 :we_tok rdf:type owl:AnnotationProperty ;
-        rdfs:subPropertyOf :isagog .
+        rdfs:subPropertyOf ig:isagog .
 
 
-#################################################################
-#    Object Properties
-#################################################################
-
-###  https://ilmanifesto.it/mema/ontology#author_of
-:author_of rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :relatedness ;
-           owl:inverseOf :authored_by ;
-           rdfs:domain :Author ;
-           rdfs:range :Information .
-
-
-###  https://ilmanifesto.it/mema/ontology#authored_by
-:authored_by rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf :relatedness ;
-             rdfs:domain :Information ;
-             rdfs:range :Author .
-
-
-###  https://ilmanifesto.it/mema/ontology#category_of
-:category_of rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf :classifies ;
-             owl:inverseOf :has_category .
-
-
-###  https://ilmanifesto.it/mema/ontology#classified_by
-:classified_by rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf :inheres_to ;
-               owl:inverseOf :classifies .
-
-
-###  https://ilmanifesto.it/mema/ontology#classifies
-:classifies rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf :inheres_to .
-
-
-###  https://ilmanifesto.it/mema/ontology#collocation
-:collocation rdf:type owl:ObjectProperty ;
-             rdfs:comment "Region collocation" .
-
-
-###  https://ilmanifesto.it/mema/ontology#component_of
-:component_of rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf :part_of ;
-              owl:inverseOf :has_component ;
-              rdfs:comment "Material parthood"@en .
-
-
-###  https://ilmanifesto.it/mema/ontology#composition
-:composition rdf:type owl:ObjectProperty ;
-             rdfs:comment "General part-whole relationship" .
-
-
-###  https://ilmanifesto.it/mema/ontology#described_by
-:described_by rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf :has_inherent ;
-              owl:inverseOf :describes .
-
-
-###  https://ilmanifesto.it/mema/ontology#describes
-:describes rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :inheres_to .
 
 
 ###  https://ilmanifesto.it/mema/ontology#generalization_of
 :generalization_of rdf:type owl:ObjectProperty ;
-                   rdfs:subPropertyOf :composition ;
+                   rdfs:subPropertyOf ig:composition ;
                    owl:inverseOf :specialization_of ;
                    rdfs:domain :Category ;
                    rdfs:range :Category .
@@ -145,98 +69,44 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#has_category
 :has_category rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf :classified_by ;
+              rdfs:subPropertyOf ig:classified_by ;
               rdfs:range :Category .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_component
-:has_component rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf :has_part .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_inherent
-:has_inherent rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf :inherence ;
-              owl:inverseOf :inheres_to .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_part
-:has_part rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :composition ;
-          owl:inverseOf :part_of .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_participant
-:has_participant rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf :participation ;
-                 owl:inverseOf :participate_in ;
-                 rdfs:range :Entity .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_phase
-:has_phase rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :composition ;
-           owl:inverseOf :phase_of .
 
 
 ###  https://ilmanifesto.it/mema/ontology#has_picture
 :has_picture rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :has_component ;
              owl:inverseOf :picture_of ;
-             rdfs:domain :Information ;
+             rdfs:domain ig:Information ;
              rdfs:range :Picture .
 
 
 ###  https://ilmanifesto.it/mema/ontology#has_tag
 :has_tag rdf:type owl:ObjectProperty ;
-         rdfs:subPropertyOf :has_inherent ;
+         rdfs:subPropertyOf ig:has_inherent ;
          owl:inverseOf :tag_of ;
          rdfs:range :Tag .
 
 
 ###  https://ilmanifesto.it/mema/ontology#has_topic
 :has_topic rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :has_inherent ;
+           rdfs:subPropertyOf ig:has_inherent ;
            owl:inverseOf :topic_of .
-
-
-###  https://ilmanifesto.it/mema/ontology#in_period
-:in_period rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :collocation .
-
-
-###  https://ilmanifesto.it/mema/ontology#in_place
-:in_place rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :collocation ;
-          rdfs:range :Location .
-
-
-###  https://ilmanifesto.it/mema/ontology#inherence
-:inherence rdf:type owl:ObjectProperty ;
-           rdfs:comment "Pertinence of metadata to data"@en .
-
-
-###  https://ilmanifesto.it/mema/ontology#inheres_to
-:inheres_to rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf :inherence ;
-            rdfs:domain :Descriptor ;
-            rdfs:range :Entity ;
-            rdfs:comment "Any relation involved in semiotic processes" .
 
 
 ###  https://ilmanifesto.it/mema/ontology#mentioned_in
 :mentioned_in rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf :relatedness ;
+              rdfs:subPropertyOf ig:relatedness ;
               owl:inverseOf :mentions .
 
 
 ###  https://ilmanifesto.it/mema/ontology#mentions
 :mentions rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :relatedness ;
-          rdfs:domain :Document ;
+          rdfs:subPropertyOf ig:relatedness ;
+          rdfs:domain ig:Document ;
           rdfs:range [ rdf:type owl:Class ;
-                       owl:unionOf ( :Entity
-                                     :Mention
+                       owl:unionOf ( ig:Entity
+                                     ig:Mention
                                    )
                      ] ;
           rdfs:comment "Referral to an Entity, either direct or via a suitable reification (Mention)"@en .
@@ -244,114 +114,61 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#object
 :object rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :referent ;
-        rdfs:domain :Sign ;
+        rdfs:subPropertyOf ig:referent ;
+        rdfs:domain ig:Sign ;
         rdfs:range [ rdf:type owl:Class ;
-                     owl:unionOf ( :Entity
-                                   :Mention
+                     owl:unionOf ( ig:Entity
+                                   ig:Mention
                                  )
                    ] .
 
 
-###  https://ilmanifesto.it/mema/ontology#part_of
-:part_of rdf:type owl:ObjectProperty ;
-         rdfs:subPropertyOf :composition ;
-         rdfs:comment "Generic parthood"@en .
-
-
-###  https://ilmanifesto.it/mema/ontology#participate_in
-:participate_in rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf :participation .
-
-
-###  https://ilmanifesto.it/mema/ontology#participation
-:participation rdf:type owl:ObjectProperty ;
-               rdfs:comment "Continuant participation in occurrents" .
-
-
-###  https://ilmanifesto.it/mema/ontology#phase_of
-:phase_of rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :composition ;
-          rdfs:comment "Temporal parthood"@en .
-
 
 ###  https://ilmanifesto.it/mema/ontology#picture_of
 :picture_of rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf :component_of .
+            rdfs:subPropertyOf ig:component_of .
 
-
-###  https://ilmanifesto.it/mema/ontology#referent
-:referent rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :inheres_to ;
-          rdfs:domain :Sign ;
-          rdfs:range [ rdf:type owl:Class ;
-                       owl:unionOf ( :Entity
-                                     :Mention
-                                   )
-                     ] ;
-          rdfs:comment "'Real-world' concept or entity that the sign points to or refers to." ;
-          rdfs:seeAlso "Sign->Object (Peirce)" .
-
-
-###  https://ilmanifesto.it/mema/ontology#relatedness
-:relatedness rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf owl:topObjectProperty ;
-             rdfs:comment "generic relatedness" .
-
-
-###  https://ilmanifesto.it/mema/ontology#source
-:source rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :relatedness ;
-        owl:inverseOf :yields ;
-        rdfs:domain :Sign ;
-        rdfs:range :Document .
 
 
 ###  https://ilmanifesto.it/mema/ontology#specialization_of
 :specialization_of rdf:type owl:ObjectProperty ;
-                   rdfs:subPropertyOf :composition ;
+                   rdfs:subPropertyOf ig:composition ;
                    rdfs:domain :Category ;
                    rdfs:range :Category .
 
 
 ###  https://ilmanifesto.it/mema/ontology#subject
 :subject rdf:type owl:ObjectProperty ;
-         rdfs:subPropertyOf :referent ;
-         rdfs:domain :Relationship ;
+         rdfs:subPropertyOf ig:referent ;
+         rdfs:domain ig:Relationship ;
          rdfs:range [ rdf:type owl:Class ;
-                      owl:unionOf ( :Entity
-                                    :Mention
+                      owl:unionOf ( ig:Entity
+                                    ig:Mention
                                   )
                     ] .
 
 
 ###  https://ilmanifesto.it/mema/ontology#summarizes
 :summarizes rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf :inheres_to ;
+            rdfs:subPropertyOf ig:inheres_to ;
             owl:inverseOf :summary ;
             rdfs:domain :Summary .
 
 
 ###  https://ilmanifesto.it/mema/ontology#summary
 :summary rdf:type owl:ObjectProperty ;
-         rdfs:subPropertyOf :has_inherent .
+         rdfs:subPropertyOf ig:has_inherent .
 
 
 ###  https://ilmanifesto.it/mema/ontology#tag_of
 :tag_of rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :inheres_to .
+        rdfs:subPropertyOf ig:inheres_to .
 
 
 ###  https://ilmanifesto.it/mema/ontology#topic_of
 :topic_of rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :inheres_to .
+          rdfs:subPropertyOf ig:inheres_to .
 
-
-###  https://ilmanifesto.it/mema/ontology#yields
-:yields rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :relatedness ;
-        rdfs:domain :Document ;
-        rdfs:range :Sign .
 
 
 #################################################################
@@ -370,19 +187,19 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#author_str
 :author_str rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf :identifier .
+            rdfs:subPropertyOf ig:identifier .
 
 
 ###  https://ilmanifesto.it/mema/ontology#body
 :body rdf:type owl:DatatypeProperty ;
-      rdfs:subPropertyOf :text ;
-      rdfs:domain :Document ;
+      rdfs:subPropertyOf ig:text ;
+      rdfs:domain ig:Document ;
       rdfs:comment "textual content of a document" .
 
 
 ###  https://ilmanifesto.it/mema/ontology#caption
 :caption rdf:type owl:DatatypeProperty ;
-         rdfs:subPropertyOf :text ;
+         rdfs:subPropertyOf ig:text ;
          :schema "https://schema.org/abstract" .
 
 
@@ -397,11 +214,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
               rdfs:subPropertyOf :tag .
 
 
-###  https://ilmanifesto.it/mema/ontology#concept
-:concept rdf:type owl:DatatypeProperty ;
-         rdfs:domain :Sign ;
-         rdfs:comment "mapping of Signs to interpreting predicates (concepts or properties)" ;
-         rdfs:seeAlso "Representamen->Interpretant (Peirce)" .
 
 
 ###  https://ilmanifesto.it/mema/ontology#copyright
@@ -410,7 +222,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#dbpedia_ref
 :dbpedia_ref rdf:type owl:DatatypeProperty ;
-             rdfs:subPropertyOf :reference .
+             rdfs:subPropertyOf ig:reference .
 
 
 ###  https://ilmanifesto.it/mema/ontology#directus_id
@@ -420,83 +232,71 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#edition_date
 :edition_date rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf :time_coord .
+              rdfs:subPropertyOf ig:time_coordinate .
 
 
-###  https://ilmanifesto.it/mema/ontology#expression
-:expression rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf :text ;
-            rdfs:domain :Sign ;
-            rdfs:range xsd:string ;
-            rdfs:comment "Sign's textual representamen" .
 
 
 ###  https://ilmanifesto.it/mema/ontology#full_name
 :full_name rdf:type owl:DatatypeProperty ;
-           rdfs:subPropertyOf :text .
+           rdfs:subPropertyOf ig:text .
 
 
-###  https://ilmanifesto.it/mema/ontology#geo_coord
-:geo_coord rdf:type owl:DatatypeProperty ;
-           rdfs:comment "any suitable <logitude, latitude> coordinate" .
 
 
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_bbox
 :geoinfo_bbox rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf :geo_coord .
+              rdfs:subPropertyOf ig:geo_coordinate .
 
 
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_country_name
 :geoinfo_country_name rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf :geo_coord .
+                      rdfs:subPropertyOf ig:geo_coordinate .
 
 
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_feature_class
 :geoinfo_feature_class rdf:type owl:DatatypeProperty ;
-                       rdfs:subPropertyOf :geo_coord .
+                       rdfs:subPropertyOf ig:geo_coordinate .
 
 
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_feature_code
 :geoinfo_feature_code rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf :geo_coord .
+                      rdfs:subPropertyOf ig:geo_coordinate .
 
 
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_id
 :geoinfo_id rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf :geo_coord ;
+            rdfs:subPropertyOf ig:geo_coordinate ;
             rdfs:range xsd:integer .
 
 
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_lat
 :geoinfo_lat rdf:type owl:DatatypeProperty ;
-             rdfs:subPropertyOf :geo_coord ;
+             rdfs:subPropertyOf ig:geo_coordinate ;
              rdfs:range xsd:double .
 
 
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_lng
 :geoinfo_lng rdf:type owl:DatatypeProperty ;
-             rdfs:subPropertyOf :geo_coord ;
+             rdfs:subPropertyOf ig:geo_coordinate ;
              rdfs:range xsd:double .
 
 
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_name
 :geoinfo_name rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf :geo_coord .
+              rdfs:subPropertyOf ig:geo_coordinate .
 
 
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_population
 :geoinfo_population rdf:type owl:DatatypeProperty ;
-                    rdfs:subPropertyOf :geo_coord .
+                    rdfs:subPropertyOf ig:geo_coordinate .
 
 
-###  https://ilmanifesto.it/mema/ontology#identifier
-:identifier rdf:type owl:DatatypeProperty ;
-            rdfs:range xsd:string .
 
 
 ###  https://ilmanifesto.it/mema/ontology#image_url
 :image_url rdf:type owl:DatatypeProperty ;
-           rdfs:subPropertyOf :reference .
+           rdfs:subPropertyOf ig:reference .
 
 
 ###  https://ilmanifesto.it/mema/ontology#imgcaption
@@ -506,14 +306,8 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#imgurl
 :imgurl rdf:type owl:DatatypeProperty ;
-        rdfs:subPropertyOf :identifier ;
+        rdfs:subPropertyOf ig:identifier ;
         rdfs:range xsd:anyURI .
-
-
-###  https://ilmanifesto.it/mema/ontology#instant
-:instant rdf:type owl:DatatypeProperty ;
-         rdfs:subPropertyOf :time_coord .
-
 
 ###  https://ilmanifesto.it/mema/ontology#keyword
 :keyword rdf:type owl:DatatypeProperty ;
@@ -523,18 +317,13 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#kicker
 :kicker rdf:type owl:DatatypeProperty ;
-        rdfs:subPropertyOf :text_annotation .
+        rdfs:subPropertyOf ig:text .
 
 
 ###  https://ilmanifesto.it/mema/ontology#mema_ids
 :mema_ids rdf:type owl:DatatypeProperty ;
-          rdfs:subPropertyOf :identifier .
+          rdfs:subPropertyOf ig:identifier .
 
-
-###  https://ilmanifesto.it/mema/ontology#name
-:name rdf:type owl:DatatypeProperty ;
-      rdfs:subPropertyOf :text ;
-      rdfs:range xsd:string .
 
 
 ###  https://ilmanifesto.it/mema/ontology#pagenum
@@ -543,63 +332,38 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#published_day
 :published_day rdf:type owl:DatatypeProperty ;
-               rdfs:subPropertyOf :time_coord .
-
-
-###  https://ilmanifesto.it/mema/ontology#reference
-:reference rdf:type owl:DatatypeProperty ;
-           rdfs:subPropertyOf owl:topDataProperty .
+               rdfs:subPropertyOf ig:time_coordinate .
 
 
 ###  https://ilmanifesto.it/mema/ontology#status
 :status rdf:type owl:DatatypeProperty .
 
 
-###  https://ilmanifesto.it/mema/ontology#surname
-:surname rdf:type owl:DatatypeProperty ;
-         rdfs:subPropertyOf :text ;
-         rdfs:range xsd:string .
-
-
 ###  https://ilmanifesto.it/mema/ontology#tag
 :tag rdf:type owl:DatatypeProperty ;
-     rdfs:subPropertyOf :text_annotation .
+     rdfs:subPropertyOf ig:text .
 
-
-###  https://ilmanifesto.it/mema/ontology#text
-:text rdf:type owl:DatatypeProperty ;
-      rdfs:range xsd:string .
-
-
-###  https://ilmanifesto.it/mema/ontology#text_annotation
-:text_annotation rdf:type owl:DatatypeProperty ;
-                 rdfs:subPropertyOf :text .
-
-
-###  https://ilmanifesto.it/mema/ontology#time_coord
-:time_coord rdf:type owl:DatatypeProperty ;
-            rdfs:comment "any suitable time point or interval" .
 
 
 ###  https://ilmanifesto.it/mema/ontology#title
 :title rdf:type owl:DatatypeProperty ;
-       rdfs:subPropertyOf :text ;
+       rdfs:subPropertyOf ig:text ;
        rdfs:range xsd:string .
 
 
 ###  https://ilmanifesto.it/mema/ontology#userid
 :userid rdf:type owl:DatatypeProperty ;
-        rdfs:subPropertyOf :identifier .
+        rdfs:subPropertyOf ig:identifier .
 
 
 ###  https://ilmanifesto.it/mema/ontology#wiki_summary
 :wiki_summary rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf :text .
+              rdfs:subPropertyOf ig:text .
 
 
 ###  https://ilmanifesto.it/mema/ontology#wiki_timestamp
 :wiki_timestamp rdf:type owl:DatatypeProperty ;
-                rdfs:subPropertyOf :time_coord .
+                rdfs:subPropertyOf ig:time_coordinate .
 
 
 ###  https://ilmanifesto.it/mema/ontology#wiki_title
@@ -609,7 +373,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#wiki_url
 :wiki_url rdf:type owl:DatatypeProperty ;
-          rdfs:subPropertyOf :reference ;
+          rdfs:subPropertyOf ig:reference ;
           rdfs:range xsd:anyURI .
 
 
@@ -625,7 +389,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#year
 :year rdf:type owl:DatatypeProperty ;
-      rdfs:subPropertyOf :time_coord .
+      rdfs:subPropertyOf ig:time_coordinate .
 
 
 #################################################################
@@ -634,14 +398,14 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#AIDescriptior
 :AIDescriptior rdf:type owl:Class ;
-               rdfs:subClassOf :EntityDescriptor .
+               rdfs:subClassOf ig:EntityDescriptor .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Article
 :Article rdf:type owl:Class ;
-         rdfs:subClassOf :Document ,
+         rdfs:subClassOf ig:Document ,
                          [ rdf:type owl:Restriction ;
-                           owl:onProperty :authored_by ;
+                           owl:onProperty ig:authored_by ;
                            owl:someValuesFrom :Author
                          ] ,
                          [ rdf:type owl:Restriction ;
@@ -670,7 +434,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
    owl:annotatedSource :Article ;
    owl:annotatedProperty rdfs:subClassOf ;
    owl:annotatedTarget [ rdf:type owl:Restriction ;
-                         owl:onProperty :authored_by ;
+                         owl:onProperty ig:authored_by ;
                          owl:someValuesFrom :Author
                        ] ;
    :we_filter "true"^^xsd:boolean ;
@@ -705,10 +469,10 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#Author
 :Author rdf:type owl:Class ;
-        rdfs:subClassOf :Person ,
+        rdfs:subClassOf ig:Person ,
                         [ rdf:type owl:Restriction ;
-                          owl:onProperty :author_of ;
-                          owl:someValuesFrom :Document
+                          owl:onProperty ig:author_of ;
+                          owl:someValuesFrom ig:Document
                         ] ,
                         [ rdf:type owl:Restriction ;
                           owl:onProperty :author_str ;
@@ -723,7 +487,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
           rdfs:subClassOf :Metadata ,
                           [ rdf:type owl:Restriction ;
                             owl:onProperty :category_of ;
-                            owl:someValuesFrom :Document
+                            owl:someValuesFrom ig:Document
                           ] ;
           rdfs:comment "Categoria di classificazione di oggetti informativi"@it ;
           rdfs:label "Category"@en .
@@ -731,10 +495,10 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#DBPediaDescriptor
 :DBPediaDescriptor rdf:type owl:Class ;
-                   rdfs:subClassOf :EntityDescriptor ,
+                   rdfs:subClassOf ig:EntityDescriptor ,
                                    [ rdf:type owl:Restriction ;
-                                     owl:onProperty :describes ;
-                                     owl:allValuesFrom :Entity
+                                     owl:onProperty ig:describes ;
+                                     owl:allValuesFrom ig:Entity
                                    ] ,
                                    [ rdf:type owl:Restriction ;
                                      owl:onProperty :dbpedia_ref ;
@@ -743,78 +507,15 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                    ] .
 
 
-###  https://ilmanifesto.it/mema/ontology#Descriptor
-:Descriptor rdf:type owl:Class ;
-            rdfs:subClassOf :Sign ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :describes ;
-                              owl:someValuesFrom owl:Thing
-                            ] ;
-            rdfs:comment "An information item that qualifies a specific aspect or feature of something" .
 
-
-###  https://ilmanifesto.it/mema/ontology#Document
-:Document rdf:type owl:Class ;
-          rdfs:subClassOf :Information ,
-                          [ rdf:type owl:Restriction ;
-                            owl:onProperty :described_by ;
-                            owl:someValuesFrom :Metadata
-                          ] ,
-                          [ rdf:type owl:Restriction ;
-                            owl:onProperty :yields ;
-                            owl:someValuesFrom :Sign
-                          ] ,
-                          [ rdf:type owl:Restriction ;
-                            owl:onProperty :body ;
-                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                            owl:onDataRange xsd:string
-                          ] ;
-          rdfs:comment "Textual document" .
-
-
-###  https://ilmanifesto.it/mema/ontology#Entity
-:Entity rdf:type owl:Class ;
-        rdfs:subClassOf [ rdf:type owl:Restriction ;
-                          owl:onProperty :mentioned_in ;
-                          owl:someValuesFrom :Document
-                        ] ,
-                        [ rdf:type owl:Restriction ;
-                          owl:onProperty :described_by ;
-                          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                          owl:onClass :EntityDescriptor
-                        ] ;
-        rdfs:comment "Entità localizzabile nello spazio e / o nel tempo"@it ,
-                     "Thing localizable in space and / or time"@en ;
-        rdfs:label "Entity"@en ;
-        rdfs:seeAlso "Continuant" .
-
-
-###  https://ilmanifesto.it/mema/ontology#EntityDescriptor
-:EntityDescriptor rdf:type owl:Class ;
-                  rdfs:subClassOf :Descriptor .
-
-
-###  https://ilmanifesto.it/mema/ontology#Event
-:Event rdf:type owl:Class ;
-       rdfs:subClassOf :Entity ,
-                       [ rdf:type owl:Restriction ;
-                         owl:onProperty :has_participant ;
-                         owl:someValuesFrom :Entity
-                       ] ,
-                       [ rdf:type owl:Restriction ;
-                         owl:onProperty :in_place ;
-                         owl:someValuesFrom :Location
-                       ] ;
-       rdfs:comment "Temporal entity, either stative or dynamic" ;
-       rdfs:seeAlso "Occurrent" .
 
 
 ###  https://ilmanifesto.it/mema/ontology#GeonamesDescriptor
 :GeonamesDescriptor rdf:type owl:Class ;
-                    rdfs:subClassOf :EntityDescriptor ,
+                    rdfs:subClassOf ig:EntityDescriptor ,
                                     [ rdf:type owl:Restriction ;
-                                      owl:onProperty :describes ;
-                                      owl:allValuesFrom :Entity
+                                      owl:onProperty ig:describes ;
+                                      owl:allValuesFrom ig:Entity
                                     ] ,
                                     [ rdf:type owl:Restriction ;
                                       owl:onProperty :geoinfo_bbox ;
@@ -867,24 +568,12 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#HumanDescriptor
 :HumanDescriptor rdf:type owl:Class ;
-                 rdfs:subClassOf :EntityDescriptor ,
+                 rdfs:subClassOf ig:EntityDescriptor ,
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty :userid ;
                                    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                    owl:onDataRange xsd:string
                                  ] .
-
-
-###  https://ilmanifesto.it/mema/ontology#Information
-:Information rdf:type owl:Class ;
-             rdfs:comment "Non material thing that conveys semantic information, realizable in many physical forms, e.g. a newspaper article (written or spoken), signs such as tags or topics, word types (lexemes)."@en ;
-             rdfs:seeAlso "Representamen (Peirce)" .
-
-
-###  https://ilmanifesto.it/mema/ontology#Location
-:Location rdf:type owl:Class ;
-          rdfs:subClassOf :Entity ;
-          rdfs:comment "Identified portion of space (place)"@en .
 
 
 ###  https://ilmanifesto.it/mema/ontology#MeMaArticle
@@ -912,57 +601,26 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                              ] .
 
 
-###  https://ilmanifesto.it/mema/ontology#Mention
-:Mention rdf:type owl:Class ;
-         rdfs:subClassOf :Sign ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :referent ;
-                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                           owl:onClass :Entity
-                         ] ;
-         rdfs:comment "Reference to an Entity in a Document"@en .
-
 
 ###  https://ilmanifesto.it/mema/ontology#Metadata
 :Metadata rdf:type owl:Class ;
-          rdfs:subClassOf :Descriptor ,
+          rdfs:subClassOf ig:Description ,
                           [ rdf:type owl:Restriction ;
-                            owl:onProperty :describes ;
-                            owl:someValuesFrom :Document
+                            owl:onProperty ig:describes ;
+                            owl:someValuesFrom ig:Document
                           ] ,
                           [ rdf:type owl:Restriction ;
-                            owl:onProperty :text ;
+                            owl:onProperty ig:text ;
                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                             owl:onDataRange xsd:string
                           ] ;
           rdfs:comment "Document's metadata" .
 
 
-###  https://ilmanifesto.it/mema/ontology#Organization
-:Organization rdf:type owl:Class ;
-              rdfs:subClassOf :Entity ;
-              rdfs:comment "Social group of people working together towards common goals, governed by defined rules and processes"@en .
-
-
-###  https://ilmanifesto.it/mema/ontology#Person
-:Person rdf:type owl:Class ;
-        rdfs:subClassOf :Entity ,
-                        [ rdf:type owl:Restriction ;
-                          owl:onProperty :name ;
-                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                          owl:onDataRange xsd:string
-                        ] ,
-                        [ rdf:type owl:Restriction ;
-                          owl:onProperty :surname ;
-                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                          owl:onDataRange xsd:string
-                        ] ;
-        :schema "https://schema.org/Person" .
-
 
 ###  https://ilmanifesto.it/mema/ontology#Picture
 :Picture rdf:type owl:Class ;
-         rdfs:subClassOf :Information ,
+         rdfs:subClassOf ig:Information ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty :picture_of ;
                            owl:someValuesFrom :Article
@@ -986,58 +644,16 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
          :schema "https://schema.org/Photograph"@it .
 
 
-###  https://ilmanifesto.it/mema/ontology#Relationship
-:Relationship rdf:type owl:Class ;
-              rdfs:subClassOf :Sign ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty :subject ;
-                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                owl:onClass :Mention
-                              ] ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty :object ;
-                                owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                owl:onClass :Mention
-                              ] ;
-              rdfs:comment "Reference to a relationship" .
-
-
-###  https://ilmanifesto.it/mema/ontology#Sign
-:Sign rdf:type owl:Class ;
-      rdfs:subClassOf :Information ,
-                      [ rdf:type owl:Restriction ;
-                        owl:onProperty :source ;
-                        owl:someValuesFrom :Information
-                      ] ,
-                      [ rdf:type owl:Restriction ;
-                        owl:onProperty :expression ;
-                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onDataRange xsd:string
-                      ] ,
-                      [ rdf:type owl:Restriction ;
-                        owl:onProperty :concept ;
-                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onDataRange xsd:string
-                      ] ,
-                      [ rdf:type owl:Restriction ;
-                        owl:onProperty :status ;
-                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onDataRange xsd:string
-                      ] ;
-      rdfs:comment "Non-material entity underpinning the process of interpreting one thing as representing or standing for another" ;
-      rdfs:seeAlso "Peirce's Sign (Representamen->Interpretant->Object)" .
-
-
 ###  https://ilmanifesto.it/mema/ontology#Summary
 :Summary rdf:type owl:Class ;
          rdfs:subClassOf :Metadata ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty :summarizes ;
                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                           owl:onClass :Document
+                           owl:onClass ig:Document
                          ] ,
                          [ rdf:type owl:Restriction ;
-                           owl:onProperty :text ;
+                           owl:onProperty ig:text ;
                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                            owl:onDataRange xsd:string
                          ] .
@@ -1048,7 +664,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
      rdfs:subClassOf :Metadata ,
                      [ rdf:type owl:Restriction ;
                        owl:onProperty :tag_of ;
-                       owl:someValuesFrom :Document
+                       owl:someValuesFrom :Article
                      ] .
 
 
@@ -1057,17 +673,17 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
        rdfs:subClassOf :Metadata ,
                        [ rdf:type owl:Restriction ;
                          owl:onProperty :topic_of ;
-                         owl:someValuesFrom :Document
+                         owl:someValuesFrom :Article
                        ] ;
        rdfs:comment "Argomento rilevante di articolo identificato dalle funzioni redazionali o dall'IA"@it .
 
 
 ###  https://ilmanifesto.it/mema/ontology#WikipediaDescriptor
 :WikipediaDescriptor rdf:type owl:Class ;
-                     rdfs:subClassOf :EntityDescriptor ,
+                     rdfs:subClassOf ig:EntityDescriptor ,
                                      [ rdf:type owl:Restriction ;
-                                       owl:onProperty :describes ;
-                                       owl:allValuesFrom :Entity
+                                       owl:onProperty ig:describes ;
+                                       owl:allValuesFrom ig:Entity
                                      ] ,
                                      [ rdf:type owl:Restriction ;
                                        owl:onProperty :wiki_timestamp ;

@@ -1,10 +1,10 @@
 @prefix : <https://www.maxxi.art/ontology#> .
+@prefix ig: <https://isagog.com/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix isagog: <https://isagog.com/ontology#> .
 @base <https://www.maxxi.art/ontology> .
 
 <https://www.maxxi.art/ontology> rdf:type owl:Ontology ;
@@ -15,7 +15,7 @@
 Credits: 
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                   rdfs:label "The Maxxi Ontology" ;
-                                  owl:versionInfo 1.0 .
+                                  owl:versionInfo 1.1 .
 
 #################################################################
 #    Annotation properties
@@ -29,624 +29,110 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 <http://purl.org/dc/elements/1.1/license> rdf:type owl:AnnotationProperty .
 
 
-###  https://ilmanifesto.it/mema/ontology#cidoc
-<https://ilmanifesto.it/mema/ontology#cidoc> rdf:type owl:AnnotationProperty ;
-                                             rdfs:comment "CIDOC Conceptual Reference Model, based on: Nick Crofts, Martin Doerr, Tony Gill, Stephen Stead, Matthew Stiff (eds.): Definition of the CIDOC Conceptual Reference Model (http://cidoc-crm.org/)." ;
-                                             rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#mapping> ;
-                                             rdfs:range xsd:anyURI .
+###  https://www.maxxi.art/ontology#cidoc
+:cidoc rdf:type owl:AnnotationProperty ;
+       rdfs:comment "CIDOC Conceptual Reference Model, based on: Nick Crofts, Martin Doerr, Tony Gill, Stephen Stead, Matthew Stiff (eds.): Definition of the CIDOC Conceptual Reference Model (http://cidoc-crm.org/)." ;
+       rdfs:subPropertyOf :mapping ;
+       rdfs:range xsd:anyURI .
 
 
-###  https://ilmanifesto.it/mema/ontology#mapping
-<https://ilmanifesto.it/mema/ontology#mapping> rdf:type owl:AnnotationProperty .
+###  https://www.maxxi.art/ontology#mapping
+:mapping rdf:type owl:AnnotationProperty .
 
 
-###  https://ilmanifesto.it/mema/ontology#schema
-<https://ilmanifesto.it/mema/ontology#schema> rdf:type owl:AnnotationProperty ;
-                                              rdfs:comment "Corrispondenza con schema.org"@it ;
-                                              rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#mapping> .
+###  https://www.maxxi.art/ontology#schema
+:schema rdf:type owl:AnnotationProperty ;
+        rdfs:comment "Corrispondenza con schema.org"@it ;
+        rdfs:subPropertyOf :mapping .
 
 
-#################################################################
-#    Object Properties
-#################################################################
-
-###  https://ilmanifesto.it/mema/ontology#adjacent_to
-<https://ilmanifesto.it/mema/ontology#adjacent_to> rdf:type owl:ObjectProperty ;
-                                                   rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#connectedness> ;
-                                                   rdf:type owl:SymmetricProperty ;
-                                                   rdfs:comment "Spatial connectedness" .
-
-
-###  https://ilmanifesto.it/mema/ontology#author_of
-<https://ilmanifesto.it/mema/ontology#author_of> rdf:type owl:ObjectProperty ;
-                                                 rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#relatedness> ;
-                                                 owl:inverseOf <https://ilmanifesto.it/mema/ontology#authored_by> ;
-                                                 rdfs:domain <https://ilmanifesto.it/mema/ontology#Author> .
-
-
-###  https://ilmanifesto.it/mema/ontology#authored_by
-<https://ilmanifesto.it/mema/ontology#authored_by> rdf:type owl:ObjectProperty ;
-                                                   rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#relatedness> ;
-                                                   rdfs:range <https://ilmanifesto.it/mema/ontology#Author> .
-
-
-###  https://ilmanifesto.it/mema/ontology#category_of
-<https://ilmanifesto.it/mema/ontology#category_of> rdf:type owl:ObjectProperty ;
-                                                   rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#classifies> ;
-                                                   owl:inverseOf <https://ilmanifesto.it/mema/ontology#has_category> .
-
-
-###  https://ilmanifesto.it/mema/ontology#classified_by
-<https://ilmanifesto.it/mema/ontology#classified_by> rdf:type owl:ObjectProperty ;
-                                                     rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#inheres_to> ;
-                                                     owl:inverseOf <https://ilmanifesto.it/mema/ontology#classifies> .
-
-
-###  https://ilmanifesto.it/mema/ontology#classifies
-<https://ilmanifesto.it/mema/ontology#classifies> rdf:type owl:ObjectProperty ;
-                                                  rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#inheres_to> .
-
-
-###  https://ilmanifesto.it/mema/ontology#collocation
-<https://ilmanifesto.it/mema/ontology#collocation> rdf:type owl:ObjectProperty ;
-                                                   rdfs:comment "Region collocation" .
-
-
-###  https://ilmanifesto.it/mema/ontology#component_of
-<https://ilmanifesto.it/mema/ontology#component_of> rdf:type owl:ObjectProperty ;
-                                                    rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#part_of> ;
-                                                    owl:inverseOf <https://ilmanifesto.it/mema/ontology#has_component> ;
-                                                    rdfs:comment "Functional parthood"@en .
-
-
-###  https://ilmanifesto.it/mema/ontology#composition
-<https://ilmanifesto.it/mema/ontology#composition> rdf:type owl:ObjectProperty ;
-                                                   rdfs:comment "General part-whole relationship" .
-
-
-###  https://ilmanifesto.it/mema/ontology#connectedness
-<https://ilmanifesto.it/mema/ontology#connectedness> rdf:type owl:ObjectProperty ;
-                                                     rdfs:comment "spatial  temporal proximity" .
-
-
-###  https://ilmanifesto.it/mema/ontology#described_by
-<https://ilmanifesto.it/mema/ontology#described_by> rdf:type owl:ObjectProperty ;
-                                                    rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#has_inherent> ;
-                                                    owl:inverseOf <https://ilmanifesto.it/mema/ontology#describes> .
-
-
-###  https://ilmanifesto.it/mema/ontology#describes
-<https://ilmanifesto.it/mema/ontology#describes> rdf:type owl:ObjectProperty ;
-                                                 rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#inheres_to> .
-
-
-###  https://ilmanifesto.it/mema/ontology#featured_in
-<https://ilmanifesto.it/mema/ontology#featured_in> rdf:type owl:ObjectProperty ;
-                                                   rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#participate_in> ;
-                                                   owl:inverseOf <https://ilmanifesto.it/mema/ontology#features> .
-
-
-###  https://ilmanifesto.it/mema/ontology#features
-<https://ilmanifesto.it/mema/ontology#features> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#has_participant> ;
-                                                rdfs:comment "Non agentive participation" .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_category
-<https://ilmanifesto.it/mema/ontology#has_category> rdf:type owl:ObjectProperty ;
-                                                    rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#classified_by> .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_component
-<https://ilmanifesto.it/mema/ontology#has_component> rdf:type owl:ObjectProperty ;
-                                                     rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#has_part> ;
-                                                     rdfs:comment "Functional parts" .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_inherent
-<https://ilmanifesto.it/mema/ontology#has_inherent> rdf:type owl:ObjectProperty ;
-                                                    rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#inherence> ;
-                                                    owl:inverseOf <https://ilmanifesto.it/mema/ontology#inheres_to> .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_part
-<https://ilmanifesto.it/mema/ontology#has_part> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#composition> ;
-                                                owl:inverseOf <https://ilmanifesto.it/mema/ontology#part_of> .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_participant
-<https://ilmanifesto.it/mema/ontology#has_participant> rdf:type owl:ObjectProperty ;
-                                                       rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#participation> ;
-                                                       owl:inverseOf <https://ilmanifesto.it/mema/ontology#participate_in> .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_phase
-<https://ilmanifesto.it/mema/ontology#has_phase> rdf:type owl:ObjectProperty ;
-                                                 rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#composition> ;
-                                                 owl:inverseOf <https://ilmanifesto.it/mema/ontology#phase_of> .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_spatial_part
-<https://ilmanifesto.it/mema/ontology#has_spatial_part> rdf:type owl:ObjectProperty ;
-                                                        rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#has_part> ;
-                                                        owl:inverseOf <https://ilmanifesto.it/mema/ontology#spatial_part_of> ;
-                                                        rdfs:comment "Spatial parts" .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_tag
-<https://ilmanifesto.it/mema/ontology#has_tag> rdf:type owl:ObjectProperty ;
-                                               rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#has_inherent> ;
-                                               owl:inverseOf <https://ilmanifesto.it/mema/ontology#tag_of> .
-
-
-###  https://ilmanifesto.it/mema/ontology#has_topic
-<https://ilmanifesto.it/mema/ontology#has_topic> rdf:type owl:ObjectProperty ;
-                                                 rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#has_inherent> ;
-                                                 owl:inverseOf <https://ilmanifesto.it/mema/ontology#topic_of> .
-
-
-###  https://ilmanifesto.it/mema/ontology#hosts
-<https://ilmanifesto.it/mema/ontology#hosts> rdf:type owl:ObjectProperty ;
-                                             rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#collocation> ;
-                                             owl:inverseOf <https://ilmanifesto.it/mema/ontology#in_place> .
-
-
-###  https://ilmanifesto.it/mema/ontology#in_place
-<https://ilmanifesto.it/mema/ontology#in_place> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#collocation> .
-
-
-###  https://ilmanifesto.it/mema/ontology#inherence
-<https://ilmanifesto.it/mema/ontology#inherence> rdf:type owl:ObjectProperty ;
-                                                 rdfs:comment "Pertinence of metadata to data"@en .
-
-
-###  https://ilmanifesto.it/mema/ontology#inheres_to
-<https://ilmanifesto.it/mema/ontology#inheres_to> rdf:type owl:ObjectProperty ;
-                                                  rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#inherence> ;
-                                                  rdfs:comment "Any relation involved in semiotic processes" .
-
-
-###  https://ilmanifesto.it/mema/ontology#initiated_by
-<https://ilmanifesto.it/mema/ontology#initiated_by> rdf:type owl:ObjectProperty ;
-                                                    rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#has_participant> ;
-                                                    owl:inverseOf <https://ilmanifesto.it/mema/ontology#initiates> ;
-                                                    rdfs:comment "Agentive participation" .
-
-
-###  https://ilmanifesto.it/mema/ontology#initiates
-<https://ilmanifesto.it/mema/ontology#initiates> rdf:type owl:ObjectProperty ;
-                                                 rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#participate_in> .
-
-
-###  https://ilmanifesto.it/mema/ontology#mentioned_in
-<https://ilmanifesto.it/mema/ontology#mentioned_in> rdf:type owl:ObjectProperty ;
-                                                    rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#relatedness> ;
-                                                    owl:inverseOf <https://ilmanifesto.it/mema/ontology#mentions> .
-
-
-###  https://ilmanifesto.it/mema/ontology#mentions
-<https://ilmanifesto.it/mema/ontology#mentions> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#relatedness> ;
-                                                rdfs:comment "Referral to an Entity, either direct or via a suitable reification (Mention)"@en .
-
-
-###  https://ilmanifesto.it/mema/ontology#next_to
-<https://ilmanifesto.it/mema/ontology#next_to> rdf:type owl:ObjectProperty ;
-                                               rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#connectedness> ;
-                                               rdf:type owl:AsymmetricProperty ;
-                                               rdfs:comment "Temporal connectedness" .
-
-
-###  https://ilmanifesto.it/mema/ontology#object
-<https://ilmanifesto.it/mema/ontology#object> rdf:type owl:ObjectProperty ;
-                                              rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#inheres_to> .
-
-
-###  https://ilmanifesto.it/mema/ontology#part_of
-<https://ilmanifesto.it/mema/ontology#part_of> rdf:type owl:ObjectProperty ;
-                                               rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#composition> ;
-                                               rdfs:comment "Generic parthood"@en .
-
-
-###  https://ilmanifesto.it/mema/ontology#participate_in
-<https://ilmanifesto.it/mema/ontology#participate_in> rdf:type owl:ObjectProperty ;
-                                                      rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#participation> .
-
-
-###  https://ilmanifesto.it/mema/ontology#participation
-<https://ilmanifesto.it/mema/ontology#participation> rdf:type owl:ObjectProperty ;
-                                                     rdfs:comment "Continuant participation in occurrents" .
-
-
-###  https://ilmanifesto.it/mema/ontology#phase_of
-<https://ilmanifesto.it/mema/ontology#phase_of> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#composition> ;
-                                                rdfs:comment "Temporal parthood"@en .
-
-
-###  https://ilmanifesto.it/mema/ontology#referent
-<https://ilmanifesto.it/mema/ontology#referent> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#inheres_to> ;
-                                                rdfs:comment "'Real-world' concept or entity that the sign points to or refers to." ;
-                                                rdfs:seeAlso "Sign->Object (Peirce)" .
-
-
-###  https://ilmanifesto.it/mema/ontology#relatedness
-<https://ilmanifesto.it/mema/ontology#relatedness> rdf:type owl:ObjectProperty ;
-                                                   rdfs:subPropertyOf owl:topObjectProperty ;
-                                                   rdfs:comment "generic relatedness" .
-
-
-###  https://ilmanifesto.it/mema/ontology#source
-<https://ilmanifesto.it/mema/ontology#source> rdf:type owl:ObjectProperty ;
-                                              rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#relatedness> ;
-                                              owl:inverseOf <https://ilmanifesto.it/mema/ontology#yields> .
-
-
-###  https://ilmanifesto.it/mema/ontology#spatial_part_of
-<https://ilmanifesto.it/mema/ontology#spatial_part_of> rdf:type owl:ObjectProperty ;
-                                                       rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#part_of> .
-
-
-###  https://ilmanifesto.it/mema/ontology#subject
-<https://ilmanifesto.it/mema/ontology#subject> rdf:type owl:ObjectProperty ;
-                                               rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#inheres_to> .
-
-
-###  https://ilmanifesto.it/mema/ontology#summarizes
-<https://ilmanifesto.it/mema/ontology#summarizes> rdf:type owl:ObjectProperty ;
-                                                  rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#inheres_to> ;
-                                                  owl:inverseOf <https://ilmanifesto.it/mema/ontology#summary> .
-
-
-###  https://ilmanifesto.it/mema/ontology#summary
-<https://ilmanifesto.it/mema/ontology#summary> rdf:type owl:ObjectProperty ;
-                                               rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#has_inherent> .
-
-
-###  https://ilmanifesto.it/mema/ontology#tag_of
-<https://ilmanifesto.it/mema/ontology#tag_of> rdf:type owl:ObjectProperty ;
-                                              rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#inheres_to> .
-
-
-###  https://ilmanifesto.it/mema/ontology#topic_of
-<https://ilmanifesto.it/mema/ontology#topic_of> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#inheres_to> .
-
-
-###  https://ilmanifesto.it/mema/ontology#yields
-<https://ilmanifesto.it/mema/ontology#yields> rdf:type owl:ObjectProperty ;
-                                              rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#relatedness> .
-
-
-#################################################################
-#    Data properties
-#################################################################
-
-###  https://ilmanifesto.it/mema/ontology#article_pubblication
-<https://ilmanifesto.it/mema/ontology#article_pubblication> rdf:type owl:DatatypeProperty ;
-                                                            owl:deprecated "" .
-
-
-###  https://ilmanifesto.it/mema/ontology#author_str
-<https://ilmanifesto.it/mema/ontology#author_str> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#identifier> .
-
-
-###  https://ilmanifesto.it/mema/ontology#body
-<https://ilmanifesto.it/mema/ontology#body> rdf:type owl:DatatypeProperty ;
-                                            rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#text> ;
-                                            rdfs:comment "textual content of a document" .
-
-
-###  https://ilmanifesto.it/mema/ontology#caption
-<https://ilmanifesto.it/mema/ontology#caption> rdf:type owl:DatatypeProperty ;
-                                               rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#text> ;
-                                               <https://ilmanifesto.it/mema/ontology#schema> "https://schema.org/abstract" .
-
-
-###  https://ilmanifesto.it/mema/ontology#category
-<https://ilmanifesto.it/mema/ontology#category> rdf:type owl:DatatypeProperty ;
-                                                rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#tag> ;
-                                                rdfs:range xsd:string .
-
-
-###  https://ilmanifesto.it/mema/ontology#category_tag
-<https://ilmanifesto.it/mema/ontology#category_tag> rdf:type owl:DatatypeProperty ;
-                                                    rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#tag> .
-
-
-###  https://ilmanifesto.it/mema/ontology#concept
-<https://ilmanifesto.it/mema/ontology#concept> rdf:type owl:DatatypeProperty ;
-                                               rdfs:comment "mapping of Signs to interpreting predicates (concepts or properties)" ;
-                                               rdfs:seeAlso "Representamen->Interpretant (Peirce)" .
-
-
-###  https://ilmanifesto.it/mema/ontology#copyright
-<https://ilmanifesto.it/mema/ontology#copyright> rdf:type owl:DatatypeProperty .
-
-
-###  https://ilmanifesto.it/mema/ontology#dbpedia_ref
-<https://ilmanifesto.it/mema/ontology#dbpedia_ref> rdf:type owl:DatatypeProperty ;
-                                                   rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#reference> .
-
-
-###  https://ilmanifesto.it/mema/ontology#edition_date
-<https://ilmanifesto.it/mema/ontology#edition_date> rdf:type owl:DatatypeProperty ;
-                                                    rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#time_coordinate> .
-
-
-###  https://ilmanifesto.it/mema/ontology#expression
-<https://ilmanifesto.it/mema/ontology#expression> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#text> ;
-                                                  rdfs:range xsd:string ;
-                                                  rdfs:comment "Sign's textual representamen" .
-
-
-###  https://ilmanifesto.it/mema/ontology#full_name
-<https://ilmanifesto.it/mema/ontology#full_name> rdf:type owl:DatatypeProperty ;
-                                                 rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#text> .
-
-
-###  https://ilmanifesto.it/mema/ontology#geo_coordinate
-<https://ilmanifesto.it/mema/ontology#geo_coordinate> rdf:type owl:DatatypeProperty ;
-                                                      rdfs:comment "any suitable <logitude, latitude> coordinate" .
-
-
-###  https://ilmanifesto.it/mema/ontology#geoinfo_bbox
-<https://ilmanifesto.it/mema/ontology#geoinfo_bbox> rdf:type owl:DatatypeProperty ;
-                                                    rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#geo_coordinate> .
-
-
-###  https://ilmanifesto.it/mema/ontology#geoinfo_country_name
-<https://ilmanifesto.it/mema/ontology#geoinfo_country_name> rdf:type owl:DatatypeProperty ;
-                                                            rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#geo_coordinate> .
-
-
-###  https://ilmanifesto.it/mema/ontology#geoinfo_feature_class
-<https://ilmanifesto.it/mema/ontology#geoinfo_feature_class> rdf:type owl:DatatypeProperty ;
-                                                             rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#geo_coordinate> .
-
-
-###  https://ilmanifesto.it/mema/ontology#geoinfo_feature_code
-<https://ilmanifesto.it/mema/ontology#geoinfo_feature_code> rdf:type owl:DatatypeProperty ;
-                                                            rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#geo_coordinate> .
-
-
-###  https://ilmanifesto.it/mema/ontology#geoinfo_id
-<https://ilmanifesto.it/mema/ontology#geoinfo_id> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#geo_coordinate> ;
-                                                  rdfs:range xsd:integer .
-
-
-###  https://ilmanifesto.it/mema/ontology#geoinfo_lat
-<https://ilmanifesto.it/mema/ontology#geoinfo_lat> rdf:type owl:DatatypeProperty ;
-                                                   rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#geo_coordinate> ;
-                                                   rdfs:range xsd:double .
-
-
-###  https://ilmanifesto.it/mema/ontology#geoinfo_lng
-<https://ilmanifesto.it/mema/ontology#geoinfo_lng> rdf:type owl:DatatypeProperty ;
-                                                   rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#geo_coordinate> ;
-                                                   rdfs:range xsd:double .
-
-
-###  https://ilmanifesto.it/mema/ontology#geoinfo_name
-<https://ilmanifesto.it/mema/ontology#geoinfo_name> rdf:type owl:DatatypeProperty ;
-                                                    rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#geo_coordinate> .
-
-
-###  https://ilmanifesto.it/mema/ontology#identifier
-<https://ilmanifesto.it/mema/ontology#identifier> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:range xsd:string .
-
-
-###  https://ilmanifesto.it/mema/ontology#image_url
-<https://ilmanifesto.it/mema/ontology#image_url> rdf:type owl:DatatypeProperty ;
-                                                 rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#reference> .
-
-
-###  https://ilmanifesto.it/mema/ontology#imgcaption
-<https://ilmanifesto.it/mema/ontology#imgcaption> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#caption> .
-
-
-###  https://ilmanifesto.it/mema/ontology#imgurl
-<https://ilmanifesto.it/mema/ontology#imgurl> rdf:type owl:DatatypeProperty ;
-                                              rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#identifier> ;
-                                              rdfs:range xsd:anyURI .
-
-
-###  https://ilmanifesto.it/mema/ontology#instant
-<https://ilmanifesto.it/mema/ontology#instant> rdf:type owl:DatatypeProperty ;
-                                               rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#time_coordinate> .
-
-
-###  https://ilmanifesto.it/mema/ontology#keyword
-<https://ilmanifesto.it/mema/ontology#keyword> rdf:type owl:DatatypeProperty ;
-                                               rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#tag> ;
-                                               rdfs:range xsd:string .
-
-
-###  https://ilmanifesto.it/mema/ontology#kicker
-<https://ilmanifesto.it/mema/ontology#kicker> rdf:type owl:DatatypeProperty ;
-                                              rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#text_annotation> .
-
-
-###  https://ilmanifesto.it/mema/ontology#name
-<https://ilmanifesto.it/mema/ontology#name> rdf:type owl:DatatypeProperty ;
-                                            rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#text> ;
-                                            rdfs:range xsd:string .
-
-
-###  https://ilmanifesto.it/mema/ontology#pagenum
-<https://ilmanifesto.it/mema/ontology#pagenum> rdf:type owl:DatatypeProperty .
-
-
-###  https://ilmanifesto.it/mema/ontology#published_day
-<https://ilmanifesto.it/mema/ontology#published_day> rdf:type owl:DatatypeProperty ;
-                                                     rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#time_coordinate> .
-
-
-###  https://ilmanifesto.it/mema/ontology#reference
-<https://ilmanifesto.it/mema/ontology#reference> rdf:type owl:DatatypeProperty ;
-                                                 rdfs:subPropertyOf owl:topDataProperty .
-
-
-###  https://ilmanifesto.it/mema/ontology#status
-<https://ilmanifesto.it/mema/ontology#status> rdf:type owl:DatatypeProperty .
-
-
-###  https://ilmanifesto.it/mema/ontology#surname
-<https://ilmanifesto.it/mema/ontology#surname> rdf:type owl:DatatypeProperty ;
-                                               rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#text> ;
-                                               rdfs:range xsd:string .
-
-
-###  https://ilmanifesto.it/mema/ontology#tag
-<https://ilmanifesto.it/mema/ontology#tag> rdf:type owl:DatatypeProperty ;
-                                           rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#text_annotation> .
-
-
-###  https://ilmanifesto.it/mema/ontology#text
-<https://ilmanifesto.it/mema/ontology#text> rdf:type owl:DatatypeProperty ;
-                                            rdfs:range xsd:string .
-
-
-###  https://ilmanifesto.it/mema/ontology#text_annotation
-<https://ilmanifesto.it/mema/ontology#text_annotation> rdf:type owl:DatatypeProperty ;
-                                                       rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#text> .
-
-
-###  https://ilmanifesto.it/mema/ontology#time_coordinate
-<https://ilmanifesto.it/mema/ontology#time_coordinate> rdf:type owl:DatatypeProperty ;
-                                                       rdfs:comment "any suitable time point or interval" .
-
-
-###  https://ilmanifesto.it/mema/ontology#title
-<https://ilmanifesto.it/mema/ontology#title> rdf:type owl:DatatypeProperty ;
-                                             rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#text> ;
-                                             rdfs:range xsd:string .
-
-
-###  https://ilmanifesto.it/mema/ontology#userid
-<https://ilmanifesto.it/mema/ontology#userid> rdf:type owl:DatatypeProperty ;
-                                              rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#identifier> .
-
-
-###  https://ilmanifesto.it/mema/ontology#wiki_summary
-<https://ilmanifesto.it/mema/ontology#wiki_summary> rdf:type owl:DatatypeProperty ;
-                                                    rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#text> .
-
-
-###  https://ilmanifesto.it/mema/ontology#wiki_timestamp
-<https://ilmanifesto.it/mema/ontology#wiki_timestamp> rdf:type owl:DatatypeProperty ;
-                                                      rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#time_coordinate> .
-
-
-###  https://ilmanifesto.it/mema/ontology#wiki_title
-<https://ilmanifesto.it/mema/ontology#wiki_title> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#title> .
-
-
-###  https://ilmanifesto.it/mema/ontology#wiki_url
-<https://ilmanifesto.it/mema/ontology#wiki_url> rdf:type owl:DatatypeProperty ;
-                                                rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#reference> ;
-                                                rdfs:range xsd:anyURI .
-
-
-###  https://ilmanifesto.it/mema/ontology#year
-<https://ilmanifesto.it/mema/ontology#year> rdf:type owl:DatatypeProperty ;
-                                            rdfs:subPropertyOf <https://ilmanifesto.it/mema/ontology#time_coordinate> .
 
 
 #################################################################
 #    Classes
 #################################################################
 
-###  https://ilmanifesto.it/mema/ontology#ArtWork
-<https://ilmanifesto.it/mema/ontology#ArtWork> rdf:type owl:Class ;
-                                               rdfs:subClassOf isagog:Object ;
-                                               <https://ilmanifesto.it/mema/ontology#schema> "https://schema.org/VisualArtwork" .
+###  https://www.maxxi.art/ontology#ArtWork
+:ArtWork rdf:type owl:Class ;
+         rdfs:subClassOf <https://isagog.com/ontology#Object> ;
+         :schema "https://schema.org/VisualArtwork" .
 
 
-###  https://ilmanifesto.it/mema/ontology#Author
-<https://ilmanifesto.it/mema/ontology#Author> rdf:type owl:Class ;
-                                              rdfs:subClassOf isagog:Person ;
-                                              rdfs:comment "Autorship information, realized (but not necessarily) by some agent"@en .
+###  https://www.maxxi.art/ontology#Author
+:Author rdf:type owl:Class ;
+        rdfs:subClassOf <https://isagog.com/ontology#Person> ;
+        rdfs:comment "Autorship information, realized (but not necessarily) by some agent"@en .
 
 
-###  https://ilmanifesto.it/mema/ontology#Building
-<https://ilmanifesto.it/mema/ontology#Building> rdf:type owl:Class ;
-                                                rdfs:subClassOf isagog:Location ,
-                                                                [ rdf:type owl:Restriction ;
-                                                                  owl:onProperty <https://ilmanifesto.it/mema/ontology#has_part> ;
-                                                                  owl:someValuesFrom <https://ilmanifesto.it/mema/ontology#BuldingPart>
-                                                                ] .
+###  https://www.maxxi.art/ontology#Building
+:Building rdf:type owl:Class ;
+          rdfs:subClassOf <https://isagog.com/ontology#Location> ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty ig:has_part ;
+                            owl:someValuesFrom :BuldingPart
+                          ] .
 
 
-###  https://ilmanifesto.it/mema/ontology#BuldingPart
-<https://ilmanifesto.it/mema/ontology#BuldingPart> rdf:type owl:Class ;
-                                                   rdfs:subClassOf isagog:Location ,
-                                                                   [ rdf:type owl:Restriction ;
-                                                                     owl:onProperty <https://ilmanifesto.it/mema/ontology#part_of> ;
-                                                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                     owl:onClass <https://ilmanifesto.it/mema/ontology#Building>
-                                                                   ] .
+###  https://www.maxxi.art/ontology#BuldingPart
+:BuldingPart rdf:type owl:Class ;
+             rdfs:subClassOf :Building ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty ig:part_of ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass :Building
+                             ] .
 
 
-###  https://ilmanifesto.it/mema/ontology#Curator
-<https://ilmanifesto.it/mema/ontology#Curator> rdf:type owl:Class ;
-                                               owl:equivalentClass [ rdf:type owl:Restriction ;
-                                                                     owl:onProperty <https://ilmanifesto.it/mema/ontology#author_of> ;
-                                                                     owl:someValuesFrom <https://ilmanifesto.it/mema/ontology#CuratorialRecord>
-                                                                   ] ;
-                                               rdfs:subClassOf isagog:Person .
+###  https://www.maxxi.art/ontology#Curator
+:Curator rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Restriction ;
+                               owl:onProperty ig:author_of ;
+                               owl:someValuesFrom :CuratorialRecord
+                             ] ;
+         rdfs:subClassOf <https://isagog.com/ontology#Person> .
 
 
-###  https://ilmanifesto.it/mema/ontology#CuratorialRecord
-<https://ilmanifesto.it/mema/ontology#CuratorialRecord> rdf:type owl:Class ;
-                                                        rdfs:subClassOf isagog:Document ,
-                                                                        [ rdf:type owl:Restriction ;
-                                                                          owl:onProperty <https://ilmanifesto.it/mema/ontology#authored_by> ;
-                                                                          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                          owl:onClass <https://ilmanifesto.it/mema/ontology#Curator>
-                                                                        ] ,
-                                                                        [ rdf:type owl:Restriction ;
-                                                                          owl:onProperty <https://ilmanifesto.it/mema/ontology#inheres_to> ;
-                                                                          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                          owl:onClass <https://ilmanifesto.it/mema/ontology#ArtWork>
-                                                                        ] .
+###  https://www.maxxi.art/ontology#CuratorialRecord
+:CuratorialRecord rdf:type owl:Class ;
+                  rdfs:subClassOf <https://isagog.com/ontology#Document> ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty ig:authored_by ;
+                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass :Curator
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty ig:inheres_to ;
+                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass :ArtWork
+                                  ] .
 
 
-###  https://ilmanifesto.it/mema/ontology#Exibition
-<https://ilmanifesto.it/mema/ontology#Exibition> rdf:type owl:Class ;
-                                                 rdfs:subClassOf isagog:Event ,
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty <https://ilmanifesto.it/mema/ontology#features> ;
-                                                                   owl:someValuesFrom <https://ilmanifesto.it/mema/ontology#ArtWork>
-                                                                 ] .
+###  https://www.maxxi.art/ontology#Exibition
+:Exibition rdf:type owl:Class ;
+           rdfs:subClassOf <https://isagog.com/ontology#Event> ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty ig:features ;
+                             owl:someValuesFrom :ArtWork
+                           ] .
 
 
-###  https://ilmanifesto.it/mema/ontology#ExibitionLocation
-<https://ilmanifesto.it/mema/ontology#ExibitionLocation> rdf:type owl:Class ;
-                                                         owl:equivalentClass [ rdf:type owl:Restriction ;
-                                                                               owl:onProperty <https://ilmanifesto.it/mema/ontology#hosts> ;
-                                                                               owl:someValuesFrom <https://ilmanifesto.it/mema/ontology#Exibition>
-                                                                             ] ;
-                                                         rdfs:subClassOf isagog:Location .
+###  https://www.maxxi.art/ontology#ExibitionLocation
+:ExibitionLocation rdf:type owl:Class ;
+                   owl:equivalentClass [ rdf:type owl:Restriction ;
+                                         owl:onProperty ig:hosts ;
+                                         owl:someValuesFrom :Exibition
+                                       ] ;
+                   rdfs:subClassOf <https://isagog.com/ontology#Location> .
 
 
-###  https://ilmanifesto.it/mema/ontology#Hall
-<https://ilmanifesto.it/mema/ontology#Hall> rdf:type owl:Class ;
-                                            rdfs:subClassOf <https://ilmanifesto.it/mema/ontology#BuldingPart> .
+###  https://www.maxxi.art/ontology#Hall
+:Hall rdf:type owl:Class ;
+      rdfs:subClassOf :BuldingPart .
 
 
-###  https://ilmanifesto.it/mema/ontology#Visitor
-<https://ilmanifesto.it/mema/ontology#Visitor> rdf:type owl:Class ;
-                                               rdfs:subClassOf isagog:Person .
+###  https://www.maxxi.art/ontology#Visitor
+:Visitor rdf:type owl:Class ;
+         rdfs:subClassOf <https://isagog.com/ontology#Person> .
 
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

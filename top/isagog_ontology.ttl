@@ -28,20 +28,24 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 
 ###  https://isagog.com/ontology#cidoc
-<https://isagog.com/ontology#cidoc> rdf:type owl:AnnotationProperty ;
-                                             rdfs:comment "CIDOC Conceptual Reference Model, based on: Nick Crofts, Martin Doerr, Tony Gill, Stephen Stead, Matthew Stiff (eds.): Definition of the CIDOC Conceptual Reference Model (http://cidoc-crm.org/)." ;
-                                             rdfs:subPropertyOf <https://isagog.com/ontology#mapping> ;
-                                             rdfs:range xsd:anyURI .
+:cidoc rdf:type owl:AnnotationProperty .
+
+
+###  https://isagog.com/ontology#isagog
+:isagog rdf:type owl:AnnotationProperty ;
+        rdfs:comment "Mapping to the isagog platform" ;
+        rdfs:subPropertyOf :mapping ;
+        rdfs:range xsd:string .
 
 
 ###  https://isagog.com/ontology#mapping
-<https://isagog.com/ontology#mapping> rdf:type owl:AnnotationProperty .
+:mapping rdf:type owl:AnnotationProperty .
 
 
 ###  https://isagog.com/ontology#schema
-<https://isagog.com/ontology#schema> rdf:type owl:AnnotationProperty ;
-                                              rdfs:comment "Corrispondenza con schema.org"@it ;
-                                              rdfs:subPropertyOf <https://isagog.com/ontology#mapping> .
+:schema rdf:type owl:AnnotationProperty ;
+        rdfs:comment "Corrispondenza con schema.org"@it ;
+        rdfs:subPropertyOf :mapping .
 
 
 #################################################################
@@ -49,560 +53,383 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 #################################################################
 
 ###  https://isagog.com/ontology#adjacent_to
-<https://isagog.com/ontology#adjacent_to> rdf:type owl:ObjectProperty ;
-                                                   rdfs:subPropertyOf <https://isagog.com/ontology#connectedness> ;
-                                                   rdf:type owl:SymmetricProperty ;
-                                                   rdfs:domain <https://isagog.com/ontology#Location> ;
-                                                   rdfs:range <https://isagog.com/ontology#Location> ;
-                                                   rdfs:comment "Spatial connectedness" .
+:adjacent_to rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :connectedness ;
+             rdf:type owl:SymmetricProperty ;
+             rdfs:domain :Location ;
+             rdfs:range :Location ;
+             rdfs:comment "Spatial connectedness" .
 
 
 ###  https://isagog.com/ontology#author_of
-<https://isagog.com/ontology#author_of> rdf:type owl:ObjectProperty ;
-                                                 rdfs:subPropertyOf <https://isagog.com/ontology#relatedness> ;
-                                                 owl:inverseOf <https://isagog.com/ontology#authored_by> .
+:author_of rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :relatedness ;
+           owl:inverseOf :authored_by .
 
 
 ###  https://isagog.com/ontology#authored_by
-<https://isagog.com/ontology#authored_by> rdf:type owl:ObjectProperty ;
-                                                   rdfs:subPropertyOf <https://isagog.com/ontology#relatedness> .
+:authored_by rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :relatedness .
 
 
 ###  https://isagog.com/ontology#category_of
-<https://isagog.com/ontology#category_of> rdf:type owl:ObjectProperty ;
-                                                   rdfs:subPropertyOf <https://isagog.com/ontology#classifies> ;
-                                                   owl:inverseOf <https://isagog.com/ontology#has_category> .
+:category_of rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :classifies ;
+             owl:inverseOf :has_category .
 
 
 ###  https://isagog.com/ontology#classified_by
-<https://isagog.com/ontology#classified_by> rdf:type owl:ObjectProperty ;
-                                                     rdfs:subPropertyOf <https://isagog.com/ontology#inheres_to> ;
-                                                     owl:inverseOf <https://isagog.com/ontology#classifies> .
+:classified_by rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :inheres_to ;
+               owl:inverseOf :classifies .
 
 
 ###  https://isagog.com/ontology#classifies
-<https://isagog.com/ontology#classifies> rdf:type owl:ObjectProperty ;
-                                                  rdfs:subPropertyOf <https://isagog.com/ontology#inheres_to> .
+:classifies rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :inheres_to .
 
 
 ###  https://isagog.com/ontology#collocation
-<https://isagog.com/ontology#collocation> rdf:type owl:ObjectProperty ;
-                                                   rdfs:comment "Region collocation" .
+:collocation rdf:type owl:ObjectProperty ;
+             rdfs:comment "Region collocation" .
 
 
 ###  https://isagog.com/ontology#component_of
-<https://isagog.com/ontology#component_of> rdf:type owl:ObjectProperty ;
-                                                    rdfs:subPropertyOf <https://isagog.com/ontology#part_of> ;
-                                                    owl:inverseOf <https://isagog.com/ontology#has_component> ;
-                                                    rdfs:comment "Functional parthood"@en .
+:component_of rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :part_of ;
+              owl:inverseOf :has_component ;
+              rdfs:comment "Functional parthood"@en .
 
 
 ###  https://isagog.com/ontology#composition
-<https://isagog.com/ontology#composition> rdf:type owl:ObjectProperty ;
-                                                   rdfs:comment "General part-whole relationship" .
+:composition rdf:type owl:ObjectProperty ;
+             rdfs:comment "General part-whole relationship" .
 
 
 ###  https://isagog.com/ontology#connectedness
-<https://isagog.com/ontology#connectedness> rdf:type owl:ObjectProperty ;
-                                                     rdfs:comment "spatial  temporal proximity" .
+:connectedness rdf:type owl:ObjectProperty ;
+               rdfs:comment "spatial  temporal proximity" .
 
 
 ###  https://isagog.com/ontology#described_by
-<https://isagog.com/ontology#described_by> rdf:type owl:ObjectProperty ;
-                                                    rdfs:subPropertyOf <https://isagog.com/ontology#has_inherent> ;
-                                                    owl:inverseOf <https://isagog.com/ontology#describes> .
+:described_by rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :has_inherent ;
+              owl:inverseOf :describes .
 
 
 ###  https://isagog.com/ontology#describes
-<https://isagog.com/ontology#describes> rdf:type owl:ObjectProperty ;
-                                                 rdfs:subPropertyOf <https://isagog.com/ontology#inheres_to> .
+:describes rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :inheres_to .
 
 
 ###  https://isagog.com/ontology#featured_in
-<https://isagog.com/ontology#featured_in> rdf:type owl:ObjectProperty ;
-                                                   rdfs:subPropertyOf <https://isagog.com/ontology#participate_in> ;
-                                                   owl:inverseOf <https://isagog.com/ontology#features> .
+:featured_in rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :participate_in ;
+             owl:inverseOf :features .
 
 
 ###  https://isagog.com/ontology#features
-<https://isagog.com/ontology#features> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://isagog.com/ontology#has_participant> ;
-                                                rdfs:comment "Non agentive participation" .
+:features rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :has_participant ;
+          rdfs:comment "Non agentive participation" .
 
 
 ###  https://isagog.com/ontology#has_category
-<https://isagog.com/ontology#has_category> rdf:type owl:ObjectProperty ;
-                                                    rdfs:subPropertyOf <https://isagog.com/ontology#classified_by> .
+:has_category rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :classified_by .
 
 
 ###  https://isagog.com/ontology#has_component
-<https://isagog.com/ontology#has_component> rdf:type owl:ObjectProperty ;
-                                                     rdfs:subPropertyOf <https://isagog.com/ontology#has_part> ;
-                                                     rdfs:comment "Functional parts" .
+:has_component rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :has_part ;
+               rdfs:comment "Functional parts" .
 
 
 ###  https://isagog.com/ontology#has_inherent
-<https://isagog.com/ontology#has_inherent> rdf:type owl:ObjectProperty ;
-                                                    rdfs:subPropertyOf <https://isagog.com/ontology#inherence> ;
-                                                    owl:inverseOf <https://isagog.com/ontology#inheres_to> ;
-                                                    rdfs:range <https://isagog.com/ontology#Information> .
+:has_inherent rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :inherence ;
+              owl:inverseOf :inheres_to ;
+              rdfs:range :Information .
 
 
 ###  https://isagog.com/ontology#has_part
-<https://isagog.com/ontology#has_part> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://isagog.com/ontology#composition> ;
-                                                owl:inverseOf <https://isagog.com/ontology#part_of> ;
-                                                rdfs:domain <https://isagog.com/ontology#Continuant> ;
-                                                rdfs:range <https://isagog.com/ontology#Continuant> .
+:has_part rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :composition ;
+          owl:inverseOf :part_of ;
+          rdfs:domain :Continuant ;
+          rdfs:range :Continuant .
 
 
 ###  https://isagog.com/ontology#has_participant
-<https://isagog.com/ontology#has_participant> rdf:type owl:ObjectProperty ;
-                                                       rdfs:subPropertyOf <https://isagog.com/ontology#participation> ;
-                                                       owl:inverseOf <https://isagog.com/ontology#participate_in> ;
-                                                       rdfs:domain <https://isagog.com/ontology#Occurrent> ;
-                                                       rdfs:range <https://isagog.com/ontology#Continuant> .
+:has_participant rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :participation ;
+                 owl:inverseOf :participate_in ;
+                 rdfs:domain :Occurrent ;
+                 rdfs:range :Continuant .
 
 
 ###  https://isagog.com/ontology#has_phase
-<https://isagog.com/ontology#has_phase> rdf:type owl:ObjectProperty ;
-                                                 rdfs:subPropertyOf <https://isagog.com/ontology#composition> ;
-                                                 owl:inverseOf <https://isagog.com/ontology#phase_of> ;
-                                                 rdfs:domain <https://isagog.com/ontology#Occurrent> ;
-                                                 rdfs:range <https://isagog.com/ontology#Occurrent> .
+:has_phase rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :composition ;
+           owl:inverseOf :phase_of ;
+           rdfs:domain :Occurrent ;
+           rdfs:range :Occurrent .
 
 
 ###  https://isagog.com/ontology#has_spatial_part
-<https://isagog.com/ontology#has_spatial_part> rdf:type owl:ObjectProperty ;
-                                                        rdfs:subPropertyOf <https://isagog.com/ontology#has_part> ;
-                                                        owl:inverseOf <https://isagog.com/ontology#spatial_part_of> ;
-                                                        rdfs:comment "Spatial parts" .
+:has_spatial_part rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :has_part ;
+                  owl:inverseOf :spatial_part_of ;
+                  rdfs:comment "Spatial parts" .
 
 
 ###  https://isagog.com/ontology#has_tag
-<https://isagog.com/ontology#has_tag> rdf:type owl:ObjectProperty ;
-                                               rdfs:subPropertyOf <https://isagog.com/ontology#has_inherent> ;
-                                               owl:inverseOf <https://isagog.com/ontology#tag_of> .
+:has_tag rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :has_inherent ;
+         owl:inverseOf :tag_of .
 
 
 ###  https://isagog.com/ontology#has_topic
-<https://isagog.com/ontology#has_topic> rdf:type owl:ObjectProperty ;
-                                                 rdfs:subPropertyOf <https://isagog.com/ontology#has_inherent> ;
-                                                 owl:inverseOf <https://isagog.com/ontology#topic_of> .
+:has_topic rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :has_inherent ;
+           owl:inverseOf :topic_of .
 
 
 ###  https://isagog.com/ontology#hosts
-<https://isagog.com/ontology#hosts> rdf:type owl:ObjectProperty ;
-                                             rdfs:subPropertyOf <https://isagog.com/ontology#collocation> ;
-                                             owl:inverseOf <https://isagog.com/ontology#in_place> .
+:hosts rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf :collocation ;
+       owl:inverseOf :in_place .
 
 
 ###  https://isagog.com/ontology#in_place
-<https://isagog.com/ontology#in_place> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://isagog.com/ontology#collocation> ;
-                                                rdfs:domain <https://isagog.com/ontology#Entity> ;
-                                                rdfs:range <https://isagog.com/ontology#Location> .
+:in_place rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :collocation ;
+          rdfs:domain :Entity ;
+          rdfs:range :Location .
 
 
 ###  https://isagog.com/ontology#inherence
-<https://isagog.com/ontology#inherence> rdf:type owl:ObjectProperty ;
-                                                 rdfs:comment "Pertinence of metadata to data"@en .
+:inherence rdf:type owl:ObjectProperty ;
+           rdfs:comment "Pertinence of metadata to data"@en .
 
 
 ###  https://isagog.com/ontology#inheres_to
-<https://isagog.com/ontology#inheres_to> rdf:type owl:ObjectProperty ;
-                                                  rdfs:subPropertyOf <https://isagog.com/ontology#inherence> ;
-                                                  rdfs:domain <https://isagog.com/ontology#Information> ;
-                                                  rdfs:comment "Any relation involved in semiotic processes" .
+:inheres_to rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :inherence ;
+            rdfs:domain :Information ;
+            rdfs:comment "Any relation involved in semiotic processes" .
 
 
 ###  https://isagog.com/ontology#initiated_by
-<https://isagog.com/ontology#initiated_by> rdf:type owl:ObjectProperty ;
-                                                    rdfs:subPropertyOf <https://isagog.com/ontology#has_participant> ;
-                                                    owl:inverseOf <https://isagog.com/ontology#initiates> ;
-                                                    rdfs:comment "Agentive participation" .
+:initiated_by rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :has_participant ;
+              owl:inverseOf :initiates ;
+              rdfs:comment "Agentive participation" .
 
 
 ###  https://isagog.com/ontology#initiates
-<https://isagog.com/ontology#initiates> rdf:type owl:ObjectProperty ;
-                                                 rdfs:subPropertyOf <https://isagog.com/ontology#participate_in> .
+:initiates rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :participate_in .
 
 
 ###  https://isagog.com/ontology#mentioned_in
-<https://isagog.com/ontology#mentioned_in> rdf:type owl:ObjectProperty ;
-                                                    rdfs:subPropertyOf <https://isagog.com/ontology#relatedness> ;
-                                                    owl:inverseOf <https://isagog.com/ontology#mentions> ;
-                                                    rdfs:range <https://isagog.com/ontology#Document> .
+:mentioned_in rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :relatedness ;
+              owl:inverseOf :mentions ;
+              rdfs:range :Document .
 
 
 ###  https://isagog.com/ontology#mentions
-<https://isagog.com/ontology#mentions> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://isagog.com/ontology#relatedness> ;
-                                                rdfs:domain <https://isagog.com/ontology#Document> ;
-                                                rdfs:range [ rdf:type owl:Class ;
-                                                             owl:unionOf ( <https://isagog.com/ontology#Entity>
-                                                                           <https://isagog.com/ontology#Mention>
-                                                                         )
-                                                           ] ;
-                                                rdfs:comment "Referral to an Entity, either direct or via a suitable reification (Mention)"@en .
+:mentions rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :relatedness ;
+          rdfs:domain :Document ;
+          rdfs:range [ rdf:type owl:Class ;
+                       owl:unionOf ( :Entity
+                                     :Mention
+                                   )
+                     ] ;
+          rdfs:comment "Referral to an Entity, either direct or via a suitable reification (Mention)"@en .
 
 
 ###  https://isagog.com/ontology#next_to
-<https://isagog.com/ontology#next_to> rdf:type owl:ObjectProperty ;
-                                               rdfs:subPropertyOf <https://isagog.com/ontology#connectedness> ;
-                                               rdf:type owl:AsymmetricProperty ;
-                                               rdfs:domain <https://isagog.com/ontology#Event> ;
-                                               rdfs:range <https://isagog.com/ontology#Event> ;
-                                               rdfs:comment "Temporal connectedness" .
+:next_to rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :connectedness ;
+         rdf:type owl:AsymmetricProperty ;
+         rdfs:domain :Event ;
+         rdfs:range :Event ;
+         rdfs:comment "Temporal connectedness" .
 
 
 ###  https://isagog.com/ontology#object
-<https://isagog.com/ontology#object> rdf:type owl:ObjectProperty ;
-                                              rdfs:subPropertyOf <https://isagog.com/ontology#inheres_to> ;
-                                              rdfs:domain <https://isagog.com/ontology#Relationship> ;
-                                              rdfs:range [ rdf:type owl:Class ;
-                                                           owl:unionOf ( <https://isagog.com/ontology#Entity>
-                                                                         <https://isagog.com/ontology#Mention>
-                                                                       )
-                                                         ] .
+:object rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :inheres_to ;
+        rdfs:domain :Relationship ;
+        rdfs:range [ rdf:type owl:Class ;
+                     owl:unionOf ( :Entity
+                                   :Mention
+                                 )
+                   ] .
 
 
 ###  https://isagog.com/ontology#part_of
-<https://isagog.com/ontology#part_of> rdf:type owl:ObjectProperty ;
-                                               rdfs:subPropertyOf <https://isagog.com/ontology#composition> ;
-                                               rdfs:domain <https://isagog.com/ontology#Continuant> ;
-                                               rdfs:range <https://isagog.com/ontology#Continuant> ;
-                                               rdfs:comment "Generic parthood"@en .
+:part_of rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :composition ;
+         rdfs:domain :Continuant ;
+         rdfs:range :Continuant ;
+         rdfs:comment "Generic parthood"@en .
 
 
 ###  https://isagog.com/ontology#participate_in
-<https://isagog.com/ontology#participate_in> rdf:type owl:ObjectProperty ;
-                                                      rdfs:subPropertyOf <https://isagog.com/ontology#participation> ;
-                                                      rdfs:domain <https://isagog.com/ontology#Continuant> ;
-                                                      rdfs:range <https://isagog.com/ontology#Occurrent> .
+:participate_in rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :participation ;
+                rdfs:domain :Continuant ;
+                rdfs:range :Occurrent .
 
 
 ###  https://isagog.com/ontology#participation
-<https://isagog.com/ontology#participation> rdf:type owl:ObjectProperty ;
-                                                     rdfs:comment "Continuant participation in occurrents" .
+:participation rdf:type owl:ObjectProperty ;
+               rdfs:comment "Continuant participation in occurrents" .
 
 
 ###  https://isagog.com/ontology#phase_of
-<https://isagog.com/ontology#phase_of> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://isagog.com/ontology#composition> ;
-                                                rdfs:domain <https://isagog.com/ontology#Occurrent> ;
-                                                rdfs:range <https://isagog.com/ontology#Occurrent> ;
-                                                rdfs:comment "Temporal parthood"@en .
+:phase_of rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :composition ;
+          rdfs:domain :Occurrent ;
+          rdfs:range :Occurrent ;
+          rdfs:comment "Temporal parthood"@en .
 
 
 ###  https://isagog.com/ontology#referent
-<https://isagog.com/ontology#referent> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://isagog.com/ontology#inheres_to> ;
-                                                rdfs:domain <https://isagog.com/ontology#Sign> ;
-                                                rdfs:comment "'Real-world' concept or entity that the sign points to or refers to." ;
-                                                rdfs:seeAlso "Sign->Object (Peirce)" .
+:referent rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :inheres_to ;
+          rdfs:domain :Sign ;
+          rdfs:comment "'Real-world' concept or entity that the sign points to or refers to." ;
+          rdfs:seeAlso "Sign->Object (Peirce)" .
 
 
 ###  https://isagog.com/ontology#relatedness
-<https://isagog.com/ontology#relatedness> rdf:type owl:ObjectProperty ;
-                                                   rdfs:subPropertyOf owl:topObjectProperty ;
-                                                   rdfs:comment "generic relatedness" .
+:relatedness rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:comment "generic relatedness" .
 
 
 ###  https://isagog.com/ontology#source
-<https://isagog.com/ontology#source> rdf:type owl:ObjectProperty ;
-                                              rdfs:subPropertyOf <https://isagog.com/ontology#relatedness> ;
-                                              owl:inverseOf <https://isagog.com/ontology#yields> ;
-                                              rdfs:domain <https://isagog.com/ontology#Sign> ;
-                                              rdfs:range <https://isagog.com/ontology#Information> .
+:source rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :relatedness ;
+        owl:inverseOf :yields ;
+        rdfs:domain :Sign ;
+        rdfs:range :Information .
 
 
 ###  https://isagog.com/ontology#spatial_part_of
-<https://isagog.com/ontology#spatial_part_of> rdf:type owl:ObjectProperty ;
-                                                       rdfs:subPropertyOf <https://isagog.com/ontology#part_of> .
+:spatial_part_of rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :part_of .
 
 
 ###  https://isagog.com/ontology#subject
-<https://isagog.com/ontology#subject> rdf:type owl:ObjectProperty ;
-                                               rdfs:subPropertyOf <https://isagog.com/ontology#inheres_to> ;
-                                               rdfs:domain <https://isagog.com/ontology#Relationship> ;
-                                               rdfs:range [ rdf:type owl:Class ;
-                                                            owl:unionOf ( <https://isagog.com/ontology#Entity>
-                                                                          <https://isagog.com/ontology#Mention>
-                                                                        )
-                                                          ] .
+:subject rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :inheres_to ;
+         rdfs:domain :Relationship ;
+         rdfs:range [ rdf:type owl:Class ;
+                      owl:unionOf ( :Entity
+                                    :Mention
+                                  )
+                    ] .
 
 
 ###  https://isagog.com/ontology#summarizes
-<https://isagog.com/ontology#summarizes> rdf:type owl:ObjectProperty ;
-                                                  rdfs:subPropertyOf <https://isagog.com/ontology#inheres_to> ;
-                                                  owl:inverseOf <https://isagog.com/ontology#summary> .
+:summarizes rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :inheres_to ;
+            owl:inverseOf :summary .
 
 
 ###  https://isagog.com/ontology#summary
-<https://isagog.com/ontology#summary> rdf:type owl:ObjectProperty ;
-                                               rdfs:subPropertyOf <https://isagog.com/ontology#has_inherent> .
+:summary rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :has_inherent .
 
 
 ###  https://isagog.com/ontology#tag_of
-<https://isagog.com/ontology#tag_of> rdf:type owl:ObjectProperty ;
-                                              rdfs:subPropertyOf <https://isagog.com/ontology#inheres_to> .
+:tag_of rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :inheres_to .
 
 
 ###  https://isagog.com/ontology#topic_of
-<https://isagog.com/ontology#topic_of> rdf:type owl:ObjectProperty ;
-                                                rdfs:subPropertyOf <https://isagog.com/ontology#inheres_to> .
+:topic_of rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :inheres_to .
 
 
 ###  https://isagog.com/ontology#yields
-<https://isagog.com/ontology#yields> rdf:type owl:ObjectProperty ;
-                                              rdfs:subPropertyOf <https://isagog.com/ontology#relatedness> ;
-                                              rdfs:domain <https://isagog.com/ontology#Information> ;
-                                              rdfs:range <https://isagog.com/ontology#Sign> .
+:yields rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :relatedness ;
+        rdfs:domain :Information ;
+        rdfs:range :Sign .
 
 
 #################################################################
 #    Data properties
 #################################################################
 
-###  https://isagog.com/ontology#article_pubblication
-<https://isagog.com/ontology#article_pubblication> rdf:type owl:DatatypeProperty ;
-                                                            owl:deprecated "" .
-
-
-###  https://isagog.com/ontology#author_str
-<https://isagog.com/ontology#author_str> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:subPropertyOf <https://isagog.com/ontology#identifier> .
-
-
-###  https://isagog.com/ontology#body
-<https://isagog.com/ontology#body> rdf:type owl:DatatypeProperty ;
-                                            rdfs:subPropertyOf <https://isagog.com/ontology#text> ;
-                                            rdfs:domain <https://isagog.com/ontology#Document> ;
-                                            rdfs:comment "textual content of a document" .
-
-
-###  https://isagog.com/ontology#caption
-<https://isagog.com/ontology#caption> rdf:type owl:DatatypeProperty ;
-                                               rdfs:subPropertyOf <https://isagog.com/ontology#text> ;
-                                               <https://isagog.com/ontology#schema> "https://schema.org/abstract" .
-
-
-###  https://isagog.com/ontology#category
-<https://isagog.com/ontology#category> rdf:type owl:DatatypeProperty ;
-                                                rdfs:subPropertyOf <https://isagog.com/ontology#tag> ;
-                                                rdfs:range xsd:string .
-
-
-###  https://isagog.com/ontology#category_tag
-<https://isagog.com/ontology#category_tag> rdf:type owl:DatatypeProperty ;
-                                                    rdfs:subPropertyOf <https://isagog.com/ontology#tag> .
-
-
 ###  https://isagog.com/ontology#concept
-<https://isagog.com/ontology#concept> rdf:type owl:DatatypeProperty ;
-                                               rdfs:domain <https://isagog.com/ontology#Sign> ;
-                                               rdfs:comment "mapping of Signs to interpreting predicates (concepts or properties)" ;
-                                               rdfs:seeAlso "Representamen->Interpretant (Peirce)" .
-
-
-###  https://isagog.com/ontology#copyright
-<https://isagog.com/ontology#copyright> rdf:type owl:DatatypeProperty .
-
-
-###  https://isagog.com/ontology#dbpedia_ref
-<https://isagog.com/ontology#dbpedia_ref> rdf:type owl:DatatypeProperty ;
-                                                   rdfs:subPropertyOf <https://isagog.com/ontology#reference> .
-
-
-###  https://isagog.com/ontology#edition_date
-<https://isagog.com/ontology#edition_date> rdf:type owl:DatatypeProperty ;
-                                                    rdfs:subPropertyOf <https://isagog.com/ontology#time_coordinate> .
+:concept rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :identifier ;
+         rdfs:domain :Sign ;
+         rdfs:comment "mapping of Signs to interpreting predicates (concepts or properties)" ;
+         rdfs:seeAlso "Representamen->Interpretant (Peirce)" .
 
 
 ###  https://isagog.com/ontology#expression
-<https://isagog.com/ontology#expression> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:subPropertyOf <https://isagog.com/ontology#text> ;
-                                                  rdfs:domain <https://isagog.com/ontology#Sign> ;
-                                                  rdfs:range xsd:string ;
-                                                  rdfs:comment "Sign's textual representamen" .
-
-
-###  https://isagog.com/ontology#full_name
-<https://isagog.com/ontology#full_name> rdf:type owl:DatatypeProperty ;
-                                                 rdfs:subPropertyOf <https://isagog.com/ontology#text> .
+:expression rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf :text ;
+            rdfs:domain :Sign ;
+            rdfs:range xsd:string ;
+            rdfs:comment "Sign's textual representamen" .
 
 
 ###  https://isagog.com/ontology#geo_coordinate
-<https://isagog.com/ontology#geo_coordinate> rdf:type owl:DatatypeProperty ;
-                                                      rdfs:comment "any suitable <logitude, latitude> coordinate" .
-
-
-###  https://isagog.com/ontology#geoinfo_bbox
-<https://isagog.com/ontology#geoinfo_bbox> rdf:type owl:DatatypeProperty ;
-                                                    rdfs:subPropertyOf <https://isagog.com/ontology#geo_coordinate> .
-
-
-###  https://isagog.com/ontology#geoinfo_country_name
-<https://isagog.com/ontology#geoinfo_country_name> rdf:type owl:DatatypeProperty ;
-                                                            rdfs:subPropertyOf <https://isagog.com/ontology#geo_coordinate> .
-
-
-###  https://isagog.com/ontology#geoinfo_feature_class
-<https://isagog.com/ontology#geoinfo_feature_class> rdf:type owl:DatatypeProperty ;
-                                                             rdfs:subPropertyOf <https://isagog.com/ontology#geo_coordinate> .
-
-
-###  https://isagog.com/ontology#geoinfo_feature_code
-<https://isagog.com/ontology#geoinfo_feature_code> rdf:type owl:DatatypeProperty ;
-                                                            rdfs:subPropertyOf <https://isagog.com/ontology#geo_coordinate> .
-
-
-###  https://isagog.com/ontology#geoinfo_id
-<https://isagog.com/ontology#geoinfo_id> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:subPropertyOf <https://isagog.com/ontology#geo_coordinate> ;
-                                                  rdfs:range xsd:integer .
-
-
-###  https://isagog.com/ontology#geoinfo_lat
-<https://isagog.com/ontology#geoinfo_lat> rdf:type owl:DatatypeProperty ;
-                                                   rdfs:subPropertyOf <https://isagog.com/ontology#geo_coordinate> ;
-                                                   rdfs:range xsd:double .
-
-
-###  https://isagog.com/ontology#geoinfo_lng
-<https://isagog.com/ontology#geoinfo_lng> rdf:type owl:DatatypeProperty ;
-                                                   rdfs:subPropertyOf <https://isagog.com/ontology#geo_coordinate> ;
-                                                   rdfs:range xsd:double .
-
-
-###  https://isagog.com/ontology#geoinfo_name
-<https://isagog.com/ontology#geoinfo_name> rdf:type owl:DatatypeProperty ;
-                                                    rdfs:subPropertyOf <https://isagog.com/ontology#geo_coordinate> .
+:geo_coordinate rdf:type owl:DatatypeProperty ;
+                rdfs:comment "any suitable <logitude, latitude> coordinate" .
 
 
 ###  https://isagog.com/ontology#identifier
-<https://isagog.com/ontology#identifier> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:range xsd:string .
-
-
-###  https://isagog.com/ontology#image_url
-<https://isagog.com/ontology#image_url> rdf:type owl:DatatypeProperty ;
-                                                 rdfs:subPropertyOf <https://isagog.com/ontology#reference> .
-
-
-###  https://isagog.com/ontology#imgcaption
-<https://isagog.com/ontology#imgcaption> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:subPropertyOf <https://isagog.com/ontology#caption> .
-
-
-###  https://isagog.com/ontology#imgurl
-<https://isagog.com/ontology#imgurl> rdf:type owl:DatatypeProperty ;
-                                              rdfs:subPropertyOf <https://isagog.com/ontology#identifier> ;
-                                              rdfs:range xsd:anyURI .
+:identifier rdf:type owl:DatatypeProperty ;
+            rdfs:range xsd:string .
 
 
 ###  https://isagog.com/ontology#instant
-<https://isagog.com/ontology#instant> rdf:type owl:DatatypeProperty ;
-                                               rdfs:subPropertyOf <https://isagog.com/ontology#time_coordinate> .
-
-
-###  https://isagog.com/ontology#keyword
-<https://isagog.com/ontology#keyword> rdf:type owl:DatatypeProperty ;
-                                               rdfs:subPropertyOf <https://isagog.com/ontology#tag> ;
-                                               rdfs:range xsd:string .
-
-
-###  https://isagog.com/ontology#kicker
-<https://isagog.com/ontology#kicker> rdf:type owl:DatatypeProperty ;
-                                              rdfs:subPropertyOf <https://isagog.com/ontology#text_annotation> .
+:instant rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :time_coordinate .
 
 
 ###  https://isagog.com/ontology#name
-<https://isagog.com/ontology#name> rdf:type owl:DatatypeProperty ;
-                                            rdfs:subPropertyOf <https://isagog.com/ontology#text> ;
-                                            rdfs:range xsd:string .
-
-
-###  https://isagog.com/ontology#pagenum
-<https://isagog.com/ontology#pagenum> rdf:type owl:DatatypeProperty .
-
-
-###  https://isagog.com/ontology#published_day
-<https://isagog.com/ontology#published_day> rdf:type owl:DatatypeProperty ;
-                                                     rdfs:subPropertyOf <https://isagog.com/ontology#time_coordinate> .
+:name rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf :text ;
+      rdfs:range xsd:string .
 
 
 ###  https://isagog.com/ontology#reference
-<https://isagog.com/ontology#reference> rdf:type owl:DatatypeProperty ;
-                                                 rdfs:subPropertyOf owl:topDataProperty .
-
-
-###  https://isagog.com/ontology#status
-<https://isagog.com/ontology#status> rdf:type owl:DatatypeProperty .
+:reference rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf owl:topDataProperty .
 
 
 ###  https://isagog.com/ontology#surname
-<https://isagog.com/ontology#surname> rdf:type owl:DatatypeProperty ;
-                                               rdfs:subPropertyOf <https://isagog.com/ontology#text> ;
-                                               rdfs:range xsd:string .
-
-
-###  https://isagog.com/ontology#tag
-<https://isagog.com/ontology#tag> rdf:type owl:DatatypeProperty ;
-                                           rdfs:subPropertyOf <https://isagog.com/ontology#text_annotation> .
+:surname rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :text ;
+         rdfs:range xsd:string .
 
 
 ###  https://isagog.com/ontology#text
-<https://isagog.com/ontology#text> rdf:type owl:DatatypeProperty ;
-                                            rdfs:range xsd:string .
-
-
-###  https://isagog.com/ontology#text_annotation
-<https://isagog.com/ontology#text_annotation> rdf:type owl:DatatypeProperty ;
-                                                       rdfs:subPropertyOf <https://isagog.com/ontology#text> .
+:text rdf:type owl:DatatypeProperty ;
+      rdfs:range xsd:string .
 
 
 ###  https://isagog.com/ontology#time_coordinate
-<https://isagog.com/ontology#time_coordinate> rdf:type owl:DatatypeProperty ;
-                                                       rdfs:comment "any suitable time point or interval" .
-
-
-###  https://isagog.com/ontology#title
-<https://isagog.com/ontology#title> rdf:type owl:DatatypeProperty ;
-                                             rdfs:subPropertyOf <https://isagog.com/ontology#text> ;
-                                             rdfs:range xsd:string .
-
-
-###  https://isagog.com/ontology#userid
-<https://isagog.com/ontology#userid> rdf:type owl:DatatypeProperty ;
-                                              rdfs:subPropertyOf <https://isagog.com/ontology#identifier> .
-
-
-###  https://isagog.com/ontology#wiki_summary
-<https://isagog.com/ontology#wiki_summary> rdf:type owl:DatatypeProperty ;
-                                                    rdfs:subPropertyOf <https://isagog.com/ontology#text> .
-
-
-###  https://isagog.com/ontology#wiki_timestamp
-<https://isagog.com/ontology#wiki_timestamp> rdf:type owl:DatatypeProperty ;
-                                                      rdfs:subPropertyOf <https://isagog.com/ontology#time_coordinate> .
-
-
-###  https://isagog.com/ontology#wiki_title
-<https://isagog.com/ontology#wiki_title> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:subPropertyOf <https://isagog.com/ontology#title> .
-
-
-###  https://isagog.com/ontology#wiki_url
-<https://isagog.com/ontology#wiki_url> rdf:type owl:DatatypeProperty ;
-                                                rdfs:subPropertyOf <https://isagog.com/ontology#reference> ;
-                                                rdfs:range xsd:anyURI .
+:time_coordinate rdf:type owl:DatatypeProperty ;
+                 rdfs:comment "any suitable time point or interval" .
 
 
 ###  https://isagog.com/ontology#year
-<https://isagog.com/ontology#year> rdf:type owl:DatatypeProperty ;
-                                            rdfs:subPropertyOf <https://isagog.com/ontology#time_coordinate> .
+:year rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf :time_coordinate .
 
 
 #################################################################
@@ -610,211 +437,206 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 #################################################################
 
 ###  https://isagog.com/ontology#Continuant
-<https://isagog.com/ontology#Continuant> rdf:type owl:Class ;
-                                                  rdfs:subClassOf <https://isagog.com/ontology#Entity> ;
-                                                  owl:disjointWith <https://isagog.com/ontology#Occurrent> ;
-                                                  rdfs:comment "An entity that persists through time while maintaining its identity, existing as a whole at any given moment. Continuants are not characterized by temporal parts; instead, they endure as the same entity throughout change, distinct from processes or events, which unfold over time." ;
-                                                  <https://isagog.com/ontology#cidoc> "http://erlangen-crm.org/240307/E77_Persistent_Item" .
+:Continuant rdf:type owl:Class ;
+            rdfs:subClassOf :Entity ;
+            owl:disjointWith :Occurrent ;
+            rdfs:comment "An entity that persists through time while maintaining its identity, existing as a whole at any given moment. Continuants are not characterized by temporal parts; instead, they endure as the same entity throughout change, distinct from processes or events, which unfold over time." ;
+            :cidoc "http://erlangen-crm.org/240307/E77_Persistent_Item" .
 
 
 ###  https://isagog.com/ontology#Description
-<https://isagog.com/ontology#Description> rdf:type owl:Class ;
-                                                   rdfs:subClassOf <https://isagog.com/ontology#Statement> ;
-                                                   rdfs:comment "Statement about a specific aspect or feature of something" ;
-                                                   <https://isagog.com/ontology#cidoc> "http://erlangen-crm.org/240307/E73_Appellation" .
+:Description rdf:type owl:Class ;
+             rdfs:subClassOf :Statement ;
+             rdfs:comment "Statement about a specific aspect or feature of something" ;
+             :cidoc "http://erlangen-crm.org/240307/E73_Appellation" .
 
 
 ###  https://isagog.com/ontology#Document
-<https://isagog.com/ontology#Document> rdf:type owl:Class ;
-                                                rdfs:subClassOf <https://isagog.com/ontology#Information> ,
-                                                                [ rdf:type owl:Restriction ;
-                                                                  owl:onProperty <https://isagog.com/ontology#authored_by> ;
-                                                                  owl:someValuesFrom <https://isagog.com/ontology#Person>
-                                                                ] ,
-                                                                [ rdf:type owl:Restriction ;
-                                                                  owl:onProperty <https://isagog.com/ontology#yields> ;
-                                                                  owl:someValuesFrom <https://isagog.com/ontology#Sign>
-                                                                ] ,
-                                                                [ rdf:type owl:Restriction ;
-                                                                  owl:onProperty <https://isagog.com/ontology#body> ;
-                                                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                  owl:onDataRange xsd:string
-                                                                ] ;
-                                                rdfs:comment "Textual document" ;
-                                                <https://isagog.com/ontology#cidoc> "http://erlangen-crm.org/240307/E31_Document" .
+:Document rdf:type owl:Class ;
+          rdfs:subClassOf :Information ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :authored_by ;
+                            owl:someValuesFrom :Person
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :yields ;
+                            owl:someValuesFrom :Sign
+                          ] ;
+          rdfs:comment "Textual document" ;
+          :cidoc "http://erlangen-crm.org/240307/E31_Document" .
 
 
 ###  https://isagog.com/ontology#Entity
-<https://isagog.com/ontology#Entity> rdf:type owl:Class ;
-                                              rdfs:subClassOf [ rdf:type owl:Restriction ;
-                                                                owl:onProperty <https://isagog.com/ontology#described_by> ;
-                                                                owl:someValuesFrom <https://isagog.com/ontology#EntityDescriptor>
-                                                              ] ;
-                                              owl:disjointWith <https://isagog.com/ontology#Information> ;
-                                              rdfs:comment "Thing localizable in space and / or time"@en ;
-                                              <https://isagog.com/ontology#cidoc> "http://erlangen-crm.org/240307/E1_CRM_Entity" .
+:Entity rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :described_by ;
+                          owl:someValuesFrom :EntityDescriptor
+                        ] ;
+        owl:disjointWith :Information ;
+        rdfs:comment "Thing localizable in space and / or time"@en ;
+        :cidoc "http://erlangen-crm.org/240307/E1_CRM_Entity" .
 
 
 ###  https://isagog.com/ontology#EntityDescriptor
-<https://isagog.com/ontology#EntityDescriptor> rdf:type owl:Class ;
-                                                        rdfs:subClassOf <https://isagog.com/ontology#Description> ,
-                                                                        [ rdf:type owl:Restriction ;
-                                                                          owl:onProperty <https://isagog.com/ontology#referent> ;
-                                                                          owl:allValuesFrom <https://isagog.com/ontology#Entity>
-                                                                        ] .
+:EntityDescriptor rdf:type owl:Class ;
+                  rdfs:subClassOf :Description ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :referent ;
+                                    owl:allValuesFrom :Entity
+                                  ] .
 
 
 ###  https://isagog.com/ontology#Event
-<https://isagog.com/ontology#Event> rdf:type owl:Class ;
-                                             rdfs:subClassOf <https://isagog.com/ontology#Occurrent> ;
-                                             <https://isagog.com/ontology#cidoc> "http://erlangen-crm.org/240307/E5_Event" .
+:Event rdf:type owl:Class ;
+       rdfs:subClassOf :Occurrent ;
+       :cidoc "http://erlangen-crm.org/240307/E5_Event" .
 
 
 ###  https://isagog.com/ontology#Information
-<https://isagog.com/ontology#Information> rdf:type owl:Class ;
-                                                   rdfs:comment "Non material thing that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."@en ;
-                                                   <https://isagog.com/ontology#cidoc> "http://erlangen-crm.org/240307/E73_Information_Object" .
+:Information rdf:type owl:Class ;
+             rdfs:comment "Non material thing that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."@en ;
+             :cidoc "http://erlangen-crm.org/240307/E73_Information_Object" .
 
 
 ###  https://isagog.com/ontology#Location
-<https://isagog.com/ontology#Location> rdf:type owl:Class ;
-                                                rdfs:subClassOf <https://isagog.com/ontology#Continuant> ,
-                                                                [ rdf:type owl:Restriction ;
-                                                                  owl:onProperty <https://isagog.com/ontology#geo_coordinate> ;
-                                                                  owl:someValuesFrom xsd:string
-                                                                ] ;
-                                                rdfs:comment "Identified portion of space (place)"@en ;
-                                                <https://isagog.com/ontology#cidoc> "http://erlangen-crm.org/240307/E53_Place" .
+:Location rdf:type owl:Class ;
+          rdfs:subClassOf :Continuant ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :geo_coordinate ;
+                            owl:someValuesFrom xsd:string
+                          ] ;
+          rdfs:comment "Identified portion of space (place)"@en ;
+          :cidoc "http://erlangen-crm.org/240307/E53_Place" .
 
 
 ###  https://isagog.com/ontology#Material
-<https://isagog.com/ontology#Material> rdf:type owl:Class ;
-                                                rdfs:subClassOf <https://isagog.com/ontology#Continuant> ;
-                                                rdfs:comment "A non-sortal continuant that exists as a mass or quantity without inherent boundaries or a distinct identity, persisting through time while undergoing potential changes in form or composition. Material is typically characterized by its divisibility and its capacity to constitute or combine with other entities to form objects or structures." .
+:Material rdf:type owl:Class ;
+          rdfs:subClassOf :Continuant ;
+          rdfs:comment "A non-sortal continuant that exists as a mass or quantity without inherent boundaries or a distinct identity, persisting through time while undergoing potential changes in form or composition. Material is typically characterized by its divisibility and its capacity to constitute or combine with other entities to form objects or structures." .
 
 
 ###  https://isagog.com/ontology#Mention
-<https://isagog.com/ontology#Mention> rdf:type owl:Class ;
-                                               rdfs:subClassOf <https://isagog.com/ontology#Sign> ,
-                                                               [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty <https://isagog.com/ontology#referent> ;
-                                                                 owl:allValuesFrom <https://isagog.com/ontology#Entity>
-                                                               ] ;
-                                               rdfs:comment "Denotation of an entity (e.g. a name)"@en .
+:Mention rdf:type owl:Class ;
+         rdfs:subClassOf :Sign ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :referent ;
+                           owl:allValuesFrom :Entity
+                         ] ;
+         rdfs:comment "Denotation of an entity (e.g. a name)"@en .
 
 
 ###  https://isagog.com/ontology#Object
-<https://isagog.com/ontology#Object> rdf:type owl:Class ;
-                                              rdfs:subClassOf <https://isagog.com/ontology#Continuant> ;
-                                              rdfs:comment "A sortal continuant characterized by having determinate boundaries and a unity criterion that defines its persistence as a distinct entity. Changes in morphology or composition may affect its identity within a given context." ;
-                                              <https://isagog.com/ontology#cidoc> "http://erlangen-crm.org/240307/E70_Thing" .
+:Object rdf:type owl:Class ;
+        rdfs:subClassOf :Continuant ;
+        rdfs:comment "A sortal continuant characterized by having determinate boundaries and a unity criterion that defines its persistence as a distinct entity. Changes in morphology or composition may affect its identity within a given context." ;
+        :cidoc "http://erlangen-crm.org/240307/E70_Thing" .
 
 
 ###  https://isagog.com/ontology#Occurrent
-<https://isagog.com/ontology#Occurrent> rdf:type owl:Class ;
-                                                 rdfs:subClassOf <https://isagog.com/ontology#Entity> ,
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty <https://isagog.com/ontology#has_participant> ;
-                                                                   owl:someValuesFrom <https://isagog.com/ontology#Entity>
-                                                                 ] ,
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty <https://isagog.com/ontology#in_place> ;
-                                                                   owl:someValuesFrom <https://isagog.com/ontology#Location>
-                                                                 ] ,
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty <https://isagog.com/ontology#time_coordinate> ;
-                                                                   owl:someValuesFrom xsd:string
-                                                                 ] ;
-                                                 rdfs:comment "Entities that unfold or occur over time, such as events, processes,  or activities. These entities are not wholly present at any single moment but are extended in time, contrasting with 'Continuants', which persist while maintaining identity." ;
-                                                 rdfs:seeAlso "Occurrent" ;
-                                                 <https://isagog.com/ontology#cidoc> "http://erlangen-crm.org/240307/E5_Event" .
+:Occurrent rdf:type owl:Class ;
+           rdfs:subClassOf :Entity ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :has_participant ;
+                             owl:someValuesFrom :Entity
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :in_place ;
+                             owl:someValuesFrom :Location
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :time_coordinate ;
+                             owl:someValuesFrom xsd:string
+                           ] ;
+           rdfs:comment "Entities that unfold or occur over time, such as events, processes,  or activities. These entities are not wholly present at any single moment but are extended in time, contrasting with 'Continuants', which persist while maintaining identity." ;
+           rdfs:seeAlso "Occurrent" ;
+           :cidoc "http://erlangen-crm.org/240307/E5_Event" .
 
 
 ###  https://isagog.com/ontology#Organization
-<https://isagog.com/ontology#Organization> rdf:type owl:Class ;
-                                                    rdfs:subClassOf <https://isagog.com/ontology#Continuant> ;
-                                                    rdfs:comment "Social group of people working together towards common goals, governed by defined rules and processes"@en .
+:Organization rdf:type owl:Class ;
+              rdfs:subClassOf :Continuant ;
+              rdfs:comment "Social group of people working together towards common goals, governed by defined rules and processes"@en .
 
 
 ###  https://isagog.com/ontology#Person
-<https://isagog.com/ontology#Person> rdf:type owl:Class ;
-                                              rdfs:subClassOf <https://isagog.com/ontology#Continuant> ,
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty <https://isagog.com/ontology#name> ;
-                                                                owl:someValuesFrom xsd:string
-                                                              ] ,
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty <https://isagog.com/ontology#surname> ;
-                                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                owl:onDataRange xsd:string
-                                                              ] ;
-                                              <https://isagog.com/ontology#schema> "https://schema.org/Person" .
+:Person rdf:type owl:Class ;
+        rdfs:subClassOf :Continuant ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :name ;
+                          owl:someValuesFrom xsd:string
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :surname ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onDataRange xsd:string
+                        ] ;
+        :schema "https://schema.org/Person" .
 
 
 ###  https://isagog.com/ontology#Relationship
-<https://isagog.com/ontology#Relationship> rdf:type owl:Class ;
-                                                    rdfs:subClassOf <https://isagog.com/ontology#Statement> ,
-                                                                    [ rdf:type owl:Restriction ;
-                                                                      owl:onProperty <https://isagog.com/ontology#subject> ;
-                                                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                      owl:onClass [ rdf:type owl:Class ;
-                                                                                    owl:unionOf ( <https://isagog.com/ontology#Entity>
-                                                                                                  <https://isagog.com/ontology#Mention>
-                                                                                                )
-                                                                                  ]
-                                                                    ] ,
-                                                                    [ rdf:type owl:Restriction ;
-                                                                      owl:onProperty <https://isagog.com/ontology#object> ;
-                                                                      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                      owl:onClass [ rdf:type owl:Class ;
-                                                                                    owl:unionOf ( <https://isagog.com/ontology#Entity>
-                                                                                                  <https://isagog.com/ontology#Mention>
-                                                                                                )
-                                                                                  ]
-                                                                    ] ;
-                                                    rdfs:comment "A formal statement (assertion) that specifies how two entities are connected or associated within a given context, describing the nature, direction, and type of interaction or dependency between them." .
+:Relationship rdf:type owl:Class ;
+              rdfs:subClassOf :Statement ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :subject ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onClass [ rdf:type owl:Class ;
+                                              owl:unionOf ( :Entity
+                                                            :Mention
+                                                          )
+                                            ]
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :object ;
+                                owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onClass [ rdf:type owl:Class ;
+                                              owl:unionOf ( :Entity
+                                                            :Mention
+                                                          )
+                                            ]
+                              ] ;
+              rdfs:comment "A formal statement (assertion) that specifies how two entities are connected or associated within a given context, describing the nature, direction, and type of interaction or dependency between them." .
 
 
 ###  https://isagog.com/ontology#Sign
-<https://isagog.com/ontology#Sign> rdf:type owl:Class ;
-                                            rdfs:subClassOf <https://isagog.com/ontology#Information> ,
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty <https://isagog.com/ontology#referent> ;
-                                                              owl:someValuesFrom [ rdf:type owl:Class ;
-                                                                                   owl:unionOf ( <https://isagog.com/ontology#Entity>
-                                                                                                 <https://isagog.com/ontology#Information>
-                                                                                               )
-                                                                                 ]
-                                                            ] ,
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty <https://isagog.com/ontology#source> ;
-                                                              owl:someValuesFrom <https://isagog.com/ontology#Information>
-                                                            ] ,
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty <https://isagog.com/ontology#concept> ;
-                                                              owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                              owl:onDataRange xsd:string
-                                                            ] ;
-                                            rdfs:comment "Non-material entity underpinning the process of interpreting something as representing or standing for something else. Signs may yield other Signs (Peirce: unlimited semiosis)" ;
-                                            rdfs:seeAlso "Peirce's Sign (Representamen->Interpretant->Object)" .
+:Sign rdf:type owl:Class ;
+      rdfs:subClassOf :Information ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :referent ;
+                        owl:someValuesFrom [ rdf:type owl:Class ;
+                                             owl:unionOf ( :Entity
+                                                           :Information
+                                                         )
+                                           ]
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :source ;
+                        owl:someValuesFrom :Information
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :concept ;
+                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:string
+                      ] ;
+      rdfs:comment "Non-material entity underpinning the process of interpreting something as representing or standing for something else. Signs may yield other Signs (Peirce: unlimited semiosis)" ;
+      rdfs:seeAlso "Peirce's Sign (Representamen->Interpretant->Object)" .
 
 
 ###  https://isagog.com/ontology#State
-<https://isagog.com/ontology#State> rdf:type owl:Class ;
-                                             rdfs:subClassOf <https://isagog.com/ontology#Occurrent> ;
-                                             <https://isagog.com/ontology#cidoc> "http://erlangen-crm.org/240307/E3_Condition_State" .
+:State rdf:type owl:Class ;
+       rdfs:subClassOf :Occurrent ;
+       :cidoc "http://erlangen-crm.org/240307/E3_Condition_State" .
 
 
 ###  https://isagog.com/ontology#Statement
-<https://isagog.com/ontology#Statement> rdf:type owl:Class ;
-                                                 rdfs:subClassOf <https://isagog.com/ontology#Sign> ,
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty <https://isagog.com/ontology#expression> ;
-                                                                   owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                   owl:onDataRange xsd:string
-                                                                 ] ;
-                                                 rdfs:comment "Proposition (i.e. sentence that may be true or false) about a state of affairs" ;
-                                                 <https://isagog.com/ontology#cidoc> "http://erlangen-crm.org/240307/E89_Propositional_Object" .
+:Statement rdf:type owl:Class ;
+           rdfs:subClassOf :Sign ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :expression ;
+                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:string
+                           ] ;
+           rdfs:comment "Proposition (i.e. sentence that may be true or false) about a state of affairs" ;
+           :cidoc "http://erlangen-crm.org/240307/E89_Propositional_Object" .
 
 
 #################################################################
@@ -822,11 +644,11 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 #################################################################
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( <https://isagog.com/ontology#Location>
-                <https://isagog.com/ontology#Material>
-                <https://isagog.com/ontology#Object>
-                <https://isagog.com/ontology#Organization>
-                <https://isagog.com/ontology#Person>
+  owl:members ( :Location
+                :Material
+                :Object
+                :Organization
+                :Person
               )
 ] .
 
