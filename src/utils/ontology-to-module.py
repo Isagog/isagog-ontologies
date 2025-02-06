@@ -321,23 +321,24 @@ def ontology_to_pydantic(turtle_content: str) -> str:
     return converter._generate_pydantic_model()
 
 
-def generate_module(ontology_file: str, output_file: str | None = None, format: str = "pydantic") -> None:
+def generate_module(ontology_files: list[str], output_file: str | None = None, format: str = "pydantic") -> None:
     """
     Generate a Python module with Pydantic models from an ontology file.
 
     Args:
-        ontology_file (str): Path to the ontology file (e.g. "resources/ontology/mema_ontology.ttl").
+        ontology_files (str): Path to the ontology files (e.g. "resources/ontology/mema_ontology.ttl").
         output_file (str): Path to the output Python module file (e.g. "src/isagog_kg/models/mema_model.py").
     """
+    converter = OntologyConverter()
 
     if output_file is None:
-        output_file = ontology_file.replace(".ttl", "_model.py")
+        output_file = ontology_files[-1].replace(".ttl", "_model.py")
 
-    with open(ontology_file, "r") as file:
-        turtle_content = file.read()
-
-    converter = OntologyConverter()
-    converter.load_ontology(turtle_content)
+    for ontology_file in ontology_files:
+        with open(ontology_file, "r") as file:
+            turtle_content = file.read()        
+        converter.load_ontology(turtle_content)
+        
     converter.extract_class_info()
     ontology_model = converter.generate_model(format)
 
@@ -353,6 +354,6 @@ def generate_module(ontology_file: str, output_file: str | None = None, format: 
 
 if __name__ == "__main__":   
     
-    ontology_file = "v7/mema_ontology.ttl"
+    ontology_files = ["top/isagog_ontology.ttl","mema/v7/mema_ontology.ttl"]
     
-    generate_module(ontology_file,  "src/models/mema_model.py", "pydantic")
+    generate_module(ontology_files,  "src/models/mema_model.py", "pydantic")

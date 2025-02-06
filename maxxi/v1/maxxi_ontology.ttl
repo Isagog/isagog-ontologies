@@ -15,7 +15,7 @@
 Credits: 
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                   rdfs:label "The Maxxi Ontology" ;
-                                  owl:versionInfo 1.1 .
+                                  owl:versionInfo 1.0 .
 
 #################################################################
 #    Annotation properties

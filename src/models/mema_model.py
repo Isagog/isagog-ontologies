@@ -5,31 +5,77 @@ from pydantic import BaseModel, Field
 from isagog_kg.models.logic_model import Thing 
 
 
+class Entity(Thing):
+    """Thing localizable in space and / or time"""
+    described_by: List['EntityDescriptor'] = Field(default_factory=list, description="described_by property", json_schema_extra={'kg_property': 'described_by', 'kg_type': 'relation', 'kg_related_class': 'EntityDescriptor'})
+
+class Continuant(Entity):
+    """An entity that persists through time while maintaining its identity, existing as a whole at any given moment. Continuants are not characterized by temporal parts; instead, they endure as the same entity throughout change, distinct from processes or events, which unfold over time."""
+
 class Information(Thing):
-    """Non material thing that conveys semantic information, realizable in many physical forms, e.g. a newspaper article (written or spoken), signs such as tags or topics, word types (lexemes)."""
+    """Non material thing that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."""
 
 class Sign(Information):
-    """Non-material entity underpinning the process of interpreting one thing as representing or standing for another"""
+    """Non-material entity underpinning the process of interpreting something as representing or standing for something else. Signs may yield other Signs (Peirce: unlimited semiosis)"""
+    referent: List[Any] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Any'})
     source: List['Information'] = Field(default_factory=list, description="source property", json_schema_extra={'kg_property': 'source', 'kg_type': 'relation', 'kg_related_class': 'Information'})
-    expression: str = Field(..., description="expression property", json_schema_extra={'kg_property': 'expression', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     concept: Optional[str] = Field(default=None, description="concept property", json_schema_extra={'kg_property': 'concept', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    status: Optional[str] = Field(default=None, description="status property", json_schema_extra={'kg_property': 'status', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
-class Descriptor(Sign):
-    """An information item that qualifies a specific aspect or feature of something"""
-    describes: List['Thing'] = Field(default_factory=list, description="describes property", json_schema_extra={'kg_property': 'describes', 'kg_type': 'relation', 'kg_related_class': 'Thing'})
+class Statement(Sign):
+    """Proposition (i.e. sentence that may be true or false) about a state of affairs"""
+    expression: Optional[str] = Field(default=None, description="expression property", json_schema_extra={'kg_property': 'expression', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
-class EntityDescriptor(Descriptor):
+class Description(Statement):
+    """Statement about a specific aspect or feature of something"""
+
+class Document(Information):
+    """Textual document"""
+    authored_by: List['Person'] = Field(default_factory=list, description="authored_by property", json_schema_extra={'kg_property': 'authored_by', 'kg_type': 'relation', 'kg_related_class': 'Person'})
+    yields: List['Sign'] = Field(default_factory=list, description="yields property", json_schema_extra={'kg_property': 'yields', 'kg_type': 'relation', 'kg_related_class': 'Sign'})
+
+class EntityDescriptor(Description):
+    referent: List['Entity'] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Entity'})
+
+class Occurrent(Entity):
+    """Entities that unfold or occur over time, such as events, processes,  or activities. These entities are not wholly present at any single moment but are extended in time, contrasting with 'Continuants', which persist while maintaining identity."""
+    has_participant: List['Entity'] = Field(default_factory=list, description="has_participant property", json_schema_extra={'kg_property': 'has_participant', 'kg_type': 'relation', 'kg_related_class': 'Entity'})
+    in_place: List['Location'] = Field(default_factory=list, description="in_place property", json_schema_extra={'kg_property': 'in_place', 'kg_type': 'relation', 'kg_related_class': 'Location'})
+    time_coordinate: List[str] = Field(default_factory=list, description="time_coordinate property", json_schema_extra={'kg_property': 'time_coordinate', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+
+class Event(Occurrent):
+    pass
+
+class Location(Continuant):
+    """Identified portion of space (place)"""
+    geo_coordinate: List[str] = Field(default_factory=list, description="geo_coordinate property", json_schema_extra={'kg_property': 'geo_coordinate', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+
+class Material(Continuant):
+    """A non-sortal continuant that exists as a mass or quantity without inherent boundaries or a distinct identity, persisting through time while undergoing potential changes in form or composition. Material is typically characterized by its divisibility and its capacity to constitute or combine with other entities to form objects or structures."""
+
+class Mention(Sign):
+    """Denotation of an entity (e.g. a name)"""
+    referent: List['Entity'] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Entity'})
+
+class Object(Continuant):
+    """A sortal continuant characterized by having determinate boundaries and a unity criterion that defines its persistence as a distinct entity. Changes in morphology or composition may affect its identity within a given context."""
+
+class Organization(Continuant):
+    """Social group of people working together towards common goals, governed by defined rules and processes"""
+
+class Person(Continuant):
+    name: List[str] = Field(default_factory=list, description="name property", json_schema_extra={'kg_property': 'name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    surname: str = Field(..., description="surname property", json_schema_extra={'kg_property': 'surname', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+
+class Relationship(Statement):
+    """A formal statement (assertion) that specifies how two entities are connected or associated within a given context, describing the nature, direction, and type of interaction or dependency between them."""
+    subject: Any = Field(..., description="subject property", json_schema_extra={'kg_property': 'subject', 'kg_type': 'relation', 'kg_related_class': 'Any'})
+    object: Optional[Any] = Field(default=None, description="object property", json_schema_extra={'kg_property': 'object', 'kg_type': 'relation', 'kg_related_class': 'Any'})
+
+class State(Occurrent):
     pass
 
 class AIDescriptior(EntityDescriptor):
     pass
-
-class Document(Information):
-    """Textual document"""
-    described_by: List['Metadata'] = Field(default_factory=list, description="described_by property", json_schema_extra={'kg_property': 'described_by', 'kg_type': 'relation', 'kg_related_class': 'Metadata'})
-    yields: List['Sign'] = Field(default_factory=list, description="yields property", json_schema_extra={'kg_property': 'yields', 'kg_type': 'relation', 'kg_related_class': 'Sign'})
-    body: Optional[str] = Field(default=None, description="body property", json_schema_extra={'kg_property': 'body', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Article(Document):
     """Newspaper article"""
@@ -39,21 +85,12 @@ class Article(Document):
     edition_date: Optional[str] = Field(default=None, description="edition_date property", json_schema_extra={'kg_property': 'edition_date', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     kicker: Optional[str] = Field(default=None, description="kicker property", json_schema_extra={'kg_property': 'kicker', 'kg_type': 'attribute', 'kg_data_type': 'str', 'we_search': 'false', 'we_tok': 'FIELD'})
 
-class Entity(Thing):
-    """Entità localizzabile nello spazio e / o nel tempo"""
-    mentioned_in: List['Document'] = Field(default_factory=list, description="mentioned_in property", json_schema_extra={'kg_property': 'mentioned_in', 'kg_type': 'relation', 'kg_related_class': 'Document'})
-    described_by: Optional['EntityDescriptor'] = Field(default=None, description="described_by property", json_schema_extra={'kg_property': 'described_by', 'kg_type': 'relation', 'kg_related_class': 'EntityDescriptor'})
-
-class Person(Entity):
-    name: str = Field(..., description="name property", json_schema_extra={'kg_property': 'name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    surname: str = Field(..., description="surname property", json_schema_extra={'kg_property': 'surname', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-
 class Author(Person):
     """Autorship information, realized (but not necessarily) by some agent"""
     author_of: List['Document'] = Field(default_factory=list, description="author_of property", json_schema_extra={'kg_property': 'author_of', 'kg_type': 'relation', 'kg_related_class': 'Document'})
     author_str: str = Field(..., description="author_str property", json_schema_extra={'kg_property': 'author_str', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
-class Metadata(Descriptor):
+class Metadata(Description):
     """Document's metadata"""
     describes: List['Document'] = Field(default_factory=list, description="describes property", json_schema_extra={'kg_property': 'describes', 'kg_type': 'relation', 'kg_related_class': 'Document'})
     text: Optional[str] = Field(default=None, description="text property", json_schema_extra={'kg_property': 'text', 'kg_type': 'attribute', 'kg_data_type': 'str'})
@@ -65,11 +102,6 @@ class Category(Metadata):
 class DBPediaDescriptor(EntityDescriptor):
     describes: List['Entity'] = Field(default_factory=list, description="describes property", json_schema_extra={'kg_property': 'describes', 'kg_type': 'relation', 'kg_related_class': 'Entity'})
     dbpedia_ref: str = Field(..., description="dbpedia_ref property", json_schema_extra={'kg_property': 'dbpedia_ref', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-
-class Event(Entity):
-    """Temporal entity, either stative or dynamic"""
-    has_participant: List['Entity'] = Field(default_factory=list, description="has_participant property", json_schema_extra={'kg_property': 'has_participant', 'kg_type': 'relation', 'kg_related_class': 'Entity'})
-    in_place: List['Location'] = Field(default_factory=list, description="in_place property", json_schema_extra={'kg_property': 'in_place', 'kg_type': 'relation', 'kg_related_class': 'Location'})
 
 class GeonamesDescriptor(EntityDescriptor):
     describes: List['Entity'] = Field(default_factory=list, description="describes property", json_schema_extra={'kg_property': 'describes', 'kg_type': 'relation', 'kg_related_class': 'Entity'})
@@ -89,21 +121,11 @@ class Highlight(Metadata):
 class HumanDescriptor(EntityDescriptor):
     userid: Optional[str] = Field(default=None, description="userid property", json_schema_extra={'kg_property': 'userid', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
-class Location(Entity):
-    """Identified portion of space (place)"""
-
 class MeMaArticle(Article):
     directus_id: str = Field(..., description="directus_id property", json_schema_extra={'kg_property': 'directus_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     athena_id: Optional[str] = Field(default=None, description="athena_id property", json_schema_extra={'kg_property': 'athena_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     wp_id: Optional[str] = Field(default=None, description="wp_id property", json_schema_extra={'kg_property': 'wp_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     wp_slug: Optional[str] = Field(default=None, description="wp_slug property", json_schema_extra={'kg_property': 'wp_slug', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-
-class Mention(Sign):
-    """Reference to an Entity in a Document"""
-    referent: Optional['Entity'] = Field(default=None, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Entity'})
-
-class Organization(Entity):
-    """Social group of people working together towards common goals, governed by defined rules and processes"""
 
 class Picture(Information):
     """Immagine fotografica o grafica a corredo di articolo o numero"""
@@ -112,21 +134,16 @@ class Picture(Information):
     copyright: Optional[str] = Field(default=None, description="copyright property", json_schema_extra={'kg_property': 'copyright', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     imgurl: Optional[str] = Field(default=None, description="imgurl property", json_schema_extra={'kg_property': 'imgurl', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
-class Relationship(Sign):
-    """Reference to a relationship"""
-    subject: 'Mention' = Field(..., description="subject property", json_schema_extra={'kg_property': 'subject', 'kg_type': 'relation', 'kg_related_class': 'Mention'})
-    object: Optional['Mention'] = Field(default=None, description="object property", json_schema_extra={'kg_property': 'object', 'kg_type': 'relation', 'kg_related_class': 'Mention'})
-
 class Summary(Metadata):
     summarizes: 'Document' = Field(..., description="summarizes property", json_schema_extra={'kg_property': 'summarizes', 'kg_type': 'relation', 'kg_related_class': 'Document'})
     text: str = Field(..., description="text property", json_schema_extra={'kg_property': 'text', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Tag(Metadata):
-    tag_of: List['Document'] = Field(default_factory=list, description="tag_of property", json_schema_extra={'kg_property': 'tag_of', 'kg_type': 'relation', 'kg_related_class': 'Document'})
+    tag_of: List['Article'] = Field(default_factory=list, description="tag_of property", json_schema_extra={'kg_property': 'tag_of', 'kg_type': 'relation', 'kg_related_class': 'Article'})
 
 class Topic(Metadata):
     """Argomento rilevante di articolo identificato dalle funzioni redazionali o dall'IA"""
-    topic_of: List['Document'] = Field(default_factory=list, description="topic_of property", json_schema_extra={'kg_property': 'topic_of', 'kg_type': 'relation', 'kg_related_class': 'Document'})
+    topic_of: List['Article'] = Field(default_factory=list, description="topic_of property", json_schema_extra={'kg_property': 'topic_of', 'kg_type': 'relation', 'kg_related_class': 'Article'})
 
 class WikipediaDescriptor(EntityDescriptor):
     """Wikipedia summary"""
@@ -137,29 +154,35 @@ class WikipediaDescriptor(EntityDescriptor):
 
 
 # Update forward references
+Entity.model_rebuild()
+Continuant.model_rebuild()
 Information.model_rebuild()
 Sign.model_rebuild()
-Descriptor.model_rebuild()
-EntityDescriptor.model_rebuild()
-AIDescriptior.model_rebuild()
+Statement.model_rebuild()
+Description.model_rebuild()
 Document.model_rebuild()
-Article.model_rebuild()
-Entity.model_rebuild()
+EntityDescriptor.model_rebuild()
+Occurrent.model_rebuild()
+Event.model_rebuild()
+Location.model_rebuild()
+Material.model_rebuild()
+Mention.model_rebuild()
+Object.model_rebuild()
+Organization.model_rebuild()
 Person.model_rebuild()
+Relationship.model_rebuild()
+State.model_rebuild()
+AIDescriptior.model_rebuild()
+Article.model_rebuild()
 Author.model_rebuild()
 Metadata.model_rebuild()
 Category.model_rebuild()
 DBPediaDescriptor.model_rebuild()
-Event.model_rebuild()
 GeonamesDescriptor.model_rebuild()
 Highlight.model_rebuild()
 HumanDescriptor.model_rebuild()
-Location.model_rebuild()
 MeMaArticle.model_rebuild()
-Mention.model_rebuild()
-Organization.model_rebuild()
 Picture.model_rebuild()
-Relationship.model_rebuild()
 Summary.model_rebuild()
 Tag.model_rebuild()
 Topic.model_rebuild()
