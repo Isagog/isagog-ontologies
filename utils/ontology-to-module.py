@@ -1,5 +1,4 @@
 from pathlib import Path
-import sys
 
 from typing import Dict, List, Optional, Tuple
 
@@ -632,5 +631,5 @@ if __name__ == "__main__":
     ontology_files = ["top/isagog_ontology.ttl","mema/v7/mema_ontology.ttl"]
     
 
-    generate_module(ontology_files,  "src/models/mema_model.py", "pydantic")
+    generate_module(ontology_files,  "models/mema_model.py", "pydantic")
 
