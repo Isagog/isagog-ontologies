@@ -89,7 +89,7 @@ class Article(Document):
 class Author(Person):
     """Autorship information, realized (but not necessarily) by some agent"""
     author_of: List['Document'] = Field(default_factory=list, description="author_of property", json_schema_extra={'kg_property': 'author_of', 'kg_type': 'relation', 'kg_related_class': 'Document'})
-    author_str: str = Field(..., description="author_str property", json_schema_extra={'kg_property': 'author_str', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    author_str: Optional[str] = Field(default=None, description="author_str property", json_schema_extra={'kg_property': 'author_str', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Metadata(Description):
     """Document's metadata"""
