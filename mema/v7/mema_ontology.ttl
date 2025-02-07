@@ -34,6 +34,9 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
        rdfs:range xsd:integer .
 
 
+###  https://ilmanifesto.it/mema/ontology#schema
+:schema rdf:type owl:AnnotationProperty .
+
 
 ###  https://ilmanifesto.it/mema/ontology#statements
 :statements rdf:type owl:AnnotationProperty ;
@@ -57,6 +60,12 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
         rdfs:subPropertyOf ig:isagog .
 
 
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://ilmanifesto.it/mema/ontology#category_of
+:category_of rdf:type owl:ObjectProperty .
 
 
 ###  https://ilmanifesto.it/mema/ontology#generalization_of
@@ -75,7 +84,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#has_picture
 :has_picture rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf :has_component ;
              owl:inverseOf :picture_of ;
              rdfs:domain ig:Information ;
              rdfs:range :Picture .
@@ -123,11 +131,8 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                    ] .
 
 
-
 ###  https://ilmanifesto.it/mema/ontology#picture_of
-:picture_of rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf ig:component_of .
-
+:picture_of rdf:type owl:ObjectProperty .
 
 
 ###  https://ilmanifesto.it/mema/ontology#specialization_of
@@ -168,7 +173,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://ilmanifesto.it/mema/ontology#topic_of
 :topic_of rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf ig:inheres_to .
-
 
 
 #################################################################
@@ -214,8 +218,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
               rdfs:subPropertyOf :tag .
 
 
-
-
 ###  https://ilmanifesto.it/mema/ontology#copyright
 :copyright rdf:type owl:DatatypeProperty .
 
@@ -235,23 +237,21 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
               rdfs:subPropertyOf ig:time_coordinate .
 
 
-
-
 ###  https://ilmanifesto.it/mema/ontology#full_name
 :full_name rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf ig:text .
 
 
-
-
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_bbox
 :geoinfo_bbox rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf ig:geo_coordinate .
+              rdfs:subPropertyOf ig:geo_coordinate ;
+              rdfs:range xsd:string .
 
 
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_country_name
 :geoinfo_country_name rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf ig:geo_coordinate .
+                      rdfs:subPropertyOf ig:geo_coordinate ;
+                      rdfs:range xsd:string .
 
 
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_feature_class
@@ -284,14 +284,14 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_name
 :geoinfo_name rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf ig:geo_coordinate .
+              rdfs:subPropertyOf ig:geo_coordinate ;
+              rdfs:range xsd:string .
 
 
 ###  https://ilmanifesto.it/mema/ontology#geoinfo_population
 :geoinfo_population rdf:type owl:DatatypeProperty ;
-                    rdfs:subPropertyOf ig:geo_coordinate .
-
-
+                    rdfs:subPropertyOf ig:geo_coordinate ;
+                    rdfs:range xsd:integer .
 
 
 ###  https://ilmanifesto.it/mema/ontology#image_url
@@ -309,6 +309,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
         rdfs:subPropertyOf ig:identifier ;
         rdfs:range xsd:anyURI .
 
+
 ###  https://ilmanifesto.it/mema/ontology#keyword
 :keyword rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf :tag ;
@@ -323,7 +324,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://ilmanifesto.it/mema/ontology#mema_ids
 :mema_ids rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf ig:identifier .
-
 
 
 ###  https://ilmanifesto.it/mema/ontology#pagenum
@@ -342,7 +342,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://ilmanifesto.it/mema/ontology#tag
 :tag rdf:type owl:DatatypeProperty ;
      rdfs:subPropertyOf ig:text .
-
 
 
 ###  https://ilmanifesto.it/mema/ontology#title
@@ -507,9 +506,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                    ] .
 
 
-
-
-
 ###  https://ilmanifesto.it/mema/ontology#GeonamesDescriptor
 :GeonamesDescriptor rdf:type owl:Class ;
                     rdfs:subClassOf ig:EntityDescriptor ,
@@ -601,7 +597,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                              ] .
 
 
-
 ###  https://ilmanifesto.it/mema/ontology#Metadata
 :Metadata rdf:type owl:Class ;
           rdfs:subClassOf ig:Description ,
@@ -615,7 +610,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                             owl:onDataRange xsd:string
                           ] ;
           rdfs:comment "Document's metadata" .
-
 
 
 ###  https://ilmanifesto.it/mema/ontology#Picture

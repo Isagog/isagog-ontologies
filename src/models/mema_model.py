@@ -113,7 +113,7 @@ class GeonamesDescriptor(EntityDescriptor):
     geoinfo_id: Optional[int] = Field(default=None, description="geoinfo_id property", json_schema_extra={'kg_property': 'geoinfo_id', 'kg_type': 'attribute', 'kg_data_type': 'int'})
     geoinfo_lat: Optional[float] = Field(default=None, description="geoinfo_lat property", json_schema_extra={'kg_property': 'geoinfo_lat', 'kg_type': 'attribute', 'kg_data_type': 'float'})
     geoinfo_lng: Optional[float] = Field(default=None, description="geoinfo_lng property", json_schema_extra={'kg_property': 'geoinfo_lng', 'kg_type': 'attribute', 'kg_data_type': 'float'})
-    geoinfo_population: Optional['long'] = Field(default=None, description="geoinfo_population property", json_schema_extra={'kg_property': 'geoinfo_population', 'kg_type': 'relation', 'kg_related_class': 'long'})
+    geoinfo_population: Optional[int] = Field(default=None, description="geoinfo_population property", json_schema_extra={'kg_property': 'geoinfo_population', 'kg_type': 'attribute', 'kg_data_type': 'int'})
 
 class Highlight(Metadata):
     pass
