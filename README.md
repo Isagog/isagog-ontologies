@@ -1,3 +1,8 @@
+# Isagog ontologies
+
+This repo contains the top ontology of the Isagog platform, the domain specific ontologies for main ongoing projects, and a utility to generate pydantic modules out of the abovementioned ontologies
+
+
 ## Generating Python Models
 
 The `ontology-to-module.py` script in the `isagog_ontologies/utils` directory can be used to generate Python model classes from an OWL ontology file like `mema_ontology.ttl`. 
