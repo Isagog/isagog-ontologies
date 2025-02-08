@@ -100,7 +100,6 @@ class Picture(Information):
     imgurl: Optional[str] = Field(default=None, description="imgurl property", json_schema_extra={'kg_property': 'imgurl', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Summary(Metadata):
-    summarizes: 'Document' = Field(..., description="summarizes property", json_schema_extra={'kg_property': 'summarizes', 'kg_type': 'relation', 'kg_related_class': 'Document'})
     text: str = Field(..., description="text property", json_schema_extra={'kg_property': 'text', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Tag(Metadata):
