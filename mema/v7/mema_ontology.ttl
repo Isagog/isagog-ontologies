@@ -413,8 +413,18 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                            owl:onDataRange xsd:string
                          ] ,
                          [ rdf:type owl:Restriction ;
+                           owl:onProperty :directus_id ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
                            owl:onProperty :published_day ;
                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :athena_id ;
+                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                            owl:onDataRange xsd:string
                          ] ,
                          [ rdf:type owl:Restriction ;
@@ -424,6 +434,16 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                          ] ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty :kicker ;
+                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :wp_id ;
+                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :wp_slug ;
                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                            owl:onDataRange xsd:string
                          ] ;
@@ -570,31 +590,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                    owl:onDataRange xsd:string
                                  ] .
-
-
-###  https://ilmanifesto.it/mema/ontology#MeMaArticle
-:MeMaArticle rdf:type owl:Class ;
-             rdfs:subClassOf :Article ,
-                             [ rdf:type owl:Restriction ;
-                               owl:onProperty :directus_id ;
-                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                               owl:onDataRange xsd:string
-                             ] ,
-                             [ rdf:type owl:Restriction ;
-                               owl:onProperty :athena_id ;
-                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                               owl:onDataRange xsd:string
-                             ] ,
-                             [ rdf:type owl:Restriction ;
-                               owl:onProperty :wp_id ;
-                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                               owl:onDataRange xsd:string
-                             ] ,
-                             [ rdf:type owl:Restriction ;
-                               owl:onProperty :wp_slug ;
-                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                               owl:onDataRange xsd:string
-                             ] .
 
 
 ###  https://ilmanifesto.it/mema/ontology#Metadata
