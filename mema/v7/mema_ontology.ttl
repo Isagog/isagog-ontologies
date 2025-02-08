@@ -637,11 +637,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 :Summary rdf:type owl:Class ;
          rdfs:subClassOf :Metadata ,
                          [ rdf:type owl:Restriction ;
-                           owl:onProperty :summarizes ;
-                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                           owl:onClass ig:Document
-                         ] ,
-                         [ rdf:type owl:Restriction ;
                            owl:onProperty ig:text ;
                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                            owl:onDataRange xsd:string
