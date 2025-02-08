@@ -625,11 +625,17 @@ def generate_module(ontology_files: list[str], output_file: str | None = None, f
         file.write(ontology_model)
 
 
-if __name__ == "__main__":   
-    
+if __name__ == "__main__":
+    import argparse
 
-    ontology_files = ["top/isagog_ontology.ttl","mema/v7/mema_ontology.ttl"]
-    
+    parser = argparse.ArgumentParser(description="Convert ontology files to Python module")
+    parser.add_argument("-o", "--ontologies", default=["top/isagog_ontology.ttl"], nargs="+", help="Path(s) to ontology file(s)")
+    parser.add_argument("-m", "--output", help="Path to output Python module file")
+    parser.add_argument("-f", "--format", default="pydantic", help="Output format (default: pydantic)")
 
-    generate_module(ontology_files,  "models/mema_model.py", "pydantic")
+    args = parser.parse_args()
 
+    try:
+        generate_module(args.ontologies, args.output, args.format)
+    except Exception as e:
+        print(f"Error: {e}")

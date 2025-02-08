@@ -1,21 +1,27 @@
-# mema_ontology
-Ontology of MeMa Knowledge Base
-
-## License
-This work is licensed under a Creative Commons Attribution 4.0 International License.
-
-## Credits
-* Il Nuovo Manifesto Soc. Coop. Editrice, Via Angelo Bargoni 8, 00153 Roma, Italy
-* Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy
-
 ## Generating Python Models
 
-The `ontology-to-module.py` script in the `src/utils` directory can be used to generate Python model classes from the mema_ontology.ttl file. To run the script:
+The `ontology-to-module.py` script in the `isagog_ontologies/utils` directory can be used to generate Python model classes from an OWL ontology file like `mema_ontology.ttl`. 
+
+To run the script and generate models from multiple ontology files:
 
 ```
-python src/utils/ontology-to-module.py
+python isagog_ontologies/utils/ontology-to-module.py -o mema/v7/mema_ontology.ttl top/isagog_ontology.ttl
 ```
 
-This will generate a `mema_model.py` file in the `src/models` directory containing Pydantic model classes representing the entities and relationships defined in the ontology.
+This will generate a `mema_model.py` file in the `isagog_ontologies/models` directory containing Pydantic model classes. Each class corresponds to an entity or concept defined in the ontology, with properties representing the entity's attributes and relationships to other entities.
 
-The generated models can then be used in your Python code to work with data conforming to the mema_ontology schema.
+For example, you could use the generated `Artwork` model class like this:
+
+```python
+from isagog_ontologies.models.mema_model import Artwork
+
+artwork = Artwork(
+    label="The Starry Night",
+    creator="Vincent Van Gogh",
+    creation_date="1889"
+)
+
+print(artwork.json())
+```
+
+This will print a JSON representation of the Artwork instance with the specified label, creator and creation date properties.
