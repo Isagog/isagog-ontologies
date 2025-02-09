@@ -31,6 +31,7 @@ class Document(Information):
     """Textual document"""
     authored_by: List['Person'] = Field(default_factory=list, description="authored_by property", json_schema_extra={'kg_property': 'authored_by', 'kg_type': 'relation', 'kg_related_class': 'Person'})
     yields: List['Sign'] = Field(default_factory=list, description="yields property", json_schema_extra={'kg_property': 'yields', 'kg_type': 'relation', 'kg_related_class': 'Sign'})
+    body: Optional[str] = Field(default=None, description="body property", json_schema_extra={'kg_property': 'body', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Article(Document):
     """Newspaper article"""
