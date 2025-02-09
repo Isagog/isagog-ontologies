@@ -194,13 +194,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
             rdfs:subPropertyOf ig:identifier .
 
 
-###  https://ilmanifesto.it/mema/ontology#body
-:body rdf:type owl:DatatypeProperty ;
-      rdfs:subPropertyOf ig:text ;
-      rdfs:domain ig:Document ;
-      rdfs:comment "textual content of a document" .
-
-
 ###  https://ilmanifesto.it/mema/ontology#caption
 :caption rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf ig:text ;

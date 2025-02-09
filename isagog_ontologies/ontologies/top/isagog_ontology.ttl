@@ -367,6 +367,13 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 #    Data properties
 #################################################################
 
+###  https://isagog.com/ontology#body
+:body rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf :text ;
+      rdfs:domain :Document ;
+      rdfs:range xsd:string .
+
+
 ###  https://isagog.com/ontology#concept
 :concept rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf :identifier ;
@@ -459,6 +466,11 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                           [ rdf:type owl:Restriction ;
                             owl:onProperty :yields ;
                             owl:someValuesFrom :Sign
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :body ;
+                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:string
                           ] ;
           rdfs:comment "Textual document" ;
           :cidoc "http://erlangen-crm.org/240307/E31_Document" .
