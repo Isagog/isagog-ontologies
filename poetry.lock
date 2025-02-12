@@ -143,7 +143,7 @@ sparqlwrapper = "^2.0.0"
 type = "git"
 url = "https://github.com/Isagog/isagog-kg.git"
 reference = "master"
-resolved_reference = "16502f846d683b6cb6ed0a5fe90b41f70b95d2ee"
+resolved_reference = "98c7972351fdceb3dd913b3c3aa06865b4f9b577"
 
 [[package]]
 name = "jinja2"

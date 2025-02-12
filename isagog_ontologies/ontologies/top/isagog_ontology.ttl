@@ -13,7 +13,7 @@
 Credits: 
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                rdfs:label "Isagog Top Level Ontology" ;
-                               owl:versionInfo 1.0 .
+                               owl:versionInfo 1.1 .
 
 #################################################################
 #    Annotation properties
@@ -40,6 +40,10 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://isagog.com/ontology#mapping
 :mapping rdf:type owl:AnnotationProperty .
+
+
+###  https://isagog.com/ontology#meta
+:meta rdf:type owl:AnnotationProperty .
 
 
 ###  https://isagog.com/ontology#schema
@@ -91,7 +95,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://isagog.com/ontology#collocation
 :collocation rdf:type owl:ObjectProperty ;
-             rdfs:comment "Region collocation" .
+             rdfs:comment "Spatial collocation" .
 
 
 ###  https://isagog.com/ontology#component_of
@@ -109,6 +113,11 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://isagog.com/ontology#connectedness
 :connectedness rdf:type owl:ObjectProperty ;
                rdfs:comment "spatial  temporal proximity" .
+
+
+###  https://isagog.com/ontology#dependency
+:dependency rdf:type owl:ObjectProperty ;
+            rdfs:comment "Existential dependency. The subject deletion should cause the object deletion." .
 
 
 ###  https://isagog.com/ontology#described_by
@@ -142,7 +151,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://isagog.com/ontology#has_component
 :has_component rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :has_part ;
-               rdfs:comment "Functional parts" .
+               rdfs:comment "Functional parthood" .
 
 
 ###  https://isagog.com/ontology#has_inherent
@@ -157,7 +166,8 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
           rdfs:subPropertyOf :composition ;
           owl:inverseOf :part_of ;
           rdfs:domain :Continuant ;
-          rdfs:range :Continuant .
+          rdfs:range :Continuant ;
+          rdfs:comment "Material parthood (whole - part)" .
 
 
 ###  https://isagog.com/ontology#has_participant
@@ -173,26 +183,15 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
            rdfs:subPropertyOf :composition ;
            owl:inverseOf :phase_of ;
            rdfs:domain :Occurrent ;
-           rdfs:range :Occurrent .
+           rdfs:range :Occurrent ;
+           rdfs:comment "Temporal parthood (whole - part)" .
 
 
 ###  https://isagog.com/ontology#has_spatial_part
 :has_spatial_part rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf :has_part ;
                   owl:inverseOf :spatial_part_of ;
-                  rdfs:comment "Spatial parts" .
-
-
-###  https://isagog.com/ontology#has_tag
-:has_tag rdf:type owl:ObjectProperty ;
-         rdfs:subPropertyOf :has_inherent ;
-         owl:inverseOf :tag_of .
-
-
-###  https://isagog.com/ontology#has_topic
-:has_topic rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :has_inherent ;
-           owl:inverseOf :topic_of .
+                  rdfs:comment "Spatial parthood" .
 
 
 ###  https://isagog.com/ontology#hosts
@@ -210,7 +209,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://isagog.com/ontology#inherence
 :inherence rdf:type owl:ObjectProperty ;
-           rdfs:comment "Pertinence of metadata to data"@en .
+           rdfs:comment "Relation of information objects, their subjects and substrate"@en .
 
 
 ###  https://isagog.com/ontology#inheres_to
@@ -274,7 +273,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
          rdfs:subPropertyOf :composition ;
          rdfs:domain :Continuant ;
          rdfs:range :Continuant ;
-         rdfs:comment "Generic parthood"@en .
+         rdfs:comment "Material parthood (part-whole)"@en .
 
 
 ###  https://isagog.com/ontology#participate_in
@@ -294,7 +293,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
           rdfs:subPropertyOf :composition ;
           rdfs:domain :Occurrent ;
           rdfs:range :Occurrent ;
-          rdfs:comment "Temporal parthood"@en .
+          rdfs:comment "Temporal parthood (part - whole)"@en .
 
 
 ###  https://isagog.com/ontology#referent
@@ -313,7 +312,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology#source
 :source rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :relatedness ;
+        rdfs:subPropertyOf :inheres_to ;
         owl:inverseOf :yields ;
         rdfs:domain :Sign ;
         rdfs:range :Information .
@@ -335,30 +334,10 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                     ] .
 
 
-###  https://isagog.com/ontology#summarizes
-:summarizes rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf :inheres_to ;
-            owl:inverseOf :summary .
-
-
-###  https://isagog.com/ontology#summary
-:summary rdf:type owl:ObjectProperty ;
-         rdfs:subPropertyOf :has_inherent .
-
-
-###  https://isagog.com/ontology#tag_of
-:tag_of rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :inheres_to .
-
-
-###  https://isagog.com/ontology#topic_of
-:topic_of rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :inheres_to .
-
-
 ###  https://isagog.com/ontology#yields
 :yields rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :relatedness ;
+        rdfs:subPropertyOf :dependency ,
+                           :has_inherent ;
         rdfs:domain :Information ;
         rdfs:range :Sign .
 
