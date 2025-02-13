@@ -15,7 +15,7 @@
 Credits: 
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                         rdfs:label "The MeMa Ontology" ;
-                                        owl:versionInfo 7.1 .
+                                        owl:versionInfo 7.2 .
 
 #################################################################
 #    Annotation properties
@@ -401,11 +401,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                            owl:someValuesFrom :Author
                          ] ,
                          [ rdf:type owl:Restriction ;
-                           owl:onProperty :title ;
-                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                           owl:onDataRange xsd:string
-                         ] ,
-                         [ rdf:type owl:Restriction ;
                            owl:onProperty :directus_id ;
                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                            owl:onDataRange xsd:string
@@ -416,12 +411,12 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                            owl:onDataRange xsd:string
                          ] ,
                          [ rdf:type owl:Restriction ;
-                           owl:onProperty :athena_id ;
-                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onProperty :title ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                            owl:onDataRange xsd:string
                          ] ,
                          [ rdf:type owl:Restriction ;
-                           owl:onProperty :edition_date ;
+                           owl:onProperty :athena_id ;
                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                            owl:onDataRange xsd:string
                          ] ,
@@ -459,7 +454,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
    owl:annotatedProperty rdfs:subClassOf ;
    owl:annotatedTarget [ rdf:type owl:Restriction ;
                          owl:onProperty :title ;
-                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                          owl:onDataRange xsd:string
                        ] ;
    :we_search "false"^^xsd:boolean ;
@@ -485,11 +480,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                         [ rdf:type owl:Restriction ;
                           owl:onProperty ig:author_of ;
                           owl:someValuesFrom ig:Document
-                        ] ,
-                        [ rdf:type owl:Restriction ;
-                          owl:onProperty :author_str ;
-                          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                          owl:onDataRange xsd:string
                         ] ;
         rdfs:comment "Autorship information, realized (but not necessarily) by some agent"@en .
 
@@ -539,6 +529,11 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                       owl:someValuesFrom xsd:string
                                     ] ,
                                     [ rdf:type owl:Restriction ;
+                                      owl:onProperty :geoinfo_id ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onDataRange xsd:integer
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
                                       owl:onProperty :geoinfo_feature_class ;
                                       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                       owl:onDataRange xsd:string
@@ -547,11 +542,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                       owl:onProperty :geoinfo_feature_code ;
                                       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                       owl:onDataRange xsd:string
-                                    ] ,
-                                    [ rdf:type owl:Restriction ;
-                                      owl:onProperty :geoinfo_id ;
-                                      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                      owl:onDataRange xsd:integer
                                     ] ,
                                     [ rdf:type owl:Restriction ;
                                       owl:onProperty :geoinfo_lat ;

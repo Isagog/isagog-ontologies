@@ -13,7 +13,7 @@
 Credits: 
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                rdfs:label "Isagog Top Level Ontology" ;
-                               owl:versionInfo 1.1 .
+                               owl:versionInfo 1.2 .
 
 #################################################################
 #    Annotation properties
@@ -115,20 +115,19 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                rdfs:comment "spatial  temporal proximity" .
 
 
-###  https://isagog.com/ontology#dependency
-:dependency rdf:type owl:ObjectProperty ;
-            rdfs:comment "Existential dependency. The subject deletion should cause the object deletion." .
-
-
 ###  https://isagog.com/ontology#described_by
 :described_by rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :has_inherent ;
-              owl:inverseOf :describes .
+              owl:inverseOf :describes ;
+              rdfs:domain :Entity ;
+              rdfs:range :EntityDescriptor .
 
 
 ###  https://isagog.com/ontology#describes
 :describes rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :inheres_to .
+           rdfs:subPropertyOf :inheres_to ;
+           rdfs:domain :EntityDescriptor ;
+           rdfs:range :Entity .
 
 
 ###  https://isagog.com/ontology#featured_in
@@ -336,8 +335,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology#yields
 :yields rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :dependency ,
-                           :has_inherent ;
+        rdfs:subPropertyOf :has_inherent ;
         rdfs:domain :Information ;
         rdfs:range :Sign .
 
@@ -493,11 +491,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology#Location
 :Location rdf:type owl:Class ;
-          rdfs:subClassOf :Continuant ,
-                          [ rdf:type owl:Restriction ;
-                            owl:onProperty :geo_coordinate ;
-                            owl:someValuesFrom xsd:string
-                          ] ;
+          rdfs:subClassOf :Continuant ;
           rdfs:comment "Identified portion of space (place)"@en ;
           :cidoc "http://erlangen-crm.org/240307/E53_Place" .
 
@@ -604,7 +598,8 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                       ] ,
                       [ rdf:type owl:Restriction ;
                         owl:onProperty :source ;
-                        owl:someValuesFrom :Information
+                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :Information
                       ] ,
                       [ rdf:type owl:Restriction ;
                         owl:onProperty :concept ;
@@ -616,7 +611,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onDataRange xsd:string
                       ] ;
-      rdfs:comment "Non-material entity underpinning the process of interpreting something as representing or standing for something else. Signs may yield other Signs (Peirce: unlimited semiosis)" ;
+      rdfs:comment "A non-material entity that underlies the process of interpreting something as representing or standing for something else. Signs existentially depend on the information source that generates them, as each sign is a particular, individuated instance originating from a singular source of information." ;
       rdfs:seeAlso "Peirce's Sign (Representamen->Interpretant->Object)" .
 
 

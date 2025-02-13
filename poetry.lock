@@ -122,7 +122,7 @@ all = ["flake8 (>=7.1.1)", "mypy (>=1.11.2)", "pytest (>=8.3.2)", "ruff (>=0.6.2
 
 [[package]]
 name = "isagog-kg"
-version = "0.2.3"
+version = "0.2.4"
 description = "Isagog Knowledge Graph components"
 optional = false
 python-versions = "^3.10"
@@ -142,8 +142,8 @@ sparqlwrapper = "^2.0.0"
 [package.source]
 type = "git"
 url = "https://github.com/Isagog/isagog-kg.git"
-reference = "master"
-resolved_reference = "98c7972351fdceb3dd913b3c3aa06865b4f9b577"
+reference = "dev-0.2.4"
+resolved_reference = "a2b4a268029f7db50fefa892631883791ba42eb5"
 
 [[package]]
 name = "jinja2"
@@ -489,4 +489,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "d11d2ea5368821699ee7915ce79d25aa93aa6d438502e5df51287857a9895268"
+content-hash = "7d8aecd180e23f99fdfd518ca66f58b201b2088be5811e2b175955a6e8a6844f"
