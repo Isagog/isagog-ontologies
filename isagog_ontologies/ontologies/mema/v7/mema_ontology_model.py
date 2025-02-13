@@ -102,11 +102,9 @@ class Category(Metadata):
     category_of: List['Document'] = Field(default_factory=list, description="category_of property", json_schema_extra={'kg_property': 'category_of', 'kg_type': 'relation', 'kg_related_class': 'Document'})
 
 class DBPediaDescriptor(EntityDescriptor):
-    describes: List['Entity'] = Field(default_factory=list, description="describes property", json_schema_extra={'kg_property': 'describes', 'kg_type': 'relation', 'kg_related_class': 'Entity'})
     dbpedia_ref: str = Field(..., description="dbpedia_ref property", json_schema_extra={'kg_property': 'dbpedia_ref', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class GeonamesDescriptor(EntityDescriptor):
-    describes: List['Entity'] = Field(default_factory=list, description="describes property", json_schema_extra={'kg_property': 'describes', 'kg_type': 'relation', 'kg_related_class': 'Entity'})
     geoinfo_bbox: List[str] = Field(default_factory=list, description="geoinfo_bbox property", json_schema_extra={'kg_property': 'geoinfo_bbox', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     geoinfo_country_name: List[str] = Field(default_factory=list, description="geoinfo_country_name property", json_schema_extra={'kg_property': 'geoinfo_country_name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     geoinfo_name: List[str] = Field(default_factory=list, description="geoinfo_name property", json_schema_extra={'kg_property': 'geoinfo_name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
@@ -142,7 +140,6 @@ class Topic(Metadata):
 
 class WikipediaDescriptor(EntityDescriptor):
     """Wikipedia summary"""
-    describes: List['Entity'] = Field(default_factory=list, description="describes property", json_schema_extra={'kg_property': 'describes', 'kg_type': 'relation', 'kg_related_class': 'Entity'})
     wiki_timestamp: Optional[str] = Field(default=None, description="wiki_timestamp property", json_schema_extra={'kg_property': 'wiki_timestamp', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     wiki_title: Optional[str] = Field(default=None, description="wiki_title property", json_schema_extra={'kg_property': 'wiki_title', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     wiki_url: Optional[str] = Field(default=None, description="wiki_url property", json_schema_extra={'kg_property': 'wiki_url', 'kg_type': 'attribute', 'kg_data_type': 'str'})

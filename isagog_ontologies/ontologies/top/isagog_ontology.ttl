@@ -129,7 +129,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://isagog.com/ontology#described_by
 :described_by rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf :has_inherent ;
+              rdfs:subPropertyOf :referred_by ;
               owl:inverseOf :describes ;
               rdfs:domain :Entity ;
               rdfs:range :EntityDescriptor .
@@ -137,7 +137,8 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://isagog.com/ontology#describes
 :describes rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :inheres_to ;
+           rdfs:subPropertyOf :referent ;
+           owl:inverseOf :referent ;
            rdfs:domain :EntityDescriptor ;
            rdfs:range :Entity .
 
@@ -313,6 +314,11 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
           rdfs:domain :Sign ;
           rdfs:comment "'Real-world' concept or entity that the sign points to or refers to." ;
           rdfs:seeAlso "Sign->Object (Peirce)" .
+
+
+###  https://isagog.com/ontology#referred_by
+:referred_by rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :has_inherent .
 
 
 ###  https://isagog.com/ontology#relatedness

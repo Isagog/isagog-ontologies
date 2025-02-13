@@ -483,10 +483,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 :DBPediaDescriptor rdf:type owl:Class ;
                    rdfs:subClassOf ig:EntityDescriptor ,
                                    [ rdf:type owl:Restriction ;
-                                     owl:onProperty ig:describes ;
-                                     owl:allValuesFrom ig:Entity
-                                   ] ,
-                                   [ rdf:type owl:Restriction ;
                                      owl:onProperty :dbpedia_ref ;
                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                      owl:onDataRange xsd:string
@@ -496,10 +492,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://ilmanifesto.it/mema/ontology#GeonamesDescriptor
 :GeonamesDescriptor rdf:type owl:Class ;
                     rdfs:subClassOf ig:EntityDescriptor ,
-                                    [ rdf:type owl:Restriction ;
-                                      owl:onProperty ig:describes ;
-                                      owl:allValuesFrom ig:Entity
-                                    ] ,
                                     [ rdf:type owl:Restriction ;
                                       owl:onProperty :geoinfo_bbox ;
                                       owl:someValuesFrom xsd:string
@@ -632,10 +624,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://ilmanifesto.it/mema/ontology#WikipediaDescriptor
 :WikipediaDescriptor rdf:type owl:Class ;
                      rdfs:subClassOf ig:EntityDescriptor ,
-                                     [ rdf:type owl:Restriction ;
-                                       owl:onProperty ig:describes ;
-                                       owl:allValuesFrom ig:Entity
-                                     ] ,
                                      [ rdf:type owl:Restriction ;
                                        owl:onProperty :wiki_timestamp ;
                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
