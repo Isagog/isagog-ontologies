@@ -27,6 +27,18 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 <http://purl.org/dc/elements/1.1/license> rdf:type owl:AnnotationProperty .
 
 
+###  https://ilmanifesto.it/mema/ontology#we_filter
+<https://ilmanifesto.it/mema/ontology#we_filter> rdf:type owl:AnnotationProperty .
+
+
+###  https://ilmanifesto.it/mema/ontology#we_search
+<https://ilmanifesto.it/mema/ontology#we_search> rdf:type owl:AnnotationProperty .
+
+
+###  https://ilmanifesto.it/mema/ontology#we_tok
+<https://ilmanifesto.it/mema/ontology#we_tok> rdf:type owl:AnnotationProperty .
+
+
 ###  https://isagog.com/ontology#cidoc
 :cidoc rdf:type owl:AnnotationProperty .
 
@@ -451,6 +463,18 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                           ] ;
           rdfs:comment "Textual document" ;
           :cidoc "http://erlangen-crm.org/240307/E31_Document" .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource :Document ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget [ rdf:type owl:Restriction ;
+                         owl:onProperty :authored_by ;
+                         owl:someValuesFrom :Person
+                       ] ;
+   <https://ilmanifesto.it/mema/ontology#we_filter> "true"^^xsd:boolean ;
+   <https://ilmanifesto.it/mema/ontology#we_search> "true"^^xsd:boolean ;
+   <https://ilmanifesto.it/mema/ontology#we_tok> "FIELD"
+ ] .
 
 
 ###  https://isagog.com/ontology#Entity
