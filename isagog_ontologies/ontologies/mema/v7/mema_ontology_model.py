@@ -13,10 +13,7 @@ class Entity(Thing):
 class Continuant(Entity):
     """An entity that persists through time while maintaining its identity, existing as a whole at any given moment. Continuants are not characterized by temporal parts; instead, they endure as the same entity throughout change, distinct from processes or events, which unfold over time."""
 
-class Information(Thing):
-    """Non material thing that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."""
-
-class Sign(Information):
+class Sign(Thing):
     """A non-material entity that underlies the process of interpreting something as representing or standing for something else. Signs existentially depend on the information source that generates them, as each sign is a particular, individuated instance originating from a singular source of information."""
     referent: List[Any] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Any'})
     source: Optional['Information'] = Field(default=None, description="source property", json_schema_extra={'kg_property': 'source', 'kg_type': 'relation', 'kg_related_class': 'Information'})
@@ -28,6 +25,10 @@ class Statement(Sign):
 
 class Description(Statement):
     """Statement about a specific aspect or feature of something"""
+
+class Information(Thing):
+    """Non material thing that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."""
+    yields: List['Sign'] = Field(default_factory=list, description="yields property", json_schema_extra={'kg_property': 'yields', 'kg_type': 'relation', 'kg_related_class': 'Sign'})
 
 class Document(Information):
     """Textual document"""
@@ -148,10 +149,10 @@ class WikipediaDescriptor(EntityDescriptor):
 # Update forward references
 Entity.model_rebuild()
 Continuant.model_rebuild()
-Information.model_rebuild()
 Sign.model_rebuild()
 Statement.model_rebuild()
 Description.model_rebuild()
+Information.model_rebuild()
 Document.model_rebuild()
 EntityDescriptor.model_rebuild()
 Occurrent.model_rebuild()

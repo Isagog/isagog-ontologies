@@ -13,7 +13,7 @@
 Credits: 
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                rdfs:label "Isagog Top Level Ontology" ;
-                               owl:versionInfo 1.2 .
+                               owl:versionInfo 1.3 .
 
 #################################################################
 #    Annotation properties
@@ -130,17 +130,13 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://isagog.com/ontology#described_by
 :described_by rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :referred_by ;
-              owl:inverseOf :describes ;
-              rdfs:domain :Entity ;
-              rdfs:range :EntityDescriptor .
+              owl:inverseOf :describes .
 
 
 ###  https://isagog.com/ontology#describes
 :describes rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :referent ;
-           owl:inverseOf :referent ;
-           rdfs:domain :EntityDescriptor ;
-           rdfs:range :Entity .
+           owl:inverseOf :referent .
 
 
 ###  https://isagog.com/ontology#featured_in
@@ -169,8 +165,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://isagog.com/ontology#has_inherent
 :has_inherent rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :inherence ;
-              owl:inverseOf :inheres_to ;
-              rdfs:range :Information .
+              owl:inverseOf :inheres_to .
 
 
 ###  https://isagog.com/ontology#has_part
@@ -227,7 +222,6 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://isagog.com/ontology#inheres_to
 :inheres_to rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf :inherence ;
-            rdfs:domain :Information ;
             rdfs:comment "Any relation involved in semiotic processes" .
 
 
@@ -311,7 +305,6 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology#referent
 :referent rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :inheres_to ;
-          rdfs:domain :Sign ;
           rdfs:comment "'Real-world' concept or entity that the sign points to or refers to." ;
           rdfs:seeAlso "Sign->Object (Peirce)" .
 
@@ -493,7 +486,8 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                           owl:onProperty :mentioned_in ;
                           owl:someValuesFrom :Document
                         ] ;
-        owl:disjointWith :Information ;
+        owl:disjointWith :Information ,
+                         :Sign ;
         rdfs:comment "Thing localizable in space and / or time"@en ;
         :cidoc "http://erlangen-crm.org/240307/E1_CRM_Entity" .
 
@@ -515,6 +509,11 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology#Information
 :Information rdf:type owl:Class ;
+             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                               owl:onProperty :yields ;
+                               owl:someValuesFrom :Sign
+                             ] ;
+             owl:disjointWith :Sign ;
              rdfs:comment "Non material thing that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."@en ;
              :cidoc "http://erlangen-crm.org/240307/E73_Information_Object" .
 
@@ -617,8 +616,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology#Sign
 :Sign rdf:type owl:Class ;
-      rdfs:subClassOf :Information ,
-                      [ rdf:type owl:Restriction ;
+      rdfs:subClassOf [ rdf:type owl:Restriction ;
                         owl:onProperty :referent ;
                         owl:someValuesFrom [ rdf:type owl:Class ;
                                              owl:unionOf ( :Entity
