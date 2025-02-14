@@ -355,6 +355,12 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 #    Data properties
 #################################################################
 
+###  https://isagog.com/ontology#anthroponym
+:anthroponym rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :text ;
+             rdfs:range xsd:string .
+
+
 ###  https://isagog.com/ontology#body
 :body rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf :text ;
@@ -578,12 +584,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 :Person rdf:type owl:Class ;
         rdfs:subClassOf :Continuant ,
                         [ rdf:type owl:Restriction ;
-                          owl:onProperty :name ;
-                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                          owl:onDataRange xsd:string
-                        ] ,
-                        [ rdf:type owl:Restriction ;
-                          owl:onProperty :surname ;
+                          owl:onProperty :anthroponym ;
                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                           owl:onDataRange xsd:string
                         ] ;
