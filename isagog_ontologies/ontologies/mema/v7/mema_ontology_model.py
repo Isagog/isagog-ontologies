@@ -65,8 +65,7 @@ class Organization(Continuant):
     """Social group of people working together towards common goals, governed by defined rules and processes"""
 
 class Person(Continuant):
-    name: str = Field(..., description="name property", json_schema_extra={'kg_property': 'name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    surname: str = Field(..., description="surname property", json_schema_extra={'kg_property': 'surname', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    anthroponym: str = Field(..., description="anthroponym property", json_schema_extra={'kg_property': 'anthroponym', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Relationship(Statement):
     """A formal statement (assertion) that specifies how two entities are connected or associated within a given context, describing the nature, direction, and type of interaction or dependency between them."""
@@ -81,8 +80,9 @@ class AIDescriptior(EntityDescriptor):
 
 class Article(Document):
     """Newspaper article"""
-    directus_id: str = Field(..., description="directus_id property", json_schema_extra={'kg_property': 'directus_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    directus_id: Optional[str] = Field(default=None, description="directus_id property", json_schema_extra={'kg_property': 'directus_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     published_day: str = Field(..., description="published_day property", json_schema_extra={'kg_property': 'published_day', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    signature: str = Field(..., description="signature property", json_schema_extra={'kg_property': 'signature', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     title: str = Field(..., description="title property", json_schema_extra={'kg_property': 'title', 'kg_type': 'attribute', 'kg_data_type': 'str', 'we_search': 'false', 'we_tok': 'FIELD'})
     athena_id: Optional[str] = Field(default=None, description="athena_id property", json_schema_extra={'kg_property': 'athena_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     kicker: Optional[str] = Field(default=None, description="kicker property", json_schema_extra={'kg_property': 'kicker', 'kg_type': 'attribute', 'kg_data_type': 'str', 'we_search': 'false', 'we_tok': 'FIELD'})
@@ -106,10 +106,10 @@ class DBPediaDescriptor(EntityDescriptor):
     dbpedia_ref: str = Field(..., description="dbpedia_ref property", json_schema_extra={'kg_property': 'dbpedia_ref', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class GeonamesDescriptor(EntityDescriptor):
-    geoinfo_bbox: List[str] = Field(default_factory=list, description="geoinfo_bbox property", json_schema_extra={'kg_property': 'geoinfo_bbox', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    geoinfo_country_name: List[str] = Field(default_factory=list, description="geoinfo_country_name property", json_schema_extra={'kg_property': 'geoinfo_country_name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     geoinfo_name: List[str] = Field(default_factory=list, description="geoinfo_name property", json_schema_extra={'kg_property': 'geoinfo_name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     geoinfo_id: int = Field(..., description="geoinfo_id property", json_schema_extra={'kg_property': 'geoinfo_id', 'kg_type': 'attribute', 'kg_data_type': 'int'})
+    geoinfo_bbox: Optional[str] = Field(default=None, description="geoinfo_bbox property", json_schema_extra={'kg_property': 'geoinfo_bbox', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    geoinfo_country_name: Optional[str] = Field(default=None, description="geoinfo_country_name property", json_schema_extra={'kg_property': 'geoinfo_country_name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     geoinfo_feature_class: Optional[str] = Field(default=None, description="geoinfo_feature_class property", json_schema_extra={'kg_property': 'geoinfo_feature_class', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     geoinfo_feature_code: Optional[str] = Field(default=None, description="geoinfo_feature_code property", json_schema_extra={'kg_property': 'geoinfo_feature_code', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     geoinfo_lat: Optional[float] = Field(default=None, description="geoinfo_lat property", json_schema_extra={'kg_property': 'geoinfo_lat', 'kg_type': 'attribute', 'kg_data_type': 'float'})
