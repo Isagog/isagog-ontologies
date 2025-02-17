@@ -15,7 +15,7 @@
 Credits: 
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                         rdfs:label "The MeMa Ontology" ;
-                                        owl:versionInfo 7.3 .
+                                        owl:versionInfo 7.4 .
 
 #################################################################
 #    Annotation properties
@@ -573,7 +573,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                           ] ,
                           [ rdf:type owl:Restriction ;
                             owl:onProperty ig:text ;
-                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                             owl:onDataRange xsd:string
                           ] ;
           rdfs:comment "Document's metadata" .

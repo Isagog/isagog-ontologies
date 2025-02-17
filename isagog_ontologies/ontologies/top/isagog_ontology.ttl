@@ -135,8 +135,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://isagog.com/ontology#describes
 :describes rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :referent ;
-           owl:inverseOf :referent .
+           rdfs:subPropertyOf :referent .
 
 
 ###  https://isagog.com/ontology#featured_in
@@ -305,6 +304,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology#referent
 :referent rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :inheres_to ;
+          owl:inverseOf :referred_by ;
           rdfs:comment "'Real-world' concept or entity that the sign points to or refers to." ;
           rdfs:seeAlso "Sign->Object (Peirce)" .
 
@@ -458,10 +458,6 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                             owl:someValuesFrom :Person
                           ] ,
                           [ rdf:type owl:Restriction ;
-                            owl:onProperty :yields ;
-                            owl:someValuesFrom :Sign
-                          ] ,
-                          [ rdf:type owl:Restriction ;
                             owl:onProperty :body ;
                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                             owl:onDataRange xsd:string
@@ -485,15 +481,14 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology#Entity
 :Entity rdf:type owl:Class ;
         rdfs:subClassOf [ rdf:type owl:Restriction ;
-                          owl:onProperty :described_by ;
-                          owl:someValuesFrom :EntityDescriptor
-                        ] ,
-                        [ rdf:type owl:Restriction ;
                           owl:onProperty :mentioned_in ;
                           owl:someValuesFrom :Document
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :referred_by ;
+                          owl:someValuesFrom :EntityDescriptor
                         ] ;
-        owl:disjointWith :Information ,
-                         :Sign ;
+        owl:disjointWith :Information ;
         rdfs:comment "Thing localizable in space and / or time"@en ;
         :cidoc "http://erlangen-crm.org/240307/E1_CRM_Entity" .
 
@@ -503,7 +498,11 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                   rdfs:subClassOf :Description ,
                                   [ rdf:type owl:Restriction ;
                                     owl:onProperty :referent ;
-                                    owl:allValuesFrom :Entity
+                                    owl:allValuesFrom [ rdf:type owl:Class ;
+                                                        owl:unionOf ( :Entity
+                                                                      :Mention
+                                                                    )
+                                                      ]
                                   ] .
 
 
@@ -519,7 +518,6 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                                owl:onProperty :yields ;
                                owl:someValuesFrom :Sign
                              ] ;
-             owl:disjointWith :Sign ;
              rdfs:comment "Non material thing that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."@en ;
              :cidoc "http://erlangen-crm.org/240307/E73_Information_Object" .
 
@@ -619,11 +617,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 :Sign rdf:type owl:Class ;
       rdfs:subClassOf [ rdf:type owl:Restriction ;
                         owl:onProperty :referent ;
-                        owl:someValuesFrom [ rdf:type owl:Class ;
-                                             owl:unionOf ( :Entity
-                                                           :Information
-                                                         )
-                                           ]
+                        owl:someValuesFrom owl:Thing
                       ] ,
                       [ rdf:type owl:Restriction ;
                         owl:onProperty :source ;

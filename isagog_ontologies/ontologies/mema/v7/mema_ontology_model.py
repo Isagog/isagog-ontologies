@@ -7,15 +7,15 @@ from isagog_kg.models.logic_model import Thing
 
 class Entity(Thing):
     """Thing localizable in space and / or time"""
-    described_by: List['EntityDescriptor'] = Field(default_factory=list, description="described_by property", json_schema_extra={'kg_property': 'described_by', 'kg_type': 'relation', 'kg_related_class': 'EntityDescriptor'})
     mentioned_in: List['Document'] = Field(default_factory=list, description="mentioned_in property", json_schema_extra={'kg_property': 'mentioned_in', 'kg_type': 'relation', 'kg_related_class': 'Document'})
+    referred_by: List['EntityDescriptor'] = Field(default_factory=list, description="referred_by property", json_schema_extra={'kg_property': 'referred_by', 'kg_type': 'relation', 'kg_related_class': 'EntityDescriptor'})
 
 class Continuant(Entity):
     """An entity that persists through time while maintaining its identity, existing as a whole at any given moment. Continuants are not characterized by temporal parts; instead, they endure as the same entity throughout change, distinct from processes or events, which unfold over time."""
 
 class Sign(Thing):
     """A non-material entity that underlies the process of interpreting something as representing or standing for something else. Signs existentially depend on the information source that generates them, as each sign is a particular, individuated instance originating from a singular source of information."""
-    referent: List[Any] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Any'})
+    referent: List['Thing'] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Thing'})
     source: Optional['Information'] = Field(default=None, description="source property", json_schema_extra={'kg_property': 'source', 'kg_type': 'relation', 'kg_related_class': 'Information'})
     concept: Optional[str] = Field(default=None, description="concept property", json_schema_extra={'kg_property': 'concept', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     expression: Optional[str] = Field(default=None, description="expression property", json_schema_extra={'kg_property': 'expression', 'kg_type': 'attribute', 'kg_data_type': 'str'})
@@ -33,11 +33,10 @@ class Information(Thing):
 class Document(Information):
     """Textual document"""
     authored_by: List['Person'] = Field(default_factory=list, description="authored_by property", json_schema_extra={'kg_property': 'authored_by', 'kg_type': 'relation', 'kg_related_class': 'Person', 'we_filter': 'true', 'we_search': 'true', 'we_tok': 'FIELD'})
-    yields: List['Sign'] = Field(default_factory=list, description="yields property", json_schema_extra={'kg_property': 'yields', 'kg_type': 'relation', 'kg_related_class': 'Sign'})
     body: Optional[str] = Field(default=None, description="body property", json_schema_extra={'kg_property': 'body', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class EntityDescriptor(Description):
-    referent: List['Entity'] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Entity'})
+    referent: List[Any] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Any'})
 
 class Occurrent(Entity):
     """Entities that unfold or occur over time, such as events, processes,  or activities. These entities are not wholly present at any single moment but are extended in time, contrasting with 'Continuants', which persist while maintaining identity."""
@@ -96,7 +95,7 @@ class Author(Person):
 class Metadata(Description):
     """Document's metadata"""
     describes: List['Document'] = Field(default_factory=list, description="describes property", json_schema_extra={'kg_property': 'describes', 'kg_type': 'relation', 'kg_related_class': 'Document'})
-    text: Optional[str] = Field(default=None, description="text property", json_schema_extra={'kg_property': 'text', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    text: str = Field(..., description="text property", json_schema_extra={'kg_property': 'text', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Category(Metadata):
     """Categoria di classificazione di oggetti informativi"""
