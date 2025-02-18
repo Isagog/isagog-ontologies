@@ -16,12 +16,12 @@ class Continuant(Entity):
 class Sign(Thing):
     """A non-material entity that underlies the process of interpreting something as representing or standing for something else. Signs existentially depend on the information source that generates them, as each sign is a particular, individuated instance originating from a singular source of information."""
     referent: List['Thing'] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Thing'})
-    source: Optional['Information'] = Field(default=None, description="source property", json_schema_extra={'kg_property': 'source', 'kg_type': 'relation', 'kg_related_class': 'Information'})
+    source: Optional[Any] = Field(default=None, description="source property", json_schema_extra={'kg_property': 'source', 'kg_type': 'relation', 'kg_related_class': 'Any'})
     concept: Optional[str] = Field(default=None, description="concept property", json_schema_extra={'kg_property': 'concept', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    expression: Optional[str] = Field(default=None, description="expression property", json_schema_extra={'kg_property': 'expression', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Statement(Sign):
     """Proposition (i.e. sentence that may be true or false) about a state of affairs"""
+    expression: Optional[str] = Field(default=None, description="expression property", json_schema_extra={'kg_property': 'expression', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Description(Statement):
     """Statement about a specific aspect or feature of something"""
@@ -36,6 +36,7 @@ class Document(Information):
     body: Optional[str] = Field(default=None, description="body property", json_schema_extra={'kg_property': 'body', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class EntityDescriptor(Description):
+    """Descriptions referring to entities"""
     referent: List[Any] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Any'})
 
 class Occurrent(Entity):
@@ -53,8 +54,9 @@ class Location(Continuant):
 class Material(Continuant):
     """A non-sortal continuant that exists as a mass or quantity without inherent boundaries or a distinct identity, persisting through time while undergoing potential changes in form or composition. Material is typically characterized by its divisibility and its capacity to constitute or combine with other entities to form objects or structures."""
 
-class Mention(Sign):
-    """Denotation of an entity (e.g. a name)"""
+class Mention(Statement):
+    """A textual or verbal occurrence that denotes an entity (e.g., a name). Mentions may sometimes be erroneous, either by referring to a non-existent entity or by misidentifying the intended referent."""
+    referred_by: List['EntityDescriptor'] = Field(default_factory=list, description="referred_by property", json_schema_extra={'kg_property': 'referred_by', 'kg_type': 'relation', 'kg_related_class': 'EntityDescriptor'})
     referent: List['Entity'] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Entity'})
 
 class Object(Continuant):

@@ -13,7 +13,7 @@
 Credits: 
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                rdfs:label "Isagog Top Level Ontology" ;
-                               owl:versionInfo 1.3 .
+                               owl:versionInfo 1.4 .
 
 #################################################################
 #    Annotation properties
@@ -164,7 +164,8 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://isagog.com/ontology#has_inherent
 :has_inherent rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :inherence ;
-              owl:inverseOf :inheres_to .
+              owl:inverseOf :inheres_to ;
+              rdfs:range :Sign .
 
 
 ###  https://isagog.com/ontology#has_part
@@ -221,6 +222,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://isagog.com/ontology#inheres_to
 :inheres_to rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf :inherence ;
+            rdfs:domain :Sign ;
             rdfs:comment "Any relation involved in semiotic processes" .
 
 
@@ -265,12 +267,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology#object
 :object rdf:type owl:ObjectProperty ;
         rdfs:subPropertyOf :inheres_to ;
-        rdfs:domain :Relationship ;
-        rdfs:range [ rdf:type owl:Class ;
-                     owl:unionOf ( :Entity
-                                   :Mention
-                                 )
-                   ] .
+        rdfs:domain :Relationship .
 
 
 ###  https://isagog.com/ontology#part_of
@@ -324,8 +321,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 :source rdf:type owl:ObjectProperty ;
         rdfs:subPropertyOf :inheres_to ;
         owl:inverseOf :yields ;
-        rdfs:domain :Sign ;
-        rdfs:range :Information .
+        rdfs:domain :Sign .
 
 
 ###  https://isagog.com/ontology#spatial_part_of
@@ -336,12 +332,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology#subject
 :subject rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf :inheres_to ;
-         rdfs:domain :Relationship ;
-         rdfs:range [ rdf:type owl:Class ;
-                      owl:unionOf ( :Entity
-                                    :Mention
-                                  )
-                    ] .
+         rdfs:domain :Relationship .
 
 
 ###  https://isagog.com/ontology#yields
@@ -503,7 +494,8 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                                                                       :Mention
                                                                     )
                                                       ]
-                                  ] .
+                                  ] ;
+                  rdfs:comment "Descriptions referring to entities"@en .
 
 
 ###  https://isagog.com/ontology#Event
@@ -537,12 +529,16 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology#Mention
 :Mention rdf:type owl:Class ;
-         rdfs:subClassOf :Sign ,
+         rdfs:subClassOf :Statement ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :referred_by ;
+                           owl:someValuesFrom :EntityDescriptor
+                         ] ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty :referent ;
                            owl:allValuesFrom :Entity
                          ] ;
-         rdfs:comment "Denotation of an entity (e.g. a name)"@en .
+         rdfs:comment "A textual or verbal occurrence that denotes an entity (e.g., a name). Mentions may sometimes be erroneous, either by referring to a non-existent entity or by misidentifying the intended referent."@en .
 
 
 ###  https://isagog.com/ontology#Object
@@ -622,15 +618,14 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                       [ rdf:type owl:Restriction ;
                         owl:onProperty :source ;
                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onClass :Information
+                        owl:onClass [ rdf:type owl:Class ;
+                                      owl:unionOf ( :Information
+                                                    :Occurrent
+                                                  )
+                                    ]
                       ] ,
                       [ rdf:type owl:Restriction ;
                         owl:onProperty :concept ;
-                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onDataRange xsd:string
-                      ] ,
-                      [ rdf:type owl:Restriction ;
-                        owl:onProperty :expression ;
                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onDataRange xsd:string
                       ] ;
@@ -646,7 +641,12 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology#Statement
 :Statement rdf:type owl:Class ;
-           rdfs:subClassOf :Sign ;
+           rdfs:subClassOf :Sign ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :expression ;
+                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:string
+                           ] ;
            rdfs:comment "Proposition (i.e. sentence that may be true or false) about a state of affairs" ;
            :cidoc "http://erlangen-crm.org/240307/E89_Propositional_Object" .
 
