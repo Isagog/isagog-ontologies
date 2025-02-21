@@ -14,17 +14,17 @@ class Continuant(Entity):
     """An entity that persists through time while maintaining its identity, existing as a whole at any given moment. Continuants are not characterized by temporal parts; instead, they endure as the same entity throughout change, distinct from processes or events, which unfold over time."""
 
 class Sign(Thing):
-    """A non-material entity that underlies the process of interpreting something as representing or standing for something else. Signs existentially depend on the information source that generates them, as each sign is a particular, individuated instance originating from a singular source of information."""
+    """A non-material entity that underlies the process of interpreting something as representing or standing for something else. Signs existentially depend on the source that generates them, as each sign is a particular instance (token)."""
     referent: List['Thing'] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Thing'})
     source: Optional[Any] = Field(default=None, description="source property", json_schema_extra={'kg_property': 'source', 'kg_type': 'relation', 'kg_related_class': 'Any'})
     concept: Optional[str] = Field(default=None, description="concept property", json_schema_extra={'kg_property': 'concept', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Statement(Sign):
-    """Proposition (i.e. sentence that may be true or false) about a state of affairs"""
+    """Linguistic proposition (i.e. sentence that may be true or false) about a state of affairs"""
     expression: Optional[str] = Field(default=None, description="expression property", json_schema_extra={'kg_property': 'expression', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
 class Description(Statement):
-    """Statement about a specific aspect or feature of something"""
+    """Statement that brings information about a specific aspect or feature of something"""
 
 class Information(Thing):
     """Non material thing that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."""

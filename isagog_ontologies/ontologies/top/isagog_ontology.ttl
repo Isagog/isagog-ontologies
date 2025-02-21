@@ -437,7 +437,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology#Description
 :Description rdf:type owl:Class ;
              rdfs:subClassOf :Statement ;
-             rdfs:comment "Statement about a specific aspect or feature of something" ;
+             rdfs:comment "Statement that brings information about a specific aspect or feature of something" ;
              :cidoc "http://erlangen-crm.org/240307/E73_Appellation" .
 
 
@@ -629,7 +629,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onDataRange xsd:string
                       ] ;
-      rdfs:comment "A non-material entity that underlies the process of interpreting something as representing or standing for something else. Signs existentially depend on the information source that generates them, as each sign is a particular, individuated instance originating from a singular source of information." ;
+      rdfs:comment "A non-material entity that underlies the process of interpreting something as representing or standing for something else. Signs existentially depend on the source that generates them, as each sign is a particular instance (token)." ;
       rdfs:seeAlso "Peirce's Sign (Representamen->Interpretant->Object)" .
 
 
@@ -644,10 +644,10 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
            rdfs:subClassOf :Sign ,
                            [ rdf:type owl:Restriction ;
                              owl:onProperty :expression ;
-                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                              owl:onDataRange xsd:string
                            ] ;
-           rdfs:comment "Proposition (i.e. sentence that may be true or false) about a state of affairs" ;
+           rdfs:comment "Linguistic proposition (i.e. sentence that may be true or false) about a state of affairs" ;
            :cidoc "http://erlangen-crm.org/240307/E89_Propositional_Object" .
 
 
