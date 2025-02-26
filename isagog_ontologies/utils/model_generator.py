@@ -11,7 +11,7 @@ if __name__ == '__main__':
     parser.add_argument(
         "-o",
         "--ontologies",
-        default=["isagog_ontologies/ontologies/top/isagog_ontology.ttl", "isagog_ontologies/ontologies/mema/v7/mema_ontology.ttl"],
+        default=["isagog_ontologies/ontologies/top/isagog_ontology.ttl", "isagog_ontologies/ontologies/maxxi/v1/maxxi_ontology.ttl"],
         nargs="+",
         help="Path(s) to ontology file(s)",
     )

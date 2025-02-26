@@ -13,7 +13,7 @@
 Credits: 
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                                rdfs:label "Isagog Top Level Ontology" ;
-                               owl:versionInfo 1.4 .
+                               owl:versionInfo 1.5 .
 
 #################################################################
 #    Annotation properties
@@ -338,7 +338,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology#yields
 :yields rdf:type owl:ObjectProperty ;
         rdfs:subPropertyOf :has_inherent ;
-        rdfs:domain :Information ;
+        rdfs:domain :SocialObject ;
         rdfs:range :Sign .
 
 
@@ -479,7 +479,6 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                           owl:onProperty :referred_by ;
                           owl:someValuesFrom :EntityDescriptor
                         ] ;
-        owl:disjointWith :Information ;
         rdfs:comment "Thing localizable in space and / or time"@en ;
         :cidoc "http://erlangen-crm.org/240307/E1_CRM_Entity" .
 
@@ -506,18 +505,19 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology#Information
 :Information rdf:type owl:Class ;
-             rdfs:subClassOf [ rdf:type owl:Restriction ;
+             rdfs:subClassOf :SocialObject ,
+                             [ rdf:type owl:Restriction ;
                                owl:onProperty :yields ;
                                owl:someValuesFrom :Sign
                              ] ;
-             rdfs:comment "Non material thing that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."@en ;
+             rdfs:comment "Social object that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens." ;
              :cidoc "http://erlangen-crm.org/240307/E73_Information_Object" .
 
 
 ###  https://isagog.com/ontology#Location
 :Location rdf:type owl:Class ;
           rdfs:subClassOf :Continuant ;
-          rdfs:comment "Identified portion of space (place)"@en ;
+          rdfs:comment "Identified portion of space not necessarily continuous"@en ;
           :cidoc "http://erlangen-crm.org/240307/E53_Place" .
 
 
@@ -619,8 +619,8 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                         owl:onProperty :source ;
                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onClass [ rdf:type owl:Class ;
-                                      owl:unionOf ( :Information
-                                                    :Occurrent
+                                      owl:unionOf ( :Occurrent
+                                                    :SocialObject
                                                   )
                                     ]
                       ] ,
@@ -631,6 +631,11 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                       ] ;
       rdfs:comment "A non-material entity that underlies the process of interpreting something as representing or standing for something else. Signs existentially depend on the source that generates them, as each sign is a particular instance (token)." ;
       rdfs:seeAlso "Peirce's Sign (Representamen->Interpretant->Object)" .
+
+
+###  https://isagog.com/ontology#SocialObject
+:SocialObject rdf:type owl:Class ;
+              rdfs:comment "Non-material entity that is socially instituted and identified, such as: informative objects (e.g. documents), political movements, promises, committments, etc. It doesn't have direct temporal-spatial attributes"@en .
 
 
 ###  https://isagog.com/ontology#State

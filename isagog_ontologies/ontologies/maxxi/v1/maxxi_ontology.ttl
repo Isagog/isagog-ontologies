@@ -50,6 +50,11 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 #    Classes
 #################################################################
 
+###  https://www.maxxi.art/ontology#ArtMovement
+:ArtMovement rdf:type owl:Class ;
+             rdfs:subClassOf ig:SocialObject .
+
+
 ###  https://www.maxxi.art/ontology#ArtWork
 :ArtWork rdf:type owl:Class ;
          rdfs:subClassOf ig:Object ,
@@ -134,6 +139,11 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://www.maxxi.art/ontology#Hall
 :Hall rdf:type owl:Class ;
       rdfs:subClassOf :BuldingPart .
+
+
+###  https://www.maxxi.art/ontology#Museum
+:Museum rdf:type owl:Class ;
+        rdfs:subClassOf ig:Location .
 
 
 ###  https://www.maxxi.art/ontology#Visit

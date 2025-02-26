@@ -79,75 +79,45 @@ class Relationship(Statement):
 class State(Occurrent):
     pass
 
-class AIDescriptior(EntityDescriptor):
+class ArtMovement(SocialObject):
     pass
 
-class Article(Document):
-    """Newspaper article"""
-    directus_id: Optional[str] = Field(default=None, description="directus_id property", json_schema_extra={'kg_property': 'directus_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    published_day: str = Field(..., description="published_day property", json_schema_extra={'kg_property': 'published_day', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    signature: str = Field(..., description="signature property", json_schema_extra={'kg_property': 'signature', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    title: str = Field(..., description="title property", json_schema_extra={'kg_property': 'title', 'kg_type': 'attribute', 'kg_data_type': 'str', 'we_search': 'false', 'we_tok': 'FIELD'})
-    athena_id: Optional[str] = Field(default=None, description="athena_id property", json_schema_extra={'kg_property': 'athena_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    kicker: Optional[str] = Field(default=None, description="kicker property", json_schema_extra={'kg_property': 'kicker', 'kg_type': 'attribute', 'kg_data_type': 'str', 'we_search': 'false', 'we_tok': 'FIELD'})
-    wp_id: Optional[str] = Field(default=None, description="wp_id property", json_schema_extra={'kg_property': 'wp_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    wp_slug: Optional[str] = Field(default=None, description="wp_slug property", json_schema_extra={'kg_property': 'wp_slug', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+class ArtWork(Object):
+    authored_by: List['Person'] = Field(default_factory=list, description="authored_by property", json_schema_extra={'kg_property': 'authored_by', 'kg_type': 'relation', 'kg_related_class': 'Person'})
 
 class Author(Person):
     """Autorship information, realized (but not necessarily) by some agent"""
-    author_of: List['Document'] = Field(default_factory=list, description="author_of property", json_schema_extra={'kg_property': 'author_of', 'kg_type': 'relation', 'kg_related_class': 'Document'})
 
-class Metadata(Description):
-    """Document's metadata"""
-    describes: List['Document'] = Field(default_factory=list, description="describes property", json_schema_extra={'kg_property': 'describes', 'kg_type': 'relation', 'kg_related_class': 'Document'})
-    text: str = Field(..., description="text property", json_schema_extra={'kg_property': 'text', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+class Building(Location):
+    has_part: List['BuldingPart'] = Field(default_factory=list, description="has_part property", json_schema_extra={'kg_property': 'has_part', 'kg_type': 'relation', 'kg_related_class': 'BuldingPart'})
 
-class Category(Metadata):
-    """Categoria di classificazione di oggetti informativi"""
-    category_of: List['Document'] = Field(default_factory=list, description="category_of property", json_schema_extra={'kg_property': 'category_of', 'kg_type': 'relation', 'kg_related_class': 'Document'})
+class BuldingPart(Building):
+    part_of: 'Building' = Field(..., description="part_of property", json_schema_extra={'kg_property': 'part_of', 'kg_type': 'relation', 'kg_related_class': 'Building'})
 
-class DBPediaDescriptor(EntityDescriptor):
-    dbpedia_ref: str = Field(..., description="dbpedia_ref property", json_schema_extra={'kg_property': 'dbpedia_ref', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-
-class GeonamesDescriptor(EntityDescriptor):
-    geoinfo_name: List[str] = Field(default_factory=list, description="geoinfo_name property", json_schema_extra={'kg_property': 'geoinfo_name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    geoinfo_id: int = Field(..., description="geoinfo_id property", json_schema_extra={'kg_property': 'geoinfo_id', 'kg_type': 'attribute', 'kg_data_type': 'int'})
-    geoinfo_bbox: Optional[str] = Field(default=None, description="geoinfo_bbox property", json_schema_extra={'kg_property': 'geoinfo_bbox', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    geoinfo_country_name: Optional[str] = Field(default=None, description="geoinfo_country_name property", json_schema_extra={'kg_property': 'geoinfo_country_name', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    geoinfo_feature_class: Optional[str] = Field(default=None, description="geoinfo_feature_class property", json_schema_extra={'kg_property': 'geoinfo_feature_class', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    geoinfo_feature_code: Optional[str] = Field(default=None, description="geoinfo_feature_code property", json_schema_extra={'kg_property': 'geoinfo_feature_code', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    geoinfo_lat: Optional[float] = Field(default=None, description="geoinfo_lat property", json_schema_extra={'kg_property': 'geoinfo_lat', 'kg_type': 'attribute', 'kg_data_type': 'float'})
-    geoinfo_lng: Optional[float] = Field(default=None, description="geoinfo_lng property", json_schema_extra={'kg_property': 'geoinfo_lng', 'kg_type': 'attribute', 'kg_data_type': 'float'})
-    geoinfo_population: Optional[int] = Field(default=None, description="geoinfo_population property", json_schema_extra={'kg_property': 'geoinfo_population', 'kg_type': 'attribute', 'kg_data_type': 'int'})
-
-class Highlight(Metadata):
+class Curator(Person):
     pass
 
-class HumanDescriptor(EntityDescriptor):
-    userid: Optional[str] = Field(default=None, description="userid property", json_schema_extra={'kg_property': 'userid', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+class CuratorialRecord(Document):
+    authored_by: Optional['Curator'] = Field(default=None, description="authored_by property", json_schema_extra={'kg_property': 'authored_by', 'kg_type': 'relation', 'kg_related_class': 'Curator'})
+    inheres_to: Optional['ArtWork'] = Field(default=None, description="inheres_to property", json_schema_extra={'kg_property': 'inheres_to', 'kg_type': 'relation', 'kg_related_class': 'ArtWork'})
 
-class Picture(Information):
-    """Immagine fotografica o grafica a corredo di articolo o numero"""
-    picture_of: List['Article'] = Field(default_factory=list, description="picture_of property", json_schema_extra={'kg_property': 'picture_of', 'kg_type': 'relation', 'kg_related_class': 'Article'})
-    imgcaption: List[str] = Field(default_factory=list, description="imgcaption property", json_schema_extra={'kg_property': 'imgcaption', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    copyright: Optional[str] = Field(default=None, description="copyright property", json_schema_extra={'kg_property': 'copyright', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    imgurl: Optional[str] = Field(default=None, description="imgurl property", json_schema_extra={'kg_property': 'imgurl', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+class Exibition(Event):
+    features: List['ArtWork'] = Field(default_factory=list, description="features property", json_schema_extra={'kg_property': 'features', 'kg_type': 'relation', 'kg_related_class': 'ArtWork'})
 
-class Summary(Metadata):
-    text: str = Field(..., description="text property", json_schema_extra={'kg_property': 'text', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+class ExibitionLocation(Location):
+    pass
 
-class Tag(Metadata):
-    tag_of: List['Article'] = Field(default_factory=list, description="tag_of property", json_schema_extra={'kg_property': 'tag_of', 'kg_type': 'relation', 'kg_related_class': 'Article'})
+class Hall(BuldingPart):
+    pass
 
-class Topic(Metadata):
-    """Argomento rilevante di articolo identificato dalle funzioni redazionali o dall'IA"""
-    topic_of: List['Article'] = Field(default_factory=list, description="topic_of property", json_schema_extra={'kg_property': 'topic_of', 'kg_type': 'relation', 'kg_related_class': 'Article'})
+class Museum(Location):
+    pass
 
-class WikipediaDescriptor(EntityDescriptor):
-    """Wikipedia summary"""
-    wiki_timestamp: Optional[str] = Field(default=None, description="wiki_timestamp property", json_schema_extra={'kg_property': 'wiki_timestamp', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    wiki_title: Optional[str] = Field(default=None, description="wiki_title property", json_schema_extra={'kg_property': 'wiki_title', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    wiki_url: Optional[str] = Field(default=None, description="wiki_url property", json_schema_extra={'kg_property': 'wiki_url', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+class Visit(Event):
+    has_participant: List['Person'] = Field(default_factory=list, description="has_participant property", json_schema_extra={'kg_property': 'has_participant', 'kg_type': 'relation', 'kg_related_class': 'Person'})
+
+class Visitor(Person):
+    pass
 
 
 # Update forward references
@@ -170,17 +140,16 @@ Organization.model_rebuild()
 Person.model_rebuild()
 Relationship.model_rebuild()
 State.model_rebuild()
-AIDescriptior.model_rebuild()
-Article.model_rebuild()
+ArtMovement.model_rebuild()
+ArtWork.model_rebuild()
 Author.model_rebuild()
-Metadata.model_rebuild()
-Category.model_rebuild()
-DBPediaDescriptor.model_rebuild()
-GeonamesDescriptor.model_rebuild()
-Highlight.model_rebuild()
-HumanDescriptor.model_rebuild()
-Picture.model_rebuild()
-Summary.model_rebuild()
-Tag.model_rebuild()
-Topic.model_rebuild()
-WikipediaDescriptor.model_rebuild()
+Building.model_rebuild()
+BuldingPart.model_rebuild()
+Curator.model_rebuild()
+CuratorialRecord.model_rebuild()
+Exibition.model_rebuild()
+ExibitionLocation.model_rebuild()
+Hall.model_rebuild()
+Museum.model_rebuild()
+Visit.model_rebuild()
+Visitor.model_rebuild()
