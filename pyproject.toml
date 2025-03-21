@@ -9,7 +9,7 @@ packages = [{ include = "isagog_ontologies" }]
 [tool.poetry.dependencies]
 python = "^3.11"
 pydantic = "^2.10.3"
-isagog-kg = { git = "https://github.com/Isagog/isagog-kg.git", branch = "dev-0.2.4" }
+isagog-kg = { git = "https://github.com/Isagog/isagog-kg.git" }
 rdflib = "^7.1.3"
 
 

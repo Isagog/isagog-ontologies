@@ -1,21 +1,21 @@
-@prefix : <https://www.maxxi.art/ontology#> .
-@prefix ig: <https://isagog.com/ontology#> .
+@prefix : <https://www.maxxi.art/ontology/maxxi#> .
+@prefix ig: <https://isagog.com/ontology/top#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <https://www.maxxi.art/ontology> .
+@base <https://www.maxxi.art/ontology/maxxi> .
 
-<https://www.maxxi.art/ontology> rdf:type owl:Ontology ;
-                                  owl:imports <https://isagog.com/ontology> ;
-                                  <http://purl.org/dc/elements/1.1/creator> "Guido Vetere, Isagog Srl, Italy" ;
-                                  <http://purl.org/dc/elements/1.1/license> <http://creativecommons.org/licenses/by/4.0/> ;
-                                  rdfs:comment """This work is licensed under a Creative Commons Attribution 4.0 International License.
+<https://www.maxxi.art/ontology/maxxi> rdf:type owl:Ontology ;
+                                        owl:imports <https://isagog.com/ontology/top> ;
+                                        <http://purl.org/dc/elements/1.1/creator> "Guido Vetere, Isagog Srl, Italy" ;
+                                        <http://purl.org/dc/elements/1.1/license> <http://creativecommons.org/licenses/by/4.0/> ;
+                                        rdfs:comment """This work is licensed under a Creative Commons Attribution 4.0 International License.
 Credits: 
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
-                                  rdfs:label "The Maxxi Ontology" ;
-                                  owl:versionInfo 1.0 .
+                                        rdfs:label "The Maxxi Ontology" ;
+                                        owl:versionInfo 1.0 .
 
 #################################################################
 #    Annotation properties
@@ -29,33 +29,93 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 <http://purl.org/dc/elements/1.1/license> rdf:type owl:AnnotationProperty .
 
 
-###  https://www.maxxi.art/ontology#cidoc
+###  http://www.w3.org/2002/07/owl#minQualifiedCardinality
+owl:minQualifiedCardinality rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#qualifiedCardinality
+owl:qualifiedCardinality rdf:type owl:AnnotationProperty .
+
+
+###  https://www.maxxi.art/ontology/maxxi#cidoc
 :cidoc rdf:type owl:AnnotationProperty ;
        rdfs:comment "CIDOC Conceptual Reference Model, based on: Nick Crofts, Martin Doerr, Tony Gill, Stephen Stead, Matthew Stiff (eds.): Definition of the CIDOC Conceptual Reference Model (http://cidoc-crm.org/)." ;
        rdfs:subPropertyOf :mapping ;
        rdfs:range xsd:anyURI .
 
 
-###  https://www.maxxi.art/ontology#mapping
+###  https://www.maxxi.art/ontology/maxxi#mapping
 :mapping rdf:type owl:AnnotationProperty .
 
 
-###  https://www.maxxi.art/ontology#schema
+###  https://www.maxxi.art/ontology/maxxi#schema
 :schema rdf:type owl:AnnotationProperty ;
         rdfs:comment "Corrispondenza con schema.org"@it ;
         rdfs:subPropertyOf :mapping .
 
 
 #################################################################
+#    Object Properties
+#################################################################
+
+###  https://isagog.com/ontology/top#author_of
+ig:author_of rdf:type owl:ObjectProperty .
+
+
+###  https://isagog.com/ontology/top#authored_by
+ig:authored_by rdf:type owl:ObjectProperty .
+
+
+###  https://isagog.com/ontology/top#features
+ig:features rdf:type owl:ObjectProperty .
+
+
+###  https://isagog.com/ontology/top#has_part
+ig:has_part rdf:type owl:ObjectProperty .
+
+
+###  https://isagog.com/ontology/top#has_participant
+ig:has_participant rdf:type owl:ObjectProperty .
+
+
+###  https://isagog.com/ontology/top#hosts
+ig:hosts rdf:type owl:ObjectProperty .
+
+
+###  https://isagog.com/ontology/top#participate_in
+ig:participate_in rdf:type owl:ObjectProperty .
+
+
+#################################################################
 #    Classes
 #################################################################
 
-###  https://www.maxxi.art/ontology#ArtMovement
+###  https://isagog.com/ontology/top#Document
+ig:Document rdf:type owl:Class .
+
+
+###  https://isagog.com/ontology/top#Event
+ig:Event rdf:type owl:Class .
+
+
+###  https://isagog.com/ontology/top#Location
+ig:Location rdf:type owl:Class .
+
+
+###  https://isagog.com/ontology/top#Object
+ig:Object rdf:type owl:Class .
+
+
+###  https://isagog.com/ontology/top#Person
+ig:Person rdf:type owl:Class .
+
+
+###  https://www.maxxi.art/ontology/maxxi#ArtMovement
 :ArtMovement rdf:type owl:Class ;
-             rdfs:subClassOf ig:SocialObject .
+             rdfs:subClassOf ig:Immaterial .
 
 
-###  https://www.maxxi.art/ontology#ArtWork
+###  https://www.maxxi.art/ontology/maxxi#ArtWork
 :ArtWork rdf:type owl:Class ;
          rdfs:subClassOf ig:Object ,
                          [ rdf:type owl:Restriction ;
@@ -65,7 +125,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
          :schema "https://schema.org/VisualArtwork" .
 
 
-###  https://www.maxxi.art/ontology#Author
+###  https://www.maxxi.art/ontology/maxxi#Author
 :Author rdf:type owl:Class ;
         owl:equivalentClass [ rdf:type owl:Restriction ;
                               owl:onProperty ig:author_of ;
@@ -75,7 +135,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
         rdfs:comment "Autorship information, realized (but not necessarily) by some agent"@en .
 
 
-###  https://www.maxxi.art/ontology#Building
+###  https://www.maxxi.art/ontology/maxxi#Building
 :Building rdf:type owl:Class ;
           rdfs:subClassOf ig:Location ,
                           [ rdf:type owl:Restriction ;
@@ -84,17 +144,12 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                           ] .
 
 
-###  https://www.maxxi.art/ontology#BuldingPart
+###  https://www.maxxi.art/ontology/maxxi#BuldingPart
 :BuldingPart rdf:type owl:Class ;
-             rdfs:subClassOf :Building ,
-                             [ rdf:type owl:Restriction ;
-                               owl:onProperty ig:part_of ;
-                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                               owl:onClass :Building
-                             ] .
+             rdfs:subClassOf :Building .
 
 
-###  https://www.maxxi.art/ontology#Curator
+###  https://www.maxxi.art/ontology/maxxi#Curator
 :Curator rdf:type owl:Class ;
          owl:equivalentClass [ rdf:type owl:Restriction ;
                                owl:onProperty ig:author_of ;
@@ -103,22 +158,12 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
          rdfs:subClassOf ig:Person .
 
 
-###  https://www.maxxi.art/ontology#CuratorialRecord
+###  https://www.maxxi.art/ontology/maxxi#CuratorialRecord
 :CuratorialRecord rdf:type owl:Class ;
-                  rdfs:subClassOf ig:Document ,
-                                  [ rdf:type owl:Restriction ;
-                                    owl:onProperty ig:authored_by ;
-                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                    owl:onClass :Curator
-                                  ] ,
-                                  [ rdf:type owl:Restriction ;
-                                    owl:onProperty ig:inheres_to ;
-                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                    owl:onClass :ArtWork
-                                  ] .
+                  rdfs:subClassOf ig:Document .
 
 
-###  https://www.maxxi.art/ontology#Exibition
+###  https://www.maxxi.art/ontology/maxxi#Exibition
 :Exibition rdf:type owl:Class ;
            rdfs:subClassOf ig:Event ,
                            [ rdf:type owl:Restriction ;
@@ -127,7 +172,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                            ] .
 
 
-###  https://www.maxxi.art/ontology#ExibitionLocation
+###  https://www.maxxi.art/ontology/maxxi#ExibitionLocation
 :ExibitionLocation rdf:type owl:Class ;
                    owl:equivalentClass [ rdf:type owl:Restriction ;
                                          owl:onProperty ig:hosts ;
@@ -136,17 +181,17 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                    rdfs:subClassOf ig:Location .
 
 
-###  https://www.maxxi.art/ontology#Hall
+###  https://www.maxxi.art/ontology/maxxi#Hall
 :Hall rdf:type owl:Class ;
       rdfs:subClassOf :BuldingPart .
 
 
-###  https://www.maxxi.art/ontology#Museum
+###  https://www.maxxi.art/ontology/maxxi#Museum
 :Museum rdf:type owl:Class ;
         rdfs:subClassOf ig:Location .
 
 
-###  https://www.maxxi.art/ontology#Visit
+###  https://www.maxxi.art/ontology/maxxi#Visit
 :Visit rdf:type owl:Class ;
        rdfs:subClassOf ig:Event ,
                        [ rdf:type owl:Restriction ;
@@ -155,7 +200,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                        ] .
 
 
-###  https://www.maxxi.art/ontology#Visitor
+###  https://www.maxxi.art/ontology/maxxi#Visitor
 :Visitor rdf:type owl:Class ;
          owl:equivalentClass [ rdf:type owl:Restriction ;
                                owl:onProperty ig:participate_in ;
@@ -163,5 +208,14 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                              ] ;
          rdfs:subClassOf ig:Person .
 
+
+[ owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger
+] .
+
+[ owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+ ] .
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
