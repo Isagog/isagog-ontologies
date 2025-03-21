@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="User Entered Import Resolution" name="https://isagog.com/ontology/top" uri="file:/D:/Projects/Isagog/isagog-ontologies/isagog_ontologies/ontologies/top/isagog_ontology.ttl"/>
     <uri id="User Entered Import Resolution" name="https://isagog.com/ontology" uri="file:/D:/Projects/Isagog/isagog-ontologies/isagog_ontologies/ontologies/top/isagog_ontology.ttl"/>
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base=""/>
 </catalog>

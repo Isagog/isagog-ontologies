@@ -340,7 +340,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology/top#yields
 :yields rdf:type owl:ObjectProperty ;
         rdfs:subPropertyOf :has_inherent ;
-        rdfs:domain :Immaterial ;
+        rdfs:domain :Intangible ;
         rdfs:range :Sign .
 
 
@@ -505,20 +505,20 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
        :cidoc "http://erlangen-crm.org/240307/E5_Event" .
 
 
-###  https://isagog.com/ontology/top#Immaterial
-:Immaterial rdf:type owl:Class ;
-            rdfs:comment "Thing without direct temporal-spatial attributes, which is socially recognized, such as: informative objects (e.g. documents), ideas, theories"@en .
-
-
 ###  https://isagog.com/ontology/top#Information
 :Information rdf:type owl:Class ;
-             rdfs:subClassOf :Immaterial ,
+             rdfs:subClassOf :Intangible ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty :yields ;
                                owl:someValuesFrom :Sign
                              ] ;
              rdfs:comment "Intangible objects that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."@en ;
              :cidoc "http://erlangen-crm.org/240307/E73_Information_Object" .
+
+
+###  https://isagog.com/ontology/top#Intangible
+:Intangible rdf:type owl:Class ;
+            rdfs:comment "Thing without direct temporal-spatial attributes, which is socially recognized, such as: informative objects (e.g. documents), ideas, theories"@en .
 
 
 ###  https://isagog.com/ontology/top#Location
@@ -627,7 +627,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                         owl:onProperty :source ;
                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onClass [ rdf:type owl:Class ;
-                                      owl:unionOf ( :Immaterial
+                                      owl:unionOf ( :Intangible
                                                     :Occurrent
                                                   )
                                     ]
@@ -637,7 +637,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onDataRange xsd:string
                       ] ;
-      rdfs:comment "Materializable entity that underlies the process of interpreting something as representing or standing for something else (interpretant). Signs existentially depend on the source that generates them, as each sign is a particular instance (token)." ;
+      rdfs:comment "Intangible entity that underlies the process of interpreting something as representing or standing for something else (interpretant). Signs existentially depend on the source that generates them, as each sign is yield by some token." ;
       rdfs:seeAlso "Peirce's Sign (Representamen->Interpretant->Object)" .
 
 
