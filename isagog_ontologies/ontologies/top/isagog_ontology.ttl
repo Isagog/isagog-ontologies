@@ -204,7 +204,9 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://isagog.com/ontology/top#hosts
 :hosts rdf:type owl:ObjectProperty ;
        rdfs:subPropertyOf :collocation ;
-       owl:inverseOf :in_place .
+       owl:inverseOf :in_place ;
+       rdfs:domain :Location ;
+       rdfs:range :Entity .
 
 
 ###  https://isagog.com/ontology/top#in_place
@@ -515,7 +517,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                                owl:onProperty :yields ;
                                owl:someValuesFrom :Sign
                              ] ;
-             rdfs:comment "Social object that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens." ;
+             rdfs:comment "Intangible objects that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."@en ;
              :cidoc "http://erlangen-crm.org/240307/E73_Information_Object" .
 
 
@@ -616,7 +618,8 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology/top#Sign
 :Sign rdf:type owl:Class ;
-      rdfs:subClassOf [ rdf:type owl:Restriction ;
+      rdfs:subClassOf :Intangible ,
+                      [ rdf:type owl:Restriction ;
                         owl:onProperty :referent ;
                         owl:someValuesFrom owl:Thing
                       ] ,

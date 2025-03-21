@@ -6,6 +6,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @base <https://www.maxxi.art/ontology/maxxi> .
+@base <https://www.maxxi.art/ontology/maxxi> .
 
 <https://www.maxxi.art/ontology/maxxi> rdf:type owl:Ontology ;
                                         owl:imports <https://isagog.com/ontology/top> ;
@@ -38,6 +39,15 @@ owl:qualifiedCardinality rdf:type owl:AnnotationProperty .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#cidoc
+###  http://www.w3.org/2002/07/owl#minQualifiedCardinality
+owl:minQualifiedCardinality rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#qualifiedCardinality
+owl:qualifiedCardinality rdf:type owl:AnnotationProperty .
+
+
+###  https://www.maxxi.art/ontology/maxxi#cidoc
 :cidoc rdf:type owl:AnnotationProperty ;
        rdfs:comment "CIDOC Conceptual Reference Model, based on: Nick Crofts, Martin Doerr, Tony Gill, Stephen Stead, Matthew Stiff (eds.): Definition of the CIDOC Conceptual Reference Model (http://cidoc-crm.org/)." ;
        rdfs:subPropertyOf :mapping ;
@@ -45,9 +55,11 @@ owl:qualifiedCardinality rdf:type owl:AnnotationProperty .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#mapping
+###  https://www.maxxi.art/ontology/maxxi#mapping
 :mapping rdf:type owl:AnnotationProperty .
 
 
+###  https://www.maxxi.art/ontology/maxxi#schema
 ###  https://www.maxxi.art/ontology/maxxi#schema
 :schema rdf:type owl:AnnotationProperty ;
         rdfs:comment "Corrispondenza con schema.org"@it ;
@@ -116,15 +128,26 @@ ig:Person rdf:type owl:Class .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#ArtWork
+###  https://www.maxxi.art/ontology/maxxi#ArtWork
 :ArtWork rdf:type owl:Class ;
          rdfs:subClassOf ig:Object ,
                          [ rdf:type owl:Restriction ;
+                           owl:onProperty ig:has_constituent ;
+                           owl:someValuesFrom ig:Material
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :has_technique ;
+                           owl:someValuesFrom :Technique
+                         ] ,
+                         [ rdf:type owl:Restriction ;
                            owl:onProperty ig:authored_by ;
-                           owl:someValuesFrom ig:Person
+                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass ig:Person
                          ] ;
          :schema "https://schema.org/VisualArtwork" .
 
 
+###  https://www.maxxi.art/ontology/maxxi#Author
 ###  https://www.maxxi.art/ontology/maxxi#Author
 :Author rdf:type owl:Class ;
         owl:equivalentClass [ rdf:type owl:Restriction ;
@@ -136,6 +159,7 @@ ig:Person rdf:type owl:Class .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#Building
+###  https://www.maxxi.art/ontology/maxxi#Building
 :Building rdf:type owl:Class ;
           rdfs:subClassOf ig:Location ,
                           [ rdf:type owl:Restriction ;
@@ -145,10 +169,13 @@ ig:Person rdf:type owl:Class .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#BuldingPart
+###  https://www.maxxi.art/ontology/maxxi#BuldingPart
 :BuldingPart rdf:type owl:Class ;
+             rdfs:subClassOf :Building .
              rdfs:subClassOf :Building .
 
 
+###  https://www.maxxi.art/ontology/maxxi#Curator
 ###  https://www.maxxi.art/ontology/maxxi#Curator
 :Curator rdf:type owl:Class ;
          owl:equivalentClass [ rdf:type owl:Restriction ;
@@ -159,10 +186,13 @@ ig:Person rdf:type owl:Class .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#CuratorialRecord
+###  https://www.maxxi.art/ontology/maxxi#CuratorialRecord
 :CuratorialRecord rdf:type owl:Class ;
+                  rdfs:subClassOf ig:Document .
                   rdfs:subClassOf ig:Document .
 
 
+###  https://www.maxxi.art/ontology/maxxi#Exibition
 ###  https://www.maxxi.art/ontology/maxxi#Exibition
 :Exibition rdf:type owl:Class ;
            rdfs:subClassOf ig:Event ,
@@ -173,6 +203,7 @@ ig:Person rdf:type owl:Class .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#ExibitionLocation
+###  https://www.maxxi.art/ontology/maxxi#ExibitionLocation
 :ExibitionLocation rdf:type owl:Class ;
                    owl:equivalentClass [ rdf:type owl:Restriction ;
                                          owl:onProperty ig:hosts ;
@@ -182,10 +213,12 @@ ig:Person rdf:type owl:Class .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#Hall
+###  https://www.maxxi.art/ontology/maxxi#Hall
 :Hall rdf:type owl:Class ;
       rdfs:subClassOf :BuldingPart .
 
 
+###  https://www.maxxi.art/ontology/maxxi#Museum
 ###  https://www.maxxi.art/ontology/maxxi#Museum
 :Museum rdf:type owl:Class ;
         rdfs:subClassOf ig:Location .
@@ -193,13 +226,10 @@ ig:Person rdf:type owl:Class .
 
 ###  https://www.maxxi.art/ontology/maxxi#Visit
 :Visit rdf:type owl:Class ;
-       rdfs:subClassOf ig:Event ,
-                       [ rdf:type owl:Restriction ;
-                         owl:onProperty ig:has_participant ;
-                         owl:someValuesFrom ig:Person
-                       ] .
+       rdfs:subClassOf ig:Event .
 
 
+###  https://www.maxxi.art/ontology/maxxi#Visitor
 ###  https://www.maxxi.art/ontology/maxxi#Visitor
 :Visitor rdf:type owl:Class ;
          owl:equivalentClass [ rdf:type owl:Restriction ;
