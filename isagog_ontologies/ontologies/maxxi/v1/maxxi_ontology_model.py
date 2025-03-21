@@ -6,15 +6,18 @@ from isagog_kg.models.logic_model import Thing
 
 
 class Entity(Thing):
-    """Thing localizable in space and / or time"""
+    """Thing localizable in space and / or time (material)"""
     mentioned_in: List['Document'] = Field(default_factory=list, description="mentioned_in property", json_schema_extra={'kg_property': 'mentioned_in', 'kg_type': 'relation', 'kg_related_class': 'Document'})
     referred_by: List['EntityDescriptor'] = Field(default_factory=list, description="referred_by property", json_schema_extra={'kg_property': 'referred_by', 'kg_type': 'relation', 'kg_related_class': 'EntityDescriptor'})
 
 class Continuant(Entity):
     """An entity that persists through time while maintaining its identity, existing as a whole at any given moment. Continuants are not characterized by temporal parts; instead, they endure as the same entity throughout change, distinct from processes or events, which unfold over time."""
 
-class Sign(Thing):
-    """A non-material entity that underlies the process of interpreting something as representing or standing for something else. Signs existentially depend on the source that generates them, as each sign is a particular instance (token)."""
+class Intangible(Thing):
+    """Thing without direct temporal-spatial attributes, which is socially recognized, such as: informative objects (e.g. documents), ideas, theories"""
+
+class Sign(Intangible):
+    """Intangible entity that underlies the process of interpreting something as representing or standing for something else (interpretant). Signs existentially depend on the source that generates them, as each sign is yield by some token."""
     referent: List['Thing'] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Thing'})
     source: Optional[Any] = Field(default=None, description="source property", json_schema_extra={'kg_property': 'source', 'kg_type': 'relation', 'kg_related_class': 'Any'})
     concept: Optional[str] = Field(default=None, description="concept property", json_schema_extra={'kg_property': 'concept', 'kg_type': 'attribute', 'kg_data_type': 'str'})
@@ -26,11 +29,8 @@ class Statement(Sign):
 class Description(Statement):
     """Statement that brings information about a specific aspect or feature of something"""
 
-class SocialObject(Thing):
-    """Non-material entity that is socially instituted and identified, such as: informative objects (e.g. documents), political movements, promises, committments, etc. It doesn't have direct temporal-spatial attributes"""
-
-class Information(SocialObject):
-    """Social object that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."""
+class Information(Intangible):
+    """Intangible objects that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."""
     yields: List['Sign'] = Field(default_factory=list, description="yields property", json_schema_extra={'kg_property': 'yields', 'kg_type': 'relation', 'kg_related_class': 'Sign'})
 
 class Document(Information):
@@ -79,11 +79,13 @@ class Relationship(Statement):
 class State(Occurrent):
     pass
 
-class ArtMovement(SocialObject):
+class ArtMovement(Intangible):
     pass
 
 class ArtWork(Object):
-    authored_by: List['Person'] = Field(default_factory=list, description="authored_by property", json_schema_extra={'kg_property': 'authored_by', 'kg_type': 'relation', 'kg_related_class': 'Person'})
+    has_constituent: List['Material'] = Field(default_factory=list, description="has_constituent property", json_schema_extra={'kg_property': 'has_constituent', 'kg_type': 'relation', 'kg_related_class': 'Material'})
+    has_technique: List['Technique'] = Field(default_factory=list, description="has_technique property", json_schema_extra={'kg_property': 'has_technique', 'kg_type': 'relation', 'kg_related_class': 'Technique'})
+    authored_by: Optional['Person'] = Field(default=None, description="authored_by property", json_schema_extra={'kg_property': 'authored_by', 'kg_type': 'relation', 'kg_related_class': 'Person'})
 
 class Author(Person):
     """Autorship information, realized (but not necessarily) by some agent"""
@@ -92,16 +94,15 @@ class Building(Location):
     has_part: List['BuldingPart'] = Field(default_factory=list, description="has_part property", json_schema_extra={'kg_property': 'has_part', 'kg_type': 'relation', 'kg_related_class': 'BuldingPart'})
 
 class BuldingPart(Building):
-    part_of: 'Building' = Field(..., description="part_of property", json_schema_extra={'kg_property': 'part_of', 'kg_type': 'relation', 'kg_related_class': 'Building'})
+    pass
 
 class Curator(Person):
     pass
 
 class CuratorialRecord(Document):
-    authored_by: Optional['Curator'] = Field(default=None, description="authored_by property", json_schema_extra={'kg_property': 'authored_by', 'kg_type': 'relation', 'kg_related_class': 'Curator'})
-    inheres_to: Optional['ArtWork'] = Field(default=None, description="inheres_to property", json_schema_extra={'kg_property': 'inheres_to', 'kg_type': 'relation', 'kg_related_class': 'ArtWork'})
+    pass
 
-class Exibition(Event):
+class Exhibition(Event):
     features: List['ArtWork'] = Field(default_factory=list, description="features property", json_schema_extra={'kg_property': 'features', 'kg_type': 'relation', 'kg_related_class': 'ArtWork'})
 
 class ExibitionLocation(Location):
@@ -113,8 +114,11 @@ class Hall(BuldingPart):
 class Museum(Location):
     pass
 
+class Technique(Intangible):
+    pass
+
 class Visit(Event):
-    has_participant: List['Person'] = Field(default_factory=list, description="has_participant property", json_schema_extra={'kg_property': 'has_participant', 'kg_type': 'relation', 'kg_related_class': 'Person'})
+    pass
 
 class Visitor(Person):
     pass
@@ -123,10 +127,10 @@ class Visitor(Person):
 # Update forward references
 Entity.model_rebuild()
 Continuant.model_rebuild()
+Intangible.model_rebuild()
 Sign.model_rebuild()
 Statement.model_rebuild()
 Description.model_rebuild()
-SocialObject.model_rebuild()
 Information.model_rebuild()
 Document.model_rebuild()
 EntityDescriptor.model_rebuild()
@@ -147,9 +151,10 @@ Building.model_rebuild()
 BuldingPart.model_rebuild()
 Curator.model_rebuild()
 CuratorialRecord.model_rebuild()
-Exibition.model_rebuild()
+Exhibition.model_rebuild()
 ExibitionLocation.model_rebuild()
 Hall.model_rebuild()
 Museum.model_rebuild()
+Technique.model_rebuild()
 Visit.model_rebuild()
 Visitor.model_rebuild()

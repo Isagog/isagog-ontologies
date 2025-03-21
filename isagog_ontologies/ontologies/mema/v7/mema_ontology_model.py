@@ -6,15 +6,18 @@ from isagog_kg.models.logic_model import Thing
 
 
 class Entity(Thing):
-    """Thing localizable in space and / or time"""
+    """Thing localizable in space and / or time (material)"""
     mentioned_in: List['Document'] = Field(default_factory=list, description="mentioned_in property", json_schema_extra={'kg_property': 'mentioned_in', 'kg_type': 'relation', 'kg_related_class': 'Document'})
     referred_by: List['EntityDescriptor'] = Field(default_factory=list, description="referred_by property", json_schema_extra={'kg_property': 'referred_by', 'kg_type': 'relation', 'kg_related_class': 'EntityDescriptor'})
 
 class Continuant(Entity):
     """An entity that persists through time while maintaining its identity, existing as a whole at any given moment. Continuants are not characterized by temporal parts; instead, they endure as the same entity throughout change, distinct from processes or events, which unfold over time."""
 
-class Sign(Thing):
-    """A non-material entity that underlies the process of interpreting something as representing or standing for something else. Signs existentially depend on the source that generates them, as each sign is a particular instance (token)."""
+class Intangible(Thing):
+    """Thing without direct temporal-spatial attributes, which is socially recognized, such as: informative objects (e.g. documents), ideas, theories"""
+
+class Sign(Intangible):
+    """Intangible entity that underlies the process of interpreting something as representing or standing for something else (interpretant). Signs existentially depend on the source that generates them, as each sign is yield by some token."""
     referent: List['Thing'] = Field(default_factory=list, description="referent property", json_schema_extra={'kg_property': 'referent', 'kg_type': 'relation', 'kg_related_class': 'Thing'})
     source: Optional[Any] = Field(default=None, description="source property", json_schema_extra={'kg_property': 'source', 'kg_type': 'relation', 'kg_related_class': 'Any'})
     concept: Optional[str] = Field(default=None, description="concept property", json_schema_extra={'kg_property': 'concept', 'kg_type': 'attribute', 'kg_data_type': 'str'})
@@ -26,11 +29,8 @@ class Statement(Sign):
 class Description(Statement):
     """Statement that brings information about a specific aspect or feature of something"""
 
-class SocialObject(Thing):
-    """Non-material entity that is socially instituted and identified, such as: informative objects (e.g. documents), political movements, promises, committments, etc. It doesn't have direct temporal-spatial attributes"""
-
-class Information(SocialObject):
-    """Social object that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."""
+class Information(Intangible):
+    """Intangible objects that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."""
     yields: List['Sign'] = Field(default_factory=list, description="yields property", json_schema_extra={'kg_property': 'yields', 'kg_type': 'relation', 'kg_related_class': 'Sign'})
 
 class Document(Information):
@@ -153,10 +153,10 @@ class WikipediaDescriptor(EntityDescriptor):
 # Update forward references
 Entity.model_rebuild()
 Continuant.model_rebuild()
+Intangible.model_rebuild()
 Sign.model_rebuild()
 Statement.model_rebuild()
 Description.model_rebuild()
-SocialObject.model_rebuild()
 Information.model_rebuild()
 Document.model_rebuild()
 EntityDescriptor.model_rebuild()
