@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Guido Vetere <g.vetere@isagog.com>"]
 readme = "README.md"
-packages = [{ include = "top", from = "isagog_ontologies" }, { include = "utils", from = "isagog_ontologies" }]
+packages = [{ include = "isagog_ontologies" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
