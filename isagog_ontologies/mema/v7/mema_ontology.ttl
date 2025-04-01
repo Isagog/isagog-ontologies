@@ -1,13 +1,13 @@
-@prefix : <http://ilmanifesto.it/ontology/mema#> .
+@prefix : <http://ilmanifesto.it/ontology#> .
 @prefix ig: <https://isagog.com/ontology/top#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://ilmanifesto.it/ontology/mema> .
+@base <http://ilmanifesto.it/ontology> .
 
-<http://ilmanifesto.it/ontology/mema> rdf:type owl:Ontology ;
+<http://ilmanifesto.it/ontology> rdf:type owl:Ontology ;
                                         owl:imports <https://isagog.com/ontology/top> ;
                                         <http://purl.org/dc/elements/1.1/creator> "Guido Vetere, Isagog Srl, Italy" ;
                                         <http://purl.org/dc/elements/1.1/license> <http://creativecommons.org/licenses/by/4.0/> ;
@@ -29,33 +29,33 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 <http://purl.org/dc/elements/1.1/license> rdf:type owl:AnnotationProperty .
 
 
-###  http://ilmanifesto.it/ontology/mema#count
+###  http://ilmanifesto.it/ontology#count
 :count rdf:type owl:AnnotationProperty ;
        rdfs:range xsd:integer .
 
 
-###  http://ilmanifesto.it/ontology/mema#schema
+###  http://ilmanifesto.it/ontology#schema
 :schema rdf:type owl:AnnotationProperty .
 
 
-###  http://ilmanifesto.it/ontology/mema#statements
+###  http://ilmanifesto.it/ontology#statements
 :statements rdf:type owl:AnnotationProperty ;
             rdfs:range xsd:integer .
 
 
-###  http://ilmanifesto.it/ontology/mema#we_filter
+###  http://ilmanifesto.it/ontology#we_filter
 :we_filter rdf:type owl:AnnotationProperty ;
            rdfs:subPropertyOf ig:isagog ;
            rdfs:range xsd:boolean .
 
 
-###  http://ilmanifesto.it/ontology/mema#we_search
+###  http://ilmanifesto.it/ontology#we_search
 :we_search rdf:type owl:AnnotationProperty ;
            rdfs:subPropertyOf ig:isagog ;
            rdfs:range xsd:boolean .
 
 
-###  http://ilmanifesto.it/ontology/mema#we_tok
+###  http://ilmanifesto.it/ontology#we_tok
 :we_tok rdf:type owl:AnnotationProperty ;
         rdfs:subPropertyOf ig:isagog .
 
@@ -68,11 +68,11 @@ ig:isagog rdf:type owl:AnnotationProperty .
 #    Object Properties
 #################################################################
 
-###  http://ilmanifesto.it/ontology/mema#category_of
+###  http://ilmanifesto.it/ontology#category_of
 :category_of rdf:type owl:ObjectProperty .
 
 
-###  http://ilmanifesto.it/ontology/mema#generalization_of
+###  http://ilmanifesto.it/ontology#generalization_of
 :generalization_of rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf ig:composition ;
                    owl:inverseOf :specialization_of ;
@@ -80,39 +80,39 @@ ig:isagog rdf:type owl:AnnotationProperty .
                    rdfs:range :Category .
 
 
-###  http://ilmanifesto.it/ontology/mema#has_category
+###  http://ilmanifesto.it/ontology#has_category
 :has_category rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf ig:classified_by ;
               rdfs:range :Category .
 
 
-###  http://ilmanifesto.it/ontology/mema#has_picture
+###  http://ilmanifesto.it/ontology#has_picture
 :has_picture rdf:type owl:ObjectProperty ;
              owl:inverseOf :picture_of ;
              rdfs:domain ig:Information ;
              rdfs:range :Picture .
 
 
-###  http://ilmanifesto.it/ontology/mema#has_tag
+###  http://ilmanifesto.it/ontology#has_tag
 :has_tag rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf ig:has_inherent ;
          owl:inverseOf :tag_of ;
          rdfs:range :Tag .
 
 
-###  http://ilmanifesto.it/ontology/mema#has_topic
+###  http://ilmanifesto.it/ontology#has_topic
 :has_topic rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf ig:has_inherent ;
            owl:inverseOf :topic_of .
 
 
-###  http://ilmanifesto.it/ontology/mema#mentioned_in
+###  http://ilmanifesto.it/ontology#mentioned_in
 :mentioned_in rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf ig:relatedness ;
               owl:inverseOf :mentions .
 
 
-###  http://ilmanifesto.it/ontology/mema#mentions
+###  http://ilmanifesto.it/ontology#mentions
 :mentions rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf ig:relatedness ;
           rdfs:domain ig:Document ;
@@ -124,7 +124,7 @@ ig:isagog rdf:type owl:AnnotationProperty .
           rdfs:comment "Referral to an Entity, either direct or via a suitable reification (Mention)"@en .
 
 
-###  http://ilmanifesto.it/ontology/mema#object
+###  http://ilmanifesto.it/ontology#object
 :object rdf:type owl:ObjectProperty ;
         rdfs:subPropertyOf ig:referent ;
         rdfs:domain ig:Sign ;
@@ -135,18 +135,18 @@ ig:isagog rdf:type owl:AnnotationProperty .
                    ] .
 
 
-###  http://ilmanifesto.it/ontology/mema#picture_of
+###  http://ilmanifesto.it/ontology#picture_of
 :picture_of rdf:type owl:ObjectProperty .
 
 
-###  http://ilmanifesto.it/ontology/mema#specialization_of
+###  http://ilmanifesto.it/ontology#specialization_of
 :specialization_of rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf ig:composition ;
                    rdfs:domain :Category ;
                    rdfs:range :Category .
 
 
-###  http://ilmanifesto.it/ontology/mema#subject
+###  http://ilmanifesto.it/ontology#subject
 :subject rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf ig:referent ;
          rdfs:domain ig:Relationship ;
@@ -157,24 +157,24 @@ ig:isagog rdf:type owl:AnnotationProperty .
                     ] .
 
 
-###  http://ilmanifesto.it/ontology/mema#summarizes
+###  http://ilmanifesto.it/ontology#summarizes
 :summarizes rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf ig:inheres_to ;
             owl:inverseOf :summary ;
             rdfs:domain :Summary .
 
 
-###  http://ilmanifesto.it/ontology/mema#summary
+###  http://ilmanifesto.it/ontology#summary
 :summary rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf ig:has_inherent .
 
 
-###  http://ilmanifesto.it/ontology/mema#tag_of
+###  http://ilmanifesto.it/ontology#tag_of
 :tag_of rdf:type owl:ObjectProperty ;
         rdfs:subPropertyOf ig:inheres_to .
 
 
-###  http://ilmanifesto.it/ontology/mema#topic_of
+###  http://ilmanifesto.it/ontology#topic_of
 :topic_of rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf ig:inheres_to .
 
@@ -215,218 +215,218 @@ ig:relatedness rdf:type owl:ObjectProperty .
 #    Data properties
 #################################################################
 
-###  http://ilmanifesto.it/ontology/mema#article_pubblication
+###  http://ilmanifesto.it/ontology#article_pubblication
 :article_pubblication rdf:type owl:DatatypeProperty ;
                       owl:deprecated "" .
 
 
-###  http://ilmanifesto.it/ontology/mema#athena_id
+###  http://ilmanifesto.it/ontology#athena_id
 :athena_id rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf :mema_ids .
 
 
-###  http://ilmanifesto.it/ontology/mema#author_str
+###  http://ilmanifesto.it/ontology#author_str
 :author_str rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf ig:identifier .
 
 
-###  http://ilmanifesto.it/ontology/mema#caption
+###  http://ilmanifesto.it/ontology#caption
 :caption rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf ig:text ;
          :schema "https://schema.org/abstract" .
 
 
-###  http://ilmanifesto.it/ontology/mema#category
+###  http://ilmanifesto.it/ontology#category
 :category rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf :tag ;
           rdfs:range xsd:string .
 
 
-###  http://ilmanifesto.it/ontology/mema#category_tag
+###  http://ilmanifesto.it/ontology#category_tag
 :category_tag rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf :tag .
 
 
-###  http://ilmanifesto.it/ontology/mema#copyright
+###  http://ilmanifesto.it/ontology#copyright
 :copyright rdf:type owl:DatatypeProperty .
 
 
-###  http://ilmanifesto.it/ontology/mema#dbpedia_ref
+###  http://ilmanifesto.it/ontology#dbpedia_ref
 :dbpedia_ref rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf ig:reference .
 
 
-###  http://ilmanifesto.it/ontology/mema#directus_id
+###  http://ilmanifesto.it/ontology#directus_id
 :directus_id rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf :mema_ids .
 
 
-###  http://ilmanifesto.it/ontology/mema#edition_date
+###  http://ilmanifesto.it/ontology#edition_date
 :edition_date rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf ig:time_coordinate .
 
 
-###  http://ilmanifesto.it/ontology/mema#full_name
+###  http://ilmanifesto.it/ontology#full_name
 :full_name rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf ig:text .
 
 
-###  http://ilmanifesto.it/ontology/mema#geoinfo_bbox
+###  http://ilmanifesto.it/ontology#geoinfo_bbox
 :geoinfo_bbox rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf ig:geo_coordinate ;
               rdfs:range xsd:string .
 
 
-###  http://ilmanifesto.it/ontology/mema#geoinfo_country_name
+###  http://ilmanifesto.it/ontology#geoinfo_country_name
 :geoinfo_country_name rdf:type owl:DatatypeProperty ;
                       rdfs:subPropertyOf ig:geo_coordinate ;
                       rdfs:range xsd:string .
 
 
-###  http://ilmanifesto.it/ontology/mema#geoinfo_feature_class
+###  http://ilmanifesto.it/ontology#geoinfo_feature_class
 :geoinfo_feature_class rdf:type owl:DatatypeProperty ;
                        rdfs:subPropertyOf ig:geo_coordinate .
 
 
-###  http://ilmanifesto.it/ontology/mema#geoinfo_feature_code
+###  http://ilmanifesto.it/ontology#geoinfo_feature_code
 :geoinfo_feature_code rdf:type owl:DatatypeProperty ;
                       rdfs:subPropertyOf ig:geo_coordinate .
 
 
-###  http://ilmanifesto.it/ontology/mema#geoinfo_id
+###  http://ilmanifesto.it/ontology#geoinfo_id
 :geoinfo_id rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf ig:geo_coordinate ;
             rdfs:range xsd:integer .
 
 
-###  http://ilmanifesto.it/ontology/mema#geoinfo_lat
+###  http://ilmanifesto.it/ontology#geoinfo_lat
 :geoinfo_lat rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf ig:geo_coordinate ;
              rdfs:range xsd:double .
 
 
-###  http://ilmanifesto.it/ontology/mema#geoinfo_lng
+###  http://ilmanifesto.it/ontology#geoinfo_lng
 :geoinfo_lng rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf ig:geo_coordinate ;
              rdfs:range xsd:double .
 
 
-###  http://ilmanifesto.it/ontology/mema#geoinfo_name
+###  http://ilmanifesto.it/ontology#geoinfo_name
 :geoinfo_name rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf ig:geo_coordinate ;
               rdfs:range xsd:string .
 
 
-###  http://ilmanifesto.it/ontology/mema#geoinfo_population
+###  http://ilmanifesto.it/ontology#geoinfo_population
 :geoinfo_population rdf:type owl:DatatypeProperty ;
                     rdfs:subPropertyOf ig:geo_coordinate ;
                     rdfs:range xsd:integer .
 
 
-###  http://ilmanifesto.it/ontology/mema#image_url
+###  http://ilmanifesto.it/ontology#image_url
 :image_url rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf ig:reference .
 
 
-###  http://ilmanifesto.it/ontology/mema#imgcaption
+###  http://ilmanifesto.it/ontology#imgcaption
 :imgcaption rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf :caption .
 
 
-###  http://ilmanifesto.it/ontology/mema#imgurl
+###  http://ilmanifesto.it/ontology#imgurl
 :imgurl rdf:type owl:DatatypeProperty ;
         rdfs:subPropertyOf ig:identifier ;
         rdfs:range xsd:anyURI .
 
 
-###  http://ilmanifesto.it/ontology/mema#keyword
+###  http://ilmanifesto.it/ontology#keyword
 :keyword rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf :tag ;
          rdfs:range xsd:string .
 
 
-###  http://ilmanifesto.it/ontology/mema#kicker
+###  http://ilmanifesto.it/ontology#kicker
 :kicker rdf:type owl:DatatypeProperty ;
         rdfs:subPropertyOf ig:text .
 
 
-###  http://ilmanifesto.it/ontology/mema#last_update
+###  http://ilmanifesto.it/ontology#last_update
 :last_update rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf ig:time_coordinate .
 
 
-###  http://ilmanifesto.it/ontology/mema#mema_ids
+###  http://ilmanifesto.it/ontology#mema_ids
 :mema_ids rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf ig:identifier .
 
 
-###  http://ilmanifesto.it/ontology/mema#pagenum
+###  http://ilmanifesto.it/ontology#pagenum
 :pagenum rdf:type owl:DatatypeProperty .
 
 
-###  http://ilmanifesto.it/ontology/mema#published_day
+###  http://ilmanifesto.it/ontology#published_day
 :published_day rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf ig:time_coordinate .
 
 
-###  http://ilmanifesto.it/ontology/mema#signature
+###  http://ilmanifesto.it/ontology#signature
 :signature rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf ig:text ;
            rdfs:range xsd:string .
 
 
-###  http://ilmanifesto.it/ontology/mema#status
+###  http://ilmanifesto.it/ontology#status
 :status rdf:type owl:DatatypeProperty .
 
 
-###  http://ilmanifesto.it/ontology/mema#tag
+###  http://ilmanifesto.it/ontology#tag
 :tag rdf:type owl:DatatypeProperty ;
      rdfs:subPropertyOf ig:text .
 
 
-###  http://ilmanifesto.it/ontology/mema#title
+###  http://ilmanifesto.it/ontology#title
 :title rdf:type owl:DatatypeProperty ;
        rdfs:subPropertyOf ig:text ;
        rdfs:range xsd:string .
 
 
-###  http://ilmanifesto.it/ontology/mema#userid
+###  http://ilmanifesto.it/ontology#userid
 :userid rdf:type owl:DatatypeProperty ;
         rdfs:subPropertyOf ig:identifier .
 
 
-###  http://ilmanifesto.it/ontology/mema#wiki_summary
+###  http://ilmanifesto.it/ontology#wiki_summary
 :wiki_summary rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf ig:text .
 
 
-###  http://ilmanifesto.it/ontology/mema#wiki_timestamp
+###  http://ilmanifesto.it/ontology#wiki_timestamp
 :wiki_timestamp rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf ig:time_coordinate .
 
 
-###  http://ilmanifesto.it/ontology/mema#wiki_title
+###  http://ilmanifesto.it/ontology#wiki_title
 :wiki_title rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf :title .
 
 
-###  http://ilmanifesto.it/ontology/mema#wiki_url
+###  http://ilmanifesto.it/ontology#wiki_url
 :wiki_url rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf ig:reference ;
           rdfs:range xsd:anyURI .
 
 
-###  http://ilmanifesto.it/ontology/mema#wp_id
+###  http://ilmanifesto.it/ontology#wp_id
 :wp_id rdf:type owl:DatatypeProperty ;
        rdfs:subPropertyOf :mema_ids .
 
 
-###  http://ilmanifesto.it/ontology/mema#wp_slug
+###  http://ilmanifesto.it/ontology#wp_slug
 :wp_slug rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf :mema_ids .
 
 
-###  http://ilmanifesto.it/ontology/mema#year
+###  http://ilmanifesto.it/ontology#year
 :year rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf ig:time_coordinate .
 
@@ -455,12 +455,12 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
 #    Classes
 #################################################################
 
-###  http://ilmanifesto.it/ontology/mema#AIDescriptior
+###  http://ilmanifesto.it/ontology#AIDescriptior
 :AIDescriptior rdf:type owl:Class ;
                rdfs:subClassOf ig:EntityDescriptor .
 
 
-###  http://ilmanifesto.it/ontology/mema#Article
+###  http://ilmanifesto.it/ontology#Article
 :Article rdf:type owl:Class ;
          rdfs:subClassOf ig:Document ,
                          [ rdf:type owl:Restriction ;
@@ -530,7 +530,7 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
  ] .
 
 
-###  http://ilmanifesto.it/ontology/mema#Author
+###  http://ilmanifesto.it/ontology#Author
 :Author rdf:type owl:Class ;
         rdfs:subClassOf ig:Person ,
                         [ rdf:type owl:Restriction ;
@@ -540,7 +540,7 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
         rdfs:comment "Autorship information, realized (but not necessarily) by some agent"@en .
 
 
-###  http://ilmanifesto.it/ontology/mema#Category
+###  http://ilmanifesto.it/ontology#Category
 :Category rdf:type owl:Class ;
           rdfs:subClassOf :Metadata ,
                           [ rdf:type owl:Restriction ;
@@ -551,7 +551,7 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
           rdfs:label "Category"@en .
 
 
-###  http://ilmanifesto.it/ontology/mema#DBPediaDescriptor
+###  http://ilmanifesto.it/ontology#DBPediaDescriptor
 :DBPediaDescriptor rdf:type owl:Class ;
                    rdfs:subClassOf ig:EntityDescriptor ,
                                    [ rdf:type owl:Restriction ;
@@ -561,7 +561,7 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
                                    ] .
 
 
-###  http://ilmanifesto.it/ontology/mema#GeonamesDescriptor
+###  http://ilmanifesto.it/ontology#GeonamesDescriptor
 :GeonamesDescriptor rdf:type owl:Class ;
                     rdfs:subClassOf ig:EntityDescriptor ,
                                     [ rdf:type owl:Restriction ;
@@ -610,12 +610,12 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
                                     ] .
 
 
-###  http://ilmanifesto.it/ontology/mema#Highlight
+###  http://ilmanifesto.it/ontology#Highlight
 :Highlight rdf:type owl:Class ;
            rdfs:subClassOf :Metadata .
 
 
-###  http://ilmanifesto.it/ontology/mema#HumanDescriptor
+###  http://ilmanifesto.it/ontology#HumanDescriptor
 :HumanDescriptor rdf:type owl:Class ;
                  rdfs:subClassOf ig:EntityDescriptor ,
                                  [ rdf:type owl:Restriction ;
@@ -625,7 +625,7 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
                                  ] .
 
 
-###  http://ilmanifesto.it/ontology/mema#Metadata
+###  http://ilmanifesto.it/ontology#Metadata
 :Metadata rdf:type owl:Class ;
           rdfs:subClassOf ig:Description ,
                           [ rdf:type owl:Restriction ;
@@ -640,7 +640,7 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
           rdfs:comment "Document's metadata" .
 
 
-###  http://ilmanifesto.it/ontology/mema#Picture
+###  http://ilmanifesto.it/ontology#Picture
 :Picture rdf:type owl:Class ;
          rdfs:subClassOf ig:Information ,
                          [ rdf:type owl:Restriction ;
@@ -666,7 +666,7 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
          :schema "https://schema.org/Photograph"@it .
 
 
-###  http://ilmanifesto.it/ontology/mema#Summary
+###  http://ilmanifesto.it/ontology#Summary
 :Summary rdf:type owl:Class ;
          rdfs:subClassOf :Metadata ,
                          [ rdf:type owl:Restriction ;
@@ -676,7 +676,7 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
                          ] .
 
 
-###  http://ilmanifesto.it/ontology/mema#Tag
+###  http://ilmanifesto.it/ontology#Tag
 :Tag rdf:type owl:Class ;
      rdfs:subClassOf :Metadata ,
                      [ rdf:type owl:Restriction ;
@@ -685,7 +685,7 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
                      ] .
 
 
-###  http://ilmanifesto.it/ontology/mema#Topic
+###  http://ilmanifesto.it/ontology#Topic
 :Topic rdf:type owl:Class ;
        rdfs:subClassOf :Metadata ,
                        [ rdf:type owl:Restriction ;
@@ -695,7 +695,7 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
        rdfs:comment "Argomento rilevante di articolo identificato dalle funzioni redazionali o dall'IA"@it .
 
 
-###  http://ilmanifesto.it/ontology/mema#WikipediaDescriptor
+###  http://ilmanifesto.it/ontology#WikipediaDescriptor
 :WikipediaDescriptor rdf:type owl:Class ;
                      rdfs:subClassOf ig:EntityDescriptor ,
                                      [ rdf:type owl:Restriction ;
