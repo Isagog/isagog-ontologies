@@ -8,26 +8,18 @@
 @base <http://ilmanifesto.it/ontology> .
 
 <http://ilmanifesto.it/ontology> rdf:type owl:Ontology ;
-                                        owl:imports <https://isagog.com/ontology/top> ;
-                                        <http://purl.org/dc/elements/1.1/creator> "Guido Vetere, Isagog Srl, Italy" ;
-                                        <http://purl.org/dc/elements/1.1/license> <http://creativecommons.org/licenses/by/4.0/> ;
-                                        rdfs:comment """This work is licensed under a Creative Commons Attribution 4.0 International License.
+                                  owl:imports <https://isagog.com/ontology/top> ;
+                                  <http://purl.org/dc/elements/1.1/creator> "Guido Vetere, Isagog Srl, Italy" ;
+                                  <http://purl.org/dc/elements/1.1/license> <http://creativecommons.org/licenses/by/4.0/> ;
+                                  rdfs:comment """This work is licensed under a Creative Commons Attribution 4.0 International License.
 Credits: 
 Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
-                                        rdfs:label "The MeMa Ontology" ;
-                                        owl:versionInfo 7.5 .
+                                  rdfs:label "The MeMa Ontology" ;
+                                  owl:versionInfo 7.5 .
 
 #################################################################
 #    Annotation properties
 #################################################################
-
-###  http://purl.org/dc/elements/1.1/creator
-<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/elements/1.1/license
-<http://purl.org/dc/elements/1.1/license> rdf:type owl:AnnotationProperty .
-
 
 ###  http://ilmanifesto.it/ontology#count
 :count rdf:type owl:AnnotationProperty ;
@@ -58,6 +50,14 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  http://ilmanifesto.it/ontology#we_tok
 :we_tok rdf:type owl:AnnotationProperty ;
         rdfs:subPropertyOf ig:isagog .
+
+
+###  http://purl.org/dc/elements/1.1/creator
+<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/license
+<http://purl.org/dc/elements/1.1/license> rdf:type owl:AnnotationProperty .
 
 
 ###  https://isagog.com/ontology/top#isagog
@@ -469,27 +469,27 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
                            owl:onDataRange xsd:string
                          ] ,
                          [ rdf:type owl:Restriction ;
-                           owl:onProperty :published_day ;
-                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                           owl:onDataRange xsd:string
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :signature ;
-                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                           owl:onDataRange xsd:string
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :title ;
-                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                           owl:onDataRange xsd:string
-                         ] ,
-                         [ rdf:type owl:Restriction ;
                            owl:onProperty :athena_id ;
                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                            owl:onDataRange xsd:string
                          ] ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty :kicker ;
+                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :published_day ;
+                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :signature ;
+                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :title ;
                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                            owl:onDataRange xsd:string
                          ] ,
@@ -509,8 +509,8 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
    owl:annotatedSource :Article ;
    owl:annotatedProperty rdfs:subClassOf ;
    owl:annotatedTarget [ rdf:type owl:Restriction ;
-                         owl:onProperty :title ;
-                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onProperty :kicker ;
+                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                          owl:onDataRange xsd:string
                        ] ;
    :we_search "false"^^xsd:boolean ;
@@ -521,7 +521,7 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
    owl:annotatedSource :Article ;
    owl:annotatedProperty rdfs:subClassOf ;
    owl:annotatedTarget [ rdf:type owl:Restriction ;
-                         owl:onProperty :kicker ;
+                         owl:onProperty :title ;
                          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                          owl:onDataRange xsd:string
                        ] ;
@@ -661,9 +661,9 @@ ig:time_coordinate rdf:type owl:DatatypeProperty .
                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                            owl:onDataRange xsd:string
                          ] ;
+         :schema "https://schema.org/Photograph"@it ;
          rdfs:comment "Immagine fotografica o grafica a corredo di articolo o numero"@it ,
-                      "Information represented by image" ;
-         :schema "https://schema.org/Photograph"@it .
+                      "Information represented by image" .
 
 
 ###  http://ilmanifesto.it/ontology#Summary

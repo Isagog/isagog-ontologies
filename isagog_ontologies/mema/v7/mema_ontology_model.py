@@ -85,11 +85,11 @@ class AIDescriptior(EntityDescriptor):
 class Article(Document):
     """Newspaper article"""
     directus_id: Optional[str] = Field(default=None, description="directus_id property", json_schema_extra={'kg_property': 'directus_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    published_day: str = Field(..., description="published_day property", json_schema_extra={'kg_property': 'published_day', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    signature: str = Field(..., description="signature property", json_schema_extra={'kg_property': 'signature', 'kg_type': 'attribute', 'kg_data_type': 'str'})
-    title: str = Field(..., description="title property", json_schema_extra={'kg_property': 'title', 'kg_type': 'attribute', 'kg_data_type': 'str', 'we_search': 'false', 'we_tok': 'FIELD'})
     athena_id: Optional[str] = Field(default=None, description="athena_id property", json_schema_extra={'kg_property': 'athena_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     kicker: Optional[str] = Field(default=None, description="kicker property", json_schema_extra={'kg_property': 'kicker', 'kg_type': 'attribute', 'kg_data_type': 'str', 'we_search': 'false', 'we_tok': 'FIELD'})
+    published_day: Optional[str] = Field(default=None, description="published_day property", json_schema_extra={'kg_property': 'published_day', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    signature: Optional[str] = Field(default=None, description="signature property", json_schema_extra={'kg_property': 'signature', 'kg_type': 'attribute', 'kg_data_type': 'str'})
+    title: Optional[str] = Field(default=None, description="title property", json_schema_extra={'kg_property': 'title', 'kg_type': 'attribute', 'kg_data_type': 'str', 'we_search': 'false', 'we_tok': 'FIELD'})
     wp_id: Optional[str] = Field(default=None, description="wp_id property", json_schema_extra={'kg_property': 'wp_id', 'kg_type': 'attribute', 'kg_data_type': 'str'})
     wp_slug: Optional[str] = Field(default=None, description="wp_slug property", json_schema_extra={'kg_property': 'wp_slug', 'kg_type': 'attribute', 'kg_data_type': 'str'})
 
