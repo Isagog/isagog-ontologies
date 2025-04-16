@@ -4,16 +4,20 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <https://isagog.com/ontology/top> .
+@base <https://isagog.com/ontology/top#> .
 
 <https://isagog.com/ontology/top> rdf:type owl:Ontology ;
                                    <http://purl.org/dc/elements/1.1/creator> "Guido Vetere, Isagog Srl, Italy" ;
                                    <http://purl.org/dc/elements/1.1/license> <http://creativecommons.org/licenses/by/4.0/> ;
-                                   rdfs:comment """This work is licensed under a Creative Commons Attribution 4.0 International License.
-Credits: 
-Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
+                                   rdfs:comment """An ultra-lite top-level ontology inspired by semiotics (Peirce) and descriptive metaphysics (Strawson).
+
+This ontology provides a minimal set of foundational categories designed to capture the most general distinctions presupposed in our conceptual scheme, as described by Strawson's descriptive metaphysics. It avoids speculative or revisionary commitments, aiming instead to reflect the structure of ordinary thought and language.
+
+At the same time, the ontology is informed by Peircean semiotics, particularly the triadic structure of signification (sign, object, interpretant), which grounds its treatment of meaning, reference, and representation. The result is a lightweight, integrative framework suited for applications in knowledge representation, human-computer interaction, and conceptual modeling, with a particular sensitivity to the contextual, relational, and interpretive dimensions of meaning.
+
+The categories employed are ontologically modest: they are introduced only insofar as they are required to make sense of actual, observable practices of reference and predication."""@en ;
                                    rdfs:label "Isagog Top Level Ontology" ;
-                                   owl:versionInfo 1.6 .
+                                   owl:versionInfo 1.8 .
 
 #################################################################
 #    Annotation properties
@@ -39,15 +43,22 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 <https://ilmanifesto.it/mema/ontology#we_tok> rdf:type owl:AnnotationProperty .
 
 
-###  https://isagog.com/ontology/top#cidoc
-:cidoc rdf:type owl:AnnotationProperty .
+###  https://isagog.com/ontology/top#dolce
+:dolce rdf:type owl:AnnotationProperty ;
+       rdfs:subPropertyOf :mapping .
 
 
 ###  https://isagog.com/ontology/top#isagog
 :isagog rdf:type owl:AnnotationProperty ;
         rdfs:comment "Mapping to the isagog platform" ;
-        rdfs:subPropertyOf :mapping ;
         rdfs:range xsd:string .
+
+
+###  https://isagog.com/ontology/top#lexical
+:lexical rdf:type owl:AnnotationProperty ;
+         rdfs:comment "Lexical annotation" ;
+         rdfs:subPropertyOf :isagog ;
+         rdfs:range :Word .
 
 
 ###  https://isagog.com/ontology/top#mapping
@@ -56,6 +67,16 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://isagog.com/ontology/top#meta
 :meta rdf:type owl:AnnotationProperty .
+
+
+###  https://isagog.com/ontology/top#modality
+:modality rdf:type owl:AnnotationProperty ;
+          rdfs:subPropertyOf :isagog .
+
+
+###  https://isagog.com/ontology/top#ontopia
+:ontopia rdf:type owl:AnnotationProperty ;
+         rdfs:subPropertyOf :mapping .
 
 
 ###  https://isagog.com/ontology/top#schema
@@ -77,6 +98,42 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
              rdfs:comment "Spatial connectedness" .
 
 
+###  https://isagog.com/ontology/top#afford_as
+:afford_as rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :inheres_to ;
+           rdfs:domain :Affordance ;
+           rdfs:range :Occurrent ;
+           rdfs:comment "affordance possible outcome" ;
+           :modality "possibility" .
+
+
+###  https://isagog.com/ontology/top#afford_from
+:afford_from rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :inheres_to ;
+             rdfs:domain :Affordance ;
+             rdfs:range :Continuant ;
+             rdfs:comment "affordance entity grounding" ;
+             :modality "possibility" .
+
+
+###  https://isagog.com/ontology/top#afford_in
+:afford_in rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :inheres_to ;
+           rdfs:domain :Affordance ;
+           rdfs:range :Occurrent ;
+           rdfs:comment "affordance possible context" ;
+           :modality "possibility" .
+
+
+###  https://isagog.com/ontology/top#afford_to
+:afford_to rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :inheres_to ;
+           rdfs:domain :Affordance ;
+           rdfs:range :Agent ;
+           rdfs:comment "affordance possible subject (to whom the affordance is)" ;
+           :modality "possibility" .
+
+
 ###  https://isagog.com/ontology/top#author_of
 :author_of rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :relatedness ;
@@ -96,7 +153,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 
 ###  https://isagog.com/ontology/top#classified_by
 :classified_by rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf :inheres_to ;
+               rdfs:subPropertyOf :has_inherent ;
                owl:inverseOf :classifies .
 
 
@@ -114,6 +171,8 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 :component_of rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :part_of ;
               owl:inverseOf :has_component ;
+              rdfs:domain :Continuant ;
+              rdfs:range :Continuant ;
               rdfs:comment "Functional parthood"@en .
 
 
@@ -127,6 +186,14 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
                rdfs:comment "spatial  temporal proximity" .
 
 
+###  https://isagog.com/ontology/top#constituent_of
+:constituent_of rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :part_of ;
+                owl:inverseOf :has_constituent ;
+                rdfs:domain :Intangible ;
+                rdfs:range :Intangible .
+
+
 ###  https://isagog.com/ontology/top#described_by
 :described_by rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :referred_by ;
@@ -136,6 +203,26 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://isagog.com/ontology/top#describes
 :describes rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :referent .
+
+
+###  https://isagog.com/ontology/top#entailed_by
+:entailed_by rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :entailment ;
+             owl:inverseOf :entails ;
+             rdfs:domain :Concept ;
+             rdfs:range :Concept .
+
+
+###  https://isagog.com/ontology/top#entailment
+:entailment rdf:type owl:ObjectProperty ;
+            rdfs:comment "Logical relation in which the truth of one proposition necessitates the truth of another" .
+
+
+###  https://isagog.com/ontology/top#entails
+:entails rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :entailment ;
+         rdfs:domain :Concept ;
+         rdfs:range :Concept .
 
 
 ###  https://isagog.com/ontology/top#featured_in
@@ -158,22 +245,39 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://isagog.com/ontology/top#has_component
 :has_component rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :has_part ;
+               rdfs:domain :Continuant ;
+               rdfs:range :Continuant ;
                rdfs:comment "Functional parthood" .
+
+
+###  https://isagog.com/ontology/top#has_constituent
+:has_constituent rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :has_part ;
+                 rdfs:domain :Intangible ;
+                 rdfs:range :Intangible .
 
 
 ###  https://isagog.com/ontology/top#has_inherent
 :has_inherent rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :inherence ;
               owl:inverseOf :inheres_to ;
-              rdfs:range :Sign .
+              rdfs:range :Intangible .
 
 
 ###  https://isagog.com/ontology/top#has_part
 :has_part rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :composition ;
           owl:inverseOf :part_of ;
-          rdfs:domain :Continuant ;
-          rdfs:range :Continuant ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :Continuant
+                                      :Intangible
+                                    )
+                      ] ;
+          rdfs:range [ rdf:type owl:Class ;
+                       owl:unionOf ( :Continuant
+                                     :Intangible
+                                   )
+                     ] ;
           rdfs:comment "Material parthood (whole - part)" .
 
 
@@ -194,10 +298,19 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
            rdfs:comment "Temporal parthood (whole - part)" .
 
 
+###  https://isagog.com/ontology/top#has_quality
+:has_quality rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :has_inherent ;
+             owl:inverseOf :qualifies ;
+             rdfs:range :Quality .
+
+
 ###  https://isagog.com/ontology/top#has_spatial_part
 :has_spatial_part rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf :has_part ;
                   owl:inverseOf :spatial_part_of ;
+                  rdfs:domain :Object ;
+                  rdfs:range :Object ;
                   rdfs:comment "Spatial parthood" .
 
 
@@ -224,7 +337,7 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://isagog.com/ontology/top#inheres_to
 :inheres_to rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf :inherence ;
-            rdfs:domain :Sign ;
+            rdfs:domain :Intangible ;
             rdfs:comment "Any relation involved in semiotic processes" .
 
 
@@ -238,6 +351,14 @@ Isagog Srl, Via Faà di Bruno 52, 00195 Roma, Italy""" ;
 ###  https://isagog.com/ontology/top#initiates
 :initiates rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :participate_in .
+
+
+###  https://isagog.com/ontology/top#interpretant
+:interpretant rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :relatedness ;
+              rdfs:domain :Sign ;
+              rdfs:range :Concept ;
+              rdfs:comment "links a Sign to a Concept as its Interpretant, i.e., the effect or understanding the sign produces in a mind, according to Peirce’s semiotic triad." .
 
 
 ###  https://isagog.com/ontology/top#mentioned_in
@@ -275,8 +396,16 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology/top#part_of
 :part_of rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf :composition ;
-         rdfs:domain :Continuant ;
-         rdfs:range :Continuant ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :Continuant
+                                     :Intangible
+                                   )
+                     ] ;
+         rdfs:range [ rdf:type owl:Class ;
+                      owl:unionOf ( :Continuant
+                                    :Intangible
+                                  )
+                    ] ;
          rdfs:comment "Material parthood (part-whole)"@en .
 
 
@@ -298,6 +427,12 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
           rdfs:domain :Occurrent ;
           rdfs:range :Occurrent ;
           rdfs:comment "Temporal parthood (part - whole)"@en .
+
+
+###  https://isagog.com/ontology/top#qualifies
+:qualifies rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :inheres_to ;
+           rdfs:domain :Quality .
 
 
 ###  https://isagog.com/ontology/top#referent
@@ -328,7 +463,9 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology/top#spatial_part_of
 :spatial_part_of rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf :part_of .
+                 rdfs:subPropertyOf :part_of ;
+                 rdfs:domain :Object ;
+                 rdfs:range :Object .
 
 
 ###  https://isagog.com/ontology/top#subject
@@ -369,6 +506,10 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
          rdfs:seeAlso "Representamen->Interpretant (Peirce)" .
 
 
+###  https://isagog.com/ontology/top#coordinate
+:coordinate rdf:type owl:DatatypeProperty .
+
+
 ###  https://isagog.com/ontology/top#expression
 :expression rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf :text ;
@@ -379,6 +520,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology/top#geo_coordinate
 :geo_coordinate rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf :coordinate ;
                 rdfs:comment "any suitable <logitude, latitude> coordinate" .
 
 
@@ -416,6 +558,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology/top#time_coordinate
 :time_coordinate rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf :coordinate ;
                  rdfs:comment "any suitable time point or interval" .
 
 
@@ -428,43 +571,80 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 #    Classes
 #################################################################
 
+###  https://isagog.com/ontology/top#Action
+:Action rdf:type owl:Class ;
+        owl:equivalentClass [ rdf:type owl:Restriction ;
+                              owl:onProperty :initiated_by ;
+                              owl:someValuesFrom :Continuant
+                            ] ;
+        rdfs:subClassOf :Event .
+
+
+###  https://isagog.com/ontology/top#Affordance
+:Affordance rdf:type owl:Class ;
+            rdfs:subClassOf :Quality ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :qualifies ;
+                              owl:allValuesFrom :Continuant
+                            ] ;
+            rdfs:comment "The availability of continuants to be acted upon by agents with respect to practical possibilities." ;
+            :modality "possibility" .
+
+
+###  https://isagog.com/ontology/top#Agent
+:Agent rdf:type owl:Class ;
+       owl:equivalentClass [ rdf:type owl:Restriction ;
+                             owl:onProperty :initiates ;
+                             owl:someValuesFrom :Event
+                           ] ;
+       rdfs:subClassOf :Continuant ,
+                       [ rdf:type owl:Class ;
+                         owl:unionOf ( :Organization
+                                       :Person
+                                     )
+                       ] ;
+       rdfs:comment "Person or Organization that intentionally initiates some Event" .
+
+
+###  https://isagog.com/ontology/top#Concept
+:Concept rdf:type owl:Class ;
+         rdfs:subClassOf :Intangible ;
+         rdfs:comment "Intangible object that exists through collective intentionality and shared recognition through linguistic acts (see Searle, social object). Differently from qualities, concepts do not existentially depend on entities."@en .
+
+
 ###  https://isagog.com/ontology/top#Continuant
 :Continuant rdf:type owl:Class ;
             rdfs:subClassOf :Entity ;
             owl:disjointWith :Occurrent ;
             rdfs:comment "An entity that persists through time while maintaining its identity, existing as a whole at any given moment. Continuants are not characterized by temporal parts; instead, they endure as the same entity throughout change, distinct from processes or events, which unfold over time." ;
-            :cidoc "http://erlangen-crm.org/240307/E77_Persistent_Item" .
+            :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#Object"@en .
 
 
 ###  https://isagog.com/ontology/top#Description
 :Description rdf:type owl:Class ;
              rdfs:subClassOf :Statement ;
-             rdfs:comment "Statement that brings information about a specific aspect or feature of something" ;
-             :cidoc "http://erlangen-crm.org/240307/E73_Appellation" .
+             rdfs:comment "Statement that brings information about a specific aspect or feature of something" .
 
 
 ###  https://isagog.com/ontology/top#Document
 :Document rdf:type owl:Class ;
           rdfs:subClassOf :Information ,
-                          [ rdf:type owl:Restriction ;
-                            owl:onProperty :authored_by ;
-                            owl:someValuesFrom :Person
-                          ] ,
+                          _:genid19 ,
                           [ rdf:type owl:Restriction ;
                             owl:onProperty :body ;
                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                             owl:onDataRange xsd:string
                           ] ;
-          rdfs:comment "Textual document" ;
-          :cidoc "http://erlangen-crm.org/240307/E31_Document" .
+          rdfs:comment "Textual document" .
+
+_:genid19 rdf:type owl:Restriction ;
+           owl:onProperty :authored_by ;
+           owl:someValuesFrom :Person .
 
 [ rdf:type owl:Axiom ;
    owl:annotatedSource :Document ;
    owl:annotatedProperty rdfs:subClassOf ;
-   owl:annotatedTarget [ rdf:type owl:Restriction ;
-                         owl:onProperty :authored_by ;
-                         owl:someValuesFrom :Person
-                       ] ;
+   owl:annotatedTarget _:genid19 ;
    <https://ilmanifesto.it/mema/ontology#we_filter> "true"^^xsd:boolean ;
    <https://ilmanifesto.it/mema/ontology#we_search> "true"^^xsd:boolean ;
    <https://ilmanifesto.it/mema/ontology#we_tok> "FIELD"
@@ -474,15 +654,10 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology/top#Entity
 :Entity rdf:type owl:Class ;
         rdfs:subClassOf [ rdf:type owl:Restriction ;
-                          owl:onProperty :mentioned_in ;
-                          owl:someValuesFrom :Document
-                        ] ,
-                        [ rdf:type owl:Restriction ;
                           owl:onProperty :referred_by ;
                           owl:someValuesFrom :EntityDescriptor
                         ] ;
-        rdfs:comment "Thing localizable in space and / or time (material)"@en ;
-        :cidoc "http://erlangen-crm.org/240307/E1_CRM_Entity" .
+        rdfs:comment "Thing localizable in space and / or time"@en .
 
 
 ###  https://isagog.com/ontology/top#EntityDescriptor
@@ -502,7 +677,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology/top#Event
 :Event rdf:type owl:Class ;
        rdfs:subClassOf :Occurrent ;
-       :cidoc "http://erlangen-crm.org/240307/E5_Event" .
+       rdfs:comment "A temporally extended occurrence composed of heterogeneous parts or phases." .
 
 
 ###  https://isagog.com/ontology/top#Information
@@ -513,7 +688,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                                owl:someValuesFrom :Sign
                              ] ;
              rdfs:comment "Intangible objects that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."@en ;
-             :cidoc "http://erlangen-crm.org/240307/E73_Information_Object" .
+             :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#InformationEntity"@en .
 
 
 ###  https://isagog.com/ontology/top#Intangible
@@ -524,8 +699,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology/top#Location
 :Location rdf:type owl:Class ;
           rdfs:subClassOf :Continuant ;
-          rdfs:comment "Identified portion of space not necessarily continuous"@en ;
-          :cidoc "http://erlangen-crm.org/240307/E53_Place" .
+          rdfs:comment "Identified portion of space not necessarily continuous"@en .
 
 
 ###  https://isagog.com/ontology/top#Material
@@ -536,7 +710,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology/top#Mention
 :Mention rdf:type owl:Class ;
-         rdfs:subClassOf :Statement ,
+         rdfs:subClassOf :Sentence ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty :referred_by ;
                            owl:someValuesFrom :EntityDescriptor
@@ -552,7 +726,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 :Object rdf:type owl:Class ;
         rdfs:subClassOf :Continuant ;
         rdfs:comment "A sortal continuant characterized by having determinate boundaries and a unity criterion that defines its persistence as a distinct entity. Changes in morphology or composition may affect its identity within a given context." ;
-        :cidoc "http://erlangen-crm.org/240307/E70_Thing" .
+        :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalObject"@en .
 
 
 ###  https://isagog.com/ontology/top#Occurrent
@@ -571,13 +745,12 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                              owl:someValuesFrom xsd:string
                            ] ;
            rdfs:comment "Entities that unfold or occur over time, such as events, processes,  or activities. These entities are not wholly present at any single moment but are extended in time, contrasting with 'Continuants', which persist while maintaining identity." ;
-           rdfs:seeAlso "Occurrent" ;
-           :cidoc "http://erlangen-crm.org/240307/E5_Event" .
+           :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#Event"@en .
 
 
 ###  https://isagog.com/ontology/top#Organization
 :Organization rdf:type owl:Class ;
-              rdfs:subClassOf :Continuant ;
+              rdfs:subClassOf :SocialGroup ;
               rdfs:comment "Social group of people working together towards common goals, governed by defined rules and processes"@en .
 
 
@@ -590,6 +763,17 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                           owl:onDataRange xsd:string
                         ] ;
         :schema "https://schema.org/Person" .
+
+
+###  https://isagog.com/ontology/top#Quality
+:Quality rdf:type owl:Class ;
+         rdfs:subClassOf :Intangible ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :qualifies ;
+                           owl:someValuesFrom :Entity
+                         ] ;
+         rdfs:comment "Aspect of a spatio-temporal entity, as perceived and conceptually elaborated. Differently from Concepts, Qualities are not socially constructed."@en ;
+         :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#Quality"@en .
 
 
 ###  https://isagog.com/ontology/top#Relationship
@@ -616,9 +800,23 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
               rdfs:comment "A formal statement (assertion) that specifies how two entities are connected or associated within a given context, describing the nature, direction, and type of interaction or dependency between them." .
 
 
+###  https://isagog.com/ontology/top#Sentence
+:Sentence rdf:type owl:Class ;
+          rdfs:subClassOf :Sign ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :has_constituent ;
+                            owl:someValuesFrom :Word
+                          ] ;
+          rdfs:comment "Syntactic linguistic occurrence (token) regardless of realization (written or spoken)"@en .
+
+
 ###  https://isagog.com/ontology/top#Sign
 :Sign rdf:type owl:Class ;
       rdfs:subClassOf :Intangible ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :interpretant ;
+                        owl:someValuesFrom :Concept
+                      ] ,
                       [ rdf:type owl:Restriction ;
                         owl:onProperty :referent ;
                         owl:someValuesFrom owl:Thing
@@ -633,30 +831,45 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                                     ]
                       ] ,
                       [ rdf:type owl:Restriction ;
-                        owl:onProperty :concept ;
-                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty :expression ;
+                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onDataRange xsd:string
                       ] ;
-      rdfs:comment "Intangible entity that underlies the process of interpreting something as representing or standing for something else (interpretant). Signs existentially depend on the source that generates them, as each sign is yield by some token." ;
+      rdfs:comment "Intangible entity that underlies the process of interpreting something as representing or standing for something else (interpretant). Signs existentially depend on the source that generates them, as each sign is yield by a part of its information (token)." ;
       rdfs:seeAlso "Peirce's Sign (Representamen->Interpretant->Object)" .
+
+
+###  https://isagog.com/ontology/top#SocialGroup
+:SocialGroup rdf:type owl:Class ;
+             rdfs:subClassOf :Continuant ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :has_component ;
+                               owl:someValuesFrom :Person
+                             ] ;
+             rdfs:comment "Group of people" .
 
 
 ###  https://isagog.com/ontology/top#State
 :State rdf:type owl:Class ;
        rdfs:subClassOf :Occurrent ;
-       :cidoc "http://erlangen-crm.org/240307/E3_Condition_State" .
+       rdfs:comment "A temporally extended condition composed of homogeneous parts, uniform across time." .
 
 
 ###  https://isagog.com/ontology/top#Statement
 :Statement rdf:type owl:Class ;
-           rdfs:subClassOf :Sign ,
-                           [ rdf:type owl:Restriction ;
-                             owl:onProperty :expression ;
-                             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                             owl:onDataRange xsd:string
-                           ] ;
-           rdfs:comment "Linguistic proposition (i.e. sentence that may be true or false) about a state of affairs" ;
-           :cidoc "http://erlangen-crm.org/240307/E89_Propositional_Object" .
+           rdfs:subClassOf :Sentence ;
+           rdfs:comment "Sentence that may be true or false (proposition) w.r.t. a state of affairs" .
+
+
+###  https://isagog.com/ontology/top#Word
+:Word rdf:type owl:Class ;
+      rdfs:subClassOf :Sign ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :constituent_of ;
+                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :Sentence
+                      ] ;
+      rdfs:comment "Word occurrence (token), regardless of realization (written or spoken)"@en .
 
 
 #################################################################
@@ -673,4 +886,4 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ] .
 
 
-###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
