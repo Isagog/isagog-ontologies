@@ -5,7 +5,7 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <https://www.maxxi.art/ontology/maxxi#> .
+@base <https://www.maxxi.art/ontology/maxxi> .
 
 <https://www.maxxi.art/ontology/maxxi> rdf:type owl:Ontology ;
                                         owl:imports <https://isagog.com/ontology/top> ;
@@ -82,6 +82,17 @@ ig:participate_in rdf:type owl:ObjectProperty .
 
 
 #################################################################
+#    Data properties
+#################################################################
+
+###  https://www.maxxi.art/ontology/maxxi#creation_date
+:creation_date rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf ig:time_coordinate ;
+               rdfs:domain ig:Object ;
+               rdfs:range xsd:dateTime .
+
+
+#################################################################
 #    Classes
 #################################################################
 
@@ -100,6 +111,10 @@ ig:Event rdf:type owl:Class ;
          :cidoc "http://erlangen-crm.org/240307/E5_Event"@en .
 
 
+###  https://isagog.com/ontology/top#Information
+ig:Information :cidoc "http://erlangen-crm.org/240307/E73_Information_Object"@en .
+
+
 ###  https://isagog.com/ontology/top#Location
 ig:Location rdf:type owl:Class ;
             :cidoc "http://erlangen-crm.org/240307/E53_Place"@en .
@@ -114,23 +129,19 @@ ig:Object rdf:type owl:Class ;
 ig:Person rdf:type owl:Class .
 
 
-###  https://www.maxxi.art/ontology/maxxi#ArtWork
-:ArtWork rdf:type owl:Class ;
-         rdfs:subClassOf ig:Object ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :has_technique ;
-                           owl:someValuesFrom :Technique
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty ig:authored_by ;
-                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                           owl:onClass ig:Person
-                         ] .
-
-
 ###  https://www.maxxi.art/ontology/maxxi#Artistic_Theory_or_Movement
 :Artistic_Theory_or_Movement rdf:type owl:Class ;
                              rdfs:subClassOf :Theories_and_Ideologies .
+
+
+###  https://www.maxxi.art/ontology/maxxi#Artwork
+:Artwork rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Class ;
+                               owl:unionOf ( :Immaterial_Artwork
+                                             :Material_Artwork
+                                             :Performative_Artwork
+                                           )
+                             ] .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#Audience
@@ -138,20 +149,21 @@ ig:Person rdf:type owl:Class .
           rdfs:subClassOf ig:SocialGroup .
 
 
-###  https://www.maxxi.art/ontology/maxxi#AudienceNeed
-:AudienceNeed rdf:type owl:Class ;
-              rdfs:subClassOf ig:Quality ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty ig:qualifies ;
-                                owl:allValuesFrom :Audience
-                              ] .
+###  https://www.maxxi.art/ontology/maxxi#AudienceAccessNeed
+:AudienceAccessNeed rdf:type owl:Class ;
+                    rdfs:subClassOf ig:Quality ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty ig:qualifies ;
+                                      owl:allValuesFrom :Audience
+                                    ] ;
+                    rdfs:comment "classificare le qualità delle persone visitatrici? es. VisualCapability, GognitiveCapability" .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#Author
 :Author rdf:type owl:Class ;
         owl:equivalentClass [ rdf:type owl:Restriction ;
                               owl:onProperty ig:author_of ;
-                              owl:someValuesFrom :ArtWork
+                              owl:someValuesFrom :Material_Artwork
                             ] ;
         rdfs:subClassOf ig:Person ;
         rdfs:comment "Autorship information, realized (but not necessarily) by some agent"@en .
@@ -195,12 +207,7 @@ ig:Person rdf:type owl:Class .
             rdfs:subClassOf ig:Event ,
                             [ rdf:type owl:Restriction ;
                               owl:onProperty ig:features ;
-                              owl:someValuesFrom :ArtWork
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty ig:in_place ;
-                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                              owl:onClass ig:Location
+                              owl:someValuesFrom :Material_Artwork
                             ] .
 
 
@@ -214,9 +221,38 @@ ig:Person rdf:type owl:Class .
       rdfs:subClassOf :BuldingPart .
 
 
+###  https://www.maxxi.art/ontology/maxxi#Immaterial_Artwork
+:Immaterial_Artwork rdf:type owl:Class ;
+                    rdfs:subClassOf ig:Information .
+
+
 ###  https://www.maxxi.art/ontology/maxxi#Literature
 :Literature rdf:type owl:Class ;
             rdfs:subClassOf :Artistic_Theory_or_Movement .
+
+
+###  https://www.maxxi.art/ontology/maxxi#Material_Artwork
+:Material_Artwork rdf:type owl:Class ;
+                  rdfs:subClassOf ig:Object ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty ig:composition ;
+                                    owl:someValuesFrom ig:Material
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :has_technique ;
+                                    owl:someValuesFrom :Technique
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty ig:authored_by ;
+                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass ig:Person
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :creation_date ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onDataRange xsd:dateTime
+                                  ] ;
+                  rdfs:comment "vi sono opere correlate 8ES. VERSIONI DELLO STESSO DIPINTO)" .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#Museum
@@ -245,6 +281,11 @@ ig:Person rdf:type owl:Class .
 ###  https://www.maxxi.art/ontology/maxxi#PerformativeArt
 :PerformativeArt rdf:type owl:Class ;
                  rdfs:subClassOf :Artistic_Theory_or_Movement .
+
+
+###  https://www.maxxi.art/ontology/maxxi#Performative_Artwork
+:Performative_Artwork rdf:type owl:Class ;
+                      rdfs:subClassOf ig:Event .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#Philosophical_and_Social_Theories
@@ -292,13 +333,12 @@ ig:Person rdf:type owl:Class .
 
 ###  https://www.maxxi.art/ontology/maxxi#cognitive_support
 :cognitive_support rdf:type owl:NamedIndividual ,
-                            :AudienceNeed .
+                            :AudienceAccessNeed .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#existentialism
 :existentialism rdf:type owl:NamedIndividual ,
-                         :Philosophical_and_Social_Theories ;
-                rdfs:comment "Sofia, non ti piace Sartre?" .
+                         :Philosophical_and_Social_Theories .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#neoclassicism
@@ -311,20 +351,23 @@ ig:Person rdf:type owl:Class .
                        :PaintingTechnique .
 
 
-###  https://www.maxxi.art/ontology/maxxi#sensorial_support
-:sensorial_support rdf:type owl:NamedIndividual ,
-                            :AudienceNeed .
-
-
 ###  https://www.maxxi.art/ontology/maxxi#tempera
 :tempera rdf:type owl:NamedIndividual ,
                   :PaintingTechnique .
+
+
+###  https://www.maxxi.art/ontology/maxxi#visually_impaired_support
+:visually_impaired_support rdf:type owl:NamedIndividual ,
+                                    :AudienceAccessNeed .
 
 
 ###  https://www.maxxi.art/ontology/maxxi#watercolor
 :watercolor rdf:type owl:NamedIndividual ,
                      :PaintingTechnique .
 
+
+[ owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger
+] .
 
 #################################################################
 #    Annotations
@@ -339,9 +382,6 @@ ig:Description :cidoc "http://erlangen-crm.org/240307/E73_Appellation"@en .
 ig:Entity :cidoc "http://erlangen-crm.org/240307/E1_CRM_Entity"@en .
 
 
-ig:Information :cidoc "http://erlangen-crm.org/240307/E73_Information_Object"@en .
-
-
 ig:Occurrent :cidoc "http://erlangen-crm.org/240307/E5_Event"@en .
 
 
@@ -354,4 +394,4 @@ ig:Statement :cidoc "http://erlangen-crm.org/240307/E89_Propositional_Object"@en
 ig:modality rdfs:comment "Sofia, non ti piace Sartre?" .
 
 
-###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
