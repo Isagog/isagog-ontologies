@@ -4,7 +4,7 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <https://isagog.com/ontology/top> .
+@base <https://isagog.com/ontology/top#> .
 
 <https://isagog.com/ontology/top> rdf:type owl:Ontology ;
                                    <http://purl.org/dc/elements/1.1/creator> "Guido Vetere, Isagog Srl, Italy" ;
@@ -345,6 +345,7 @@ The categories employed are ontologically modest: they are introduced only insof
 :initiated_by rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :has_participant ;
               owl:inverseOf :initiates ;
+              rdfs:domain :Occurrent ;
               rdfs:comment "Agentive participation" .
 
 
@@ -427,6 +428,12 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
           rdfs:domain :Occurrent ;
           rdfs:range :Occurrent ;
           rdfs:comment "Temporal parthood (part - whole)"@en .
+
+
+###  https://isagog.com/ontology/top#planned_by
+:planned_by rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :referred_by ;
+            rdfs:domain :Action .
 
 
 ###  https://isagog.com/ontology/top#qualifies
@@ -575,9 +582,13 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 :Action rdf:type owl:Class ;
         owl:equivalentClass [ rdf:type owl:Restriction ;
                               owl:onProperty :initiated_by ;
-                              owl:someValuesFrom :Continuant
+                              owl:someValuesFrom :Agent
                             ] ;
-        rdfs:subClassOf :Event .
+        rdfs:subClassOf :Event ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :planned_by ;
+                          owl:someValuesFrom :Information
+                        ] .
 
 
 ###  https://isagog.com/ontology/top#Affordance
@@ -587,8 +598,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                               owl:onProperty :qualifies ;
                               owl:allValuesFrom :Continuant
                             ] ;
-            rdfs:comment "Si può applicare agli eventi? (Sofia)" ,
-                         "The availability of continuants to be acted upon by agents with respect to practical possibilities." ;
+            rdfs:comment "Quality that characterizes the availability of continuants to be acted upon by agents with respect to practical possibilities." ;
             :modality "possibility" .
 
 
@@ -630,10 +640,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology/top#Document
 :Document rdf:type owl:Class ;
           rdfs:subClassOf :Information ,
-                          [ rdf:type owl:Restriction ;
-                            owl:onProperty :authored_by ;
-                            owl:someValuesFrom :Person
-                          ] ,
+                          _:genid20 ,
                           [ rdf:type owl:Restriction ;
                             owl:onProperty :body ;
                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
@@ -641,17 +648,29 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                           ] ;
           rdfs:comment "Textual document" .
 
+_:genid20 rdf:type owl:Restriction ;
+           owl:onProperty :authored_by ;
+           owl:someValuesFrom :Person .
+
 [ rdf:type owl:Axiom ;
    owl:annotatedSource :Document ;
    owl:annotatedProperty rdfs:subClassOf ;
-   owl:annotatedTarget [ rdf:type owl:Restriction ;
-                         owl:onProperty :authored_by ;
-                         owl:someValuesFrom :Person
-                       ] ;
+   owl:annotatedTarget _:genid20 ;
    <https://ilmanifesto.it/mema/ontology#we_filter> "true"^^xsd:boolean ;
    <https://ilmanifesto.it/mema/ontology#we_search> "true"^^xsd:boolean ;
    <https://ilmanifesto.it/mema/ontology#we_tok> "FIELD"
  ] .
+
+
+###  https://isagog.com/ontology/top#Enactment
+:Enactment rdf:type owl:Class ;
+           rdfs:subClassOf :Quality ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :qualifies ;
+                             owl:allValuesFrom :Occurrent
+                           ] ;
+           rdfs:comment "Quality that characterizes an Occurrent with respect to its capacity to suggest, solicit or enable participation, reaction, or continuation." ;
+           :modality "possibility" .
 
 
 ###  https://isagog.com/ontology/top#Entity
@@ -775,7 +794,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                            owl:onProperty :qualifies ;
                            owl:someValuesFrom :Entity
                          ] ;
-         rdfs:comment "Aspect of a spatio-temporal entity, as perceived and conceptually elaborated. Differently from Concepts, Qualities are not socially constructed."@en ;
+         rdfs:comment "Aspect of a spatio-temporal entity, as perceived or conceptually elaborated. Differently from Concepts, Qualities are not socially constructed."@en ;
          :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#Quality"@en .
 
 
@@ -889,4 +908,4 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ] .
 
 
-###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
