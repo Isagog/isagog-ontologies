@@ -17,7 +17,7 @@ At the same time, the ontology is informed by Peircean semiotics, particularly t
 
 The categories employed are ontologically modest: they are introduced only insofar as they are required to make sense of actual, observable practices of reference and predication."""@en ;
                                    rdfs:label "Isagog Top Level Ontology" ;
-                                   owl:versionInfo 1.8 .
+                                   owl:versionInfo 2.0 .
 
 #################################################################
 #    Annotation properties
@@ -111,7 +111,7 @@ The categories employed are ontologically modest: they are introduced only insof
 :afford_from rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :inheres_to ;
              rdfs:domain :Affordance ;
-             rdfs:range :Continuant ;
+             rdfs:range :Entity ;
              rdfs:comment "affordance entity grounding" ;
              :modality "possibility" .
 
@@ -171,8 +171,8 @@ The categories employed are ontologically modest: they are introduced only insof
 :component_of rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :part_of ;
               owl:inverseOf :has_component ;
-              rdfs:domain :Continuant ;
-              rdfs:range :Continuant ;
+              rdfs:domain :Entity ;
+              rdfs:range :Entity ;
               rdfs:comment "Functional parthood"@en .
 
 
@@ -245,8 +245,8 @@ The categories employed are ontologically modest: they are introduced only insof
 ###  https://isagog.com/ontology/top#has_component
 :has_component rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :has_part ;
-               rdfs:domain :Continuant ;
-               rdfs:range :Continuant ;
+               rdfs:domain :Entity ;
+               rdfs:range :Entity ;
                rdfs:comment "Functional parthood" .
 
 
@@ -269,12 +269,12 @@ The categories employed are ontologically modest: they are introduced only insof
           rdfs:subPropertyOf :composition ;
           owl:inverseOf :part_of ;
           rdfs:domain [ rdf:type owl:Class ;
-                        owl:unionOf ( :Continuant
+                        owl:unionOf ( :Entity
                                       :Intangible
                                     )
                       ] ;
           rdfs:range [ rdf:type owl:Class ;
-                       owl:unionOf ( :Continuant
+                       owl:unionOf ( :Entity
                                      :Intangible
                                    )
                      ] ;
@@ -286,7 +286,7 @@ The categories employed are ontologically modest: they are introduced only insof
                  rdfs:subPropertyOf :participation ;
                  owl:inverseOf :participate_in ;
                  rdfs:domain :Occurrent ;
-                 rdfs:range :Continuant .
+                 rdfs:range :Entity .
 
 
 ###  https://isagog.com/ontology/top#has_phase
@@ -318,14 +318,12 @@ The categories employed are ontologically modest: they are introduced only insof
 :hosts rdf:type owl:ObjectProperty ;
        rdfs:subPropertyOf :collocation ;
        owl:inverseOf :in_place ;
-       rdfs:domain :Location ;
-       rdfs:range :Entity .
+       rdfs:domain :Location .
 
 
 ###  https://isagog.com/ontology/top#in_place
 :in_place rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :collocation ;
-          rdfs:domain :Entity ;
           rdfs:range :Location .
 
 
@@ -366,7 +364,6 @@ The categories employed are ontologically modest: they are introduced only insof
 :mentioned_in rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :relatedness ;
               owl:inverseOf :mentions ;
-              rdfs:domain :Entity ;
               rdfs:range :Document .
 
 
@@ -374,7 +371,6 @@ The categories employed are ontologically modest: they are introduced only insof
 :mentions rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :relatedness ;
           rdfs:domain :Document ;
-          rdfs:range :Entity ;
           rdfs:comment """Direct (abstract) representation of Entity mentions in Documents.
 mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
@@ -398,12 +394,12 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 :part_of rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf :composition ;
          rdfs:domain [ rdf:type owl:Class ;
-                       owl:unionOf ( :Continuant
+                       owl:unionOf ( :Entity
                                      :Intangible
                                    )
                      ] ;
          rdfs:range [ rdf:type owl:Class ;
-                      owl:unionOf ( :Continuant
+                      owl:unionOf ( :Entity
                                     :Intangible
                                   )
                     ] ;
@@ -413,7 +409,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology/top#participate_in
 :participate_in rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf :participation ;
-                rdfs:domain :Continuant ;
+                rdfs:domain :Entity ;
                 rdfs:range :Occurrent .
 
 
@@ -593,12 +589,12 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology/top#Affordance
 :Affordance rdf:type owl:Class ;
-            rdfs:subClassOf :Quality ,
+            rdfs:subClassOf :Disposition ,
                             [ rdf:type owl:Restriction ;
                               owl:onProperty :qualifies ;
-                              owl:allValuesFrom :Continuant
+                              owl:allValuesFrom :Entity
                             ] ;
-            rdfs:comment "Quality that characterizes the availability of continuants to be acted upon by agents with respect to practical possibilities." ;
+            rdfs:comment "Disposition of Continuants to be acted upon by agents with respect to practical possibilities." ;
             :modality "possibility" .
 
 
@@ -608,7 +604,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                              owl:onProperty :initiates ;
                              owl:someValuesFrom :Event
                            ] ;
-       rdfs:subClassOf :Continuant ,
+       rdfs:subClassOf :Entity ,
                        [ rdf:type owl:Class ;
                          owl:unionOf ( :Organization
                                        :Person
@@ -623,18 +619,16 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
          rdfs:comment "Intangible object that exists through collective intentionality and shared recognition through linguistic acts (see Searle, social object). Differently from qualities, concepts do not existentially depend on entities."@en .
 
 
-###  https://isagog.com/ontology/top#Continuant
-:Continuant rdf:type owl:Class ;
-            rdfs:subClassOf :Entity ;
-            owl:disjointWith :Occurrent ;
-            rdfs:comment "An entity that persists through time while maintaining its identity, existing as a whole at any given moment. Continuants are not characterized by temporal parts; instead, they endure as the same entity throughout change, distinct from processes or events, which unfold over time." ;
-            :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#Object"@en .
-
-
 ###  https://isagog.com/ontology/top#Description
 :Description rdf:type owl:Class ;
              rdfs:subClassOf :Statement ;
              rdfs:comment "Statement that brings information about a specific aspect or feature of something" .
+
+
+###  https://isagog.com/ontology/top#Disposition
+:Disposition rdf:type owl:Class ;
+             rdfs:subClassOf :Quality ;
+             rdfs:comment "Potential or modal quality that inheres in a bearer but requires specific contextual conditions for its full realization or manifestation. It captures the capacity, tendency, or functional potential of an entity." .
 
 
 ###  https://isagog.com/ontology/top#Document
@@ -664,35 +658,26 @@ _:genid20 rdf:type owl:Restriction ;
 
 ###  https://isagog.com/ontology/top#Enactment
 :Enactment rdf:type owl:Class ;
-           rdfs:subClassOf :Quality ,
+           rdfs:subClassOf :Disposition ,
                            [ rdf:type owl:Restriction ;
                              owl:onProperty :qualifies ;
                              owl:allValuesFrom :Occurrent
                            ] ;
-           rdfs:comment "Quality that characterizes an Occurrent with respect to its capacity to suggest, solicit or enable participation, reaction, or continuation." ;
+           rdfs:comment "Disposition of Occurrents with respect to their capacity to suggest, solicit or enable participation, reaction, or continuation." ;
            :modality "possibility" .
 
 
 ###  https://isagog.com/ontology/top#Entity
 :Entity rdf:type owl:Class ;
-        rdfs:subClassOf [ rdf:type owl:Restriction ;
-                          owl:onProperty :referred_by ;
-                          owl:someValuesFrom :EntityDescriptor
-                        ] ;
-        rdfs:comment "Thing localizable in space and / or time"@en .
+        owl:disjointWith :Intangible ,
+                         :Occurrent ;
+        rdfs:comment "Thing that persists through time while maintaining its identity, existing as a whole at any given moment (continuant). Continuants are not characterized by temporal parts; instead, they endure as the same entity throughout change, distinct from processes or events, which unfold over time." ;
+        :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#Object"@en .
 
 
 ###  https://isagog.com/ontology/top#EntityDescriptor
 :EntityDescriptor rdf:type owl:Class ;
-                  rdfs:subClassOf :Description ,
-                                  [ rdf:type owl:Restriction ;
-                                    owl:onProperty :referent ;
-                                    owl:allValuesFrom [ rdf:type owl:Class ;
-                                                        owl:unionOf ( :Entity
-                                                                      :Mention
-                                                                    )
-                                                      ]
-                                  ] ;
+                  rdfs:subClassOf :Description ;
                   rdfs:comment "Descriptions referring to entities"@en .
 
 
@@ -715,18 +700,19 @@ _:genid20 rdf:type owl:Restriction ;
 
 ###  https://isagog.com/ontology/top#Intangible
 :Intangible rdf:type owl:Class ;
+            owl:disjointWith :Occurrent ;
             rdfs:comment "Thing without direct temporal-spatial attributes, which is socially recognized, such as: informative objects (e.g. documents), ideas, theories"@en .
 
 
 ###  https://isagog.com/ontology/top#Location
 :Location rdf:type owl:Class ;
-          rdfs:subClassOf :Continuant ;
+          rdfs:subClassOf :Entity ;
           rdfs:comment "Identified portion of space not necessarily continuous"@en .
 
 
 ###  https://isagog.com/ontology/top#Material
 :Material rdf:type owl:Class ;
-          rdfs:subClassOf :Continuant ;
+          rdfs:subClassOf :Entity ;
           rdfs:comment "A non-sortal continuant that exists as a mass or quantity without inherent boundaries or a distinct identity, persisting through time while undergoing potential changes in form or composition. Material is typically characterized by its divisibility and its capacity to constitute or combine with other entities to form objects or structures." .
 
 
@@ -736,29 +722,20 @@ _:genid20 rdf:type owl:Restriction ;
                          [ rdf:type owl:Restriction ;
                            owl:onProperty :referred_by ;
                            owl:someValuesFrom :EntityDescriptor
-                         ] ,
-                         [ rdf:type owl:Restriction ;
-                           owl:onProperty :referent ;
-                           owl:allValuesFrom :Entity
                          ] ;
          rdfs:comment "A textual or verbal occurrence that denotes an entity (e.g., a name). Mentions may sometimes be erroneous, either by referring to a non-existent entity or by misidentifying the intended referent."@en .
 
 
 ###  https://isagog.com/ontology/top#Object
 :Object rdf:type owl:Class ;
-        rdfs:subClassOf :Continuant ;
+        rdfs:subClassOf :Entity ;
         rdfs:comment "A sortal continuant characterized by having determinate boundaries and a unity criterion that defines its persistence as a distinct entity. Changes in morphology or composition may affect its identity within a given context." ;
         :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalObject"@en .
 
 
 ###  https://isagog.com/ontology/top#Occurrent
 :Occurrent rdf:type owl:Class ;
-           rdfs:subClassOf :Entity ,
-                           [ rdf:type owl:Restriction ;
-                             owl:onProperty :has_participant ;
-                             owl:someValuesFrom :Entity
-                           ] ,
-                           [ rdf:type owl:Restriction ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
                              owl:onProperty :in_place ;
                              owl:someValuesFrom :Location
                            ] ,
@@ -766,7 +743,7 @@ _:genid20 rdf:type owl:Restriction ;
                              owl:onProperty :time_coordinate ;
                              owl:someValuesFrom xsd:string
                            ] ;
-           rdfs:comment "Entities that unfold or occur over time, such as events, processes,  or activities. These entities are not wholly present at any single moment but are extended in time, contrasting with 'Continuants', which persist while maintaining identity." ;
+           rdfs:comment "Thing that unfold or occur over time, such as events, processes,  or activities. These entities are not wholly present at any single moment but are extended in time, contrasting with 'Continuants', which persist while maintaining identity." ;
            :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#Event"@en .
 
 
@@ -778,7 +755,7 @@ _:genid20 rdf:type owl:Restriction ;
 
 ###  https://isagog.com/ontology/top#Person
 :Person rdf:type owl:Class ;
-        rdfs:subClassOf :Continuant ,
+        rdfs:subClassOf :Entity ,
                         [ rdf:type owl:Restriction ;
                           owl:onProperty :anthroponym ;
                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
@@ -792,7 +769,7 @@ _:genid20 rdf:type owl:Restriction ;
          rdfs:subClassOf :Intangible ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty :qualifies ;
-                           owl:someValuesFrom :Entity
+                           owl:someValuesFrom owl:Thing
                          ] ;
          rdfs:comment "Aspect of a spatio-temporal entity, as perceived or conceptually elaborated. Differently from Concepts, Qualities are not socially constructed."@en ;
          :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#Quality"@en .
@@ -800,25 +777,7 @@ _:genid20 rdf:type owl:Restriction ;
 
 ###  https://isagog.com/ontology/top#Relationship
 :Relationship rdf:type owl:Class ;
-              rdfs:subClassOf :Statement ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty :subject ;
-                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                owl:onClass [ rdf:type owl:Class ;
-                                              owl:unionOf ( :Entity
-                                                            :Mention
-                                                          )
-                                            ]
-                              ] ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty :object ;
-                                owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                owl:onClass [ rdf:type owl:Class ;
-                                              owl:unionOf ( :Entity
-                                                            :Mention
-                                                          )
-                                            ]
-                              ] ;
+              rdfs:subClassOf :Statement ;
               rdfs:comment "A formal statement (assertion) that specifies how two entities are connected or associated within a given context, describing the nature, direction, and type of interaction or dependency between them." .
 
 
@@ -863,7 +822,7 @@ _:genid20 rdf:type owl:Restriction ;
 
 ###  https://isagog.com/ontology/top#SocialGroup
 :SocialGroup rdf:type owl:Class ;
-             rdfs:subClassOf :Continuant ,
+             rdfs:subClassOf :Entity ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty :has_component ;
                                owl:someValuesFrom :Person
@@ -881,6 +840,12 @@ _:genid20 rdf:type owl:Restriction ;
 :Statement rdf:type owl:Class ;
            rdfs:subClassOf :Sentence ;
            rdfs:comment "Sentence that may be true or false (proposition) w.r.t. a state of affairs" .
+
+
+###  https://isagog.com/ontology/top#Trait
+:Trait rdf:type owl:Class ;
+       rdfs:subClassOf :Quality ;
+       rdfs:comment "Intrinsic and actual quality that inheres in a bearer independently of any contextual realization or contingent manifestation. It represents a stable, present property of an entity at a given time." .
 
 
 ###  https://isagog.com/ontology/top#Word
