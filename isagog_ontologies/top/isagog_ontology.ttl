@@ -17,7 +17,7 @@ At the same time, the ontology is informed by Peircean semiotics, particularly t
 
 The categories employed are ontologically modest: they are introduced only insofar as they are required to make sense of actual, observable practices of reference and predication."""@en ;
                                    rdfs:label "Isagog Top Level Ontology" ;
-                                   owl:versionInfo 2.0 .
+                                   owl:versionInfo 2.1 .
 
 #################################################################
 #    Annotation properties
@@ -497,7 +497,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology/top#body
 :body rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf :text ;
-      rdfs:domain :Document ;
+      rdfs:domain :Information ;
       rdfs:range xsd:string .
 
 
@@ -637,7 +637,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
                           _:genid20 ,
                           [ rdf:type owl:Restriction ;
                             owl:onProperty :body ;
-                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                             owl:onDataRange xsd:string
                           ] ;
           rdfs:comment "Textual document" .
@@ -751,6 +751,20 @@ _:genid20 rdf:type owl:Restriction ;
 :Organization rdf:type owl:Class ;
               rdfs:subClassOf :SocialGroup ;
               rdfs:comment "Social group of people working together towards common goals, governed by defined rules and processes"@en .
+
+
+###  https://isagog.com/ontology/top#Passage
+:Passage rdf:type owl:Class ;
+         rdfs:subClassOf :Information ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :part_of ;
+                           owl:someValuesFrom :Document
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :body ;
+                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:string
+                         ] .
 
 
 ###  https://isagog.com/ontology/top#Person
