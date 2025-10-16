@@ -198,7 +198,7 @@ The result is a lightweight framework suited for AI driven human-computer intera
             rdfs:subPropertyOf :composition ;
             owl:inverseOf :has_element ;
             rdfs:domain :Continuant ;
-            rdfs:range :Entity ;
+            rdfs:range :Continuant ;
             rdfs:comment "Membership"@en .
 
 
@@ -305,8 +305,8 @@ The result is a lightweight framework suited for AI driven human-computer intera
 :has_spatial_part rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf :has_part ;
                   owl:inverseOf :spatial_part_of ;
-                  rdfs:domain :Entity ;
-                  rdfs:range :Entity ;
+                  rdfs:domain :Sortal ;
+                  rdfs:range :Sortal ;
                   rdfs:comment "Spatial parthood" .
 
 
@@ -478,8 +478,8 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology/top#spatial_part_of
 :spatial_part_of rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf :part_of ;
-                 rdfs:domain :Entity ;
-                 rdfs:range :Entity .
+                 rdfs:domain :Sortal ;
+                 rdfs:range :Sortal .
 
 
 ###  https://isagog.com/ontology/top#subject
@@ -527,7 +527,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 ###  https://isagog.com/ontology/top#dimension
 :dimension rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf :property ;
-           rdfs:domain :Entity .
+           rdfs:domain :Sortal .
 
 
 ###  https://isagog.com/ontology/top#expression
@@ -627,17 +627,17 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en .
 
 ###  https://isagog.com/ontology/top#Agent
 :Agent rdf:type owl:Class ;
-       owl:equivalentClass [ rdf:type owl:Restriction ;
-                             owl:onProperty :initiates ;
-                             owl:someValuesFrom :Event
-                           ] ;
-       rdfs:subClassOf :Continuant ;
-       rdfs:comment "Whatever Continuant that intentionally initiates some Event" .
+       rdfs:subClassOf :Sortal ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :initiates ;
+                         owl:someValuesFrom :Event
+                       ] ;
+       rdfs:comment "A sortal capable of initiating events" .
 
 
 ###  https://isagog.com/ontology/top#Automata
 :Automata rdf:type owl:Class ;
-          rdfs:subClassOf :Entity ;
+          rdfs:subClassOf :Agent ;
           rdfs:comment "Computational or mechanical systems capable of executing predefined sequences of operations or behaviors" .
 
 
@@ -703,18 +703,6 @@ _:genid5 rdf:type owl:Restriction ;
            :modality "possibility" .
 
 
-###  https://isagog.com/ontology/top#Entity
-:Entity rdf:type owl:Class ;
-        rdfs:subClassOf :Continuant ,
-                        [ rdf:type owl:Restriction ;
-                          owl:onProperty :located_in ;
-                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                          owl:onClass :Place
-                        ] ;
-        rdfs:comment "A sortal continuant characterized by having determinate boundaries and a unity criterion that defines its persistence as a distinct entity. Changes in morphology or composition may affect its identity within a given context. At any time, Entities are located in some Place" ;
-        :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalObject"@en .
-
-
 ###  https://isagog.com/ontology/top#EntityDescriptor
 :EntityDescriptor rdf:type owl:Class ;
                   rdfs:subClassOf :Description ;
@@ -760,6 +748,12 @@ _:genid5 rdf:type owl:Restriction ;
          rdfs:comment "A textual or verbal occurrence that denotes an entity (e.g., a name). Mentions may sometimes be erroneous, either by referring to a non-existent entity or by misidentifying the intended referent."@en .
 
 
+###  https://isagog.com/ontology/top#Object
+:Object rdf:type owl:Class ;
+        rdfs:subClassOf :Sortal ;
+        rdfs:comment "Non-agentive sortal" .
+
+
 ###  https://isagog.com/ontology/top#Occurrent
 :Occurrent rdf:type owl:Class ;
            rdfs:subClassOf [ rdf:type owl:Restriction ;
@@ -783,13 +777,13 @@ _:genid5 rdf:type owl:Restriction ;
 
 ###  https://isagog.com/ontology/top#Person
 :Person rdf:type owl:Class ;
-        rdfs:subClassOf :Entity ,
+        rdfs:subClassOf :Agent ,
                         [ rdf:type owl:Restriction ;
                           owl:onProperty :anthroponym ;
                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                           owl:onDataRange xsd:string
                         ] ;
-        rdfs:comment "Human being" ;
+        rdfs:comment "Rational intentional agent - human being" ;
         :schema "https://schema.org/Person" .
 
 
@@ -865,6 +859,18 @@ _:genid5 rdf:type owl:Restriction ;
              rdfs:comment "Group of people with social relationships and interactions among its members" .
 
 
+###  https://isagog.com/ontology/top#Sortal
+:Sortal rdf:type owl:Class ;
+        rdfs:subClassOf :Continuant ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :located_in ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onClass :Place
+                        ] ;
+        rdfs:comment "A continuant characterized by having determinate boundaries and a unity criterion that defines its persistence as a distinct entity. Changes in morphology or composition may affect its identity within a given context. At any time, Sortals are located in some Place" ;
+        :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalObject"@en .
+
+
 ###  https://isagog.com/ontology/top#State
 :State rdf:type owl:Class ;
        rdfs:subClassOf :Occurrent ;
@@ -899,9 +905,9 @@ _:genid5 rdf:type owl:Restriction ;
 #################################################################
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :Entity
-                :Material
+  owl:members ( :Material
                 :Place
+                :Sortal
               )
 ] .
 
