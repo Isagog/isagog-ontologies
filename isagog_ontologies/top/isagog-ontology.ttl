@@ -12,11 +12,11 @@
                                    <http://purl.org/dc/elements/1.1/license> <http://creativecommons.org/licenses/by/4.0/> ;
                                    rdfs:comment """An ultra-lite top level that provides a minimal set of foundational categories designed to capture the most general distinctions presupposed in our conceptual scheme. The categories employed are ontologically modest: they are introduced only insofar as they are required to make sense of actual, observable practices of reference and predication.
 The result is a lightweight framework suited for AI driven human-computer interaction, with a particular sensitivity to the contextual, relational, and interpretive dimensions of meaning."""@en ,
-                                   """Un livello superiore ultra-leggero che fornisce un insieme minimo di categorie fondazionali progettate per catturare le distinzioni più generali presupposte nel nostro schema concettuale. Le categorie impiegate sono ontologicamente modeste: sono introdotte solo nella misura in cui sono necessarie per dare senso alle pratiche effettive e osservabili di riferimento e predicazione.
+                                                """Un livello superiore ultra-leggero che fornisce un insieme minimo di categorie fondazionali progettate per catturare le distinzioni più generali presupposte nel nostro schema concettuale. Le categorie impiegate sono ontologicamente modeste: sono introdotte solo nella misura in cui sono necessarie per dare senso alle pratiche effettive e osservabili di riferimento e predicazione.
 Il risultato è un framework leggero adatto all'interazione uomo-computer guidata dall'IA, con particolare sensibilità alle dimensioni contestuali, relazionali e interpretative del significato."""@it ;
                                    rdfs:label "Isagog Top Level Ontology"@en ,
-                                             "Ontologia di Livello Superiore Isagog"@it ;
-                                   owl:versionInfo "2.2 16/10/2025" .
+                                              "Ontologia di Livello Superiore Isagog"@it ;
+                                   owl:versionInfo "2.ì3 4/11/2025" .
 
 #################################################################
 #    Annotation properties
@@ -44,72 +44,72 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
 
 ###  https://isagog.com/ontology/top#dolce
 :dolce rdf:type owl:AnnotationProperty ;
-       rdfs:subPropertyOf :mapping ;
+       rdfs:comment "Mappatura verso l'ontologia DOLCE"@it ,
+                    "Mapping to DOLCE ontology"@en ;
        rdfs:label "DOLCE mapping"@en ,
-                 "mappatura DOLCE"@it ;
-       rdfs:comment "Mapping to DOLCE ontology"@en ,
-                   "Mappatura verso l'ontologia DOLCE"@it .
+                  "mappatura DOLCE"@it ;
+       rdfs:subPropertyOf :mapping .
 
 
 ###  https://isagog.com/ontology/top#isagog
 :isagog rdf:type owl:AnnotationProperty ;
-        rdfs:comment "Mapping to the isagog platform"@en ,
-                    "Mappatura verso la piattaforma isagog"@it ;
-        rdfs:label "isagog annotation"@en ,
-                  "annotazione isagog"@it ;
+        rdfs:comment "Mappatura verso la piattaforma isagog"@it ,
+                     "Mapping to the isagog platform"@en ;
+        rdfs:label "annotazione isagog"@it ,
+                   "isagog annotation"@en ;
         rdfs:range xsd:string .
 
 
-###  https://isagog.com/ontology/top#lexical
-:lexical rdf:type owl:AnnotationProperty ;
-         rdfs:comment "Lexical annotation"@en ,
-                     "Annotazione lessicale"@it ;
-         rdfs:label "lexical"@en ,
-                   "lessicale"@it ;
+###  https://isagog.com/ontology/top#lexicon
+:lexicon rdf:type owl:AnnotationProperty ;
+         rdfs:comment "Annotazione lessicale"@it ,
+                      "Lexical annotation"@en ;
+         rdfs:label "lessicale"@it ,
+                    "lexical"@en ;
          rdfs:subPropertyOf :isagog ;
          rdfs:range :Word .
 
 
 ###  https://isagog.com/ontology/top#mapping
 :mapping rdf:type owl:AnnotationProperty ;
-         rdfs:label "mapping"@en ,
-                   "mappatura"@it ;
-         rdfs:comment "Generic mapping annotation"@en ,
-                     "Annotazione di mappatura generica"@it .
+         rdfs:comment "Annotazione di mappatura generica"@it ,
+                      "Generic mapping annotation"@en ;
+         rdfs:label "mappatura"@it ,
+                    "mapping"@en .
 
 
 ###  https://isagog.com/ontology/top#meta
 :meta rdf:type owl:AnnotationProperty ;
+      rdfs:comment "Annotazione a livello meta"@it ,
+                   "Meta-level annotation"@en ;
       rdfs:label "meta"@en ,
-                "meta"@it ;
-      rdfs:comment "Meta-level annotation"@en ,
-                  "Annotazione a livello meta"@it .
+                 "meta"@it .
 
 
 ###  https://isagog.com/ontology/top#modality
 :modality rdf:type owl:AnnotationProperty ;
-          rdfs:subPropertyOf :isagog ;
+          rdfs:comment "Annotazione di qualificazione modale, es- necessario, possibile."@it ,
+                       "Modal qualification annotation"@en ;
           rdfs:label "modality"@en ,
-                    "modalità"@it ;
-          rdfs:comment "Modal qualification annotation"@en ,
-                      "Annotazione di qualificazione modale"@it .
+                     "modalità"@it ;
+          rdfs:subPropertyOf :isagog .
 
 
 ###  https://isagog.com/ontology/top#ontopia
 :ontopia rdf:type owl:AnnotationProperty ;
-         rdfs:subPropertyOf :mapping ;
+         rdfs:comment "Mappatura verso l'ontologia OnTopiA"@it ,
+                      "Mapping to OnTopiA ontology"@en ;
          rdfs:label "OnTopiA mapping"@en ,
-                   "mappatura OnTopiA"@it ;
-         rdfs:comment "Mapping to OnTopiA ontology"@en ,
-                     "Mappatura verso l'ontologia OnTopiA"@it .
+                    "mappatura OnTopiA"@it ;
+         rdfs:subPropertyOf :mapping .
 
 
 ###  https://isagog.com/ontology/top#schema
 :schema rdf:type owl:AnnotationProperty ;
-        rdfs:comment "Corrispondenza con schema.org"@it ,
-                    "Correspondence with schema.org"@en ;
-        rdfs:label "schema.org mapping"@en ,
-                  "mappatura schema.org"@it ;
+        rdfs:comment "Correspondence with schema.org"@en ,
+                     "Corrispondenza con schema.org"@it ;
+        rdfs:label "mappatura schema.org"@it ,
+                   "schema.org mapping"@en ;
         rdfs:subPropertyOf :mapping .
 
 
@@ -123,10 +123,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
              rdf:type owl:SymmetricProperty ;
              rdfs:domain :Place ;
              rdfs:range :Place ;
-             rdfs:label "adjacent to"@en ,
-                       "adiacente a"@it ;
-             rdfs:comment "Spatial connectedness"@en ,
-                         "Connessione spaziale"@it .
+             rdfs:comment "Connessione spaziale"@it ,
+                          "Spatial connectedness"@en ;
+             rdfs:label "adiacente a"@it ,
+                        "adjacent to"@en .
 
 
 ###  https://isagog.com/ontology/top#afford_as
@@ -134,10 +134,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
            rdfs:subPropertyOf :inheres_in ;
            rdfs:domain :Affordance ;
            rdfs:range :Occurrent ;
-           rdfs:label "affords as"@en ,
-                     "permette come"@it ;
            rdfs:comment "affordance possible outcome"@en ,
-                       "esito possibile dell'affordance"@it ;
+                        "esito possibile dell'affordance"@it ;
+           rdfs:label "affords as"@en ,
+                      "permette come"@it ;
            :modality "possibility" .
 
 
@@ -146,10 +146,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
              rdfs:subPropertyOf :inheres_in ;
              rdfs:domain :Affordance ;
              rdfs:range :Continuant ;
-             rdfs:label "affords from"@en ,
-                       "permette da"@it ;
              rdfs:comment "affordance entity grounding"@en ,
-                         "fondamento entitativo dell'affordance"@it ;
+                          "fondamento entitativo dell'affordance"@it ;
+             rdfs:label "affords from"@en ,
+                        "permette da"@it ;
              :modality "possibility" .
 
 
@@ -158,10 +158,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
            rdfs:subPropertyOf :inheres_in ;
            rdfs:domain :Affordance ;
            rdfs:range :Occurrent ;
-           rdfs:label "affords in"@en ,
-                     "permette in"@it ;
            rdfs:comment "affordance possible context"@en ,
-                       "contesto possibile dell'affordance"@it ;
+                        "contesto possibile dell'affordance"@it ;
+           rdfs:label "affords in"@en ,
+                      "permette in"@it ;
            :modality "possibility" .
 
 
@@ -170,10 +170,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
            rdfs:subPropertyOf :inheres_in ;
            rdfs:domain :Affordance ;
            rdfs:range :Agent ;
-           rdfs:label "affords to"@en ,
-                     "permette a"@it ;
            rdfs:comment "affordance possible subject (to whom the affordance is)"@en ,
-                       "soggetto possibile dell'affordance (a chi l'affordance si rivolge)"@it ;
+                        "soggetto possibile dell'affordance (a chi l'affordance si rivolge)"@it ;
+           rdfs:label "affords to"@en ,
+                      "permette a"@it ;
            :modality "possibility" .
 
 
@@ -181,72 +181,72 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
 :author_of rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :relatedness ;
            owl:inverseOf :authored_by ;
-           rdfs:label "author of"@en ,
-                     "autore di"@it ;
            rdfs:comment "Authorship relation from author to work"@en ,
-                       "Relazione di autorialità dall'autore all'opera"@it .
+                        "Relazione di autorialità dall'autore all'opera"@it ;
+           rdfs:label "author of"@en ,
+                      "autore di"@it .
 
 
 ###  https://isagog.com/ontology/top#authored_by
 :authored_by rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :relatedness ;
-             rdfs:label "authored by"@en ,
-                       "scritto da"@it ;
              rdfs:comment "Authorship relation from work to author"@en ,
-                         "Relazione di autorialità dall'opera all'autore"@it .
+                          "Relazione di autorialità dall'opera all'autore"@it ;
+             rdfs:label "authored by"@en ,
+                        "scritto da"@it .
 
 
 ###  https://isagog.com/ontology/top#category_of
 :category_of rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :classifies ;
              owl:inverseOf :has_category ;
-             rdfs:label "category of"@en ,
-                       "categoria di"@it ;
              rdfs:comment "Relation from category to categorized entity"@en ,
-                         "Relazione dalla categoria all'entità categorizzata"@it .
+                          "Relazione dalla categoria all'entità categorizzata"@it ;
+             rdfs:label "categoria di"@it ,
+                        "category of"@en .
 
 
 ###  https://isagog.com/ontology/top#classified_by
 :classified_by rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :has_inherent ;
                owl:inverseOf :classifies ;
-               rdfs:label "classified by"@en ,
-                         "classificato da"@it ;
                rdfs:comment "Inverse of classification relation"@en ,
-                           "Inverso della relazione di classificazione"@it .
+                            "Inverso della relazione di classificazione"@it ;
+               rdfs:label "classificato da"@it ,
+                          "classified by"@en .
 
 
 ###  https://isagog.com/ontology/top#classifies
 :classifies rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf :inheres_in ;
-            rdfs:label "classifies"@en ,
-                      "classifica"@it ;
             rdfs:comment "Classification relation from classifier to classified"@en ,
-                        "Relazione di classificazione dal classificatore al classificato"@it .
+                         "Relazione di classificazione dal classificatore al classificato"@it ;
+            rdfs:label "classifica"@it ,
+                       "classifies"@en .
 
 
 ###  https://isagog.com/ontology/top#collocation
 :collocation rdf:type owl:ObjectProperty ;
+             rdfs:comment "Collocazione spaziale"@it ,
+                          "Spatial collocation"@en ;
              rdfs:label "collocation"@en ,
-                       "collocazione"@it ;
-             rdfs:comment "Spatial collocation"@en ,
-                         "Collocazione spaziale"@it .
+                        "collocazione"@it .
 
 
 ###  https://isagog.com/ontology/top#composition
 :composition rdf:type owl:ObjectProperty ;
-             rdfs:label "composition"@en ,
-                       "composizione"@it ;
              rdfs:comment "General part-whole relationship"@en ,
-                         "Relazione generale parte-tutto"@it .
+                          "Relazione generale parte-tutto"@it ;
+             rdfs:label "composition"@en ,
+                        "composizione"@it .
 
 
 ###  https://isagog.com/ontology/top#connectedness
 :connectedness rdf:type owl:ObjectProperty ;
+               rdfs:comment "prossimità spazio-temporale"@it ,
+                            "spatial temporal proximity"@en ;
                rdfs:label "connectedness"@en ,
-                         "connessione"@it ;
-               rdfs:comment "spatial temporal proximity"@en ,
-                           "prossimità spazio-temporale"@it .
+                          "connessione"@it .
 
 
 ###  https://isagog.com/ontology/top#constituent_of
@@ -255,30 +255,30 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
                 owl:inverseOf :has_constituent ;
                 rdfs:domain :Continuant ;
                 rdfs:range :Continuant ;
-                rdfs:label "constituent of"@en ,
-                          "costituente di"@it ;
                 rdfs:comment "Functional material parthood relation from part to whole"@en ,
-                            "Relazione di partizione materiale funzionale dalla parte al tutto"@it .
+                             "Relazione di partizione materiale funzionale dalla parte al tutto"@it ;
+                rdfs:label "constituent of"@en ,
+                           "costituente di"@it .
 
 
 ###  https://isagog.com/ontology/top#described_by
 :described_by rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :has_inherent ;
               owl:inverseOf :describes ;
-              rdfs:label "described by"@en ,
-                        "descritto da"@it ;
               rdfs:comment "Relation from entity to its description"@en ,
-                          "Relazione dall'entità alla sua descrizione"@it .
+                           "Relazione dall'entità alla sua descrizione"@it ;
+              rdfs:label "described by"@en ,
+                         "descritto da"@it .
 
 
 ###  https://isagog.com/ontology/top#describes
 :describes rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :inheres_in ;
            rdfs:domain :Document ;
-           rdfs:label "describes"@en ,
-                     "descrive"@it ;
            rdfs:comment "Descriptive relation from document to entity"@en ,
-                       "Relazione descrittiva dal documento all'entità"@it .
+                        "Relazione descrittiva dal documento all'entità"@it ;
+           rdfs:label "describes"@en ,
+                      "descrive"@it .
 
 
 ###  https://isagog.com/ontology/top#element_of
@@ -287,10 +287,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
             owl:inverseOf :has_element ;
             rdfs:domain :Continuant ;
             rdfs:range :Continuant ;
+            rdfs:comment "Appartenenza"@it ,
+                         "Membership"@en ;
             rdfs:label "element of"@en ,
-                      "elemento di"@it ;
-            rdfs:comment "Membership"@en ,
-                        "Appartenenza"@it .
+                       "elemento di"@it .
 
 
 ###  https://isagog.com/ontology/top#entailed_by
@@ -299,18 +299,18 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
              owl:inverseOf :entails ;
              rdfs:domain :Concept ;
              rdfs:range :Concept ;
-             rdfs:label "entailed by"@en ,
-                       "implicato da"@it ;
              rdfs:comment "Inverse entailment relation"@en ,
-                         "Relazione di implicazione inversa"@it .
+                          "Relazione di implicazione inversa"@it ;
+             rdfs:label "entailed by"@en ,
+                        "implicato da"@it .
 
 
 ###  https://isagog.com/ontology/top#entailment
 :entailment rdf:type owl:ObjectProperty ;
-            rdfs:label "entailment"@en ,
-                      "implicazione"@it ;
             rdfs:comment "Logical relation in which the truth of one proposition necessitates the truth of another"@en ,
-                        "Relazione logica in cui la verità di una proposizione rende necessaria la verità di un'altra"@it .
+                         "Relazione logica in cui la verità di una proposizione rende necessaria la verità di un'altra"@it ;
+            rdfs:label "entailment"@en ,
+                       "implicazione"@it .
 
 
 ###  https://isagog.com/ontology/top#entails
@@ -318,38 +318,38 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
          rdfs:subPropertyOf :entailment ;
          rdfs:domain :Concept ;
          rdfs:range :Concept ;
-         rdfs:label "entails"@en ,
-                   "implica"@it ;
          rdfs:comment "Direct entailment relation"@en ,
-                     "Relazione di implicazione diretta"@it .
+                      "Relazione di implicazione diretta"@it ;
+         rdfs:label "entails"@en ,
+                    "implica"@it .
 
 
 ###  https://isagog.com/ontology/top#featured_in
 :featured_in rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :participate_in ;
              owl:inverseOf :features ;
-             rdfs:label "featured in"@en ,
-                       "presente in"@it ;
              rdfs:comment "Non-agentive participation from participant to event"@en ,
-                         "Partecipazione non agentiva dal partecipante all'evento"@it .
+                          "Partecipazione non agentiva dal partecipante all'evento"@it ;
+             rdfs:label "featured in"@en ,
+                        "presente in"@it .
 
 
 ###  https://isagog.com/ontology/top#features
 :features rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :has_participant ;
-          rdfs:label "features"@en ,
-                    "presenta"@it ;
           rdfs:comment "Non agentive participation"@en ,
-                      "Partecipazione non agentiva"@it .
+                       "Partecipazione non agentiva"@it ;
+          rdfs:label "features"@en ,
+                     "presenta"@it .
 
 
 ###  https://isagog.com/ontology/top#has_category
 :has_category rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :classified_by ;
-              rdfs:label "has category"@en ,
-                        "ha categoria"@it ;
               rdfs:comment "Categorization relation from entity to category"@en ,
-                          "Relazione di categorizzazione dall'entità alla categoria"@it .
+                           "Relazione di categorizzazione dall'entità alla categoria"@it ;
+              rdfs:label "ha categoria"@it ,
+                         "has category"@en .
 
 
 ###  https://isagog.com/ontology/top#has_constituent
@@ -357,10 +357,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
                  rdfs:subPropertyOf :has_part ;
                  rdfs:domain :Continuant ;
                  rdfs:range :Continuant ;
-                 rdfs:label "has constituent"@en ,
-                           "ha costituente"@it ;
                  rdfs:comment "Functional material parthood"@en ,
-                             "Partizione materiale funzionale"@it .
+                              "Partizione materiale funzionale"@it ;
+                 rdfs:label "ha costituente"@it ,
+                            "has constituent"@en .
 
 
 ###  https://isagog.com/ontology/top#has_element
@@ -368,10 +368,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
              rdfs:subPropertyOf :composition ;
              rdfs:domain :Continuant ;
              rdfs:range :Continuant ;
-             rdfs:label "has element"@en ,
-                       "ha elemento"@it ;
-             rdfs:comment "Membership"@en ,
-                         "Appartenenza"@it .
+             rdfs:comment "Appartenenza"@it ,
+                          "Membership"@en ;
+             rdfs:label "ha elemento"@it ,
+                        "has element"@en .
 
 
 ###  https://isagog.com/ontology/top#has_inherent
@@ -379,10 +379,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
               rdfs:subPropertyOf :inherence ;
               owl:inverseOf :inheres_in ;
               rdfs:range :Intangible ;
-              rdfs:label "has inherent"@en ,
-                        "ha inerente"@it ;
               rdfs:comment "Relation to inherent intangible aspects"@en ,
-                          "Relazione verso aspetti intangibili inerenti"@it .
+                           "Relazione verso aspetti intangibili inerenti"@it ;
+              rdfs:label "ha inerente"@it ,
+                         "has inherent"@en .
 
 
 ###  https://isagog.com/ontology/top#has_logical_part
@@ -391,20 +391,20 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
                   owl:inverseOf :logical_part_of ;
                   rdfs:domain :Intangible ;
                   rdfs:range :Intangible ;
-                  rdfs:label "has logical part"@en ,
-                            "ha parte logica"@it ;
                   rdfs:comment "Logical parthood between intangibles"@en ,
-                              "Partizione logica tra intangibili"@it .
+                               "Partizione logica tra intangibili"@it ;
+                  rdfs:label "ha parte logica"@it ,
+                             "has logical part"@en .
 
 
 ###  https://isagog.com/ontology/top#has_part
 :has_part rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :composition ;
           owl:inverseOf :part_of ;
-          rdfs:label "has part"@en ,
-                    "ha parte"@it ;
           rdfs:comment "Material parthood (whole - part)"@en ,
-                      "Partizione materiale (tutto - parte)"@it .
+                       "Partizione materiale (tutto - parte)"@it ;
+          rdfs:label "ha parte"@it ,
+                     "has part"@en .
 
 
 ###  https://isagog.com/ontology/top#has_participant
@@ -413,10 +413,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
                  owl:inverseOf :participate_in ;
                  rdfs:domain :Occurrent ;
                  rdfs:range :Continuant ;
-                 rdfs:label "has participant"@en ,
-                           "ha partecipante"@it ;
                  rdfs:comment "Participation relation from event to participant"@en ,
-                             "Relazione di partecipazione dall'evento al partecipante"@it .
+                              "Relazione di partecipazione dall'evento al partecipante"@it ;
+                 rdfs:label "ha partecipante"@it ,
+                            "has participant"@en .
 
 
 ###  https://isagog.com/ontology/top#has_phase
@@ -425,10 +425,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
            owl:inverseOf :phase_of ;
            rdfs:domain :Occurrent ;
            rdfs:range :Occurrent ;
-           rdfs:label "has phase"@en ,
-                     "ha fase"@it ;
-           rdfs:comment "Temporal parthood (whole - part)"@en ,
-                       "Partizione temporale (tutto - parte)"@it .
+           rdfs:comment "Partizione temporale (tutto - parte)"@it ,
+                        "Temporal parthood (whole - part)"@en ;
+           rdfs:label "ha fase"@it ,
+                      "has phase"@en .
 
 
 ###  https://isagog.com/ontology/top#has_quality
@@ -436,10 +436,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
              rdfs:subPropertyOf :has_inherent ;
              owl:inverseOf :qualifies ;
              rdfs:range :Quality ;
-             rdfs:label "has quality"@en ,
-                       "ha qualità"@it ;
              rdfs:comment "Relation to inherent quality"@en ,
-                         "Relazione verso qualità inerente"@it .
+                          "Relazione verso qualità inerente"@it ;
+             rdfs:label "ha qualità"@it ,
+                        "has quality"@en .
 
 
 ###  https://isagog.com/ontology/top#has_spatial_part
@@ -448,10 +448,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
                   owl:inverseOf :spatial_part_of ;
                   rdfs:domain :Sortal ;
                   rdfs:range :Sortal ;
-                  rdfs:label "has spatial part"@en ,
-                            "ha parte spaziale"@it ;
-                  rdfs:comment "Spatial parthood"@en ,
-                              "Partizione spaziale"@it .
+                  rdfs:comment "Partizione spaziale"@it ,
+                               "Spatial parthood"@en ;
+                  rdfs:label "ha parte spaziale"@it ,
+                             "has spatial part"@en .
 
 
 ###  https://isagog.com/ontology/top#hosts
@@ -460,28 +460,28 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
        owl:inverseOf :occurs_in ;
        rdfs:domain :Place ;
        rdfs:range :Occurrent ;
-       rdfs:label "hosts"@en ,
-                 "ospita"@it ;
        rdfs:comment "Hosting relation from place to event"@en ,
-                   "Relazione di ospitalità dal luogo all'evento"@it .
+                    "Relazione di ospitalità dal luogo all'evento"@it ;
+       rdfs:label "hosts"@en ,
+                  "ospita"@it .
 
 
 ###  https://isagog.com/ontology/top#inherence
 :inherence rdf:type owl:ObjectProperty ;
-           rdfs:label "inherence"@en ,
-                     "inerenza"@it ;
            rdfs:comment "Relation of information objects, their subjects and substrate"@en ,
-                       "Relazione degli oggetti informativi, i loro soggetti e substrato"@it .
+                        "Relazione degli oggetti informativi, i loro soggetti e substrato"@it ;
+           rdfs:label "inerenza"@it ,
+                      "inherence"@en .
 
 
 ###  https://isagog.com/ontology/top#inheres_in
 :inheres_in rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf :inherence ;
             rdfs:domain :Intangible ;
-            rdfs:label "inheres in"@en ,
-                      "inerisce in"@it ;
             rdfs:comment "Any relation involved in semiotic processes"@en ,
-                        "Qualsiasi relazione coinvolta in processi semiotici"@it .
+                         "Qualsiasi relazione coinvolta in processi semiotici"@it ;
+            rdfs:label "inerisce in"@it ,
+                       "inheres in"@en .
 
 
 ###  https://isagog.com/ontology/top#initiated_by
@@ -489,19 +489,19 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
               rdfs:subPropertyOf :has_participant ;
               owl:inverseOf :initiates ;
               rdfs:domain :Occurrent ;
-              rdfs:label "initiated by"@en ,
-                        "iniziato da"@it ;
               rdfs:comment "Agentive participation"@en ,
-                          "Partecipazione agentiva"@it .
+                           "Partecipazione agentiva"@it ;
+              rdfs:label "initiated by"@en ,
+                         "iniziato da"@it .
 
 
 ###  https://isagog.com/ontology/top#initiates
 :initiates rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :participate_in ;
-           rdfs:label "initiates"@en ,
-                     "inizia"@it ;
            rdfs:comment "Agentive initiation of events"@en ,
-                       "Iniziazione agentiva di eventi"@it .
+                        "Iniziazione agentiva di eventi"@it ;
+           rdfs:label "initiates"@en ,
+                      "inizia"@it .
 
 
 ###  https://isagog.com/ontology/top#interpretant
@@ -509,10 +509,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
               rdfs:subPropertyOf :relatedness ;
               rdfs:domain :Sign ;
               rdfs:range :Concept ;
+              rdfs:comment "collega un Segno a un Concetto come suo Interpretante, cioè l'effetto o comprensione che il segno produce in una mente, secondo la triade semiotica di Peirce."@it ,
+                           "links a Sign to a Concept as its Interpretant, i.e., the effect or understanding the sign produces in a mind, according to Peirce's semiotic triad."@en ;
               rdfs:label "interpretant"@en ,
-                        "interpretante"@it ;
-              rdfs:comment "links a Sign to a Concept as its Interpretant, i.e., the effect or understanding the sign produces in a mind, according to Peirce's semiotic triad."@en ,
-                          "collega un Segno a un Concetto come suo Interpretante, cioè l'effetto o comprensione che il segno produce in una mente, secondo la triade semiotica di Peirce."@it .
+                         "interpretante"@it .
 
 
 ###  https://isagog.com/ontology/top#is_location_of
@@ -521,10 +521,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
                 owl:inverseOf :located_in ;
                 rdfs:domain :Place ;
                 rdfs:range :Continuant ;
-                rdfs:label "is location of"@en ,
-                          "è ubicazione di"@it ;
                 rdfs:comment "Location relation from place to entity"@en ,
-                            "Relazione di ubicazione dal luogo all'entità"@it .
+                             "Relazione di ubicazione dal luogo all'entità"@it ;
+                rdfs:label "is location of"@en ,
+                           "è ubicazione di"@it .
 
 
 ###  https://isagog.com/ontology/top#located_in
@@ -532,10 +532,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
             rdfs:subPropertyOf :collocation ;
             rdfs:domain :Continuant ;
             rdfs:range :Place ;
-            rdfs:label "located in"@en ,
-                      "ubicato in"@it ;
             rdfs:comment "Location relation from entity to place"@en ,
-                        "Relazione di ubicazione dall'entità al luogo"@it .
+                         "Relazione di ubicazione dall'entità al luogo"@it ;
+            rdfs:label "located in"@en ,
+                       "ubicato in"@it .
 
 
 ###  https://isagog.com/ontology/top#logical_part_of
@@ -543,10 +543,10 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
                  rdfs:subPropertyOf :part_of ;
                  rdfs:domain :Intangible ;
                  rdfs:range :Intangible ;
-                 rdfs:label "logical part of"@en ,
-                           "parte logica di"@it ;
                  rdfs:comment "Logical parthood relation between intangibles"@en ,
-                             "Relazione di partizione logica tra intangibili"@it .
+                              "Relazione di partizione logica tra intangibili"@it ;
+                 rdfs:label "logical part of"@en ,
+                            "parte logica di"@it .
 
 
 ###  https://isagog.com/ontology/top#mentioned_in
@@ -554,22 +554,22 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
               rdfs:subPropertyOf :relatedness ;
               owl:inverseOf :mentions ;
               rdfs:range :Document ;
-              rdfs:label "mentioned in"@en ,
-                        "menzionato in"@it ;
               rdfs:comment "Being mentioned in a document"@en ,
-                          "Essere menzionato in un documento"@it .
+                           "Essere menzionato in un documento"@it ;
+              rdfs:label "mentioned in"@en ,
+                         "menzionato in"@it .
 
 
 ###  https://isagog.com/ontology/top#mentions
 :mentions rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :relatedness ;
           rdfs:domain :Document ;
-          rdfs:label "mentions"@en ,
-                    "menziona"@it ;
           rdfs:comment """Direct (abstract) representation of Entity mentions in Documents.
 mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@en ,
-                      """Rappresentazione diretta (astratta) delle menzioni di Entità nei Documenti.
-mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
+                       """Rappresentazione diretta (astratta) delle menzioni di Entità nei Documenti.
+mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it ;
+          rdfs:label "mentions"@en ,
+                     "menziona"@it .
 
 
 ###  https://isagog.com/ontology/top#next_to
@@ -578,20 +578,20 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
          rdf:type owl:AsymmetricProperty ;
          rdfs:domain :Event ;
          rdfs:range :Event ;
+         rdfs:comment "Connessione temporale"@it ,
+                      "Temporal connectedness"@en ;
          rdfs:label "next to"@en ,
-                   "successivo a"@it ;
-         rdfs:comment "Temporal connectedness"@en ,
-                     "Connessione temporale"@it .
+                    "successivo a"@it .
 
 
 ###  https://isagog.com/ontology/top#object
 :object rdf:type owl:ObjectProperty ;
         rdfs:subPropertyOf :inheres_in ;
         rdfs:domain :Relationship ;
-        rdfs:label "object"@en ,
-                  "oggetto"@it ;
         rdfs:comment "Object of a relationship"@en ,
-                    "Oggetto di una relazione"@it .
+                     "Oggetto di una relazione"@it ;
+        rdfs:label "object"@en ,
+                   "oggetto"@it .
 
 
 ###  https://isagog.com/ontology/top#occurs_in
@@ -599,19 +599,19 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
            rdfs:subPropertyOf :collocation ;
            rdfs:domain :Occurrent ;
            rdfs:range :Place ;
-           rdfs:label "occurs in"@en ,
-                     "occorre in"@it ;
            rdfs:comment "Occurrence relation from event to place"@en ,
-                       "Relazione di occorrenza dall'evento al luogo"@it .
+                        "Relazione di occorrenza dall'evento al luogo"@it ;
+           rdfs:label "occorre in"@it ,
+                      "occurs in"@en .
 
 
 ###  https://isagog.com/ontology/top#part_of
 :part_of rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf :composition ;
-         rdfs:label "part of"@en ,
-                   "parte di"@it ;
          rdfs:comment "Material parthood (part-whole)"@en ,
-                     "Partizione materiale (parte-tutto)"@it .
+                      "Partizione materiale (parte-tutto)"@it ;
+         rdfs:label "part of"@en ,
+                    "parte di"@it .
 
 
 ###  https://isagog.com/ontology/top#participate_in
@@ -619,18 +619,18 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
                 rdfs:subPropertyOf :participation ;
                 rdfs:domain :Continuant ;
                 rdfs:range :Occurrent ;
-                rdfs:label "participates in"@en ,
-                          "partecipa in"@it ;
-                rdfs:comment "Participation of continuant in occurrent"@en ,
-                            "Partecipazione del continuante nell'occorrente"@it .
+                rdfs:comment "Partecipazione del continuante nell'occorrente"@it ,
+                             "Participation of continuant in occurrent"@en ;
+                rdfs:label "partecipa in"@it ,
+                           "participates in"@en .
 
 
 ###  https://isagog.com/ontology/top#participation
 :participation rdf:type owl:ObjectProperty ;
-               rdfs:label "participation"@en ,
-                         "partecipazione"@it ;
                rdfs:comment "Continuant participation in occurrents"@en ,
-                           "Partecipazione dei continuanti negli occorrenti"@it .
+                            "Partecipazione dei continuanti negli occorrenti"@it ;
+               rdfs:label "partecipazione"@it ,
+                          "participation"@en .
 
 
 ###  https://isagog.com/ontology/top#phase_of
@@ -638,30 +638,30 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
           rdfs:subPropertyOf :composition ;
           rdfs:domain :Occurrent ;
           rdfs:range :Occurrent ;
-          rdfs:label "phase of"@en ,
-                    "fase di"@it ;
-          rdfs:comment "Temporal parthood (part - whole)"@en ,
-                      "Partizione temporale (parte - tutto)"@it .
+          rdfs:comment "Partizione temporale (parte - tutto)"@it ,
+                       "Temporal parthood (part - whole)"@en ;
+          rdfs:label "fase di"@it ,
+                     "phase of"@en .
 
 
 ###  https://isagog.com/ontology/top#planned_by
 :planned_by rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf :has_inherent ;
             rdfs:domain :Action ;
-            rdfs:label "planned by"@en ,
-                      "pianificato da"@it ;
             rdfs:comment "Planning relation from action to information"@en ,
-                        "Relazione di pianificazione dall'azione all'informazione"@it .
+                         "Relazione di pianificazione dall'azione all'informazione"@it ;
+            rdfs:label "pianificato da"@it ,
+                       "planned by"@en .
 
 
 ###  https://isagog.com/ontology/top#qualifies
 :qualifies rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :inheres_in ;
            rdfs:domain :Quality ;
-           rdfs:label "qualifies"@en ,
-                     "qualifica"@it ;
            rdfs:comment "Qualification relation from quality to bearer"@en ,
-                       "Relazione di qualificazione dalla qualità al portatore"@it .
+                        "Relazione di qualificazione dalla qualità al portatore"@it ;
+           rdfs:label "qualifica"@it ,
+                      "qualifies"@en .
 
 
 ###  https://isagog.com/ontology/top#referent
@@ -669,29 +669,29 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
           rdfs:subPropertyOf :inheres_in ;
           owl:inverseOf :referred_by ;
           rdfs:domain :Sign ;
-          rdfs:label "referent"@en ,
-                    "referente"@it ;
           rdfs:comment "'Real-world' concept or entity that the sign points to or refers to."@en ,
-                      "Concetto o entità del 'mondo reale' a cui il segno punta o si riferisce."@it ;
+                       "Concetto o entità del 'mondo reale' a cui il segno punta o si riferisce."@it ;
+          rdfs:label "referent"@en ,
+                     "referente"@it ;
           rdfs:seeAlso "Sign->Object (Peirce)" .
 
 
 ###  https://isagog.com/ontology/top#referred_by
 :referred_by rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :has_inherent ;
-             rdfs:label "referred by"@en ,
-                       "riferito da"@it ;
              rdfs:comment "Being referred by a sign"@en ,
-                         "Essere riferito da un segno"@it .
+                          "Essere riferito da un segno"@it ;
+             rdfs:label "referred by"@en ,
+                        "riferito da"@it .
 
 
 ###  https://isagog.com/ontology/top#relatedness
 :relatedness rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf owl:topObjectProperty ;
-             rdfs:label "relatedness"@en ,
-                       "relazione"@it ;
              rdfs:comment "generic relatedness"@en ,
-                         "relazione generica"@it .
+                          "relazione generica"@it ;
+             rdfs:label "relatedness"@en ,
+                        "relazione"@it .
 
 
 ###  https://isagog.com/ontology/top#source
@@ -699,10 +699,10 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
         rdfs:subPropertyOf :inheres_in ;
         owl:inverseOf :yields ;
         rdfs:domain :Sign ;
-        rdfs:label "source"@en ,
-                  "sorgente"@it ;
-        rdfs:comment "Source that yields the sign"@en ,
-                    "Sorgente che produce il segno"@it .
+        rdfs:comment "Sorgente che produce il segno"@it ,
+                     "Source that yields the sign"@en ;
+        rdfs:label "sorgente"@it ,
+                   "source"@en .
 
 
 ###  https://isagog.com/ontology/top#spatial_part_of
@@ -710,20 +710,20 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
                  rdfs:subPropertyOf :part_of ;
                  rdfs:domain :Sortal ;
                  rdfs:range :Sortal ;
-                 rdfs:label "spatial part of"@en ,
-                           "parte spaziale di"@it ;
-                 rdfs:comment "Spatial parthood relation"@en ,
-                             "Relazione di partizione spaziale"@it .
+                 rdfs:comment "Relazione di partizione spaziale"@it ,
+                              "Spatial parthood relation"@en ;
+                 rdfs:label "parte spaziale di"@it ,
+                            "spatial part of"@en .
 
 
 ###  https://isagog.com/ontology/top#subject
 :subject rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf :inheres_in ;
          rdfs:domain :Relationship ;
-         rdfs:label "subject"@en ,
-                   "soggetto"@it ;
-         rdfs:comment "Subject of a relationship"@en ,
-                     "Soggetto di una relazione"@it .
+         rdfs:comment "Soggetto di una relazione"@it ,
+                      "Subject of a relationship"@en ;
+         rdfs:label "soggetto"@it ,
+                    "subject"@en .
 
 
 ###  https://isagog.com/ontology/top#yields
@@ -731,10 +731,10 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
         rdfs:subPropertyOf :has_inherent ;
         rdfs:domain :Intangible ;
         rdfs:range :Sign ;
-        rdfs:label "yields"@en ,
-                  "produce"@it ;
         rdfs:comment "Production of signs from intangibles"@en ,
-                    "Produzione di segni da intangibili"@it .
+                     "Produzione di segni da intangibili"@it ;
+        rdfs:label "produce"@it ,
+                   "yields"@en .
 
 
 #################################################################
@@ -745,10 +745,10 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
 :anthroponym rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf :identifier ;
              rdfs:range xsd:string ;
+             rdfs:comment "Identificatore del nome personale"@it ,
+                          "Personal name identifier"@en ;
              rdfs:label "anthroponym"@en ,
-                       "antroponimo"@it ;
-             rdfs:comment "Personal name identifier"@en ,
-                         "Identificatore del nome personale"@it .
+                        "antroponimo"@it .
 
 
 ###  https://isagog.com/ontology/top#body
@@ -756,39 +756,39 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
       rdfs:subPropertyOf :text ;
       rdfs:domain :Document ;
       rdfs:range xsd:string ;
+      rdfs:comment "Contenuto testuale principale di un documento"@it ,
+                   "Main textual content of a document"@en ;
       rdfs:label "body"@en ,
-                "corpo"@it ;
-      rdfs:comment "Main textual content of a document"@en ,
-                  "Contenuto testuale principale di un documento"@it .
+                 "corpo"@it .
 
 
 ###  https://isagog.com/ontology/top#concept
 :concept rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf :identifier ;
          rdfs:domain :Sign ;
+         rdfs:comment "mappatura dei Segni verso predicati interpretanti (concetti o proprietà)"@it ,
+                      "mapping of Signs to interpreting predicates (concepts or properties)"@en ;
          rdfs:label "concept"@en ,
-                   "concetto"@it ;
-         rdfs:comment "mapping of Signs to interpreting predicates (concepts or properties)"@en ,
-                     "mappatura dei Segni verso predicati interpretanti (concetti o proprietà)"@it ;
+                    "concetto"@it ;
          rdfs:seeAlso "Representamen->Interpretant (Peirce)" .
 
 
 ###  https://isagog.com/ontology/top#coordinate
 :coordinate rdf:type owl:DatatypeProperty ;
-            rdfs:label "coordinate"@en ,
-                      "coordinata"@it ;
             rdfs:comment "Generic coordinate value"@en ,
-                        "Valore generico di coordinata"@it .
+                         "Valore generico di coordinata"@it ;
+            rdfs:label "coordinata"@it ,
+                       "coordinate"@en .
 
 
 ###  https://isagog.com/ontology/top#dimension
 :dimension rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf :property ;
            rdfs:domain :Sortal ;
-           rdfs:label "dimension"@en ,
-                     "dimensione"@it ;
            rdfs:comment "Dimensional property of a sortal"@en ,
-                       "Proprietà dimensionale di un sortale"@it .
+                        "Proprietà dimensionale di un sortale"@it ;
+           rdfs:label "dimension"@en ,
+                      "dimensione"@it .
 
 
 ###  https://isagog.com/ontology/top#expression
@@ -796,111 +796,111 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
             rdfs:subPropertyOf :signifier ,
                                :text ;
             rdfs:range xsd:string ;
-            rdfs:label "expression"@en ,
-                      "espressione"@it ;
-            rdfs:comment "Sign's textual representamen"@en ,
-                        "Rappresentamen testuale del segno"@it .
+            rdfs:comment "Rappresentamen testuale del segno"@it ,
+                         "Sign's textual representamen"@en ;
+            rdfs:label "espressione"@it ,
+                       "expression"@en .
 
 
 ###  https://isagog.com/ontology/top#geo_coordinate
 :geo_coordinate rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf :coordinate ;
-                rdfs:label "geo coordinate"@en ,
-                          "coordinata geografica"@it ;
                 rdfs:comment "any suitable <longitude, latitude> coordinate"@en ,
-                            "qualsiasi coordinata <longitudine, latitudine> adatta"@it .
+                             "qualsiasi coordinata <longitudine, latitudine> adatta"@it ;
+                rdfs:label "coordinata geografica"@it ,
+                           "geo coordinate"@en .
 
 
 ###  https://isagog.com/ontology/top#identifier
 :identifier rdf:type owl:DatatypeProperty ;
             rdfs:range xsd:string ;
-            rdfs:label "identifier"@en ,
-                      "identificatore"@it ;
             rdfs:comment "Generic identifier string"@en ,
-                        "Stringa identificativa generica"@it .
+                         "Stringa identificativa generica"@it ;
+            rdfs:label "identificatore"@it ,
+                       "identifier"@en .
 
 
 ###  https://isagog.com/ontology/top#instant
 :instant rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf :time_coordinate ;
+         rdfs:comment "Coordinata di istante temporale"@it ,
+                      "Temporal instant coordinate"@en ;
          rdfs:label "instant"@en ,
-                   "istante"@it ;
-         rdfs:comment "Temporal instant coordinate"@en ,
-                     "Coordinata di istante temporale"@it .
+                    "istante"@it .
 
 
 ###  https://isagog.com/ontology/top#name
 :name rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf :identifier ;
       rdfs:range xsd:string ;
+      rdfs:comment "Identificatore del nome"@it ,
+                   "Name identifier"@en ;
       rdfs:label "name"@en ,
-                "nome"@it ;
-      rdfs:comment "Name identifier"@en ,
-                  "Identificatore del nome"@it .
+                 "nome"@it .
 
 
 ###  https://isagog.com/ontology/top#property
 :property rdf:type owl:DatatypeProperty ;
-          rdfs:label "property"@en ,
-                    "proprietà"@it ;
           rdfs:comment "Generic property"@en ,
-                      "Proprietà generica"@it .
+                       "Proprietà generica"@it ;
+          rdfs:label "property"@en ,
+                     "proprietà"@it .
 
 
 ###  https://isagog.com/ontology/top#reference
 :reference rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf owl:topDataProperty ;
-           rdfs:label "reference"@en ,
-                     "riferimento"@it ;
            rdfs:comment "Generic reference value"@en ,
-                       "Valore di riferimento generico"@it .
+                        "Valore di riferimento generico"@it ;
+           rdfs:label "reference"@en ,
+                      "riferimento"@it .
 
 
 ###  https://isagog.com/ontology/top#signifier
 :signifier rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf :reference ;
            rdfs:domain :Sign ;
-           rdfs:label "signifier"@en ,
-                     "significante"@it ;
-           rdfs:comment "Sign's representamen or material form"@en ,
-                       "Rappresentamen o forma materiale del segno"@it .
+           rdfs:comment "Rappresentamen o forma materiale del segno"@it ,
+                        "Sign's representamen or material form"@en ;
+           rdfs:label "significante"@it ,
+                      "signifier"@en .
 
 
 ###  https://isagog.com/ontology/top#surname
 :surname rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf :identifier ;
          rdfs:range xsd:string ;
-         rdfs:label "surname"@en ,
-                   "cognome"@it ;
          rdfs:comment "Family name identifier"@en ,
-                     "Identificatore del cognome"@it .
+                      "Identificatore del cognome"@it ;
+         rdfs:label "cognome"@it ,
+                    "surname"@en .
 
 
 ###  https://isagog.com/ontology/top#text
 :text rdf:type owl:DatatypeProperty ;
       rdfs:range xsd:string ;
-      rdfs:label "text"@en ,
-                "testo"@it ;
-      rdfs:comment "Textual content"@en ,
-                  "Contenuto testuale"@it .
+      rdfs:comment "Contenuto testuale"@it ,
+                   "Textual content"@en ;
+      rdfs:label "testo"@it ,
+                 "text"@en .
 
 
 ###  https://isagog.com/ontology/top#time_coordinate
 :time_coordinate rdf:type owl:DatatypeProperty ;
                  rdfs:subPropertyOf :coordinate ;
-                 rdfs:label "time coordinate"@en ,
-                           "coordinata temporale"@it ;
                  rdfs:comment "any suitable time point or interval"@en ,
-                             "qualsiasi punto o intervallo temporale adatto"@it .
+                              "qualsiasi punto o intervallo temporale adatto"@it ;
+                 rdfs:label "coordinata temporale"@it ,
+                            "time coordinate"@en .
 
 
 ###  https://isagog.com/ontology/top#year
 :year rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf :time_coordinate ;
-      rdfs:label "year"@en ,
-                "anno"@it ;
-      rdfs:comment "Year coordinate"@en ,
-                  "Coordinata dell'anno"@it .
+      rdfs:comment "Coordinata dell'anno"@it ,
+                   "Year coordinate"@en ;
+      rdfs:label "anno"@it ,
+                 "year"@en .
 
 
 #################################################################
@@ -918,10 +918,10 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
                           owl:onProperty :planned_by ;
                           owl:someValuesFrom :Information
                         ] ;
-        rdfs:label "Action"@en ,
-                  "Azione"@it ;
         rdfs:comment "Event initiated by an agent with intentional planning"@en ,
-                    "Evento iniziato da un agente con pianificazione intenzionale"@it .
+                     "Evento iniziato da un agente con pianificazione intenzionale"@it ;
+        rdfs:label "Action"@en ,
+                   "Azione"@it .
 
 
 ###  https://isagog.com/ontology/top#Affordance
@@ -931,10 +931,10 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
                               owl:onProperty :qualifies ;
                               owl:allValuesFrom :Continuant
                             ] ;
-            rdfs:label "Affordance"@en ,
-                      "Affordance"@it ;
             rdfs:comment "Disposition of Continuants to be acted upon by agents with respect to practical possibilities."@en ,
-                        "Disposizione dei Continuanti ad essere agiti da agenti rispetto a possibilità pratiche."@it ;
+                         "Disposizione dei Continuanti ad essere agiti da agenti rispetto a possibilità pratiche."@it ;
+            rdfs:label "Affordance"@en ,
+                       "Affordance"@it ;
             :modality "possibility" .
 
 
@@ -945,57 +945,57 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
                          owl:onProperty :initiates ;
                          owl:someValuesFrom :Event
                        ] ;
-       rdfs:label "Agent"@en ,
-                 "Agente"@it ;
        rdfs:comment "A sortal capable of initiating events"@en ,
-                   "Un sortale capace di iniziare eventi"@it .
+                    "Un sortale capace di iniziare eventi"@it ;
+       rdfs:label "Agent"@en ,
+                  "Agente"@it .
 
 
 ###  https://isagog.com/ontology/top#Automata
 :Automata rdf:type owl:Class ;
           rdfs:subClassOf :Agent ;
-          rdfs:label "Automata"@en ,
-                    "Automa"@it ;
           rdfs:comment "Computational or mechanical systems capable of executing predefined sequences of operations or behaviors"@en ,
-                      "Sistemi computazionali o meccanici capaci di eseguire sequenze predefinite di operazioni o comportamenti"@it .
+                       "Sistemi computazionali o meccanici capaci di eseguire sequenze predefinite di operazioni o comportamenti"@it ;
+          rdfs:label "Automa"@it ,
+                     "Automata"@en .
 
 
 ###  https://isagog.com/ontology/top#Concept
 :Concept rdf:type owl:Class ;
          rdfs:subClassOf :Intangible ;
-         rdfs:label "Concept"@en ,
-                   "Concetto"@it ;
          rdfs:comment "Intangible object that exists through collective intentionality and shared recognition through linguistic acts (see Searle, social object). Differently from qualities, concepts do not existentially depend on entities."@en ,
-                     "Oggetto intangibile che esiste attraverso l'intenzionalità collettiva e il riconoscimento condiviso attraverso atti linguistici (vedi Searle, oggetto sociale). Diversamente dalle qualità, i concetti non dipendono esistenzialmente dalle entità."@it .
+                      "Oggetto intangibile che esiste attraverso l'intenzionalità collettiva e il riconoscimento condiviso attraverso atti linguistici (vedi Searle, oggetto sociale). Diversamente dalle qualità, i concetti non dipendono esistenzialmente dalle entità."@it ;
+         rdfs:label "Concept"@en ,
+                    "Concetto"@it .
 
 
 ###  https://isagog.com/ontology/top#Continuant
 :Continuant rdf:type owl:Class ;
             owl:disjointWith :Intangible ,
                              :Occurrent ;
+            rdfs:comment "Cosa materiale che persiste nel tempo mantenendo la propria identità, esistendo come un tutto in ogni momento dato. I continuanti non sono caratterizzati da parti temporali; invece, perdurano come la stessa entità attraverso il cambiamento, distinti da processi o eventi che si dispiegano nel tempo."@it ,
+                         "Material thing that persists through time while maintaining its identity, existing as a whole at any given moment. Continuants are not characterized by temporal parts; instead, they endure as the same entity throughout change, distinct from processes or events, which unfold over time."@en ;
             rdfs:label "Continuant"@en ,
-                      "Continuante"@it ;
-            rdfs:comment "Material thing that persists through time while maintaining its identity, existing as a whole at any given moment. Continuants are not characterized by temporal parts; instead, they endure as the same entity throughout change, distinct from processes or events, which unfold over time."@en ,
-                        "Cosa materiale che persiste nel tempo mantenendo la propria identità, esistendo come un tutto in ogni momento dato. I continuanti non sono caratterizzati da parti temporali; invece, perdurano come la stessa entità attraverso il cambiamento, distinti da processi o eventi che si dispiegano nel tempo."@it ;
+                       "Continuante"@it ;
             :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#Object"@en .
 
 
 ###  https://isagog.com/ontology/top#Description
 :Description rdf:type owl:Class ;
              rdfs:subClassOf :Statement ;
+             rdfs:comment "Enunciato che porta informazione su un aspetto o caratteristica specifica di qualcosa"@it ,
+                          "Statement that brings information about a specific aspect or feature of something"@en ;
              rdfs:label "Description"@en ,
-                       "Descrizione"@it ;
-             rdfs:comment "Statement that brings information about a specific aspect or feature of something"@en ,
-                         "Enunciato che porta informazione su un aspetto o caratteristica specifica di qualcosa"@it .
+                        "Descrizione"@it .
 
 
 ###  https://isagog.com/ontology/top#Disposition
 :Disposition rdf:type owl:Class ;
              rdfs:subClassOf :Quality ;
-             rdfs:label "Disposition"@en ,
-                       "Disposizione"@it ;
              rdfs:comment "Potential or modal quality that inheres in a bearer but requires specific contextual conditions for its full realization or manifestation. It captures the capacity, tendency, or functional potential of an entity."@en ,
-                         "Qualità potenziale o modale che inerisce in un portatore ma richiede condizioni contestuali specifiche per la sua piena realizzazione o manifestazione. Cattura la capacità, tendenza o potenziale funzionale di un'entità."@it .
+                          "Qualità potenziale o modale che inerisce in un portatore ma richiede condizioni contestuali specifiche per la sua piena realizzazione o manifestazione. Cattura la capacità, tendenza o potenziale funzionale di un'entità."@it ;
+             rdfs:label "Disposition"@en ,
+                        "Disposizione"@it .
 
 
 ###  https://isagog.com/ontology/top#Document
@@ -1007,10 +1007,10 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it .
                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                             owl:onDataRange xsd:string
                           ] ;
+          rdfs:comment "Documento testuale"@it ,
+                       "Textual document"@en ;
           rdfs:label "Document"@en ,
-                    "Documento"@it ;
-          rdfs:comment "Textual document"@en ,
-                      "Documento testuale"@it .
+                     "Documento"@it .
 
 _:genid5 rdf:type owl:Restriction ;
           owl:onProperty :authored_by ;
@@ -1033,29 +1033,29 @@ _:genid5 rdf:type owl:Restriction ;
                              owl:onProperty :qualifies ;
                              owl:allValuesFrom :Occurrent
                            ] ;
-           rdfs:label "Enactment"@en ,
-                     "Attuazione"@it ;
            rdfs:comment "Disposition of Occurrents with respect to their capacity to suggest, solicit or enable participation, reaction, or continuation."@en ,
-                       "Disposizione degli Occorrenti rispetto alla loro capacità di suggerire, sollecitare o abilitare partecipazione, reazione o continuazione."@it ;
+                        "Disposizione degli Occorrenti rispetto alla loro capacità di suggerire, sollecitare o abilitare partecipazione, reazione o continuazione."@it ;
+           rdfs:label "Attuazione"@it ,
+                      "Enactment"@en ;
            :modality "possibility" .
 
 
 ###  https://isagog.com/ontology/top#EntityDescriptor
 :EntityDescriptor rdf:type owl:Class ;
                   rdfs:subClassOf :Description ;
-                  rdfs:label "Entity Descriptor"@en ,
-                            "Descrittore di Entità"@it ;
                   rdfs:comment "Descriptions referring to entities"@en ,
-                              "Descrizioni che si riferiscono a entità"@it .
+                               "Descrizioni che si riferiscono a entità"@it ;
+                  rdfs:label "Descrittore di Entità"@it ,
+                             "Entity Descriptor"@en .
 
 
 ###  https://isagog.com/ontology/top#Event
 :Event rdf:type owl:Class ;
        rdfs:subClassOf :Occurrent ;
-       rdfs:label "Event"@en ,
-                 "Evento"@it ;
        rdfs:comment "A temporally extended occurrence composed of heterogeneous parts or phases."@en ,
-                   "Un'occorrenza temporalmente estesa composta da parti o fasi eterogenee."@it .
+                    "Un'occorrenza temporalmente estesa composta da parti o fasi eterogenee."@it ;
+       rdfs:label "Event"@en ,
+                  "Evento"@it .
 
 
 ###  https://isagog.com/ontology/top#Information
@@ -1065,29 +1065,29 @@ _:genid5 rdf:type owl:Restriction ;
                                owl:onProperty :yields ;
                                owl:someValuesFrom :Sign
                              ] ;
-             rdfs:label "Information"@en ,
-                       "Informazione"@it ;
              rdfs:comment "Intangible objects that yields signs, which may be instantiated in many physical forms, e.g. documents, descriptors, classifiers such as tags or topics, word types (lexemes) and tokens."@en ,
-                         "Oggetti intangibili che producono segni, che possono essere istanziati in molte forme fisiche, es. documenti, descrittori, classificatori come tag o argomenti, tipi di parole (lessemi) e token."@it ;
+                          "Oggetti intangibili che producono segni, che possono essere istanziati in molte forme fisiche, es. documenti, descrittori, classificatori come tag o argomenti, tipi di parole (lessemi) e token."@it ;
+             rdfs:label "Information"@en ,
+                        "Informazione"@it ;
              :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#InformationEntity"@en .
 
 
 ###  https://isagog.com/ontology/top#Intangible
 :Intangible rdf:type owl:Class ;
             owl:disjointWith :Occurrent ;
-            rdfs:label "Intangible"@en ,
-                      "Intangibile"@it ;
-            rdfs:comment "Immaterial thing (without direct temporal-spatial attributes), which is socially recognized, such as: informative objects (e.g. documents), ideas, theories, qualities"@en ,
-                        "Cosa immateriale (senza attributi spazio-temporali diretti), che è socialmente riconosciuta, come: oggetti informativi (es. documenti), idee, teorie, qualità"@it .
+            rdfs:comment "Cosa immateriale (senza attributi spazio-temporali diretti), che è socialmente riconosciuta, come: oggetti informativi (es. documenti), idee, teorie, qualità"@it ,
+                         "Immaterial thing (without direct temporal-spatial attributes), which is socially recognized, such as: informative objects (e.g. documents), ideas, theories, qualities"@en ;
+            rdfs:label "Intangibile"@it ,
+                       "Intangible"@en .
 
 
 ###  https://isagog.com/ontology/top#Material
 :Material rdf:type owl:Class ;
           rdfs:subClassOf :Continuant ;
-          rdfs:label "Material"@en ,
-                    "Materiale"@it ;
           rdfs:comment "A non-sortal continuant that exists as a mass or quantity without inherent boundaries or a distinct identity, persisting through time while undergoing potential changes in form or composition. Material is typically characterized by its divisibility and its capacity to constitute or combine with other entities to form objects or structures."@en ,
-                      "Un continuante non-sortale che esiste come massa o quantità senza confini intrinseci o un'identità distinta, persistendo nel tempo mentre subisce potenziali cambiamenti di forma o composizione. Il materiale è tipicamente caratterizzato dalla sua divisibilità e dalla sua capacità di costituire o combinarsi con altre entità per formare oggetti o strutture."@it .
+                       "Un continuante non-sortale che esiste come massa o quantità senza confini intrinseci o un'identità distinta, persistendo nel tempo mentre subisce potenziali cambiamenti di forma o composizione. Il materiale è tipicamente caratterizzato dalla sua divisibilità e dalla sua capacità di costituire o combinarsi con altre entità per formare oggetti o strutture."@it ;
+          rdfs:label "Material"@en ,
+                     "Materiale"@it .
 
 
 ###  https://isagog.com/ontology/top#Mention
@@ -1097,19 +1097,19 @@ _:genid5 rdf:type owl:Restriction ;
                            owl:onProperty :referred_by ;
                            owl:someValuesFrom :EntityDescriptor
                          ] ;
-         rdfs:label "Mention"@en ,
-                   "Menzione"@it ;
          rdfs:comment "A textual or verbal occurrence that denotes an entity (e.g., a name). Mentions may sometimes be erroneous, either by referring to a non-existent entity or by misidentifying the intended referent."@en ,
-                     "Un'occorrenza testuale o verbale che denota un'entità (es., un nome). Le menzioni possono talvolta essere erronee, sia riferendosi a un'entità inesistente sia identificando erroneamente il referente inteso."@it .
+                      "Un'occorrenza testuale o verbale che denota un'entità (es., un nome). Le menzioni possono talvolta essere erronee, sia riferendosi a un'entità inesistente sia identificando erroneamente il referente inteso."@it ;
+         rdfs:label "Mention"@en ,
+                    "Menzione"@it .
 
 
 ###  https://isagog.com/ontology/top#Object
 :Object rdf:type owl:Class ;
         rdfs:subClassOf :Sortal ;
-        rdfs:label "Object"@en ,
-                  "Oggetto"@it ;
         rdfs:comment "Non-agentive sortal"@en ,
-                    "Sortale non agentivo"@it .
+                     "Sortale non agentivo"@it ;
+        rdfs:label "Object"@en ,
+                   "Oggetto"@it .
 
 
 ###  https://isagog.com/ontology/top#Occurrent
@@ -1123,20 +1123,20 @@ _:genid5 rdf:type owl:Restriction ;
                              owl:onProperty :time_coordinate ;
                              owl:someValuesFrom xsd:string
                            ] ;
-           rdfs:label "Occurrent"@en ,
-                     "Occorrente"@it ;
-           rdfs:comment "Thing that unfold or occur over time, such as events, processes, or activities. These entities are not wholly present at any single moment but are extended in time, contrasting with 'Continuants', which persist while maintaining identity."@en ,
-                       "Cosa che si dispiega o occorre nel tempo, come eventi, processi o attività. Queste entità non sono completamente presenti in un singolo momento ma sono estese nel tempo, in contrasto con i 'Continuanti', che persistono mantenendo l'identità."@it ;
+           rdfs:comment "Cosa che si dispiega o occorre nel tempo, come eventi, processi o attività. Queste entità non sono completamente presenti in un singolo momento ma sono estese nel tempo, in contrasto con i 'Continuanti', che persistono mantenendo l'identità."@it ,
+                        "Thing that unfold or occur over time, such as events, processes, or activities. These entities are not wholly present at any single moment but are extended in time, contrasting with 'Continuants', which persist while maintaining identity."@en ;
+           rdfs:label "Occorrente"@it ,
+                      "Occurrent"@en ;
            :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#Event"@en .
 
 
 ###  https://isagog.com/ontology/top#Organization
 :Organization rdf:type owl:Class ;
               rdfs:subClassOf :SocialGroup ;
+              rdfs:comment "Gruppo sociale di persone che lavorano insieme verso obiettivi comuni, governato da regole e processi definiti"@it ,
+                           "Social group of people working together towards common goals, governed by defined rules and processes"@en ;
               rdfs:label "Organization"@en ,
-                        "Organizzazione"@it ;
-              rdfs:comment "Social group of people working together towards common goals, governed by defined rules and processes"@en ,
-                          "Gruppo sociale di persone che lavorano insieme verso obiettivi comuni, governato da regole e processi definiti"@it .
+                         "Organizzazione"@it .
 
 
 ###  https://isagog.com/ontology/top#Person
@@ -1147,39 +1147,39 @@ _:genid5 rdf:type owl:Restriction ;
                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                           owl:onDataRange xsd:string
                         ] ;
+        rdfs:comment "Agente razionale intenzionale - essere umano"@it ,
+                     "Rational intentional agent - human being"@en ;
         rdfs:label "Person"@en ,
-                  "Persona"@it ;
-        rdfs:comment "Rational intentional agent - human being"@en ,
-                    "Agente razionale intenzionale - essere umano"@it ;
+                   "Persona"@it ;
         :schema "https://schema.org/Person" .
 
 
 ###  https://isagog.com/ontology/top#Place
 :Place rdf:type owl:Class ;
        rdfs:subClassOf :Continuant ;
-       rdfs:label "Place"@en ,
-                 "Luogo"@it ;
        rdfs:comment "Identified portion of space"@en ,
-                   "Porzione identificata di spazio"@it .
+                    "Porzione identificata di spazio"@it ;
+       rdfs:label "Luogo"@it ,
+                  "Place"@en .
 
 
 ###  https://isagog.com/ontology/top#Quality
 :Quality rdf:type owl:Class ;
          rdfs:subClassOf :Intangible ;
-         rdfs:label "Quality"@en ,
-                   "Qualità"@it ;
          rdfs:comment "Aspect of a spatio-temporal entity, as perceived or conceptually elaborated. Differently from Concepts, Qualities are not socially constructed."@en ,
-                     "Aspetto di un'entità spazio-temporale, come percepito o elaborato concettualmente. Diversamente dai Concetti, le Qualità non sono socialmente costruite."@it ;
+                      "Aspetto di un'entità spazio-temporale, come percepito o elaborato concettualmente. Diversamente dai Concetti, le Qualità non sono socialmente costruite."@it ;
+         rdfs:label "Quality"@en ,
+                    "Qualità"@it ;
          :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#Quality"@en .
 
 
 ###  https://isagog.com/ontology/top#Relationship
 :Relationship rdf:type owl:Class ;
               rdfs:subClassOf :Statement ;
-              rdfs:label "Relationship"@en ,
-                        "Relazione"@it ;
               rdfs:comment "A formal statement (assertion) that specifies how two entities are connected or associated within a given context, describing the nature, direction, and type of interaction or dependency between them."@en ,
-                          "Un enunciato formale (asserzione) che specifica come due entità sono connesse o associate all'interno di un dato contesto, descrivendo la natura, direzione e tipo di interazione o dipendenza tra loro."@it .
+                           "Un enunciato formale (asserzione) che specifica come due entità sono connesse o associate all'interno di un dato contesto, descrivendo la natura, direzione e tipo di interazione o dipendenza tra loro."@it ;
+              rdfs:label "Relationship"@en ,
+                         "Relazione"@it .
 
 
 ###  https://isagog.com/ontology/top#Sentence
@@ -1194,10 +1194,10 @@ _:genid5 rdf:type owl:Restriction ;
                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                             owl:onDataRange xsd:string
                           ] ;
-          rdfs:label "Sentence"@en ,
-                    "Frase"@it ;
-          rdfs:comment "Syntactic linguistic occurrence (token) regardless of realization (written or spoken)"@en ,
-                      "Occorrenza linguistica sintattica (token) indipendentemente dalla realizzazione (scritta o parlata)"@it .
+          rdfs:comment "Occorrenza linguistica sintattica (token) indipendentemente dalla realizzazione (scritta o parlata)"@it ,
+                       "Syntactic linguistic occurrence (token) regardless of realization (written or spoken)"@en ;
+          rdfs:label "Frase"@it ,
+                     "Sentence"@en .
 
 
 ###  https://isagog.com/ontology/top#Sign
@@ -1224,10 +1224,10 @@ _:genid5 rdf:type owl:Restriction ;
                         owl:onProperty :signifier ;
                         owl:minCardinality "1"^^xsd:nonNegativeInteger
                       ] ;
-      rdfs:label "Sign"@en ,
-                "Segno"@it ;
-      rdfs:comment "Intangible entity that underlies the process of interpreting something as representing or standing for something else (interpretant). Signs existentially depend on the source that generates them, as each sign is yield by a part of its information (token)."@en ,
-                  "Entità intangibile che sottende il processo di interpretare qualcosa come rappresentante o stante per qualcos'altro (interpretante). I segni dipendono esistenzialmente dalla sorgente che li genera, poiché ogni segno è prodotto da una parte della sua informazione (token)."@it ;
+      rdfs:comment "Entità intangibile che sottende il processo di interpretare qualcosa come rappresentante o stante per qualcos'altro (interpretante). I segni dipendono esistenzialmente dalla sorgente che li genera, poiché ogni segno è prodotto da una parte della sua informazione (token)."@it ,
+                   "Intangible entity that underlies the process of interpreting something as representing or standing for something else (interpretant). Signs existentially depend on the source that generates them, as each sign is yield by a part of its information (token)."@en ;
+      rdfs:label "Segno"@it ,
+                 "Sign"@en ;
       rdfs:seeAlso "Peirce's Sign (Representamen->Interpretant->Object)" .
 
 
@@ -1238,10 +1238,10 @@ _:genid5 rdf:type owl:Restriction ;
                                owl:onProperty :has_element ;
                                owl:someValuesFrom :Person
                              ] ;
-             rdfs:label "Social Group"@en ,
-                       "Gruppo Sociale"@it ;
              rdfs:comment "Group of people with social relationships and interactions among its members"@en ,
-                         "Gruppo di persone con relazioni sociali e interazioni tra i suoi membri"@it .
+                          "Gruppo di persone con relazioni sociali e interazioni tra i suoi membri"@it ;
+             rdfs:label "Gruppo Sociale"@it ,
+                        "Social Group"@en .
 
 
 ###  https://isagog.com/ontology/top#Sortal
@@ -1252,38 +1252,38 @@ _:genid5 rdf:type owl:Restriction ;
                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                           owl:onClass :Place
                         ] ;
-        rdfs:label "Sortal"@en ,
-                  "Sortale"@it ;
         rdfs:comment "A continuant characterized by having determinate boundaries and a unity criterion that defines its persistence as a distinct entity. Changes in morphology or composition may affect its identity within a given context. At any time, Sortals are located in some Place"@en ,
-                    "Un continuante caratterizzato dall'avere confini determinati e un criterio di unità che definisce la sua persistenza come entità distinta. Cambiamenti nella morfologia o composizione possono influenzare la sua identità all'interno di un dato contesto. In ogni momento, i Sortali sono ubicati in qualche Luogo"@it ;
+                     "Un continuante caratterizzato dall'avere confini determinati e un criterio di unità che definisce la sua persistenza come entità distinta. Cambiamenti nella morfologia o composizione possono influenzare la sua identità all'interno di un dato contesto. In ogni momento, i Sortali sono ubicati in qualche Luogo"@it ;
+        rdfs:label "Sortal"@en ,
+                   "Sortale"@it ;
         :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalObject"@en .
 
 
 ###  https://isagog.com/ontology/top#State
 :State rdf:type owl:Class ;
        rdfs:subClassOf :Occurrent ;
-       rdfs:label "State"@en ,
-                 "Stato"@it ;
        rdfs:comment "A temporally extended condition composed of homogeneous parts, uniform across time."@en ,
-                   "Una condizione temporalmente estesa composta da parti omogenee, uniforme nel tempo."@it .
+                    "Una condizione temporalmente estesa composta da parti omogenee, uniforme nel tempo."@it ;
+       rdfs:label "State"@en ,
+                  "Stato"@it .
 
 
 ###  https://isagog.com/ontology/top#Statement
 :Statement rdf:type owl:Class ;
            rdfs:subClassOf :Sentence ;
-           rdfs:label "Statement"@en ,
-                     "Enunciato"@it ;
-           rdfs:comment "Sentence that may be true or false (proposition) w.r.t. a state of affairs"@en ,
-                       "Frase che può essere vera o falsa (proposizione) rispetto a uno stato di cose"@it .
+           rdfs:comment "Frase che può essere vera o falsa (proposizione) rispetto a uno stato di cose"@it ,
+                        "Sentence that may be true or false (proposition) w.r.t. a state of affairs"@en ;
+           rdfs:label "Enunciato"@it ,
+                      "Statement"@en .
 
 
 ###  https://isagog.com/ontology/top#Trait
 :Trait rdf:type owl:Class ;
        rdfs:subClassOf :Quality ;
-       rdfs:label "Trait"@en ,
-                 "Tratto"@it ;
        rdfs:comment "Intrinsic and actual quality that inheres in a bearer independently of any contextual realization or contingent manifestation. It represents a stable, present property of an entity at a given time."@en ,
-                   "Qualità intrinseca e attuale che inerisce in un portatore indipendentemente da qualsiasi realizzazione contestuale o manifestazione contingente. Rappresenta una proprietà stabile e presente di un'entità in un dato momento."@it .
+                    "Qualità intrinseca e attuale che inerisce in un portatore indipendentemente da qualsiasi realizzazione contestuale o manifestazione contingente. Rappresenta una proprietà stabile e presente di un'entità in un dato momento."@it ;
+       rdfs:label "Trait"@en ,
+                  "Tratto"@it .
 
 
 ###  https://isagog.com/ontology/top#Word
@@ -1294,10 +1294,10 @@ _:genid5 rdf:type owl:Restriction ;
                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onDataRange xsd:string
                       ] ;
-      rdfs:label "Word"@en ,
-                "Parola"@it ;
-      rdfs:comment "Word occurrence (token), regardless of realization (written or spoken)"@en ,
-                  "Occorrenza di parola (token), indipendentemente dalla realizzazione (scritta o parlata)"@it .
+      rdfs:comment "Occorrenza di parola (token), indipendentemente dalla realizzazione (scritta o parlata)"@it ,
+                   "Word occurrence (token), regardless of realization (written or spoken)"@en ;
+      rdfs:label "Parola"@it ,
+                 "Word"@en .
 
 
 #################################################################
