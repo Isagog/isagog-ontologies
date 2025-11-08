@@ -16,7 +16,7 @@ The result is a lightweight framework suited for AI driven human-computer intera
 Il risultato è un framework leggero adatto all'interazione uomo-computer guidata dall'IA, con particolare sensibilità alle dimensioni contestuali, relazionali e interpretative del significato."""@it ;
                                    rdfs:label "Isagog Top Level Ontology"@en ,
                                               "Ontologia di Livello Superiore Isagog"@it ;
-                                   owl:versionInfo "2.ì3 4/11/2025" .
+                                   owl:versionInfo "2.4 8/11/2025" .
 
 #################################################################
 #    Annotation properties
@@ -962,9 +962,9 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it ;
 
 ###  https://isagog.com/ontology/top#Concept
 :Concept rdf:type owl:Class ;
-         rdfs:subClassOf :Intangible ;
-         rdfs:comment "Intangible object that exists through collective intentionality and shared recognition through linguistic acts (see Searle, social object). Differently from qualities, concepts do not existentially depend on entities."@en ,
-                      "Oggetto intangibile che esiste attraverso l'intenzionalità collettiva e il riconoscimento condiviso attraverso atti linguistici (vedi Searle, oggetto sociale). Diversamente dalle qualità, i concetti non dipendono esistenzialmente dalle entità."@it ;
+         rdfs:subClassOf :SocialObject ;
+         rdfs:comment "Oggetto sociale che identifica un concetto. Diversamente dalle qualità, i concetti non dipendono esistenzialmente dalle entità."@it ,
+                      "Social object that identify a concept. Differently from qualities, concepts do not existentially depend on entities."@en ;
          rdfs:label "Concept"@en ,
                     "Concetto"@it .
 
@@ -1233,7 +1233,7 @@ _:genid5 rdf:type owl:Restriction ;
 
 ###  https://isagog.com/ontology/top#SocialGroup
 :SocialGroup rdf:type owl:Class ;
-             rdfs:subClassOf :Continuant ,
+             rdfs:subClassOf :SocialObject ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty :has_element ;
                                owl:someValuesFrom :Person
@@ -1241,7 +1241,14 @@ _:genid5 rdf:type owl:Restriction ;
              rdfs:comment "Group of people with social relationships and interactions among its members"@en ,
                           "Gruppo di persone con relazioni sociali e interazioni tra i suoi membri"@it ;
              rdfs:label "Gruppo Sociale"@it ,
-                        "Social Group"@en .
+                        "Social group"@en .
+
+
+###  https://isagog.com/ontology/top#SocialObject
+:SocialObject rdf:type owl:Class ;
+              rdfs:subClassOf :Intangible ;
+              rdfs:comment "Intangible object that exists through collective intentionality and shared recognition through linguistic acts (see Searle, social object)."@en ,
+                           "Oggetto intangibile che esiste attraverso l'intenzionalità collettiva e il riconoscimento condiviso attraverso atti linguistici (vedi Searle, oggetto sociale)."@it .
 
 
 ###  https://isagog.com/ontology/top#Sortal
