@@ -16,7 +16,7 @@ The result is a lightweight framework suited for AI driven human-computer intera
 Il risultato è un framework leggero adatto all'interazione uomo-computer guidata dall'IA, con particolare sensibilità alle dimensioni contestuali, relazionali e interpretative del significato."""@it ;
                                    rdfs:label "Isagog Top Level Ontology"@en ,
                                               "Ontologia di Livello Superiore Isagog"@it ;
-                                   owl:versionInfo "2.4 8/11/2025" .
+                                   owl:versionInfo "2.5 27/11/2025" .
 
 #################################################################
 #    Annotation properties
@@ -773,6 +773,17 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it ;
          rdfs:seeAlso "Representamen->Interpretant (Peirce)" .
 
 
+###  https://isagog.com/ontology/top#context
+:context rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :text ;
+         rdfs:domain :Mention ;
+         rdfs:range xsd:string ;
+         rdfs:comment "Contesto di una menzione"@it ,
+                      "Mention context"@en ;
+         rdfs:label "context"@en ,
+                    "contesto" .
+
+
 ###  https://isagog.com/ontology/top#coordinate
 :coordinate rdf:type owl:DatatypeProperty ;
             rdfs:comment "Generic coordinate value"@en ,
@@ -793,11 +804,10 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it ;
 
 ###  https://isagog.com/ontology/top#expression
 :expression rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf :signifier ,
-                               :text ;
+            rdfs:subPropertyOf :text ;
             rdfs:range xsd:string ;
-            rdfs:comment "Rappresentamen testuale del segno"@it ,
-                         "Sign's textual representamen"@en ;
+            rdfs:comment "Generic textual expression"@en ,
+                         "Generica espressione significante"@it ;
             rdfs:label "espressione"@it ,
                        "expression"@en .
 
@@ -858,7 +868,6 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it ;
 
 ###  https://isagog.com/ontology/top#signifier
 :signifier rdf:type owl:DatatypeProperty ;
-           rdfs:subPropertyOf :reference ;
            rdfs:domain :Sign ;
            rdfs:comment "Rappresentamen o forma materiale del segno"@it ,
                         "Sign's representamen or material form"@en ;
@@ -878,9 +887,10 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it ;
 
 ###  https://isagog.com/ontology/top#text
 :text rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf :signifier ;
       rdfs:range xsd:string ;
-      rdfs:comment "Contenuto testuale"@it ,
-                   "Textual content"@en ;
+      rdfs:comment "Significante testuale"@it ,
+                   "Textual significant"@en ;
       rdfs:label "testo"@it ,
                  "text"@en .
 
@@ -913,11 +923,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it ;
                               owl:onProperty :initiated_by ;
                               owl:someValuesFrom :Agent
                             ] ;
-        rdfs:subClassOf :Event ,
-                        [ rdf:type owl:Restriction ;
-                          owl:onProperty :planned_by ;
-                          owl:someValuesFrom :Information
-                        ] ;
+        rdfs:subClassOf :Event ;
         rdfs:comment "Event initiated by an agent with intentional planning"@en ,
                      "Evento iniziato da un agente con pianificazione intenzionale"@it ;
         rdfs:label "Action"@en ,
@@ -1001,7 +1007,7 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it ;
 ###  https://isagog.com/ontology/top#Document
 :Document rdf:type owl:Class ;
           rdfs:subClassOf :Information ,
-                          _:genid5 ,
+                          _:genid4 ,
                           [ rdf:type owl:Restriction ;
                             owl:onProperty :body ;
                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
@@ -1012,14 +1018,14 @@ mentions(?d, ?e) -> Mention(?m) ∧ yields(?d, ?m) ∧ referent(?m, ?e)"""@it ;
           rdfs:label "Document"@en ,
                      "Documento"@it .
 
-_:genid5 rdf:type owl:Restriction ;
+_:genid4 rdf:type owl:Restriction ;
           owl:onProperty :authored_by ;
           owl:someValuesFrom :Person .
 
 [ rdf:type owl:Axiom ;
    owl:annotatedSource :Document ;
    owl:annotatedProperty rdfs:subClassOf ;
-   owl:annotatedTarget _:genid5 ;
+   owl:annotatedTarget _:genid4 ;
    <https://ilmanifesto.it/mema/ontology#we_filter> "true"^^xsd:boolean ;
    <https://ilmanifesto.it/mema/ontology#we_search> "true"^^xsd:boolean ;
    <https://ilmanifesto.it/mema/ontology#we_tok> "FIELD"
@@ -1115,6 +1121,10 @@ _:genid5 rdf:type owl:Restriction ;
 ###  https://isagog.com/ontology/top#Occurrent
 :Occurrent rdf:type owl:Class ;
            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty :has_participant ;
+                             owl:someValuesFrom :Continuant
+                           ] ,
+                           [ rdf:type owl:Restriction ;
                              owl:onProperty :occurs_in ;
                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                              owl:onClass :Place
@@ -1123,8 +1133,8 @@ _:genid5 rdf:type owl:Restriction ;
                              owl:onProperty :time_coordinate ;
                              owl:someValuesFrom xsd:string
                            ] ;
-           rdfs:comment "Cosa che si dispiega o occorre nel tempo, come eventi, processi o attività. Queste entità non sono completamente presenti in un singolo momento ma sono estese nel tempo, in contrasto con i 'Continuanti', che persistono mantenendo l'identità."@it ,
-                        "Thing that unfold or occur over time, such as events, processes, or activities. These entities are not wholly present at any single moment but are extended in time, contrasting with 'Continuants', which persist while maintaining identity."@en ;
+           rdfs:comment "Cosa che si dispiega o occorre nel tempo, come eventi, stati di cose, processi o attività. Queste entità non sono completamente presenti in un singolo momento ma sono estese nel tempo, in contrasto con i 'Continuanti', che persistono mantenendo l'identità. Ogni evento o stato di cose avviene in un luogo e riguarda qualcosa o qualcuno."@it ,
+                        "Thing that unfold or occur over time, such as events, states, processes, or activities. These entities are not wholly present at any single moment but are extended in time, contrasting with 'Continuants', which persist while maintaining identity. Every event or state occurs in a place and involves something or someone."@en ;
            rdfs:label "Occorrente"@it ,
                       "Occurrent"@en ;
            :dolce "http://www.loa-cnr.it/ontologies/DUL.owl#Event"@en .
@@ -1222,7 +1232,8 @@ _:genid5 rdf:type owl:Restriction ;
                       ] ,
                       [ rdf:type owl:Restriction ;
                         owl:onProperty :signifier ;
-                        owl:minCardinality "1"^^xsd:nonNegativeInteger
+                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:string
                       ] ;
       rdfs:comment "Entità intangibile che sottende il processo di interpretare qualcosa come rappresentante o stante per qualcos'altro (interpretante). I segni dipendono esistenzialmente dalla sorgente che li genera, poiché ogni segno è prodotto da una parte della sua informazione (token)."@it ,
                    "Intangible entity that underlies the process of interpreting something as representing or standing for something else (interpretant). Signs existentially depend on the source that generates them, as each sign is yield by a part of its information (token)."@en ;
