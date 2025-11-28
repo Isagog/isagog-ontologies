@@ -1,18 +1,24 @@
-[tool.poetry]
+[project]
 name = "isagog-ontologies"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
-authors = ["Guido Vetere <g.vetere@isagog.com>"]
+authors = [
+    { name = "Guido Vetere", email = "g.vetere@isagog.com" }
+]
 readme = "README.md"
-packages = [{ include = "isagog_ontologies" }]
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.10.3",
+    "isagog-kg @ git+https://github.com/Isagog/isagog-kg.git",
+    "rdflib>=7.1.3",
+]
+[tool.hatch.metadata]
+allow-direct-references = true
+[tool.hatch.build.targets.wheel]
+packages = ["test", "top", "utils"]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-pydantic = "^2.10.3"
-isagog-kg = { git = "https://github.com/Isagog/isagog-kg.git" }
-rdflib = "^7.1.3"
 
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"

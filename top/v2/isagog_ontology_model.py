@@ -2,7 +2,7 @@ from typing import List, Optional, Any
 
 from pydantic import BaseModel, Field
 
-from isagog_kg.models.logic_model import Thing
+from isagog_kg.entities import Thing
 
 
 class Entity(Thing):
