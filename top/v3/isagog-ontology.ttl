@@ -7,7 +7,7 @@
 @base <https://isagog.com/ontology/top#> .
 
 <https://isagog.com/ontology/top> rdf:type owl:Ontology ;
-                                   owl:versionIRI <https://isagog.com/ontology/top/2.5> ;
+                                   owl:versionIRI <https://isagog.com/ontology/top/3.0> ;
                                    <http://purl.org/dc/elements/1.1/creator> "Guido Vetere, Isagog Srl, Italy" ;
                                    <http://purl.org/dc/elements/1.1/license> <http://creativecommons.org/licenses/by/4.0/> ;
                                    rdfs:comment """An ultra-lite top level that provides a minimal set of foundational categories designed to capture the most general distinctions presupposed in our conceptual scheme. The categories employed are ontologically modest: they are introduced only insofar as they are required to make sense of actual, observable practices of reference and predication.
@@ -16,7 +16,7 @@ The result is a lightweight framework suited for AI driven human-computer intera
 Il risultato è un framework leggero adatto all'interazione uomo-computer guidata dall'IA, con particolare sensibilità alle dimensioni contestuali, relazionali e interpretative del significato."""@it ;
                                    rdfs:label "Isagog Top Level Ontology"@en ,
                                               "Ontologia di Livello Superiore Isagog"@it ;
-                                   owl:versionInfo "2.5 27/11/2025" .
+                                   owl:versionInfo "3.0 29/11/2025" .
 
 #################################################################
 #    Annotation properties
@@ -30,16 +30,6 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
 <http://purl.org/dc/elements/1.1/license> rdf:type owl:AnnotationProperty .
 
 
-###  https://ilmanifesto.it/mema/ontology#we_filter
-<https://ilmanifesto.it/mema/ontology#we_filter> rdf:type owl:AnnotationProperty .
-
-
-###  https://ilmanifesto.it/mema/ontology#we_search
-<https://ilmanifesto.it/mema/ontology#we_search> rdf:type owl:AnnotationProperty .
-
-
-###  https://ilmanifesto.it/mema/ontology#we_tok
-<https://ilmanifesto.it/mema/ontology#we_tok> rdf:type owl:AnnotationProperty .
 
 
 ###  https://isagog.com/ontology/top#dolce
@@ -93,15 +83,6 @@ Il risultato è un framework leggero adatto all'interazione uomo-computer guidat
           rdfs:label "modality"@en ,
                      "modalità"@it ;
           rdfs:subPropertyOf :isagog .
-
-
-###  https://isagog.com/ontology/top#ontopia
-:ontopia rdf:type owl:AnnotationProperty ;
-         rdfs:comment "Mappatura verso l'ontologia OnTopiA"@it ,
-                      "Mapping to OnTopiA ontology"@en ;
-         rdfs:label "OnTopiA mapping"@en ,
-                    "mappatura OnTopiA"@it ;
-         rdfs:subPropertyOf :mapping .
 
 
 ###  https://isagog.com/ontology/top#schema
